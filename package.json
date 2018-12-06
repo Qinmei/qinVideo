@@ -1,0 +1,19 @@
+{
+  "name": "node-qinmei",
+  "version": "1.0.0",
+  "description": "基于node.js开发的一套后台管理系统",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qinvz/node-qvideo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qinvz/node-qvideo/issues"
+  },
+  "homepage": "https://github.com/qinvz/node-qvideo#readme"
+}
