@@ -1,21 +1,18 @@
-class userController {
-
-    // 测试
-    static async test(ctx) {
-        ctx.send({
-        status:'success',
-        data:'hello'
-        })
-    }
-
-    // 文件上传
-    static async upload(ctx) {
-      ctx.send({
-        status:'success',
-        data:'hello'
-      })
-    }
-
-  }
+const {
+    userModel,
+    AnimateModel,
+  } = require('../models/index');
   
-  module.exports = userController;
+class baseController {
+  
+    // 
+    static async slugSearch(ctx) {
+      const {title,size,page,sort,sortby,area,kind,year,tag} = ctx.query;
+      const result = await AnimateModel.find();
+      ctx.error({ msg:'上传成功!',data: { }} )
+    }
+
+  
+}
+    
+module.exports = baseController;

@@ -1,7 +1,17 @@
-const baseController  = require('./baseController');
+const baseController = require('./baseController');
+const animateController  = require('./animateController');
 const userController  = require('./userController');
+const commentController  = require('./commentController');
+const configController  = require('./configController');
+const postController  = require('./postController');
+const reportController = require('./reportController');
 
 module.exports = {
     baseController,
-    userController
+    animateController,
+    userController,
+    commentController,
+    configController,
+    postController,
+    reportController
 }

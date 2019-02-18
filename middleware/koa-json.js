@@ -1,10 +1,14 @@
-module.exports = () => {
-    function render(json) {
-        this.set("Content-Type", "application/json")
-        this.body = JSON.stringify(json)
+module.exports = async (ctx, next) => {
+    ctx.error = ({ data, msg, status,error }) => {
+       ctx.status= status||400;
+       ctx.body = { code: -200, msg, data, error };
     }
-    return async (ctx, next) => {
-        ctx.send = render.bind(ctx)
-        await next()
+    ctx.success = ({ data, msg,total }) => {
+        ctx.body = { code: 200, msg, total, data };
     }
-  }
+
+    ctx.send = ({result, success, error, total})=>{
+        result ? ctx.success({data:result, msg:success,total}) : ctx.error({msg:error})
+    }
+    await next()
+}
