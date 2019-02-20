@@ -21,20 +21,10 @@ class userController {
       ctx.send({ result,total,success:'搜索成功',error:'搜索失败' } );
   }
 
-  // post post 
-  static async user_post(ctx) {
-      const post = ctx.request.body;
-      const result = await UserModel.create(post);
-      ctx.send({ result,success:'创建成功',error:'创建失败' } );
-  }
-
   // post Get
   static async user_get(ctx) {
       const { slug } = ctx.params;
-      const result = await UserModel.findOne({name:slug})
-                                    .populate({path:'author',
-                                              select:'-_id name level score avatar background introduce',
-                                              model:'User'});
+      const result = await UserModel.findOne({name:slug},{password:0});
       ctx.send({ result,success:'查询成功',error:'查询失败' } );
   }
 

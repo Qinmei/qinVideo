@@ -1,57 +1,63 @@
-const router = require('koa-router')();
-const { version } = require('../config');
+const Router = require('koa-router');
 const  { 
   animateController,
   commentController,
   configController,
   postController,
   reportController,
-  userController
+  userController,
+  baseController
 } =  require('../controllers/index');
+const auth = require('../middleware/authRouter');
+
+const { version } = require('../config');
+const router = new Router({
+  prefix: `/${version}`
+})
 
 router 
   // 基础服务
-
+  .post('/auth/login',auth(false),baseController.login)
+  .post('/auth/register',auth(false),baseController.register)
+  .post('/auth/refreshtoken',auth(true),baseController.refreshtoken)
 
   // animate
-  .get(`/${version}/animate`,animateController.animate_query)
-  .post(`/${version}/animate`,animateController.animate_post)
-  .get(`/${version}/animate/:slug`,animateController.animate_get)
-  .put(`/${version}/animate/:slug`,animateController.animate_put)
-  .delete(`/${version}/animate/:slug`,animateController.animate_delete)
+  .get('/animate',auth(false),animateController.animate_query)
+  .post('/animate',auth(true),animateController.animate_post)
+  .get('/animate/:slug',auth(false),animateController.animate_get)
+  .put('/animate/:slug',auth(true),animateController.animate_put)
+  .delete('/animate/:slug',auth(true),animateController.animate_delete)
 
   // post
-  .get(`/${version}/post`,postController.post_query)
-  .post(`/${version}/post`,postController.post_post)
-  .get(`/${version}/post/:slug`,postController.post_get)
-  .put(`/${version}/post/:slug`,postController.post_put)
-  .delete(`/${version}/post/:slug`,postController.post_delete)
+  .get('/post',auth(false),postController.post_query)
+  .post('/post',auth(true),postController.post_post)
+  .get('/post/:slug',auth(false),postController.post_get)
+  .put('/post/:slug',auth(true),postController.post_put)
+  .delete('/post/:slug',auth(true),postController.post_delete)
 
   // comment
-  .get(`/${version}/comment`,commentController.comment_query)
-  .post(`/${version}/comment`,commentController.comment_post)
-  .get(`/${version}/comment/:id`,commentController.comment_get)
-  .put(`/${version}/comment/:id`,commentController.comment_put)
-  .delete(`/${version}/comment/:id`,commentController.comment_delete)
+  .get('/comment',auth(false),commentController.comment_query)
+  .post('/comment',auth(true),commentController.comment_post)
+  .get('/comment/:id',auth(false),commentController.comment_get)
+  .put('/comment/:id',auth(true),commentController.comment_put)
+  .delete('/comment/:id',auth(true),commentController.comment_delete)
 
   // config
-  .get(`/${version}/config`,configController.config_get)
-  .put(`/${version}/config`,configController.config_put)
+  .get('/config',auth(false),configController.config_get)
+  .put('/config',auth(true),configController.config_put)
 
   // report
-  .get(`/${version}/report`,reportController.report_query)
-  .post(`/${version}/report`,reportController.report_post)
-  .get(`/${version}/report/:id`,reportController.report_get)
-  .put(`/${version}/report/:id`,reportController.report_put)
-  .delete(`/${version}/report/:id`,reportController.report_delete)
+  .get('/report',auth(true),reportController.report_query)
+  .post('/report',auth(true),reportController.report_post)
+  .get('/report/:id',auth(true),reportController.report_get)
+  .put('/report/:id',auth(true),reportController.report_put)
+  .delete('/report/:id',auth(true),reportController.report_delete)
 
   // user
-  .get(`/${version}/user`,userController.user_query)
-  .post(`/${version}/user`,userController.user_post)
-  .get(`/${version}/user/:slug`,userController.user_get)
-  .put(`/${version}/user/:slug`,userController.user_put)
-  .delete(`/${version}/user/:slug`,userController.user_delete)
+  .get('/user',auth(true),userController.user_query)
+  .get('/user/:slug',auth(false),userController.user_get)
+  .put('/user/:slug',auth(true),userController.user_put)
+  .delete('/user/:slug',auth(true),userController.user_delete)
 
 
-;
 module.exports = router;
