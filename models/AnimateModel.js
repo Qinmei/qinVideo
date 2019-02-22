@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
 const AnimateSchema = new Schema({
@@ -13,7 +14,11 @@ const AnimateSchema = new Schema({
       unique: true,
     },
     author:Schema.Types.ObjectId,
-    status:String,                                    // 状态
+    status: {
+      type:String,
+      enum:['draft','publish','trash'],
+      default:'draft'
+    },
     information:{                                     // 动漫详情
       introduce:String,                               // 简介
       staff:[{type:String}],                          // 工作人员

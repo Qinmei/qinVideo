@@ -6,15 +6,15 @@ class configController {
   
     // config Get
     static async config_get(ctx) {
-        const result = await ConfigModel.find();
-        ctx.send({ result,success:'查询成功',error:'查询失败' } );
+        const data = await ConfigModel.find().catch(err=>{return {code:404,msg:err.message}});
+        ctx.send({ data} );
     }
 
     // config put
     static async config_put(ctx) {
         const data = ctx.request.body;
-        const result = await ConfigModel.updateOne({},data);
-        ctx.send({ result,success:'修改成功',error:'修改失败' } );
+        const data = await ConfigModel.updateOne({},data).catch(err=>{return {code:404,msg:err.message}});
+        ctx.send({ data} );
     }
 
 }

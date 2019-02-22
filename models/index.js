@@ -5,6 +5,7 @@ const CommentModel  = require('./CommentModel');
 const PostModel  = require('./PostModel');
 const OrderModel  = require('./OrderModel');
 const ReportModel = require('./ReportModel');
+const CategoryModel = require('./CategoryModel');
 
 module.exports = {
     UserModel,
@@ -13,5 +14,6 @@ module.exports = {
     CommentModel,
     PostModel,
     OrderModel,
-    ReportModel
+    ReportModel,
+    CategoryModel
 }

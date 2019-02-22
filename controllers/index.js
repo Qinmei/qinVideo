@@ -5,6 +5,7 @@ const commentController  = require('./commentController');
 const configController  = require('./configController');
 const postController  = require('./postController');
 const reportController = require('./reportController');
+const categoryController = require('./categoryController');
 
 module.exports = {
     baseController,
@@ -13,5 +14,6 @@ module.exports = {
     commentController,
     configController,
     postController,
-    reportController
+    reportController,
+    categoryController
 }

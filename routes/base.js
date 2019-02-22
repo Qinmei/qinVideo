@@ -6,7 +6,8 @@ const  {
   postController,
   reportController,
   userController,
-  baseController
+  baseController,
+  categoryController
 } =  require('../controllers/index');
 const auth = require('../middleware/authRouter');
 
@@ -19,7 +20,8 @@ router
   // 基础服务
   .post('/auth/login',auth(false),baseController.login)
   .post('/auth/register',auth(false),baseController.register)
-  .post('/auth/refreshtoken',auth(true),baseController.refreshtoken)
+  .post('/auth/refreshtoken',auth(false),baseController.refreshtoken)
+  .post('/upload',auth(false),baseController.upload)
 
   // animate
   .get('/animate',auth(false),animateController.animate_query)
@@ -58,6 +60,13 @@ router
   .get('/user/:slug',auth(false),userController.user_get)
   .put('/user/:slug',auth(true),userController.user_put)
   .delete('/user/:slug',auth(true),userController.user_delete)
+  
+  // category
+  .get('/category',auth(false),categoryController.category_query)
+  .post('/category',auth(true),categoryController.category_post)
+  .get('/category/:slug',auth(false),categoryController.category_get)
+  .put('/category/:slug',auth(true),categoryController.category_put)
+  .delete('/category/:slug',auth(true),categoryController.category_delete)
 
 
 module.exports = router;

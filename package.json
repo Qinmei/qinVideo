@@ -19,8 +19,7 @@
   "dependencies": {
     "jsonwebtoken": "^8.4.0",
     "koa": "^2.6.2",
-    "koa-bodyparser": "^4.2.1",
-    "koa-multer": "^1.0.2",
+    "koa-body": "^4.0.8",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "mongoose": "^5.4.7",

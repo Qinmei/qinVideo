@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
@@ -12,7 +13,11 @@ const PostSchema = new Schema({
       index: true,
       unique: true,
     },
-    status:String,                                  // 状态
+    status: {
+      type:String,
+      enum:['draft','publish','trash'],
+      default:'draft'
+    },  
     author: Schema.Types.ObjectId,                  // 用户名
     category:[{String}],                            // 分类
     cover:String,                                   // 封面图

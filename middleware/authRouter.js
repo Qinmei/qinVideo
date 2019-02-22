@@ -12,7 +12,7 @@ module.exports = ( safe ) => {
                 const { id } = await jwt.verify(token,config.token.secret);
                 const userInfo = await UserModel.findById(id);
                 ctx.state.user = userInfo;
-                
+
                 await next();
             }catch(err){
                 ctx.status = 401;

@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
-  author: Schema.Types.ObjectId,                          // 用户名
+  author: Schema.Types.ObjectId,                            // 用户名
   belong: { type: String, required: true },                 // 归属
   parent: Schema.Types.ObjectId,                            // 父级
   content: String,                                          // 内容

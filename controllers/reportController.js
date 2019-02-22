@@ -13,47 +13,49 @@ class reportController {
             ...reportQuery
         } = ctx.query;
 
-        const result = await ReportModel.find(reportQuery)
+        const data = await ReportModel.find(reportQuery)
                                         .populate({path:'author',
                                                    select:'-_id name level score avatar background introduce',
                                                    model:'User'})
                                         .sort(sort)
                                         .skip((page - 1) * size)
-                                        .limit(Number(size));
+                                        .limit(Number(size))
+                                        .catch(err=>{return {code:404,msg:err.message}});
         const total = await ReportModel.count(reportQuery);
-        ctx.send({ result,total,success:'搜索成功',error:'搜索失败' } );
+        ctx.send({ data,total });
     }
 
     // post post 
     static async report_post(ctx) {
         const post = ctx.request.body;
-        const result = await ReportModel.create(post);
-        ctx.send({ result,success:'创建成功',error:'创建失败' } );
+        const data = await ReportModel.create(post).catch(err=>{return {code:404,msg:err.message}});
+        ctx.send({ data });
     }
   
     // post Get
     static async report_get(ctx) {
         const { id } = ctx.params;
-        const result = await ReportModel.findById(id)
+        const data = await ReportModel.findById(id)
                                       .populate({path:'author',
                                                 select:'-_id name level score avatar background introduce',
-                                                model:'User'});
-        ctx.send({ result,success:'查询成功',error:'查询失败' } );
+                                                model:'User'})
+                                      .catch(err=>{return {code:404,msg:err.message}});
+        ctx.send({ data });
     }
 
     // post put
     static async report_put(ctx) {
         const { id } = ctx.params;
         const data = ctx.request.body;
-        const result = await ReportModel.findByIdAndUpdate(id,data);
-        ctx.send({ result,success:'修改成功',error:'修改失败' } );
+        const data = await ReportModel.findByIdAndUpdate(id,data).catch(err=>{return {code:404,msg:err.message}});
+        ctx.send({ data });
     }
 
     // aniamte delete
     static async report_delete(ctx) {
         const { id } = ctx.params;
-        const result = await ReportModel.findByIdAndDelete(id);
-        ctx.send({ result,success:'删除成功',error:'删除失败' } );
+        const data = await ReportModel.findByIdAndDelete(id).catch(err=>{return {code:404,msg:err.message}});
+        ctx.send({ data });
     }
 
 }

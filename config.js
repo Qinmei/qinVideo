@@ -7,6 +7,6 @@ module.exports = {
     salt:'qinmei',
     token:{
         secret:'qinmei',
-        expired:'2h'
+        expired:'7d'
     }
 }
