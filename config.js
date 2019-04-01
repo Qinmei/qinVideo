@@ -5,8 +5,5 @@ module.exports = {
         uri:'mongodb://localhost:27017/qinmei',
     },
     salt:'qinmei',
-    token:{
-        secret:'qinmei',
-        expired:'7d'
-    }
+    tokenSecret:'qinmei',
 }
