@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const {
     OrderModel,
+    ShopModel,
+    UserModel,
+    DataModel
   } = require('../models/index');
 
 const authorLookup = {$lookup:{
@@ -51,7 +54,7 @@ const unwindList = ['$shop','$user'].map(item=>{
 
 class orderController {
   
-    // query列表
+    // 订单列表
     static async order_query(ctx) {
         const {
             size=10,
@@ -83,33 +86,52 @@ class orderController {
         ctx.send({ data,total} );
     }
   
-    // post Get
+    // 获取订单详情
     static async order_get(ctx) {
         const { id } = ctx.params;
         const data = await OrderModel.findById(id).catch(err=>{return {code:404,msg:err.message}});
         ctx.send({ data} );
     }
 
+    // 创建订单
     static async order_post(ctx) {
-        const shop = ctx.request.body;
         const { user } = ctx.state;
-        shop.user = user._id;
-        const data = await OrderModel.create(shop).catch(err=>{return {code:404,msg:err.message}});
-        ctx.send({ data} );
+        const { shop } = ctx.request.body;
+
+        const shopItem = await ShopModel.findById(shop);
+        if(!shopItem) return ctx.error({code:407,msg:'no this item'});
+        
+        const { price, upLevel, addScore, addExpired } = shopItem;
+        if(shopItem && user.money >= price){
+          const data = await OrderModel.create({shop,user:user._id}).catch(err=>{return {code:404,msg:err.message}});
+          const newUserInfo = {
+            $set:{level:upLevel},
+            $inc:{
+              score:`+${addScore}`,
+              expired:`+${addExpired}`,
+              money:`-${price}`
+            }
+          };
+          await UserModel.findByIdAndUpdate(user._id,newUserInfo);
+          await DataModel.create({type:'order'}).catch(err=>err); 
+          ctx.send({ data} );
+        }else{
+          return ctx.error({code:406,msg:"money can't afford"});
+        }
+
+
     }
 
-    // post delete
+    // 删除订单
     static async order_delete(ctx) {
         const { id } = ctx.params;
-
         const data = await OrderModel.findByIdAndDelete(id).catch(err=>{return {code:404,msg:err.message}});
         ctx.send({ data } );
-
     }
 
+    // 批量删除订单
     static async order_delete_batch(ctx) {
         const { type,list } = ctx.request.body;
-
         if(type === 'all'){
             const data = await OrderModel.remove({}).catch(err=>{return {code:404,msg:err.message}});
             ctx.send({ data } );

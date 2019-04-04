@@ -24,6 +24,7 @@ const DataSchema = new mongoose.Schema({
             'comicUnlike',
             'danmu',
             'order',
+            'key',
             'play',
             'search',
             'other'],

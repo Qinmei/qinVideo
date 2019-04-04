@@ -2,7 +2,8 @@ const { getChildArray } = require('../utils/common');
 
 const {
     ComicModel,
-    CategoryModel
+    CategoryModel,
+    DataModel
   } = require('../models/index');
 
 const authorLookup = {$lookup:{
@@ -165,6 +166,8 @@ class comicController {
         comic.author = user._id;
         comic.stats && delete comic.status;
         const data = await ComicModel.create(comic).catch(err=>{return {code:404,msg:err.message}});
+
+        await DataModel.create({type:'comicSend'}).catch(err=>err); 
         ctx.send({ data } );
     }
   
@@ -263,6 +266,8 @@ class comicController {
         const dirPath = path.join(__dirname, `../../public/comic${path}`);
         if(fs.existsSync(dirPath)){
           const data = fs.readdirSync(dirPath).map(item=>`/comic${path}/${item}`);
+
+          await DataModel.create({type:'play',target:`${slug}E${eposide}`}).catch(err=>err); 
           ctx.success({ data });
         }else{
           return ctx.error({code:404,msg:'暂无数据'})

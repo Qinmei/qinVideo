@@ -1,5 +1,6 @@
 const {
     CommentModel,
+    DataModel
 } = require('../models/index');
 
 const authorLookup = {$lookup:{
@@ -168,6 +169,8 @@ class commentController {
         const { user } = ctx.state;
         comment.author = user._id;
         const data = await CommentModel.create(comment).catch(err=>{return {code:404,msg:err.message}});
+
+        await DataModel.create({type:'commentSend'}).catch(err=>err);  
         ctx.send({ data } );
     }
 

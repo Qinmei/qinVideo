@@ -4,6 +4,10 @@ const { MD5 } = require('../utils/common');
 const config = require('../../config');
 const {
   UserModel,
+  AnimateModel,
+  PostModel,
+  ComicModel,
+  DataModel
 } = require('../models/index');
 
 const animateLookup = ['own','like','unlike'].map(item=>{
@@ -368,6 +372,21 @@ class userController {
       userArr.push(id);
     }
     const data = await UserModel.findByIdAndUpdate(user._id,{$set:userInfo},{new:true,select:{comic:1,post:1,animate:1,comment:1}});
+
+    let data;
+    if(type==='animate'){
+      data = await AnimateModel.findById(id);
+    }else if(type === 'post'){
+      data = await PostModel.findById(id);
+    }else if(type === 'comic'){
+      data = await ComicModel.findById(id);
+    }
+    const target = data.slug;
+    const dataType = kind === 'like' ? `${type}Like` : `${type}Unlike`;
+    const newData = await DataModel.findOne({target,type:dataType,author:user.name});
+    if(!newData){
+      await DataModel.create({target,type:dataType,author:user.name}).catch(err=>err);
+    }
     ctx.send({ data });
   }
 

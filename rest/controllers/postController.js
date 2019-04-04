@@ -1,6 +1,7 @@
 const { getChildArray } = require('../utils/common');
 const {
     PostModel,
+    DataModel
   } = require('../models/index');
 
 const authorLookup = {$lookup:{
@@ -147,6 +148,8 @@ class postController {
         const post = ctx.request.body;
         post.author = user._id;
         const data = await PostModel.create(post).catch(err=>{return {code:404,msg:err.message}});
+
+        await DataModel.create({type:'postSend'}).catch(err=>err); 
         ctx.send({ data } );
     }
   
@@ -172,6 +175,7 @@ class postController {
                                         },
                                         {$project:postShow}
                                     ])
+        await DataModel.create({type:'play',target:slug}).catch(err=>err).catch(err=>err); 
         ctx.send({ data} );
     }
 

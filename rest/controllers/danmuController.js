@@ -1,5 +1,6 @@
 const {
     DanmuModel,
+    DataModel
 } = require('../models/index');
 
 class danmuController {
@@ -41,6 +42,8 @@ class danmuController {
         const { user } = ctx.state;
         danmu.author = user._id;
         const data = await DanmuModel.create(danmu).catch(err=>{return {code:404,msg:err.message}});
+
+        await DataModel.create({type:'danmu',target:danmu.player}).catch(err=>err); 
         ctx.send({ data } );
     }
 

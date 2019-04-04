@@ -26,7 +26,7 @@ class dataController {
                 }
             };
 
-            target && ( dataQuery.target = target );
+            target && ( dataQuery.target = {$regex:target,$options:"$i"} );
 
             const data = await DataModel.aggregate([
                 {
@@ -185,7 +185,7 @@ class dataController {
     // data post 
     static async data_post(ctx) {
         const data = ctx.request.body;
-        const result = await DataModel.create(data).catch(err=>{return {code:404,msg:err.message}});
+        const result = await DataModel.create(data).catch(err=>{return {code:404,msg:err.message}}).catch(err=>err); 
         ctx.send({ data:result } );
     }
 

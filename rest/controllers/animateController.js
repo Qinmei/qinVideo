@@ -3,7 +3,8 @@ const { getChildArray,generateSecurePathHash } = require('../utils/common');
 const {
     AnimateModel,
     CategoryModel,
-    ConfigModel
+    ConfigModel,
+    DataModel
   } = require('../models/index');
 
 const authorLookup = {$lookup:{
@@ -188,6 +189,7 @@ class animateController {
         animate.author = user._id;
         animate.stats && delete animate.status;
         const data = await AnimateModel.create(animate).catch(err=>{return {code:404,msg:err.message}});
+        await DataModel.create({type:'animateSend'}); 
         ctx.send({ data } );
     }
   
@@ -288,7 +290,7 @@ class animateController {
     static async animate_play(ctx){
         const { slug, season, eposide } = ctx.request.body;
         const { user } = ctx.state;
-    
+        
         const result = await AnimateModel.findOne({slug,'play.level':{$lte:user.level}});
         if(!result ) return ctx.error({code:402,msg:'权限不足'});
         const data = await AnimateModel.aggregate([
@@ -381,6 +383,8 @@ class animateController {
             }
         }
         animate.playInfo.link = playLink;
+
+        await DataModel.create({type:'play',target:`${slug}S${season}E${eposide}`}).catch(err=>err); 
         ctx.send({ data: animate });
     }
 

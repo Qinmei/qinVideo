@@ -9,6 +9,8 @@ const sendemail = require('../utils/sendMail');
 
 const {
     UserModel,
+    KeyModel,
+    DataModel
   } = require('../models/index');
 
 class baseController {
@@ -40,7 +42,7 @@ class baseController {
         config.tokenSecret, 
         { expiresIn: '1d'}
       );
-      
+      await DataModel.create({type:'login'}).catch(err=>err); 
       ctx.success({ data:{token,refreshToken}} );
     }
 
@@ -50,6 +52,7 @@ class baseController {
       const newPass = MD5(config.salt + password);
       const refreshToken = new mongoose.Types.ObjectId().toString() + stringRandom(16);
       const data = await UserModel.create({name,password:newPass,email,refreshToken}).catch(err=>{return {code:404,msg:err.message}});
+      await DataModel.create({type:'register'}).catch(err=>err);      
       ctx.send({ data} );
     }
 
@@ -73,7 +76,7 @@ class baseController {
           config.tokenSecret, 
           { expiresIn: '1d'}
         );
-        
+        await DataModel.create({type:'login'}).catch(err=>err);       
         ctx.success({data:{token},msg:'刷新成功'})
       }else{
         return ctx.error({code:403,msg:'refreshToken错误'})
@@ -126,6 +129,24 @@ class baseController {
             msg:err.message
           })
       }
+    }
+
+    // 使用激活码
+    static async useKey(ctx){
+      const { key } = ctx.request.body;
+      const { user } = ctx.state;
+      const keyInfo = await KeyModel.findOne({key,status:'unactive'});
+      if(keyInfo){
+        const { price } = keyInfo;
+        await KeyModel.findOneAndUpdate({key},{$set:{status:'active'}});
+        await UserModel.findByIdAndUpdate(user._id,{$inc:{money:`+${price}`}});
+
+        await DataModel.create({type:'key'}).catch(err=>err); 
+        ctx.success({ code:200,msg:'激活码使用成功' });
+      }else{
+        ctx.error({code:406,msg:'激活码无效'})
+      }
+
     }
 
     // 上传文件
