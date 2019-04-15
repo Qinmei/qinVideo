@@ -116,8 +116,11 @@ class postController {
         if(post){ 
             const postData = await CategoryModel.find({type:'post'});
             const postList = getChildArray(postData,post);
-            animateQuery['category.post'] = {$in: postList };
+            postQuery['category.post'] = {$in: postList };
         };
+
+        const { user } = ctx.state;
+        user.level < 100 && ( postQuery.status = 'publish' );
 
         const data = await PostModel.aggregate([
                                         {$match:postQuery},
@@ -158,7 +161,7 @@ class postController {
         const { slug } = ctx.params;
         const { user } = ctx.state;
         let postShow = {};
-        if(user.level >= 100){
+        if(user.level > 99){
             postShow = {_id:0}
         }else{
             const isAuthor = await PostModel.find({slug,author:user._id});

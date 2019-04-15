@@ -143,6 +143,7 @@ class animateController {
         title && ( animateQuery.title = {$regex:title,$options:"$i"} );
         status && ( animateQuery.status = status )
         isUpdate && ( animateQuery['information.isUpdate'] = isUpdate === 'true' );
+
         if(area){ 
             const areaData = await CategoryModel.find({type:'area'});
             const areaList = getChildArray(areaData,area);
@@ -158,6 +159,9 @@ class animateController {
             const yearList = getChildArray(yearData,year);
             animateQuery['category.year'] = {$in: yearList };
         };
+        
+        const { user } = ctx.state;
+        user.level < 100 && ( animateQuery.status = 'publish' );
         
         const data = await AnimateModel.aggregate([
                                             {$match:animateQuery},
@@ -198,15 +202,11 @@ class animateController {
         const { slug } = ctx.params;
         const { user } = ctx.state;
         let animateShow = {};
-        if(user && user.level > 0){
-            if(user.level > 100){
-                animateShow = {_id:0}
-            }else{
-                const isAuthor = await AnimateModel.find({slug,author:user._id});
-                animateShow = isAuthor ? {_id:0} : {_id:0,eposide:0,relative:0}
-            }
+        if(user.level > 99){
+            animateShow = {_id:0}
         }else{
-            animateShow = {_id:0,eposide:0,relative:0}
+            const isAuthor = await AnimateModel.find({slug,author:user._id});
+            animateShow = isAuthor ? {_id:0} : {_id:0,eposide:0,relative:0}
         }
         const data = await AnimateModel.aggregate([
                                         {$match:{slug}},

@@ -155,7 +155,7 @@ class baseController {
       const { file }= ctx.request.files;
       const { type } = ctx.request.body;
       const typePath = ['animate','post','comment','avatar','background','config','others'].includes(type) ? type : 'others';
-      const dirPath = path.join(__dirname, '../../public') + `/${typePath}`;
+      const dirPath = path.join(__dirname, '../../public/img') + `/${typePath}`;
       !fs.existsSync(dirPath) && await fs.mkdirSync(dirPath);
 
       async function saveFile(file){
@@ -189,7 +189,7 @@ class baseController {
     static async image_query(ctx){
       const { type } = ctx.params;
       const typePath = ['animate','post','comment','avatar','background','config','others'].includes(type) ? type : 'others';
-      const dirPath = path.join(__dirname, `../../public/${typePath}`);
+      const dirPath = path.join(__dirname, `../../public/img/${typePath}`);
       !fs.existsSync(dirPath) && fs.mkdirSync(dirPath);
       const data = fs.readdirSync(dirPath).map(item=>`/${typePath}/${item}`);
       ctx.success({ data });
@@ -199,7 +199,7 @@ class baseController {
     static async image_delete(ctx){
       const { list } = ctx.request.body;
       list.map(item=>{
-        const filePath = path.join(__dirname, '../../public') + `${item}`;
+        const filePath = path.join(__dirname, '../../public/img') + `${item}`;
         fs.exists(filePath,()=>{
           fs.unlinkSync(filePath);
         });

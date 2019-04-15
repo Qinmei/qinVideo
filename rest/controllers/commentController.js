@@ -137,6 +137,9 @@ class commentController {
         type && ( commentQuery.type = type );
         belong && ( commentQuery.belong = {$regex:belong,$options:"$i"} );
 
+        const { user } = ctx.state;
+        user.level < 100 && ( commentQuery.status = 'publish' );
+
         const data = await CommentModel.aggregate([
                                         {$match:commentQuery},
                                         {$addFields:

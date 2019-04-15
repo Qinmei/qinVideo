@@ -135,6 +135,9 @@ class comicController {
             const comicList = getChildArray(comicData,comic);
             comicQuery['category.comic'] = {$in: comicList };
         };
+
+        const { user } = ctx.state;
+        user.level < 100 && ( comicQuery.status = 'publish' );
         
         const data = await ComicModel.aggregate([
                                             {$match:comicQuery},
@@ -176,15 +179,11 @@ class comicController {
         const { slug } = ctx.params;
         const { user } = ctx.state;
         let comicShow = {};
-        if(user && user.level > 0){
-            if(user.level > 100){
-                comicShow = {_id:0}
-            }else{
-                const isAuthor = await ComicModel.find({slug,author:user._id});
-                comicShow = isAuthor ? {_id:0} : {_id:0,eposide:0,relative:0}
-            }
+        if(user.level > 99){
+            comicShow = {_id:0}
         }else{
-            comicShow = {_id:0,eposide:0,relative:0}
+            const isAuthor = await ComicModel.find({slug,author:user._id});
+            comicShow = isAuthor ? {_id:0} : {_id:0,eposide:0,relative:0}
         }
         const data = await ComicModel.aggregate([
                                         {$match:{slug}},
