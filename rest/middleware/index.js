@@ -1,4 +1,3 @@
-const staticFile = require('koa-static');
 const path = require('path');
 const cors = require('@koa/cors');
 const koaJson = require('./koa-json');
@@ -7,7 +6,6 @@ const koaBody = require('./koa-upload');
 
 module.exports = app=>{
     app.use(cors());
-    app.use(staticFile(path.join( __dirname,  '../../public')));
     app.use(koaBody);
     app.use(koaJson);
     app.use(filter);

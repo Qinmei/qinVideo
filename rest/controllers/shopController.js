@@ -21,7 +21,10 @@ class shopController {
 
         const shopQuery = {};
         title && ( shopQuery.title = {$regex:title,$options:"$i"} );
-        status && ( shopQuery.status = status )
+        status && ( shopQuery.status = status );
+
+        const { user } = ctx.state;
+        user.level < 100 && ( shopQuery.status = 'active' );
 
         const data = await ShopModel.aggregate([
                                         {$match :shopQuery},
