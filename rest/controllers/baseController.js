@@ -170,7 +170,7 @@ class baseController {
           fs.exists(oldPath,()=>{
             fs.unlinkSync(oldPath);
           });
-          file.path = `/${typePath}/${name}`;
+          file.path = `/img/${typePath}/${name}`;
           result.push(file)
         }else{
           return ctx.error({code:404,msg:'不支持的格式'})
