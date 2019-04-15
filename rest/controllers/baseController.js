@@ -172,8 +172,6 @@ class baseController {
           });
           file.path = `/${typePath}/${name}`;
           result.push(file)
-        }else if(file.type === 'application/zip'){
-          
         }else{
           return ctx.error({code:404,msg:'不支持的格式'})
         }
