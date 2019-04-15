@@ -1,8 +1,8 @@
 module.exports = {
-    author:'qinmei',
+    author:'qinvz',
     version:'v1',
     mongodb:{
-        uri:'mongodb://localhost:27017/qinmei',
+        uri:'mongodb://qinvideo:Op6bg0PzQnVuTSjGuK0TkHJyUtGkTtQK@localhost:27017/qinvideo',
     },
     salt:'qinmei',
     tokenSecret:'qinmei',
