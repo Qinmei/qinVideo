@@ -5,5 +5,5 @@ module.exports = {
         uri:'mongodb://qinvideo:Op6bg0PzQnVuTSjGuK0TkHJyUtGkTtQK@localhost:27017/qinvideo',
     },
     salt:'qinmei',
-    tokenSecret:'qinmei',
+    tokenSecret:'qinmei'
 }
