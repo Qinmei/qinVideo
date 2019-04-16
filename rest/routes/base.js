@@ -29,7 +29,7 @@ router
   .post('/auth/refreshtoken',auth(0),baseController.refreshtoken)
   .post('/auth/resetPasswordMail',auth(0),baseController.resetPasswordMail)
   .post('/auth/resetPasswordAuth',auth(0),baseController.resetPasswordAuth)
-  .post('/upload',auth(0),baseController.upload)
+  .post('/upload',auth(1),baseController.upload)
   .get('/image/:type',auth(100),baseController.image_query)
   .delete('/image',auth(100),baseController.image_delete)
   .post('/money',auth(1),baseController.useKey)
