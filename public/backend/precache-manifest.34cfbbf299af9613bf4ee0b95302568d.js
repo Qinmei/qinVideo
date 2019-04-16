@@ -16,11 +16,11 @@ self.__precacheManifest = [
     "url": "/backend/pwacompat.min.js"
   },
   {
-    "revision": "69211a5494f83fb1e145",
+    "revision": "66bc07b4c38fee8d454c",
     "url": "/backend/umi.js"
   },
   {
-    "revision": "69211a5494f83fb1e145",
+    "revision": "66bc07b4c38fee8d454c",
     "url": "/backend/umi.css"
   },
   {
@@ -228,8 +228,8 @@ self.__precacheManifest = [
     "url": "/backend/icons/icon-512x512.png"
   },
   {
-    "revision": "c1074efc2372bf52c481a8ba0909be63",
-    "url": "/backend/icons/icon-192x192.png"
+    "revision": "4f38ae784c9e5f8b5135fd0b2ec19a9d",
+    "url": "/backend/icons/icon-128x128.png"
   },
   {
     "revision": "a5dc2f42f6427f20b894",
@@ -252,12 +252,12 @@ self.__precacheManifest = [
     "url": "/backend/46.async.js"
   },
   {
-    "revision": "965944efb1b4901333ee1f54dbb2e9eb",
+    "revision": "6c91044ee81da01f91526da49fa460a7",
     "url": "/backend/index.html"
   },
   {
-    "revision": "4f38ae784c9e5f8b5135fd0b2ec19a9d",
-    "url": "/backend/icons/icon-128x128.png"
+    "revision": "c1074efc2372bf52c481a8ba0909be63",
+    "url": "/backend/icons/icon-192x192.png"
   },
   {
     "revision": "4c17cd56deffab5da458",
