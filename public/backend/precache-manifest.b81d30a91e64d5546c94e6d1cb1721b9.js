@@ -16,11 +16,11 @@ self.__precacheManifest = [
     "url": "/backend/pwacompat.min.js"
   },
   {
-    "revision": "66bc07b4c38fee8d454c",
+    "revision": "75ada20eeda0e19e54e9",
     "url": "/backend/umi.js"
   },
   {
-    "revision": "66bc07b4c38fee8d454c",
+    "revision": "75ada20eeda0e19e54e9",
     "url": "/backend/umi.css"
   },
   {
@@ -252,7 +252,7 @@ self.__precacheManifest = [
     "url": "/backend/46.async.js"
   },
   {
-    "revision": "6c91044ee81da01f91526da49fa460a7",
+    "revision": "8b4eb50bf64f1fade172d8c96872e934",
     "url": "/backend/index.html"
   },
   {
