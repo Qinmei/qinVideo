@@ -191,7 +191,7 @@ class baseController {
       const typePath = ['animate','post','comment','avatar','background','config','others'].includes(type) ? type : 'others';
       const dirPath = path.join(__dirname, `../../public/img/${typePath}`);
       !fs.existsSync(dirPath) && fs.mkdirSync(dirPath);
-      const data = fs.readdirSync(dirPath).map(item=>`/${typePath}/${item}`);
+      const data = fs.readdirSync(dirPath).map(item=>`/img/${typePath}/${item}`);
       ctx.success({ data });
     }
 
@@ -199,7 +199,7 @@ class baseController {
     static async image_delete(ctx){
       const { list } = ctx.request.body;
       list.map(item=>{
-        const filePath = path.join(__dirname, '../../public/img') + `${item}`;
+        const filePath = path.join(__dirname, '../../public') + `${item}`;
         fs.exists(filePath,()=>{
           fs.unlinkSync(filePath);
         });
