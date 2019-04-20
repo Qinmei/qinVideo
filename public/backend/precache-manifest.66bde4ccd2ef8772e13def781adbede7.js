@@ -1,6 +1,6 @@
 self.__precacheManifest = [
   {
-    "revision": "f61f6586850dbdf7766e",
+    "revision": "d9bc548c92edcbd3424e",
     "url": "/backend/p__Shop__Order.async.js"
   },
   {
@@ -16,11 +16,11 @@ self.__precacheManifest = [
     "url": "/backend/pwacompat.min.js"
   },
   {
-    "revision": "1d40f3125b72d867a88e",
+    "revision": "9150c43ab38929af308f",
     "url": "/backend/umi.js"
   },
   {
-    "revision": "1d40f3125b72d867a88e",
+    "revision": "9150c43ab38929af308f",
     "url": "/backend/umi.css"
   },
   {
@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "/backend/vendors.async.js"
   },
   {
-    "revision": "ae93dc24b96098cf5553",
+    "revision": "00072c15bf70cf6b0baa",
     "url": "/backend/p__User__List.async.js"
   },
   {
@@ -44,7 +44,7 @@ self.__precacheManifest = [
     "url": "/backend/p__Animate__Info.async.js"
   },
   {
-    "revision": "1577a5b6e8f316e1fee4",
+    "revision": "18b700d149f8f567bf8b",
     "url": "/backend/p__Animate__List.async.js"
   },
   {
@@ -72,7 +72,7 @@ self.__precacheManifest = [
     "url": "/backend/p__Comic__Info.async.js"
   },
   {
-    "revision": "0cbc4f100b413e35fe05",
+    "revision": "e1dc180091d8f718fe95",
     "url": "/backend/p__Comic__List.async.js"
   },
   {
@@ -80,7 +80,7 @@ self.__precacheManifest = [
     "url": "/backend/p__Comment__List.async.js"
   },
   {
-    "revision": "1425b870deaee03ed133",
+    "revision": "640ebdb122031da6060b",
     "url": "/backend/p__Config__index.async.js"
   },
   {
@@ -124,7 +124,7 @@ self.__precacheManifest = [
     "url": "/backend/p__Post__Info.async.js"
   },
   {
-    "revision": "06cc381e1c8af639eb83",
+    "revision": "334ec74672eb71ff31fe",
     "url": "/backend/p__Post__List.async.js"
   },
   {
@@ -148,7 +148,7 @@ self.__precacheManifest = [
     "url": "/backend/38.chunk.css"
   },
   {
-    "revision": "bf4e7e028f45f63a0d55",
+    "revision": "eda7f68073fd6c7f241a",
     "url": "/backend/layouts__BasicLayout.chunk.css"
   },
   {
@@ -176,7 +176,7 @@ self.__precacheManifest = [
     "url": "/backend/40.async.js"
   },
   {
-    "revision": "bf4e7e028f45f63a0d55",
+    "revision": "eda7f68073fd6c7f241a",
     "url": "/backend/layouts__BasicLayout.async.js"
   },
   {
