@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/backend/p__Shop__Order.async.js"
   },
   {
-    "revision": "90135b91d0818b8d72a4",
+    "revision": "e6f136060b4476bc0109",
     "url": "/backend/vendors.chunk.css"
   },
   {
@@ -16,20 +16,20 @@ self.__precacheManifest = [
     "url": "/backend/pwacompat.min.js"
   },
   {
-    "revision": "9150c43ab38929af308f",
+    "revision": "43f40628814eaf50d13a",
     "url": "/backend/umi.js"
   },
   {
-    "revision": "9150c43ab38929af308f",
+    "revision": "43f40628814eaf50d13a",
     "url": "/backend/umi.css"
   },
   {
-    "revision": "90135b91d0818b8d72a4",
+    "revision": "e6f136060b4476bc0109",
     "url": "/backend/vendors.async.js"
   },
   {
-    "revision": "00072c15bf70cf6b0baa",
-    "url": "/backend/p__User__List.async.js"
+    "revision": "06078b079968b3f760f3",
+    "url": "/backend/layouts__UserLayout.async.js"
   },
   {
     "revision": "3b952bf767818f2c4744",
@@ -80,7 +80,7 @@ self.__precacheManifest = [
     "url": "/backend/p__Comment__List.async.js"
   },
   {
-    "revision": "640ebdb122031da6060b",
+    "revision": "81009ceb508bd778680d",
     "url": "/backend/p__Config__index.async.js"
   },
   {
@@ -140,12 +140,16 @@ self.__precacheManifest = [
     "url": "/backend/p__Shop__List.async.js"
   },
   {
+    "revision": "00072c15bf70cf6b0baa",
+    "url": "/backend/p__User__List.async.js"
+  },
+  {
     "revision": "865466bf7fd24858fe99",
     "url": "/backend/p__User__Info.async.js"
   },
   {
     "revision": "5cf90737b4bc6f6bb98d",
-    "url": "/backend/38.chunk.css"
+    "url": "/backend/38.async.js"
   },
   {
     "revision": "eda7f68073fd6c7f241a",
@@ -154,10 +158,6 @@ self.__precacheManifest = [
   {
     "revision": "3b952bf767818f2c4744",
     "url": "/backend/p__Animate__Category.async.js"
-  },
-  {
-    "revision": "06078b079968b3f760f3",
-    "url": "/backend/layouts__UserLayout.async.js"
   },
   {
     "revision": "06078b079968b3f760f3",
@@ -172,16 +172,16 @@ self.__precacheManifest = [
     "url": "/backend/p__404.async.js"
   },
   {
-    "revision": "4d129dc0921e1b2a7739",
-    "url": "/backend/40.async.js"
+    "revision": "648c3ea5d9ddd12b4223",
+    "url": "/backend/41.async.js"
   },
   {
     "revision": "eda7f68073fd6c7f241a",
     "url": "/backend/layouts__BasicLayout.async.js"
   },
   {
-    "revision": "648c3ea5d9ddd12b4223",
-    "url": "/backend/41.async.js"
+    "revision": "a5dc2f42f6427f20b894",
+    "url": "/backend/42.async.js"
   },
   {
     "revision": "4c17cd56deffab5da458",
@@ -212,16 +212,20 @@ self.__precacheManifest = [
     "url": "/backend/37.async.js"
   },
   {
+    "revision": "5cf90737b4bc6f6bb98d",
+    "url": "/backend/38.chunk.css"
+  },
+  {
     "revision": "6455a54d5369cf16e4fe22af82fea3e3",
     "url": "/backend/favicon.png"
   },
   {
-    "revision": "5cf90737b4bc6f6bb98d",
-    "url": "/backend/38.async.js"
-  },
-  {
     "revision": "3691b6fac5fafc996622",
     "url": "/backend/39.async.js"
+  },
+  {
+    "revision": "4d129dc0921e1b2a7739",
+    "url": "/backend/40.async.js"
   },
   {
     "revision": "d26b6882c10242e359b3502e77c14779",
@@ -230,10 +234,6 @@ self.__precacheManifest = [
   {
     "revision": "c1074efc2372bf52c481a8ba0909be63",
     "url": "/backend/icons/icon-192x192.png"
-  },
-  {
-    "revision": "a5dc2f42f6427f20b894",
-    "url": "/backend/42.async.js"
   },
   {
     "revision": "a09327a80c9303230a38",
@@ -278,5 +278,9 @@ self.__precacheManifest = [
   {
     "revision": "ce5b770ab872f77bbce4",
     "url": "/backend/32.async.js"
+  },
+  {
+    "revision": "9e49a1bed567e8f8725b84134ccc8b6b",
+    "url": "/backend/.DS_Store"
   }
 ];

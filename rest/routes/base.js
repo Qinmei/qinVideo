@@ -33,9 +33,10 @@ router
   .get("/image/:type", auth(100), baseController.image_query)
   .delete("/image", auth(100), baseController.image_delete)
   .post("/money", auth(1), baseController.useKey)
+  .get("/search", auth(0), baseController.search_word)
 
   // config
-  .get("/config", auth(0), configController.config_get)
+  .get("/config", auth(100), configController.config_get)
   .post("/config", auth(100), configController.config_post)
 
   // animate
