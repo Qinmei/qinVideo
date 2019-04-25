@@ -98,7 +98,7 @@ router
   // category
   .get("/category", auth(0), categoryController.category_query)
   .post("/category", auth(1), categoryController.category_post)
-  .get("/category/id/:id", auth(1), categoryController.category_get)
+  .get("/category/id/:id", auth(0), categoryController.category_get)
   .put("/category/id/:id", auth(1), categoryController.category_put)
   .delete("/category/id/:id", auth(1), categoryController.category_delete)
   .put("/category/batch", auth(1), categoryController.category_put_batch)
