@@ -128,7 +128,7 @@ const countSize = {
 };
 
 class comicController {
-  // comic列表
+  // comic
   static async comic_query(ctx) {
     const {
       size = 10,
