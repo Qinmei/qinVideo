@@ -5,10 +5,11 @@ class categoryController {
   // query列表
   static async category_query(ctx) {
     const { type } = ctx.query;
-    const result = await CategoryModel.find({ type }).catch(err => {
+    const query = type === "all" ? {} : { type };
+    const result = await CategoryModel.find(query).catch(err => {
       return { code: 404, msg: err.message };
     });
-    const total = await CategoryModel.countDocuments({ type });
+    const total = await CategoryModel.countDocuments(query);
     // 通过 parent 获取循环结构
     const data = Array.isArray(result) ? array2Tree(result) : result;
     ctx.send({ data, total });
