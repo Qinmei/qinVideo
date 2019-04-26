@@ -2,7 +2,7 @@ const { CategoryModel } = require("../models/index");
 const { array2Tree } = require("../utils/common");
 
 class categoryController {
-  // query列表
+  // query
   static async category_query(ctx) {
     const { type } = ctx.query;
     const query = type === "all" ? {} : { type };
