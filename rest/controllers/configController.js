@@ -54,6 +54,7 @@ class configController {
           }
         })
       );
+
       ["pc", "h5"].map(item => {
         const config = path.join(__dirname, `../../public/${item}/config.js`);
         fs.writeFile(
@@ -64,6 +65,16 @@ class configController {
             if (err) console.log(err);
           }
         );
+
+        const favicon = path.join(
+          __dirname,
+          "../../public/img/config/favicon.ico"
+        );
+        const dirPath = path.join(
+          __dirname,
+          `../../public/${item}/favicon.ico`
+        );
+        fs.writeFileSync(dirPath, fs.readFileSync(favicon));
       });
     }
 

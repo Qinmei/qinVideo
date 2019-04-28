@@ -187,7 +187,13 @@ class baseController {
         file.type === "image/x-icon" ||
         file.type === "image/vnd.microsoft.icon"
       ) {
-        const fileName = file.hash;
+        let fileName = file.hash;
+        if (
+          file.type === "image/x-icon" ||
+          file.type === "image/vnd.microsoft.icon"
+        ) {
+          fileName = "favicon";
+        }
         const fileExt = path.extname(file.name);
         const name = `${fileName}${fileExt}`;
         const oldPath = file.path;
@@ -199,21 +205,6 @@ class baseController {
         });
         file.path = `/img/${typePath}/${name}`;
         result.push(file);
-
-        if (
-          file.type === "image/x-icon" ||
-          file.type === "image/vnd.microsoft.icon"
-        ) {
-          const reader = await fs.createReadStream(file.path);
-          ["pc", "h5"].map(async item => {
-            const icoPath = path.join(
-              __dirname,
-              `../../public/${item}/favicon.ico`
-            );
-            const upStream = await fs.createWriteStream(icoPath);
-            await reader.pipe(upStream);
-          });
-        }
       } else {
         return ctx.error({ code: 404, msg: "不支持的格式" });
       }
