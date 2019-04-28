@@ -187,13 +187,7 @@ class baseController {
         file.type === "image/x-icon" ||
         file.type === "image/vnd.microsoft.icon"
       ) {
-        let fileName = file.hash;
-        if (
-          file.type === "image/x-icon" ||
-          file.type === "image/vnd.microsoft.icon"
-        ) {
-          fileName = "favicon";
-        }
+        const fileName = file.hash;
         const fileExt = path.extname(file.name);
         const name = `${fileName}${fileExt}`;
         const oldPath = file.path;
