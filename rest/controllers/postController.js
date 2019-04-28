@@ -1,5 +1,5 @@
 const { getChildArray } = require("../utils/common");
-const { PostModel, DataModel,CategoryModel } = require("../models/index");
+const { PostModel, DataModel, CategoryModel } = require("../models/index");
 
 const authorLookup = {
   $lookup: {
@@ -55,7 +55,7 @@ const unwindList = ["$category.post", "$author"].map(item => {
   };
 });
 
-const relativeLookup = ["like", "unlike", "comment", "play"{item.introduce}].map(item => {
+const relativeLookup = ["like", "unlike", "comment", "play"].map(item => {
   if (item === "like" || item === "unlike") {
     return {
       $lookup: {
