@@ -183,7 +183,8 @@ class baseController {
       if (
         file.type === "image/jpeg" ||
         file.type === "image/jpg" ||
-        file.type === "image/png"
+        file.type === "image/png" ||
+        file.type === 'image/x-icon'
       ) {
         const fileName = file.hash;
         const fileExt = path.extname(file.name);
@@ -197,6 +198,16 @@ class baseController {
         });
         file.path = `/img/${typePath}/${name}`;
         result.push(file);
+
+        if( file.type === 'image/x-icon'){
+          const reader = await fs.createReadStream(file.path);
+          ["pc", "h5"].map(item => {
+            const icoPath = path.join(__dirname, `../../public/${item}/favicon.ico`);
+            const upStream = await fs.createWriteStream(icoPath);
+            await reader.pipe(upStream);
+          });
+        }
+
       } else {
         return ctx.error({ code: 404, msg: "不支持的格式" });
       }

@@ -3,6 +3,7 @@ mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
 const ConfigSchema = new Schema({
+  favcion: { type: String, default: "" }, // ico
   name: { type: String, default: "" }, // 网站名
   slogan: { type: String, default: "" }, // 标语
   information: { type: String, default: "" }, // 简介
@@ -15,6 +16,13 @@ const ConfigSchema = new Schema({
   loginimg: { type: String, default: "" }, // 登陆大图
   avatar: { type: String, default: "" }, // 默认头像图
   background: { type: String, default: "" }, // 默认背景图
+  newAnimate: { type: String, default: "" }, // 新番
+  newComic: { type: String, default: "" }, // 新漫
+  newDiscuss: { type: String, default: "" }, // 讨论区
+  newShop: { type: String, default: "" }, // 商品
+  allAnimate: { type: String, default: "" }, // 所有番剧
+  allComic: { type: String, default: "" }, // 所有漫画
+  allPost: { type: String, default: "" }, // 所有文章
   pcMenu: [{ type: String }], // web菜单
   pcIndex: [{ type: String }], // web首页
   h5Menu: [{ type: String }], // mobile菜单
