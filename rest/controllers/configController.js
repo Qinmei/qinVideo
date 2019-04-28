@@ -22,6 +22,7 @@ class configController {
       const newConfig = await ConfigModel.findOne(
         {},
         {
+          favicon: 1,
           name: 1,
           slogan: 1,
           information: 1,
@@ -34,6 +35,13 @@ class configController {
           loginimg: 1,
           avatar: 1,
           background: 1,
+          newAnimate: 1,
+          newComic: 1,
+          newDiscuss: 1,
+          newShop: 1,
+          allAnimate: 1,
+          allComic: 1,
+          allPost: 1,
           pcMenu: 1,
           pcIndex: 1,
           h5Menu: 1,
