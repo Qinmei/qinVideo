@@ -210,6 +210,8 @@ class baseController {
         })
       : saveFile(file);
 
+    console.log(result);
+
     ctx.success({ data: result });
   }
 
