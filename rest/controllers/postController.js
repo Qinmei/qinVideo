@@ -47,7 +47,7 @@ const unwindList = ['$category.post','$author'].map(item=>{
             }
 })
 
-const relativeLookup = ['like','unlike','comment',].map(item=>{
+const relativeLookup = ['like','unlike','comment',‘play].map(item=>{
     if(item === 'like' || item === 'unlike'){
         return {$lookup:{
                 from: 'users',
@@ -83,13 +83,29 @@ const relativeLookup = ['like','unlike','comment',].map(item=>{
                 ],
                 as: `relative.${item}`
             }}
-        }
+        }else if (item === "play") {
+            return {
+              $lookup: {
+                from: "datas",
+                let: { value: "$slug" },
+                pipeline: [
+                  {
+                    $match: {
+                      $expr: { $gt: [{ $indexOfBytes: ["$target", "$$value"] }, -1] }
+                    }
+                  }
+                ],
+                as: `relative.${item}`
+              }
+            };
+          }
 })
 
 const countSize = {
     like:{ $size:"$relative.like" },
     unlike:{ $size:"$relative.unlike" },
     comment:{ $size:"$relative.comment" },
+    play:{$size:'$relative.play'}
 }
 
 class postController {
