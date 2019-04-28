@@ -184,7 +184,8 @@ class baseController {
         file.type === "image/jpeg" ||
         file.type === "image/jpg" ||
         file.type === "image/png" ||
-        file.type === "image/x-icon"
+        file.type === "image/x-icon" ||
+        file.type === "image/vnd.microsoft.icon"
       ) {
         const fileName = file.hash;
         const fileExt = path.extname(file.name);
@@ -199,7 +200,10 @@ class baseController {
         file.path = `/img/${typePath}/${name}`;
         result.push(file);
 
-        if (file.type === "image/x-icon") {
+        if (
+          file.type === "image/x-icon" ||
+          file.type === "image/vnd.microsoft.icon"
+        ) {
           const reader = await fs.createReadStream(file.path);
           ["pc", "h5"].map(async item => {
             const icoPath = path.join(
