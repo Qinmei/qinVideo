@@ -1,5 +1,5 @@
 const { CommentModel, DataModel } = require("../models/index");
-
+const mongoose = require("mongoose");
 const authorLookup = {
   $lookup: {
     from: "users",
@@ -53,23 +53,6 @@ const replyToLookup = {
       }
     ],
     as: "replyTo"
-  }
-};
-
-const childrenLookup = {
-  $lookup: {
-    from: "comments",
-    let: { value: "$_id" },
-    pipeline: [
-      {
-        $match: {
-          $expr: {
-            $eq: ["$parent", "$$value"]
-          }
-        }
-      }
-    ],
-    as: "children"
   }
 };
 
@@ -189,6 +172,44 @@ const countSize = {
   unlike: { $size: "$relative.unlike" }
 };
 
+const childrenLookup = {
+  $lookup: {
+    from: "comments",
+    let: { value: "$_id" },
+    pipeline: [
+      {
+        $match: {
+          $expr: {
+            $eq: ["$parent", "$$value"]
+          }
+        }
+      },
+      authorLookup,
+      replyToLookup,
+      ...relativeLookup,
+      {
+        $unwind: "$author"
+      },
+      {
+        $unwind: "$replyTo"
+      },
+      { $addFields: { count: countSize } },
+      {
+        $project: {
+          type: 0,
+          image: 0,
+          video: 0,
+          parent: 0,
+          status: 0,
+          relative: 0,
+          belong: 0
+        }
+      }
+    ],
+    as: "children"
+  }
+};
+
 class commentController {
   // 评论列表
   static async comment_query(ctx) {
@@ -207,24 +228,18 @@ class commentController {
     const sortBy = pattern.test(sort) ? sort.substring(1) : sort;
     const skip = (page - 1) * size;
 
-    const commentQuery = {
-      parent: null
-    };
+    const commentQuery = {};
     content && (commentQuery.content = { $regex: content, $options: "$i" });
     status && (commentQuery.status = status);
     type && (commentQuery.type = type);
     belong && (commentQuery.belong = { $regex: belong, $options: "$i" });
 
-    const arrLookup = {
-      animateLookup,
-      comicLookup,
-      postLookup
-    };
+    let arrLookup = [animateLookup, comicLookup, postLookup];
 
     const { user } = ctx.state;
     if (user.level < 100) {
-      commentQuery.status = "publish";
-      arrLookup = {};
+      // commentQuery.status = "publish";
+      arrLookup = [];
     }
 
     const data = await CommentModel.aggregate([
@@ -237,12 +252,17 @@ class commentController {
         }
       },
       authorLookup,
-      replyToLookup,
       childrenLookup,
       ...arrLookup,
       ...relativeLookup,
       ...unwindList,
       { $addFields: { count: countSize } },
+      {
+        $project: {
+          replyTo: 0,
+          relative: 0
+        }
+      },
       {
         $sort: {
           [sortBy]: sortOrder
@@ -272,10 +292,12 @@ class commentController {
   static async comment_get(ctx) {
     const { id } = ctx.params;
     const data = await CommentModel.aggregate([
-      { $match: { id } },
+      { $match: { _id: new mongoose.Types.ObjectId(id) } },
       authorLookup,
+      replyToLookup,
+      childrenLookup,
       ...unwindList
-    ]);
+    ]).catch(err => err);
     ctx.send({ data });
   }
 
