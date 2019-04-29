@@ -309,7 +309,12 @@ class commentController {
       const single = await CommentModel.findOne({ _id: id, author: user._id });
       if (!single) return ctx.error({ msg: "没有权限", code: 402 });
     }
-    const data = await CommentModel.deleteOne({ _id: id });
+    const data = await CommentModel.deleteOne({ _id: id }).catch(err => {
+      return { code: 404, msg: err.message };
+    });
+    if (!data.code) {
+      await CommentModel.deleteMany({ parent: id });
+    }
     ctx.send({ data });
   }
 
