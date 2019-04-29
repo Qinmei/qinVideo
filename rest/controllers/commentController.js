@@ -193,18 +193,7 @@ const childrenLookup = {
       {
         $unwind: "$replyTo"
       },
-      { $addFields: { count: countSize } },
-      {
-        $project: {
-          type: 0,
-          image: 0,
-          video: 0,
-          parent: 0,
-          status: 0,
-          relative: 0,
-          belong: 0
-        }
-      }
+      { $addFields: { count: countSize } }
     ],
     as: "children"
   }
