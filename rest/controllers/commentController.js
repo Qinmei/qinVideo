@@ -217,7 +217,9 @@ class commentController {
     const sortBy = pattern.test(sort) ? sort.substring(1) : sort;
     const skip = (page - 1) * size;
 
-    const commentQuery = {};
+    const commentQuery = {
+      parent: null
+    };
     content && (commentQuery.content = { $regex: content, $options: "$i" });
     status && (commentQuery.status = status);
     type && (commentQuery.type = type);
