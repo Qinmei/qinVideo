@@ -56,7 +56,6 @@ const replyToLookup = {
   }
 };
 
-
 const childrenLookup = {
   $lookup: {
     from: "comments",
@@ -68,7 +67,7 @@ const childrenLookup = {
             $eq: ["$parent", "$$value"]
           }
         }
-      },
+      }
     ],
     as: "children"
   }
@@ -209,7 +208,7 @@ class commentController {
     const skip = (page - 1) * size;
 
     const commentQuery = {
-      parent = null
+      parent: null
     };
     content && (commentQuery.content = { $regex: content, $options: "$i" });
     status && (commentQuery.status = status);
