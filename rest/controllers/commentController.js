@@ -14,7 +14,6 @@ const authorLookup = {
       },
       {
         $project: {
-          _id: 0,
           name: 1,
           level: 1,
           score: 1,
@@ -42,7 +41,6 @@ const replyToLookup = {
       },
       {
         $project: {
-          _id: 0,
           name: 1,
           level: 1,
           score: 1,
