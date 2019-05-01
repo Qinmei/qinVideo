@@ -260,7 +260,14 @@ class animateController {
       animateShow = { _id: 0 };
     } else {
       const isAuthor = await AnimateModel.find({ slug, author: user._id });
-      animateShow = isAuthor ? { _id: 0 } : { _id: 0, eposide: 0, relative: 0 };
+      animateShow = isAuthor
+        ? { _id: 0 }
+        : {
+            _id: 0,
+            eposide: 0,
+            relative: 0,
+            play: { kind: 0, level: 0, linkPrefix: 0 }
+          };
     }
     const data = await AnimateModel.aggregate([
       { $match: { slug } },
