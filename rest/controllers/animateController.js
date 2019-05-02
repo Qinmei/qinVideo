@@ -448,7 +448,9 @@ class animateController {
           slug: 1,
           information: 1,
           cover: 1,
-          play: 1
+          play: {
+            kind: 1
+          }
         }
       },
       {
