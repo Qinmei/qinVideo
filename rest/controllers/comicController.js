@@ -206,7 +206,14 @@ class comicController {
       comicShow = { _id: 0 };
     } else {
       const isAuthor = await ComicModel.find({ slug, author: user._id });
-      comicShow = isAuthor ? { _id: 0 } : { _id: 0, eposide: 0, relative: 0 };
+      comicShow = isAuthor
+        ? { _id: 0 }
+        : {
+            _id: 0,
+            eposide: 0,
+            relative: 0,
+            play: { level: 0, linkPrefix: 0 }
+          };
     }
     const data = await ComicModel.aggregate([
       { $match: { slug } },
