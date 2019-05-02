@@ -259,7 +259,7 @@ class animateController {
     if (user.level > 99) {
       animateShow = { _id: 0 };
     } else {
-      const isAuthor = await AnimateModel.find({ slug, author: user._id });
+      const isAuthor = await AnimateModel.findOne({ slug, author: user._id });
       animateShow = isAuthor
         ? { _id: 0 }
         : {

@@ -205,7 +205,7 @@ class comicController {
     if (user.level > 99) {
       comicShow = { _id: 0 };
     } else {
-      const isAuthor = await ComicModel.find({ slug, author: user._id });
+      const isAuthor = await ComicModel.findOne({ slug, author: user._id });
       comicShow = isAuthor
         ? { _id: 0 }
         : {
