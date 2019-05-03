@@ -437,16 +437,35 @@ class animateController {
             play: { $size: "$relative.play" },
             comment: { $size: "$relative.comment" },
             danmu: { $size: "$relative.danmu" }
+          },
+          season: {
+            $map: {
+              input: "$eposide",
+              as: "m",
+              in: {
+                key: season,
+                list: {
+                  $map: {
+                    input: "$$m.list",
+                    as: "single",
+                    in: {
+                      title: "$$single.title"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
       {
         $project: {
-          playInfo: { $arrayElemAt: ["$eposide", season] },
+          playInfo: { $arrayElemAt: ["$eposide", parseInt(season)] },
           count: 1,
           title: 1,
           slug: 1,
           information: 1,
+          season: { $arrayElemAt: ["$season", parseInt(season)] },
           cover: 1,
           play: {
             kind: 1
@@ -455,11 +474,12 @@ class animateController {
       },
       {
         $project: {
-          playInfo: { $arrayElemAt: ["$playInfo.list", eposide] },
+          playInfo: { $arrayElemAt: ["$playInfo.list", parseInt(eposide)] },
           count: 1,
           title: 1,
           slug: 1,
           information: 1,
+          season: 1,
           cover: 1,
           play: 1
         }
