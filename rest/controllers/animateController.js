@@ -468,6 +468,9 @@ class animateController {
           information: 1,
           season: { $arrayElemAt: ["$season", parseInt(season)] },
           cover: 1,
+          relative: {
+            danmu: 1
+          },
           play: {
             kind: 1
           }
@@ -482,7 +485,8 @@ class animateController {
           information: 1,
           season: 1,
           cover: 1,
-          play: 1
+          play: 1,
+          relative: 1
         }
       }
     ]);
