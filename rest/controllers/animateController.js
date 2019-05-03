@@ -443,7 +443,8 @@ class animateController {
               input: "$eposide",
               as: "m",
               in: {
-                key: season,
+                season: season,
+                eposide: eposide,
                 list: {
                   $map: {
                     input: "$$m.list",
