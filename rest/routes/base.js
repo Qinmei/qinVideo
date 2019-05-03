@@ -127,7 +127,8 @@ router
   .delete("/key/batch", auth(100), keyController.key_delete_batch)
 
   // danmu
-  .get("/danmu", auth(0), danmuController.danmu_query)
+  .get("/danmu/list", auth(0), danmuController.danmu_get)
+  .get("/danmu", auth(100), danmuController.danmu_query)
   .post("/danmu", auth(0), danmuController.danmu_post)
   .delete("/danmu", auth(100), danmuController.danmu_delete)
 
