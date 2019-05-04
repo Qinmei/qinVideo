@@ -67,18 +67,7 @@ const relativeLookup = ["like", "unlike", "play", "comment"].map(item => {
         from: "users",
         let: { value: "$_id" },
         pipeline: [
-          { $match: { $expr: { $in: ["$$value", `$comic.${item}`] } } },
-          {
-            $project: {
-              _id: 0,
-              name: 1,
-              level: 1,
-              score: 1,
-              avatar: 1,
-              background: 1,
-              introduce: 1
-            }
-          }
+          { $match: { $expr: { $in: ["$$value", `$comic.${item}`] } } }
         ],
         as: `relative.${item}`
       }
@@ -177,7 +166,8 @@ class comicController {
       {
         $project: {
           relative: 0,
-          eposide: 0
+          eposide: 0,
+          play: { linkPrefix: 0 }
         }
       }
     ]);
@@ -214,7 +204,7 @@ class comicController {
             _id: 0,
             eposide: 0,
             relative: 0,
-            play: { level: 0, linkPrefix: 0 }
+            play: { linkPrefix: 0 }
           };
     }
     const data = await ComicModel.aggregate([
@@ -311,23 +301,58 @@ class comicController {
       "play.level": { $lte: user.level }
     });
     if (!result) return ctx.error({ code: 402, msg: "权限不足" });
+
+    const comicInfo = await ComicModel.aggregate([
+      { $match: { slug } },
+      authorLookup,
+      ...categoryLookup,
+      ...relativeLookup,
+      ...unwindList,
+      {
+        $addFields: {
+          count: countSize,
+          season: {
+            $map: {
+              input: "$eposide",
+              as: "m",
+              in: {
+                title: "$$m.title"
+              }
+            }
+          }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          eposide: 0,
+          relative: 0,
+          play: { linkPrefix: 0 }
+        }
+      }
+    ]);
+
     const playInfo = result.eposide[parseInt(eposide)];
     const linkPrefix = result.play.linkPrefix;
     const playPath = linkPrefix + playInfo.list;
     const dirPath = path.join(__dirname, `../../public/comic${playPath}`);
+
+    let data = [];
     if (fs.existsSync(dirPath)) {
-      const data = fs
-        .readdirSync(dirPath)
-        .map(item => `/comic${playPath}/${item}`);
+      data = fs.readdirSync(dirPath).map(item => `/comic${playPath}/${item}`);
 
       await DataModel.create({
         type: "play",
         target: `${slug}E${eposide}`
       }).catch(err => err);
-      ctx.success({ data });
-    } else {
-      return ctx.error({ code: 404, msg: "暂无数据" });
     }
+
+    ctx.send({
+      data: {
+        ...comicInfo[0],
+        playInfo: data
+      }
+    });
   }
 }
 

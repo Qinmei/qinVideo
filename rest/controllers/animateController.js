@@ -77,18 +77,7 @@ const relativeLookup = ["like", "unlike", "play", "comment", "danmu"].map(
           from: "users",
           let: { value: "$_id" },
           pipeline: [
-            { $match: { $expr: { $in: ["$$value", `$animate.${item}`] } } },
-            {
-              $project: {
-                _id: 0,
-                name: 1,
-                level: 1,
-                score: 1,
-                avatar: 1,
-                background: 1,
-                introduce: 1
-              }
-            }
+            { $match: { $expr: { $in: ["$$value", `$animate.${item}`] } } }
           ],
           as: `relative.${item}`
         }
@@ -229,7 +218,8 @@ class animateController {
         $project: {
           relative: 0,
           eposide: 0,
-          new: 0
+          new: 0,
+          play: { linkPrefix: 0 }
         }
       }
     ]);
@@ -266,7 +256,7 @@ class animateController {
             _id: 0,
             eposide: 0,
             relative: 0,
-            play: { kind: 0, level: 0, linkPrefix: 0 }
+            play: { linkPrefix: 0 }
           };
     }
     const data = await AnimateModel.aggregate([
