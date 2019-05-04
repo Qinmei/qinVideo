@@ -350,7 +350,10 @@ class comicController {
     ctx.send({
       data: {
         ...comicInfo[0],
-        playInfo: data
+        playInfo: {
+          list: data,
+          eposide
+        }
       }
     });
   }
