@@ -306,7 +306,7 @@ class comicController {
     const { user } = ctx.state;
     const result = await ComicModel.findOne({
       slug,
-      level: { $lte: user.level }
+      "play.level": { $lte: user.level }
     });
     if (!result) return ctx.error({ code: 402, msg: "权限不足" });
     const playInfo = result.eposide[eposide];
