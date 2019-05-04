@@ -1,5 +1,7 @@
-const { getChildArray } = require("../utils/common");
+const path = require("path");
+const fs = require("fs");
 
+const { getChildArray } = require("../utils/common");
 const { ComicModel, CategoryModel, DataModel } = require("../models/index");
 
 const authorLookup = {
@@ -309,12 +311,14 @@ class comicController {
       "play.level": { $lte: user.level }
     });
     if (!result) return ctx.error({ code: 402, msg: "权限不足" });
-    const playInfo = result.eposide[eposide];
-    const linkPrefix = playInfo.play.linkPrefix;
-    const path = linkPrefix + playInfo.list;
-    const dirPath = path.join(__dirname, `../../public/comic${path}`);
+    const playInfo = result.eposide[parseInt(eposide)];
+    const linkPrefix = result.play.linkPrefix;
+    const playPath = linkPrefix + playInfo.list;
+    const dirPath = path.join(__dirname, `../../public/comic${playPath}`);
     if (fs.existsSync(dirPath)) {
-      const data = fs.readdirSync(dirPath).map(item => `/comic${path}/${item}`);
+      const data = fs
+        .readdirSync(dirPath)
+        .map(item => `/comic${playPath}/${item}`);
 
       await DataModel.create({
         type: "play",
