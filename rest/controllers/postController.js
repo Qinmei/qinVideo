@@ -195,6 +195,12 @@ class postController {
     const { slug } = ctx.params;
     const { user } = ctx.state;
     let postShow = {};
+    const result = await PostModel.findOne({
+      slug,
+      level: { $lte: user.level }
+    });
+    if (!result) return ctx.error({ code: 402, msg: "权限不足" });
+
     if (user.level > 99) {
       postShow = { _id: 0 };
     } else {
