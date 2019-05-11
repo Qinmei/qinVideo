@@ -14,10 +14,11 @@ class baseController {
   static async login(ctx) {
     const { name, password } = ctx.request.body;
     const nameResult = await UserModel.findOne({ name });
-    const passwordResult = MD5(config.salt + password) === nameResult.password;
     if (!nameResult) {
       return ctx.error({ msg: "用户名错误" });
     }
+
+    const passwordResult = MD5(config.salt + password) === nameResult.password;
     if (!passwordResult) {
       return ctx.error({ msg: "密码错误" });
     }
@@ -48,6 +49,15 @@ class baseController {
     const newPass = MD5(config.salt + password);
     const refreshToken =
       new mongoose.Types.ObjectId().toString() + stringRandom(16);
+
+    const nameResult = await UserModel.findOne({ name });
+    if (nameResult) {
+      return ctx.error({ msg: "用户名重复,请更换一个" });
+    }
+
+    if (name.length < 3)
+      return ctx.error({ msg: "用户名太短,请输入3个字符以上" });
+
     const data = await UserModel.create({
       name,
       password: newPass,
