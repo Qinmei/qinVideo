@@ -103,12 +103,12 @@ class baseController {
   // 重置密码-发送邮件
 
   static async resetPasswordMail(ctx) {
-    const { name: username, email } = ctx.request.body;
+    const { name: username, email: useremail } = ctx.request.body;
     let userInfo;
     if (username) {
       userInfo = await UserModel.findOne({ name: username });
-    } else if (email) {
-      userInfo = await UserModel.findOne({ email });
+    } else if (useremail) {
+      userInfo = await UserModel.findOne({ email: useremail });
     } else {
       return ctx.error({ code: 404, msg: "请输入用户名或邮箱" });
     }
