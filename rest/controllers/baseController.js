@@ -45,18 +45,20 @@ class baseController {
 
   // 注册
   static async register(ctx) {
-    const { name, email, password } = ctx.request.body;
+    const { name: newName, email, password } = ctx.request.body;
+    const name = newName.replace(/\s+/g, "");
     const newPass = MD5(config.salt + password);
     const refreshToken =
       new mongoose.Types.ObjectId().toString() + stringRandom(16);
+
+    if (name.length < 3) {
+      return ctx.error({ msg: "用户名太短,请输入3个字符以上" });
+    }
 
     const nameResult = await UserModel.findOne({ name });
     if (nameResult) {
       return ctx.error({ msg: "用户名重复,请更换一个" });
     }
-
-    if (name.length < 3)
-      return ctx.error({ msg: "用户名太短,请输入3个字符以上" });
 
     const data = await UserModel.create({
       name,
