@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/backend/p__Shop__Order.async.js"
   },
   {
-    "revision": "ed54a6f251becffcffc0",
+    "revision": "5e71c7c021717d393649",
     "url": "/backend/vendors.chunk.css"
   },
   {
@@ -16,15 +16,15 @@ self.__precacheManifest = [
     "url": "/backend/pwacompat.min.js"
   },
   {
-    "revision": "f5a1cf0f5b4a01922e39",
+    "revision": "d26bff439f953bf5d874",
     "url": "/backend/umi.js"
   },
   {
-    "revision": "f5a1cf0f5b4a01922e39",
+    "revision": "d26bff439f953bf5d874",
     "url": "/backend/umi.css"
   },
   {
-    "revision": "ed54a6f251becffcffc0",
+    "revision": "5e71c7c021717d393649",
     "url": "/backend/vendors.async.js"
   },
   {
@@ -140,11 +140,11 @@ self.__precacheManifest = [
     "url": "/backend/p__Shop__List.async.js"
   },
   {
-    "revision": "00072c15bf70cf6b0baa",
+    "revision": "d46c74e10fd22a147224",
     "url": "/backend/p__User__List.async.js"
   },
   {
-    "revision": "865466bf7fd24858fe99",
+    "revision": "453eb85f0b7ea7a7eaec",
     "url": "/backend/p__User__Info.async.js"
   },
   {
@@ -232,8 +232,8 @@ self.__precacheManifest = [
     "url": "/backend/icons/icon-512x512.png"
   },
   {
-    "revision": "c1074efc2372bf52c481a8ba0909be63",
-    "url": "/backend/icons/icon-192x192.png"
+    "revision": "4f38ae784c9e5f8b5135fd0b2ec19a9d",
+    "url": "/backend/icons/icon-128x128.png"
   },
   {
     "revision": "a09327a80c9303230a38",
@@ -256,8 +256,8 @@ self.__precacheManifest = [
     "url": "/backend/index.html"
   },
   {
-    "revision": "4f38ae784c9e5f8b5135fd0b2ec19a9d",
-    "url": "/backend/icons/icon-128x128.png"
+    "revision": "c1074efc2372bf52c481a8ba0909be63",
+    "url": "/backend/icons/icon-192x192.png"
   },
   {
     "revision": "4c17cd56deffab5da458",
