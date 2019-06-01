@@ -526,7 +526,7 @@ class userController {
     } else if (type === "comic") {
       data = await ComicModel.findOne({ slug });
     } else if (type === "comment") {
-      data = await CommentModel.findOne({ slug });
+      data = await CommentModel.findById(slug);
     }
 
     const id = data._id;
