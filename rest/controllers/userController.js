@@ -7,6 +7,7 @@ const {
   AnimateModel,
   PostModel,
   ComicModel,
+  CommentModel,
   DataModel
 } = require("../models/index");
 
@@ -524,6 +525,8 @@ class userController {
       data = await PostModel.findOne(slug);
     } else if (type === "comic") {
       data = await ComicModel.findOne(slug);
+    } else if (type === "comment") {
+      data = await CommentModel.findOne(slug);
     }
 
     const id = data._id;
