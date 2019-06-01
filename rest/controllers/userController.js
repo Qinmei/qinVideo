@@ -520,11 +520,11 @@ class userController {
 
     let data;
     if (type === "animate") {
-      data = await AnimateModel.findOne(slug);
+      data = await AnimateModel.findOne({ slug });
     } else if (type === "post") {
-      data = await PostModel.findOne(slug);
+      data = await PostModel.findOne({ slug });
     } else if (type === "comic") {
-      data = await ComicModel.findOne(slug);
+      data = await ComicModel.findOne({ slug });
     } else if (type === "comment") {
       data = await CommentModel.findOne({ slug });
     }
