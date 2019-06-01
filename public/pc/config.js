@@ -21,6 +21,7 @@ window.config = {
   pcMenu: [
     'newComic',
     'newDiscuss',
+    'newShop',
     'allAnimate',
     'allComic',
     'allPost',

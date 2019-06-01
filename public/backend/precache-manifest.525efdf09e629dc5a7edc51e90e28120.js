@@ -232,8 +232,8 @@ self.__precacheManifest = [
     "url": "/backend/icons/icon-512x512.png"
   },
   {
-    "revision": "4f38ae784c9e5f8b5135fd0b2ec19a9d",
-    "url": "/backend/icons/icon-128x128.png"
+    "revision": "c1074efc2372bf52c481a8ba0909be63",
+    "url": "/backend/icons/icon-192x192.png"
   },
   {
     "revision": "a09327a80c9303230a38",
@@ -256,8 +256,8 @@ self.__precacheManifest = [
     "url": "/backend/index.html"
   },
   {
-    "revision": "c1074efc2372bf52c481a8ba0909be63",
-    "url": "/backend/icons/icon-192x192.png"
+    "revision": "4f38ae784c9e5f8b5135fd0b2ec19a9d",
+    "url": "/backend/icons/icon-128x128.png"
   },
   {
     "revision": "4c17cd56deffab5da458",
