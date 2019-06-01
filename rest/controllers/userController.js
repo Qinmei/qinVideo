@@ -512,29 +512,33 @@ class userController {
   }
 
   static async user_action(ctx) {
-    const { type, kind, id } = ctx.request.body;
+    const { type, kind, slug } = ctx.request.body;
     const { user } = ctx.state;
     const userInfo = await UserModel.findById(user._id);
     const userArr = userInfo[type][kind];
+
+    let data;
+    if (type === "animate") {
+      data = await AnimateModel.findOne(slug);
+    } else if (type === "post") {
+      data = await PostModel.findOne(slug);
+    } else if (type === "comic") {
+      data = await ComicModel.findOne(slug);
+    }
+
+    const id = data._id;
+
     if (userArr.indexOf(id) > -1) {
       userArr.splice(userArr.findIndex(item => item === id), 1);
     } else {
       userArr.push(id);
     }
-    const data = await UserModel.findByIdAndUpdate(
+    await UserModel.findByIdAndUpdate(
       user._id,
       { $set: userInfo },
       { new: true, select: { comic: 1, post: 1, animate: 1, comment: 1 } }
     );
 
-    let data;
-    if (type === "animate") {
-      data = await AnimateModel.findById(id);
-    } else if (type === "post") {
-      data = await PostModel.findById(id);
-    } else if (type === "comic") {
-      data = await ComicModel.findById(id);
-    }
     const target = data.slug;
     const dataType = kind === "like" ? `${type}Like` : `${type}Unlike`;
     const newData = await DataModel.findOne({
