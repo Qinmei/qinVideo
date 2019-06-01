@@ -191,10 +191,12 @@ class postController {
     if (!result) return ctx.error({ code: 402, msg: "权限不足" });
 
     if (user.level > 99) {
-      postShow = { _id: 0 };
+      postShow = { _id: 0, relative: 0 };
     } else {
       const isAuthor = await PostModel.findOne({ slug, author: user._id });
-      postShow = isAuthor ? { _id: 0 } : { _id: 0, eposide: 0, relative: 0 };
+      postShow = isAuthor
+        ? { _id: 0, relative: 0 }
+        : { _id: 0, eposide: 0, relative: 0 };
     }
     const data = await PostModel.aggregate([
       { $match: { slug, level: { $lte: user.level } } },

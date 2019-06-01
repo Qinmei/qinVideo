@@ -247,11 +247,11 @@ class animateController {
     const { user } = ctx.state;
     let animateShow = {};
     if (user.level > 99) {
-      animateShow = { _id: 0 };
+      animateShow = { _id: 0, relative: 0 };
     } else {
       const isAuthor = await AnimateModel.findOne({ slug, author: user._id });
       animateShow = isAuthor
-        ? { _id: 0 }
+        ? { _id: 0, relative: 0 }
         : {
             _id: 0,
             eposide: 0,

@@ -195,11 +195,11 @@ class comicController {
     const { user } = ctx.state;
     let comicShow = {};
     if (user.level > 99) {
-      comicShow = { _id: 0 };
+      comicShow = { _id: 0, relative: 0 };
     } else {
       const isAuthor = await ComicModel.findOne({ slug, author: user._id });
       comicShow = isAuthor
-        ? { _id: 0 }
+        ? { _id: 0, relative: 0 }
         : {
             _id: 0,
             eposide: 0,
