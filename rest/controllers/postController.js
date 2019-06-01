@@ -62,18 +62,7 @@ const relativeLookup = ["like", "unlike", "comment", "play"].map(item => {
         from: "users",
         let: { value: "$_id" },
         pipeline: [
-          { $match: { $expr: { $in: ["$$value", `$animate.${item}`] } } },
-          {
-            $project: {
-              _id: 0,
-              name: 1,
-              level: 1,
-              score: 1,
-              avatar: 1,
-              background: 1,
-              introduce: 1
-            }
-          }
+          { $match: { $expr: { $in: ["$$value", `$post.${item}`] } } }
         ],
         as: `relative.${item}`
       }
