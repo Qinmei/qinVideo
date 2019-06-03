@@ -80,7 +80,7 @@ self.__precacheManifest = [
     "url": "/backend/p__Comment__List.async.js"
   },
   {
-    "revision": "0cfec453936cc10afced",
+    "revision": "0b36be7519cf52551f5b",
     "url": "/backend/p__Config__index.async.js"
   },
   {
@@ -216,8 +216,8 @@ self.__precacheManifest = [
     "url": "/backend/38.chunk.css"
   },
   {
-    "revision": "d26b6882c10242e359b3502e77c14779",
-    "url": "/backend/icons/icon-512x512.png"
+    "revision": "6455a54d5369cf16e4fe22af82fea3e3",
+    "url": "/backend/favicon.png"
   },
   {
     "revision": "3691b6fac5fafc996622",
@@ -228,8 +228,8 @@ self.__precacheManifest = [
     "url": "/backend/40.async.js"
   },
   {
-    "revision": "6455a54d5369cf16e4fe22af82fea3e3",
-    "url": "/backend/favicon.png"
+    "revision": "d26b6882c10242e359b3502e77c14779",
+    "url": "/backend/icons/icon-512x512.png"
   },
   {
     "revision": "c1074efc2372bf52c481a8ba0909be63",
