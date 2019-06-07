@@ -27,6 +27,7 @@ const ConfigSchema = new Schema({
   pcIndex: [{ type: String }], // web首页
   h5Menu: [{ type: String }], // mobile菜单
   h5Index: [{ type: String }], // mobile首页
+  aboutus: { type: String, default: "" },
   playLimit: [
     {
       // 播放限制

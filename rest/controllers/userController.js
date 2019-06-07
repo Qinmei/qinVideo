@@ -536,6 +536,14 @@ class userController {
     } else {
       userArr.push(id);
     }
+
+    if (type === "history") {
+      if (userArr.length > 20) {
+        const length = userArr.length;
+        userArr.splice(0, length);
+      }
+    }
+
     await UserModel.findByIdAndUpdate(
       user._id,
       { $set: userInfo },
@@ -543,7 +551,13 @@ class userController {
     );
 
     const target = data.slug;
-    const dataType = kind === "like" ? `${type}Like` : `${type}Unlike`;
+
+    const dataType =
+      kind === "like"
+        ? `${type}Like`
+        : kind === "unlike"
+        ? `${type}Unlike`
+        : "";
     const newData = await DataModel.findOne({
       target,
       type: dataType,

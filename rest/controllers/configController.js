@@ -45,7 +45,8 @@ class configController {
           pcMenu: 1,
           pcIndex: 1,
           h5Menu: 1,
-          h5Index: 1
+          h5Index: 1,
+          aboutus: 1
         }
       );
       const category = await CategoryModel.find();
