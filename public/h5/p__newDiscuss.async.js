@@ -1,0 +1,3 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[17],{GKCt:function(e,t,n){"use strict";n.r(t);var a=n("mrSG"),c=n("q1tI"),s=n.n(c),r=n("MuoO"),o=n("8KYf"),i=n("nLTe"),m=n("vOnD"),l=m["a"].div`
+  margin-top: 40px;
+`,u=class extends c["Component"]{constructor(){super(...arguments),this.state={cate:"newDiscuss"}}render(){var e=this.state.cate,t=this.props.category;t[e];return s.a.createElement(l,null,s.a.createElement(i["a"],{active:"newDiscuss"}),s.a.createElement("div",{className:"container"},s.a.createElement(o["a"],{type:"discuss",belong:"all"})))}};u=a["a"]([Object(r["connect"])(e=>{var t=e.comment,n=e.category,a=e.loading;return{comment:t,category:n,loadingComment:a.effects["comment/queryList"]}})],u),t["default"]=u}}]);

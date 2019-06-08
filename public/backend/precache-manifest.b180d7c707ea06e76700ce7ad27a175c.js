@@ -16,11 +16,11 @@ self.__precacheManifest = [
     "url": "/backend/pwacompat.min.js"
   },
   {
-    "revision": "fe22c3dd61b8d01de09d",
+    "revision": "55006ad3de6d50594378",
     "url": "/backend/umi.js"
   },
   {
-    "revision": "fe22c3dd61b8d01de09d",
+    "revision": "55006ad3de6d50594378",
     "url": "/backend/umi.css"
   },
   {
@@ -80,7 +80,7 @@ self.__precacheManifest = [
     "url": "/backend/p__Comment__List.async.js"
   },
   {
-    "revision": "0b36be7519cf52551f5b",
+    "revision": "404b240c0e4f6ba7f03c",
     "url": "/backend/p__Config__index.async.js"
   },
   {
@@ -228,12 +228,12 @@ self.__precacheManifest = [
     "url": "/backend/40.async.js"
   },
   {
-    "revision": "d26b6882c10242e359b3502e77c14779",
-    "url": "/backend/icons/icon-512x512.png"
-  },
-  {
     "revision": "c1074efc2372bf52c481a8ba0909be63",
     "url": "/backend/icons/icon-192x192.png"
+  },
+  {
+    "revision": "d26b6882c10242e359b3502e77c14779",
+    "url": "/backend/icons/icon-512x512.png"
   },
   {
     "revision": "a09327a80c9303230a38",

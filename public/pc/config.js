@@ -77,4 +77,5 @@ window.config = {
   ],
   h5Menu: [{ _id: '5c8f79ed0dd00327616a4a05', type: 'post', slug: '主页', __v: 0 }],
   h5Index: [],
+  aboutus: 'pv0002',
 };

@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "805a85642f119b41e2e4",
+    "revision": "45c38d727656a1129fd3",
     "url": "/pc/p__index.async.js"
   },
   {
-    "revision": "27748f0d846c7b6e3754",
+    "revision": "81403a51d6b3d61d03e2",
     "url": "/pc/vendors.chunk.css"
   },
   {
@@ -16,15 +16,15 @@ self.__precacheManifest = [
     "url": "/pc/pwacompat.min.js"
   },
   {
-    "revision": "ed96e14ee723ccd2dc58",
+    "revision": "ed03f16678598cc10720",
     "url": "/pc/umi.js"
   },
   {
-    "revision": "ed96e14ee723ccd2dc58",
+    "revision": "ed03f16678598cc10720",
     "url": "/pc/umi.css"
   },
   {
-    "revision": "27748f0d846c7b6e3754",
+    "revision": "81403a51d6b3d61d03e2",
     "url": "/pc/vendors.async.js"
   },
   {
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/pc/p__newDiscuss.async.js"
   },
   {
-    "revision": "c25e4bf99b9b4f7f10c3",
+    "revision": "5453c59324c068127ad0",
     "url": "/pc/p__animate__play__$data.async.js"
   },
   {
@@ -52,7 +52,7 @@ self.__precacheManifest = [
     "url": "/pc/p__comic__play__$data.async.js"
   },
   {
-    "revision": "805a85642f119b41e2e4",
+    "revision": "45c38d727656a1129fd3",
     "url": "/pc/p__index.chunk.css"
   },
   {
@@ -72,7 +72,7 @@ self.__precacheManifest = [
     "url": "/pc/p__auth___layout.async.js"
   },
   {
-    "revision": "45adf61c0c9bfe400c14",
+    "revision": "41b693d1439edd0c44aa",
     "url": "/pc/p__newShop.async.js"
   },
   {
@@ -100,7 +100,7 @@ self.__precacheManifest = [
     "url": "/pc/manifest.json"
   },
   {
-    "revision": "e87f599dbd9c1682fe33",
+    "revision": "08449aeba5ff7f03ea15",
     "url": "/pc/layouts__index.async.js"
   },
   {
@@ -108,7 +108,7 @@ self.__precacheManifest = [
     "url": "/pc/index.html"
   },
   {
-    "revision": "3943908e8a37f3c7afd6de3fdfb65605",
+    "revision": "c53fd5563ef73d0a63693cad13167ca4",
     "url": "/pc/config.js"
   }
 ];
