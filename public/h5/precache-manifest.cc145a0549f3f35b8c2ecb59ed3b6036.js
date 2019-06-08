@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/h5/p__comic__play__$data.async.js"
   },
   {
-    "revision": "d1950172b48e77160eb8",
+    "revision": "ac7eb9680986c3dc1f13",
     "url": "/h5/vendors.chunk.css"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/h5/umi.css"
   },
   {
-    "revision": "d1950172b48e77160eb8",
+    "revision": "ac7eb9680986c3dc1f13",
     "url": "/h5/vendors.async.js"
   },
   {
@@ -56,7 +56,7 @@ self.__precacheManifest = [
     "url": "/h5/p__comic__$slug.async.js"
   },
   {
-    "revision": "08565fbe2182a6fe6d44",
+    "revision": "e3b98169d4b211a008ab",
     "url": "/h5/p__user___layout.async.js"
   },
   {
@@ -104,7 +104,7 @@ self.__precacheManifest = [
     "url": "/h5/manifest.json"
   },
   {
-    "revision": "00e51bae8106eabedbc9",
+    "revision": "3f411fdd06cfc4d292d3",
     "url": "/h5/layouts__index.async.js"
   },
   {
