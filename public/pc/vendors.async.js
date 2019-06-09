@@ -924,7 +924,6 @@
         float: left;
         width: 96px;
         height: 100%;
-        margin: -1px;
         border-radius: 4px 0 0 4px;
         overflow: hidden;
         background-size: cover;
@@ -1005,7 +1004,6 @@
         float: left;
         width: 96px;
         height: 100%;
-        margin: -1px;
         border-radius: 4px 0 0 4px;
         overflow: hidden;
         background-size: cover;

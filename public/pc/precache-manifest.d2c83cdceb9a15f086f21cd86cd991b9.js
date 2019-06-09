@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/pc/p__index.async.js"
   },
   {
-    "revision": "e5757d8f60b6837389d0",
+    "revision": "f9f3462887dbe9e8b61f",
     "url": "/pc/vendors.chunk.css"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/pc/umi.css"
   },
   {
-    "revision": "e5757d8f60b6837389d0",
+    "revision": "f9f3462887dbe9e8b61f",
     "url": "/pc/vendors.async.js"
   },
   {
