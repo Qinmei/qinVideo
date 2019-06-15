@@ -20,3 +20,45 @@
 # 使用须知
 
 可用于个人非营利性的使用.
+
+# 安装方法
+### 安装mongodb
+1. 使用宝塔面板可直接安装mongodb, 然后配置数据库以及用户名密码即可
+2. 对于使用appnode或者lnmp的用户请自行搜索安装mongodb的方法， 另外最好不要用root用户直连数据库， 创建个单独用户用于管理
+
+### 安装nodejs
+1. 宝塔一键安装node， appnode在软件管家搜索nodejs即可， 安装完之后node -v看看版本信息， 没有提示的话可能安装有问题
+2. 下载zip压缩包到服务器， 然后找个文件夹解压即可
+3. 在文件目录里使用 npm install 命令， 安装依赖
+4. 修改根目录里面的config.js文件， mongodb的uri填写你自己的数据库地址， 格式为'mongodb://账号:密码@地址:端口/数据库'，salt是用户密码的盐值， 填写个别人不知道的就行， tokenSecret是验证的加密码， 也填写个唯一的
+
+### 安装nginx
+1. 安装nginx, 然后创建静态网站 网站的程序目录填写上面的nodejs的public文件夹。
+2. 给与public文件夹777权限 然后将用户组分配给WWW。
+3. 在nginx的配置文件添加以下内容：
+```
+    location /qinmei {
+        alias      /home/qinvideo-node/public;
+        index      /backend/index.html;
+        try_files  $uri $uri/ /backend/index.html?$args;
+    }
+    
+    location /web {
+        alias      /home/qinvideo-node/public;
+        index      /pc/index.html;
+        try_files  $uri $uri/ /pc/index.html?$args;
+    }
+    
+    location /m {
+        alias      /home/qinvideo-node/public;
+        index      /h5/index.html;
+        try_files  $uri $uri/ /h5/index.html?$args;
+    }
+```
+4. 最后我们重启nginx即可
+
+### 运行
+在node的根目录运行 node app.js 即可测试链接情况， 后台运行的话可以使用PM2进行进程守护。
+网址/qinmei则是后台管理面板的地址，
+/web则是PC端的前端地址，
+/m则是移动端的前端地址
