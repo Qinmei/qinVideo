@@ -51,20 +51,20 @@ const ConfigSchema = new Schema({
       enum: ["smtp", "sendgrid"],
       default: "smtp"
     },
-    name: String,
-    sender: String
+    name: { type: String, default: "" },
+    sender: { type: String, default: "" }
   },
   smtp: {
     // 邮箱
-    host: String,
-    port: Number,
-    secure: Boolean,
-    user: String,
-    pass: String
+    host: { type: String, default: "" },
+    port: { type: Number, default: 465 },
+    secure: { type: String, default: "" },
+    user: { type: String, default: "" },
+    pass: { type: String, default: "" }
   },
   sendgrid: {
     // sendgird
-    key: String
+    key: { type: String, default: "" }
   },
   addons: Schema.Types.Mixed
 });
