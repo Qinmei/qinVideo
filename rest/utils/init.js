@@ -1,4 +1,4 @@
-const { UserModel } = require("../models/index");
+const { UserModel, ConfigModel } = require("../models/index");
 const mongoose = require("mongoose");
 const stringRandom = require("string-random");
 
@@ -12,5 +12,10 @@ module.exports = async () => {
       email: "test@qinvideo.org",
       refreshToken: new mongoose.Types.ObjectId().toString() + stringRandom(16)
     });
+  }
+
+  const config = await ConfigModel.findOne();
+  if (!config) {
+    await ConfigModel.create({});
   }
 };
