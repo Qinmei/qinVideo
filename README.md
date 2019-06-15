@@ -37,6 +37,14 @@
 2. 给与public文件夹777权限 然后将用户组分配给WWW。
 3. 在nginx的配置文件添加以下内容：
 ```
+    client_max_body_size 20M;
+    location /api/ {
+            proxy_pass      http://localhost:9000/;
+            proxy_redirect  off;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
     location /qinmei {
         alias      /home/qinvideo-node/public;
         index      /backend/index.html;
