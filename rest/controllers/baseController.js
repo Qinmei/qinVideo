@@ -7,7 +7,12 @@ const { MD5 } = require("../utils/common");
 const config = require("../../config");
 const sendemail = require("../utils/sendMail");
 
-const { UserModel, KeyModel, DataModel } = require("../models/index");
+const {
+  UserModel,
+  KeyModel,
+  DataModel,
+  ConfigModel
+} = require("../models/index");
 
 class baseController {
   // 登录
@@ -60,11 +65,21 @@ class baseController {
       return ctx.error({ msg: "用户名重复,请更换一个" });
     }
 
+    const baseConfig = {};
+    const config = await ConfigModel.findOne();
+    if (config) {
+      baseConfig = {
+        avatar: config.avatar,
+        background: config.background
+      };
+    }
+
     const data = await UserModel.create({
       name,
       password: newPass,
       email,
-      refreshToken
+      refreshToken,
+      ...baseConfig
     }).catch(err => {
       return { code: 404, msg: err.message };
     });
