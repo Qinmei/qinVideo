@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "b133428101b03c9077ca",
+    "revision": "d1bb09e1dbe3206c442d",
     "url": "/pc/p__index.async.js"
   },
   {
-    "revision": "d2f75b495496ef2826b8",
+    "revision": "76bd2da1220fef2f3331",
     "url": "/pc/vendors.chunk.css"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/pc/umi.css"
   },
   {
-    "revision": "d2f75b495496ef2826b8",
+    "revision": "76bd2da1220fef2f3331",
     "url": "/pc/vendors.async.js"
   },
   {
@@ -52,7 +52,7 @@ self.__precacheManifest = [
     "url": "/pc/p__comic__play__$data.async.js"
   },
   {
-    "revision": "b133428101b03c9077ca",
+    "revision": "d1bb09e1dbe3206c442d",
     "url": "/pc/p__index.chunk.css"
   },
   {
