@@ -41,7 +41,7 @@ function generateSecurePathHash(url, expires, secret) {
     return url;
   }
   const expired = Math.ceil(Date.now() / 1000) + expires;
-  const input = expired + url + " " + secret;
+  const input = secret + url + expired;
   const binaryHash = crypto
     .createHash("md5")
     .update(input)
@@ -51,7 +51,7 @@ function generateSecurePathHash(url, expires, secret) {
     .replace(/=/g, "")
     .replace(/\+/g, "-")
     .replace(/\//g, "_");
-  return `${url}?token=${token}&expires=${expired}`;
+  return `${url}?st=${token}&e=${expired}`;
 }
 
 module.exports = {
