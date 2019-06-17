@@ -489,7 +489,8 @@ class animateController {
           .sort((a, b) => b.level - a.level)[0];
         if (configPrefix) {
           const { prefix, key, expired } = configPrefix;
-          const uri = prefix + animate.play.linkPrefix + animate.playInfo.link;
+          const uri =
+            prefix + animate.play.linkPrefix || "" + animate.playInfo.link;
           playLink = generateSecurePathHash(uri, expired, key);
         } else {
           playLink = animate.play.linkPrefix + animate.playInfo.link;
