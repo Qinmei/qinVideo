@@ -459,7 +459,9 @@ class animateController {
           season: { $arrayElemAt: ["$season", parseInt(season)] },
           cover: 1,
           play: {
-            kind: 1
+            kind: 1,
+            level: 1,
+            linkPrefix: 1
           }
         }
       },
