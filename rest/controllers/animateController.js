@@ -306,6 +306,7 @@ class animateController {
       if (!single) return ctx.error({ msg: "没有权限", code: 402 });
       sendData.stats && delete sendData.status;
       sendData.slug && delete sendData.slug;
+      !sendData.play.linkPrefix && (sendData.play.linkPrefix = "");
     }
     const data = await AnimateModel.updateOne(
       { slug },
