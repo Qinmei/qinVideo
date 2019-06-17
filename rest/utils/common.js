@@ -51,7 +51,7 @@ function generateSecurePathHash(url, expires, secret) {
     .replace(/=/g, "")
     .replace(/\+/g, "-")
     .replace(/\//g, "_");
-  return `${url}?st=${token}&e=${expired}`;
+  return `${url}?h=${token}&e=${expired}`;
 }
 
 module.exports = {
