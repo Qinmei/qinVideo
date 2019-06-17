@@ -41,7 +41,7 @@ function generateSecurePathHash(url, expires, secret) {
     return url;
   }
   const expired = Math.ceil(Date.now() / 1000) + expires;
-  const input = secret + url + expired;
+  const input = expires + url + " " + secret;
   const binaryHash = crypto
     .createHash("md5")
     .update(input)
