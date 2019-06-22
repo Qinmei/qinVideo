@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/pc/precache-manifest.d47dce74bab2dd16585d18b35ea6b6ea.js"
+  "/pc/precache-manifest.87176aed1470d1bceab82423dd41be41.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "qinvideo"});
