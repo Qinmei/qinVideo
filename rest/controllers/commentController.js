@@ -230,7 +230,7 @@ class commentController {
       // commentQuery.status = "publish";
       arrLookup = [];
       belong &&
-        (commentQuery.belong = { $regex: `/^${belong}$/`, $options: "$i" });
+        (commentQuery.belong = { $regex: `/${belong}$/`, $options: "$i" });
     }
 
     const data = await CommentModel.aggregate([
