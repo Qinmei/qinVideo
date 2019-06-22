@@ -49,21 +49,17 @@ class danmuController {
   static async danmu_get_v3(ctx) {
     const { id } = ctx.query;
 
-    let data = await DanmuModel.find({ player: id }).catch(err => {
-      return { code: 404, msg: err.message };
-    });
+    let data = await DanmuModel.find({ player: id });
 
-    if (!data.code) {
-      data = data.map(item => [
-        item.time || 0,
-        item.type || 0,
-        item.color || 16777215,
-        htmlEncode(item.author) || "DPlayer",
-        htmlEncode(item.text) || ""
-      ]);
-    }
+    data = data.map(item => [
+      item.time || 0,
+      item.type || 0,
+      item.color || 16777215,
+      htmlEncode(item.author) || "DPlayer",
+      htmlEncode(item.text) || ""
+    ]);
 
-    ctx.send({ data });
+    ctx.success({ data, code: 0 });
   }
 
   // danmu post
