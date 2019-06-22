@@ -50,6 +50,7 @@ class danmuController {
     const danmu = ctx.request.body;
     const { user } = ctx.state;
     danmu.author = user._id;
+    danmu.player = danmu.id;
     const data = await DanmuModel.create(danmu).catch(err => {
       return { code: 404, msg: err.message };
     });
