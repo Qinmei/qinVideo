@@ -45,6 +45,25 @@ class danmuController {
     ctx.send({ data });
   }
 
+  static async danmu_get_v3(ctx) {
+    const { id } = ctx.query;
+
+    const result = await DanmuModel.find({ player: id }).catch(err => {
+      return { code: 404, msg: err.message };
+    });
+
+    result.data &&
+      (result.data = result.data.map(item => [
+        item.time || 0,
+        item.type || 0,
+        item.color || 16777215,
+        htmlEncode(item.author) || "DPlayer",
+        htmlEncode(item.text) || ""
+      ]));
+
+    ctx.send({ data: result });
+  }
+
   // danmu post
   static async danmu_post(ctx) {
     const danmu = ctx.request.body;

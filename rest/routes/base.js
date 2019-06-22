@@ -133,7 +133,7 @@ router
   .delete("/danmu", auth(100), danmuController.danmu_delete)
 
   //dplayer 适配
-  .get("/danmu/list/v3", auth(0), danmuController.danmu_get)
+  .get("/danmu/list/v3", auth(0), danmuController.danmu_get_v3)
   .post("/danmu/list/v3", auth(0), danmuController.danmu_post)
 
   // data
