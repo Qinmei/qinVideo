@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/backend/p__Shop__Order.async.js"
   },
   {
-    "revision": "5e71c7c021717d393649",
+    "revision": "f9c11997827fcd7df7ab",
     "url": "/backend/vendors.chunk.css"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/backend/umi.css"
   },
   {
-    "revision": "5e71c7c021717d393649",
+    "revision": "f9c11997827fcd7df7ab",
     "url": "/backend/vendors.async.js"
   },
   {
@@ -36,11 +36,11 @@ self.__precacheManifest = [
     "url": "/backend/p__Animate__Category.chunk.css"
   },
   {
-    "revision": "c42138ebe523f3640842",
+    "revision": "429ff7f3c328e6899897",
     "url": "/backend/p__Animate__Create.async.js"
   },
   {
-    "revision": "0c03bc5cbe0555d85925",
+    "revision": "80e98ca4329dc600ffc9",
     "url": "/backend/p__Animate__Info.async.js"
   },
   {
@@ -64,11 +64,11 @@ self.__precacheManifest = [
     "url": "/backend/p__Comic__Category.async.js"
   },
   {
-    "revision": "c53818286d947d5c554a",
+    "revision": "b2474b9694583d0398e8",
     "url": "/backend/p__Comic__Create.async.js"
   },
   {
-    "revision": "11e0e8347ad442e7ba4e",
+    "revision": "ced1b4ba243050aa507d",
     "url": "/backend/p__Comic__Info.async.js"
   },
   {
@@ -232,8 +232,8 @@ self.__precacheManifest = [
     "url": "/backend/icons/icon-512x512.png"
   },
   {
-    "revision": "c1074efc2372bf52c481a8ba0909be63",
-    "url": "/backend/icons/icon-192x192.png"
+    "revision": "4f38ae784c9e5f8b5135fd0b2ec19a9d",
+    "url": "/backend/icons/icon-128x128.png"
   },
   {
     "revision": "a09327a80c9303230a38",
@@ -256,8 +256,8 @@ self.__precacheManifest = [
     "url": "/backend/index.html"
   },
   {
-    "revision": "4f38ae784c9e5f8b5135fd0b2ec19a9d",
-    "url": "/backend/icons/icon-128x128.png"
+    "revision": "c1074efc2372bf52c481a8ba0909be63",
+    "url": "/backend/icons/icon-192x192.png"
   },
   {
     "revision": "4c17cd56deffab5da458",

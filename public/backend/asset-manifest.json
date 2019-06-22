@@ -69,7 +69,7 @@
   "/icons/icon-512x512.png": "/backend/icons/icon-512x512.png",
   "/index.html": "/backend/index.html",
   "/manifest.json": "/backend/manifest.json",
-  "/precache-manifest.f0cad05a097befd134e59e2630f80a04.js": "/backend/precache-manifest.f0cad05a097befd134e59e2630f80a04.js",
+  "/precache-manifest.585d757f286d26d0efc18f5aae1dd1db.js": "/backend/precache-manifest.585d757f286d26d0efc18f5aae1dd1db.js",
   "/pwacompat.min.js": "/backend/pwacompat.min.js",
   "/service-worker.js": "/backend/service-worker.js"
 }
