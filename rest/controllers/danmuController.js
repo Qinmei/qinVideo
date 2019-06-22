@@ -48,7 +48,7 @@ class danmuController {
   static async danmu_get_v3(ctx) {
     const { id } = ctx.query;
 
-    const data = await DanmuModel.find({ player: id }).catch(err => {
+    let data = await DanmuModel.find({ player: id }).catch(err => {
       return { code: 404, msg: err.message };
     });
 
