@@ -16,9 +16,9 @@ const UserSchema = new Schema(
     email: { type: String, required: true, unique: true }, // 邮箱
     level: { type: Number, default: 1 }, // 等级
     score: { type: Number, default: 0 }, // 积分
-    avatar: { type: String }, // 头像
-    background: { type: String }, // 背景图
-    introduce: { type: String }, // 简介
+    avatar: { type: String, default: "" }, // 头像
+    background: { type: String, default: "" }, // 背景图
+    introduce: { type: String, default: "" }, // 简介
     status: {
       type: String,
       enum: ["inactive", "active", "unused"],
