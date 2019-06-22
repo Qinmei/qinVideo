@@ -54,15 +54,13 @@ class danmuController {
     });
 
     if (!data.code) {
-      data = {
-        data: data.map(item => [
-          item.time || 0,
-          item.type || 0,
-          item.color || 16777215,
-          htmlEncode(item.author) || "DPlayer",
-          htmlEncode(item.text) || ""
-        ])
-      };
+      data = data.map(item => [
+        item.time || 0,
+        item.type || 0,
+        item.color || 16777215,
+        htmlEncode(item.author) || "DPlayer",
+        htmlEncode(item.text) || ""
+      ]);
     }
 
     ctx.send({ data });
