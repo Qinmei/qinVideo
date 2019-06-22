@@ -132,6 +132,10 @@ router
   .post("/danmu", auth(0), danmuController.danmu_post)
   .delete("/danmu", auth(100), danmuController.danmu_delete)
 
+  //dplayer 适配
+  .get("/danmu/list/v3", auth(0), danmuController.danmu_get)
+  .post("/danmu/v3", auth(0), danmuController.danmu_post)
+
   // data
   .get("/data", auth(100), dataController.data_query)
   .post("/data", auth(0), dataController.data_post);

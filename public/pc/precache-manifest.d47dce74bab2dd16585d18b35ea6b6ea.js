@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/pc/p__newDiscuss.async.js"
   },
   {
-    "revision": "7505064724c5873e2f99",
+    "revision": "ed884b1a48c264b33fde",
     "url": "/pc/p__animate__play__$data.async.js"
   },
   {
