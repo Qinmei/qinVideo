@@ -229,6 +229,8 @@ class commentController {
     if (user.level < 100) {
       // commentQuery.status = "publish";
       arrLookup = [];
+      belong &&
+        (commentQuery.belong = { $regex: `/^${belong}$/`, $options: "$i" });
     }
 
     const data = await CommentModel.aggregate([
