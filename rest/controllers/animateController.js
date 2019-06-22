@@ -483,6 +483,7 @@ class animateController {
     const config = await ConfigModel.findOne({});
     const animate = data[0];
     let playLink;
+    const animatePrefix = animate.play.linkPrefix || "";
     if (config) {
       if (animate.play.kind === "mp4" || animate.play.kind === "m3u8") {
         const configPrefix = config.playLimit
@@ -490,10 +491,10 @@ class animateController {
           .sort((a, b) => b.level - a.level)[0];
         if (configPrefix) {
           const { prefix, key, expired } = configPrefix;
-          const uri = animate.play.linkPrefix + animate.playInfo.link;
+          const uri = animatePrefix + animate.playInfo.link;
           playLink = prefix + generateSecurePathHash(uri, expired, key);
         } else {
-          playLink = animate.play.linkPrefix + animate.playInfo.link;
+          playLink = animatePrefix + animate.playInfo.link;
         }
       } else {
         const configPrefix = config.jiexi.filter(item => {
@@ -502,9 +503,7 @@ class animateController {
         })[0];
         if (configPrefix) {
           playLink =
-            configPrefix.prefix +
-            animate.play.linkPrefix +
-            animate.playInfo.link;
+            configPrefix.prefix + animatePrefix + animate.playInfo.link;
         }
       }
     }
