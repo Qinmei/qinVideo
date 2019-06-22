@@ -53,7 +53,7 @@ class danmuController {
       return { code: 404, msg: err.message };
     });
 
-    !data.code &&
+    if (!data.code) {
       data.map(item => {
         item = [
           item.time || 0,
@@ -63,6 +63,7 @@ class danmuController {
           htmlEncode(item.text) || ""
         ];
       });
+    }
 
     ctx.send({ data });
   }
