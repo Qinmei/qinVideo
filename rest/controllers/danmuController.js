@@ -59,7 +59,7 @@ class danmuController {
       htmlEncode(item.text) || ""
     ]);
 
-    ctx.success({ data, code: 0 });
+    ctx.dplayer({ data, code: 0 });
   }
 
   // danmu post
