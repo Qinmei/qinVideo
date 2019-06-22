@@ -1,4 +1,5 @@
 const { DanmuModel, DataModel } = require("../models/index");
+const { htmlEncode } = require("../utils/common");
 
 class danmuController {
   // 评论列表
@@ -53,13 +54,15 @@ class danmuController {
     });
 
     !data.code &&
-      (data = data.map(item => [
-        item.time || 0,
-        item.type || 0,
-        item.color || 16777215,
-        htmlEncode(item.author) || "DPlayer",
-        htmlEncode(item.text) || ""
-      ]));
+      data.map(item => {
+        item = [
+          item.time || 0,
+          item.type || 0,
+          item.color || 16777215,
+          htmlEncode(item.author) || "DPlayer",
+          htmlEncode(item.text) || ""
+        ];
+      });
 
     ctx.send({ data });
   }

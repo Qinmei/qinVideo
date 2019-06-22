@@ -54,9 +54,22 @@ function generateSecurePathHash(url, expires, secret) {
   return `${url}?st=${token}&e=${expired}`;
 }
 
+function htmlEncode(str) {
+  return str
+    ? str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#x27;")
+        .replace(/\//g, "&#x2f;")
+    : "";
+}
+
 module.exports = {
   MD5,
   array2Tree,
   getChildArray,
-  generateSecurePathHash
+  generateSecurePathHash,
+  htmlEncode
 };
