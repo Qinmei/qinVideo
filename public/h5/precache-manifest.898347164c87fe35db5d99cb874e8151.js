@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/h5/p__comic__play__$data.async.js"
   },
   {
-    "revision": "98c637c4f6b44974afd1",
+    "revision": "f31ca18c8c59a6e2e2b5",
     "url": "/h5/vendors.chunk.css"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/h5/umi.css"
   },
   {
-    "revision": "98c637c4f6b44974afd1",
+    "revision": "f31ca18c8c59a6e2e2b5",
     "url": "/h5/vendors.async.js"
   },
   {
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/h5/p__newDiscuss.async.js"
   },
   {
-    "revision": "c04a940060150dd51436",
+    "revision": "ab61db537e979d1bd618",
     "url": "/h5/p__animate__play__$data.async.js"
   },
   {
