@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const stringRandom = require("string-random");
 const { MD5 } = require("../utils/common");
-const config = require("../../config");
+const configInit = require("../../config");
 const sendemail = require("../utils/sendMail");
 
 const {
@@ -23,7 +23,8 @@ class baseController {
       return ctx.error({ msg: "用户名错误" });
     }
 
-    const passwordResult = MD5(config.salt + password) === nameResult.password;
+    const passwordResult =
+      MD5(configInit.salt + password) === nameResult.password;
     if (!passwordResult) {
       return ctx.error({ msg: "密码错误" });
     }
@@ -41,7 +42,7 @@ class baseController {
 
     const token = jwt.sign(
       { id: _id, name, email, level, score, avatar, background, introduce },
-      config.tokenSecret,
+      configInit.tokenSecret,
       { expiresIn: "1d" }
     );
     await DataModel.create({ type: "login" }).catch(err => err);
@@ -52,7 +53,7 @@ class baseController {
   static async register(ctx) {
     const { name: newName, email, password } = ctx.request.body;
     const name = newName.replace(/\s+/g, "");
-    const newPass = MD5(config.salt + password);
+    const newPass = MD5(configInit.salt + password);
     const refreshToken =
       new mongoose.Types.ObjectId().toString() + stringRandom(16);
 
@@ -65,7 +66,7 @@ class baseController {
       return ctx.error({ msg: "用户名重复,请更换一个" });
     }
 
-    const baseConfig = {};
+    let baseConfig = {};
     const config = await ConfigModel.findOne();
     if (config) {
       baseConfig = {
@@ -105,7 +106,7 @@ class baseController {
       } = nameResult;
       const token = jwt.sign(
         { id: _id, name, email, level, score, avatar, background, introduce },
-        config.tokenSecret,
+        configInit.tokenSecret,
         { expiresIn: "1d" }
       );
       await DataModel.create({ type: "login" }).catch(err => err);
@@ -133,7 +134,9 @@ class baseController {
     }
 
     const { name, email } = userInfo;
-    const token = jwt.sign({ name }, config.tokenSecret, { expiresIn: "2h" });
+    const token = jwt.sign({ name }, configInit.tokenSecret, {
+      expiresIn: "2h"
+    });
 
     sendemail({
       to: email,
@@ -149,8 +152,8 @@ class baseController {
   static async resetPasswordAuth(ctx) {
     const { password, token } = ctx.request.body;
     try {
-      const { name } = await jwt.verify(token, config.tokenSecret);
-      const newPass = MD5(config.salt + password);
+      const { name } = await jwt.verify(token, configInit.tokenSecret);
+      const newPass = MD5(configInit.salt + password);
       const refreshToken =
         new mongoose.Types.ObjectId().toString() + stringRandom(16);
       await UserModel.updateOne(

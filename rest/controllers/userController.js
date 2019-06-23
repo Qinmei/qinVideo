@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const stringRandom = require("string-random");
 const { MD5 } = require("../utils/common");
-const config = require("../../config");
+const configInit = require("../../config");
 const {
   UserModel,
   AnimateModel,
@@ -388,7 +388,7 @@ class userController {
 
   static async user_post(ctx) {
     const userInfo = ctx.request.body;
-    const newPass = MD5(config.salt + userInfo.password);
+    const newPass = MD5(configInit.salt + userInfo.password);
     const refreshToken =
       new mongoose.Types.ObjectId().toString() + stringRandom(16);
     const data = await UserModel.create({
