@@ -66,6 +66,11 @@ class baseController {
       return ctx.error({ msg: "用户名重复,请更换一个" });
     }
 
+    const emailResult = await UserModel.findOne({ email });
+    if (emailResult) {
+      return ctx.error({ msg: "邮箱重复,请更换一个" });
+    }
+
     let baseConfig = {};
     const config = await ConfigModel.findOne();
     if (config) {
