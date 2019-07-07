@@ -62,6 +62,16 @@
         index      /h5/index.html;
         try_files  $uri $uri/ /h5/index.html?$args;
     }
+    
+    location =/ { 
+        if ($http_user_agent ~* (mobile|nokia|iphone|ipad|android|samsung|htc|blackberry)) {
+             rewrite  ^(.*) $scheme://$host/m/ permanent;
+        }
+        if ($http_user_agent !~* (mobile|nokia|iphone|ipad|android|samsung|htc|blackberry)){
+           rewrite  ^(.*) $scheme://$host/web/ permanent;
+        }
+    }
+
 ```
 4. 最后我们重启nginx即可
 
