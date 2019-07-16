@@ -29,6 +29,7 @@ const ConfigSchema = new Schema({
   h5Index: [{ type: String }], // mobile首页
   postMenu: [{ type: String }], //动态文章分类置顶
   postTop: [{ type: String }], // 动态文章置顶
+  message: [{ type: String }], // 系统通知
   aboutus: { type: String, default: "" },
   playLimit: [
     {

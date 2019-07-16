@@ -48,6 +48,7 @@ class configController {
           h5Index: 1,
           postMenu: 1,
           postTop: 1,
+          message: 1,
           aboutus: 1
         }
       );
