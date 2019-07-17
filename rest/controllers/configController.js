@@ -53,8 +53,8 @@ class configController {
         }
       );
       const category = await CategoryModel.find();
-      const { pcMenu, h5Menu, pcIndex, h5Index } = newConfig;
-      [pcMenu, h5Menu, pcIndex, h5Index].map(single =>
+      const { pcMenu, h5Menu, pcIndex, h5Index, postMenu, postTop, message } = newConfig;
+      [pcMenu, h5Menu, pcIndex, h5Index,postMenu,postTop, message ].map(single =>
         single.map((item, key) => {
           if (!/new/.test(item)) {
             const categoryArr = JSON.parse(JSON.stringify(category)).filter(
