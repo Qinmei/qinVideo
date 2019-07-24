@@ -189,7 +189,10 @@ const childrenLookup = {
         $unwind: "$author"
       },
       {
-        $unwind: "$replyTo"
+        $unwind: {
+          path:"$replyTo",
+        "preserveNullAndEmptyArrays": true
+          }
       },
       { $addFields: { count: countSize } }
     ],
