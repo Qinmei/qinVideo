@@ -289,7 +289,9 @@ class commentController {
       authorLookup,
       replyToLookup,
       childrenLookup,
-      ...unwindList
+      relativeLookup,
+      ...unwindList,
+      { $addFields: { count: countSize } }
     ]).catch(err => err);
     ctx.send({ data });
   }
