@@ -232,7 +232,19 @@ class commentController {
     if (user.level < 100) {
       // commentQuery.status = "publish";
       arrLookup = [];
-      belong && (commentQuery.belong = { $regex: `${belong}$`, $options: "m" });
+      if (belong) {
+        let newBelong = belong;
+        if (/E/.test(newBelong)) {
+          newBelong = newBelong.split("E")[0];
+        }
+        if (/S/.test(newBelong)) {
+          newBelong = newBelong.split("S")[0];
+        }
+        if (/P/.test(newBelong)) {
+          newBelong = newBelong.split("P")[0];
+        }
+        commentQuery.belong = { $regex: `${newBelong}$`, $options: "m" };
+      }
     }
 
     const data = await CommentModel.aggregate([
