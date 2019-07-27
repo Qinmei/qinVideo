@@ -224,7 +224,20 @@ class commentController {
     content && (commentQuery.content = { $regex: content, $options: "$i" });
     status && (commentQuery.status = status);
     type && (commentQuery.type = type);
-    belong && (commentQuery.belong = { $regex: belong, $options: "$i" });
+    if (belong) {
+      commentQuery.belong = { $regex: belong, $options: "$i" };
+      let newBelong = belong;
+      if (/E/.test(newBelong)) {
+        newBelong = newBelong.split("E")[0];
+      }
+      if (/S/.test(newBelong)) {
+        newBelong = newBelong.split("S")[0];
+      }
+      if (/P/.test(newBelong)) {
+        newBelong = newBelong.split("P")[0];
+      }
+      commentQuery.belong = { $regex: `${newBelong}$`, $options: "m" };
+    }
 
     let arrLookup = [animateLookup, comicLookup, postLookup];
 
@@ -232,19 +245,7 @@ class commentController {
     if (user.level < 100) {
       // commentQuery.status = "publish";
       arrLookup = [];
-      if (belong) {
-        let newBelong = belong;
-        if (/E/.test(newBelong)) {
-          newBelong = newBelong.split("E")[0];
-        }
-        if (/S/.test(newBelong)) {
-          newBelong = newBelong.split("S")[0];
-        }
-        if (/P/.test(newBelong)) {
-          newBelong = newBelong.split("P")[0];
-        }
-        commentQuery.belong = { $regex: `${newBelong}$`, $options: "m" };
-      }
+      belong && (commentQuery.belong = { $regex: `${belong}$`, $options: "m" });
     }
 
     const data = await CommentModel.aggregate([
