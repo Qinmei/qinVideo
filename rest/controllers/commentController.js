@@ -57,7 +57,7 @@ const replyToLookup = {
 const animateLookup = {
   $lookup: {
     from: "animates",
-    let: { value: "$target" },
+    let: { value: "$belong" },
     pipeline: [
       {
         $match: {
@@ -81,7 +81,7 @@ const animateLookup = {
 const postLookup = {
   $lookup: {
     from: "posts",
-    let: { value: "$target" },
+    let: { value: "$belong" },
     pipeline: [
       {
         $match: {
@@ -105,7 +105,7 @@ const postLookup = {
 const comicLookup = {
   $lookup: {
     from: "comics",
-    let: { value: "$target" },
+    let: { value: "$belong" },
     pipeline: [
       {
         $match: {
@@ -224,7 +224,8 @@ class commentController {
     content && (commentQuery.content = { $regex: content, $options: "$i" });
     status && (commentQuery.status = status);
     type && (commentQuery.type = type);
-    belong && (commentQuery.target = belong);
+    belong && (commentQuery.belong = belong);
+    target && (commentQuery.target = target);
 
     let arrLookup = [animateLookup, comicLookup, postLookup];
 
@@ -272,16 +273,6 @@ class commentController {
     const comment = ctx.request.body;
     const { user } = ctx.state;
     comment.author = user._id;
-    const belong = comment.belong;
-    if (/E/.test(belong)) {
-      comment.target = belong.split("E")[0];
-    }
-    if (/S/.test(belong)) {
-      comment.target = belong.split("S")[0];
-    }
-    if (/P/.test(belong)) {
-      comment.target = belong.split("P")[0];
-    }
     const data = await CommentModel.create(comment).catch(err => {
       return { code: 404, msg: err.message };
     });

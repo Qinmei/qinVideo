@@ -6,7 +6,7 @@ const CommentSchema = new Schema(
   {
     author: Schema.Types.ObjectId, // 用户名
     belong: { type: String, required: true }, // 归属
-    target: { type: String, required: true }, // 确认标识
+    target: { type: String }, // 子集
     type: {
       type: String,
       enum: ["animate", "post", "comic", "discuss"],
