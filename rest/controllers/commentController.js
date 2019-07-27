@@ -210,7 +210,8 @@ class commentController {
       type,
       belong,
       content,
-      status
+      status,
+      target
     } = ctx.query;
 
     const pattern = /^-/;
