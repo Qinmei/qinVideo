@@ -381,7 +381,8 @@ class animateController {
                   $match: {
                     $expr: {
                       $and: [
-                        { $eq: ["$belong", `${slug}S${season}E${eposide}`] },
+                        { $eq: ["$belong", `${slug}`] },
+                        { $eq: ["$target", `S${season}E${eposide}}`] },
                         { $eq: ["$type", "animate"] }
                       ]
                     }
@@ -398,7 +399,10 @@ class animateController {
               pipeline: [
                 {
                   $match: {
-                    $expr: { $eq: ["$belong", `${slug}S${season}E${eposide}`] }
+                    $and: [
+                      { $eq: ["$belong", `${slug}`] },
+                      { $eq: ["$target", `S${season}E${eposide}}`] }
+                    ]
                   }
                 }
               ],
@@ -412,7 +416,10 @@ class animateController {
               pipeline: [
                 {
                   $match: {
-                    $expr: { $eq: ["$belong", `${slug}S${season}E${eposide}`] }
+                    $and: [
+                      { $eq: ["$belong", `${slug}`] },
+                      { $eq: ["$target", `S${season}E${eposide}}`] }
+                    ]
                   }
                 }
               ],
