@@ -110,7 +110,12 @@ const relativeLookup = ["like", "unlike", "play", "comment", "danmu"].map(
           pipeline: [
             {
               $match: {
-                $expr: { $gt: [{ $indexOfBytes: ["$target", "$$value"] }, -1] }
+                $expr: {
+                  $and: [
+                    { $gt: [{ $indexOfBytes: ["$target", "$$value"] }, -1] },
+                    { $eq: ["$type", "play"] }
+                  ]
+                }
               }
             }
           ],
@@ -376,13 +381,14 @@ class animateController {
           return {
             $lookup: {
               from: "comments",
+              let: { value: "$slug" },
               pipeline: [
                 {
                   $match: {
                     $expr: {
                       $and: [
-                        { $eq: ["$belong", `${slug}`] },
-                        { $eq: ["$target", `S${season}E${eposide}}`] },
+                        { $eq: ["$belong", "$$value"] },
+                        { $eq: ["$target", `S${season}E${eposide}`] },
                         { $eq: ["$type", "animate"] }
                       ]
                     }
@@ -400,7 +406,10 @@ class animateController {
                 {
                   $match: {
                     $expr: {
-                      $eq: ["$belong", `${slug}S${season}E${eposide}`]
+                      $and: [
+                        { $eq: ["$target", `${slug}S${season}E${eposide}`] },
+                        { $eq: ["$type", "play"] }
+                      ]
                     }
                   }
                 }
@@ -416,7 +425,7 @@ class animateController {
                 {
                   $match: {
                     $expr: {
-                      $eq: ["$belong", `${slug}S${season}E${eposide}`]
+                      $eq: ["$player", `${slug}S${season}E${eposide}`]
                     }
                   }
                 }

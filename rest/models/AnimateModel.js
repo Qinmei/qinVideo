@@ -31,7 +31,7 @@ const AnimateSchema = new Schema(
       firstPlay: { type: String, default: "20160606" }, // 首播
       isUpdate: { type: Boolean, default: false }, // 是否连载
       updateDay: { type: Number, default: 0 }, // 周几播放
-      rateStar: { type: Number, default: 4 }, // 评分星级
+      rateStar: { type: Number, default: 8 }, // 评分星级
       rateCount: { type: Number, default: 1000 }, // 评分人数
       impression: { type: String, default: "" }, // 印象
       eposideCount: { type: Number, default: 0 } // 总集数
