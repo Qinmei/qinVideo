@@ -230,6 +230,9 @@ class animateController {
     ]);
 
     const total = await AnimateModel.countDocuments(animateQuery);
+    title &&
+      user.level < 100 &&
+      DataModel.create({ type: "search", target: title });
     ctx.send({ data, total });
   }
 
