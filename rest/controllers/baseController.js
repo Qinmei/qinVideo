@@ -301,7 +301,11 @@ class baseController {
           _id: "$target",
           count: { $sum: 1 }
         }
-      }
+      },
+      {
+        $sort: { count: -1 }
+      },
+      { $limit: 10 }
     ]);
     ctx.success({ data: result });
   }
