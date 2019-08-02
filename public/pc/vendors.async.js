@@ -2,7 +2,19 @@
   margin-bottom: 40px;
   display: grid;
   grid-gap: 40px 20px;
-  grid-template-columns: repeat(6, calc((100% - 100px) / 6));
+  grid-template-columns: repeat(4, calc((100% - 60px) / 4));
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, calc((100% - 60px) / 4));
+  }
+
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(5, calc((100% - 80px) / 5));
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(6, calc((100% - 100px) / 6));
+  }
 
   @media (min-width: 1600px) {
     grid-template-columns: repeat(8, calc((100% - 140px) / 8));
