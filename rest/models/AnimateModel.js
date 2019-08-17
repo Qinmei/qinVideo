@@ -42,6 +42,7 @@ const AnimateSchema = new Schema(
         enum: ["mp4", "m3u8", "php"],
         default: "mp4"
       }, // 播放类型
+      noPrefix: { type: Boolean, default: false }, // 不使用设置的等级前缀
       level: { type: Number, default: 0 }, // 等级限定
       linkPrefix: { type: String, default: "" }, // 链接前缀
       downTitle: { type: String, default: "" }, // 下载标题

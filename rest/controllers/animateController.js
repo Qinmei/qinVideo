@@ -261,11 +261,11 @@ class animateController {
       animateShow = isAuthor
         ? { _id: 0, relative: 0 }
         : {
-            _id: 0,
-            eposide: 0,
-            relative: 0,
-            play: { linkPrefix: 0 }
-          };
+          _id: 0,
+          eposide: 0,
+          relative: 0,
+          play: { linkPrefix: 0 }
+        };
     }
     const data = await AnimateModel.aggregate([
       { $match: { slug } },
@@ -501,10 +501,10 @@ class animateController {
     const animate = data[0];
     let playLink;
     const animatePrefix = animate.play.linkPrefix || "";
-    if (config) {
+    if (!animate.play.noPrefix && config) {
       if (animate.play.kind === "mp4" || animate.play.kind === "m3u8") {
         const configPrefix = config.playLimit
-          .filter(item => item.level <= animate.play.level)
+          .filter(item => item.level <= user.level)
           .sort((a, b) => b.level - a.level)[0];
         if (configPrefix) {
           const { prefix, key, expired } = configPrefix;
