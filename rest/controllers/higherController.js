@@ -5,7 +5,7 @@ const {
 class higherController {
   // higher Get
   static async higher_get(ctx) {
-    const data = await HigherModel.findOne();
+    let data = await HigherModel.find();
     ctx.send({ data });
   }
 
