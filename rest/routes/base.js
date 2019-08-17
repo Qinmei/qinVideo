@@ -13,7 +13,8 @@ const {
   orderController,
   shopController,
   keyController,
-  comicController
+  comicController,
+  higherController
 } = require("../controllers/index");
 const auth = require("../middleware/authRouter");
 
@@ -138,6 +139,10 @@ router
 
   // data
   .get("/data", auth(100), dataController.data_query)
-  .post("/data", auth(0), dataController.data_post);
+  .post("/data", auth(0), dataController.data_post)
+
+  // higher
+  .get("/higher", auth(100), higherController.higher_get)
+  .post("/higher", auth(100), higherController.higher_post);
 
 module.exports = router;
