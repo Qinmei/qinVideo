@@ -479,7 +479,8 @@ class animateController {
           play: {
             kind: 1,
             level: 1,
-            linkPrefix: 1
+            linkPrefix: 1,
+             noPrefix: 1
           }
         }
       },
