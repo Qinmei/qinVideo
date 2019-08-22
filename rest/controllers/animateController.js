@@ -523,6 +523,8 @@ class animateController {
             configPrefix.prefix + animatePrefix + animate.playInfo.link;
         }
       }
+    }else{
+       playLink = animatePrefix + animate.playInfo.link;
     }
     animate.playInfo.link = playLink;
 
