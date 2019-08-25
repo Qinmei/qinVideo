@@ -479,7 +479,8 @@ class animateController {
           play: {
             kind: 1,
             level: 1,
-            linkPrefix: 1
+            linkPrefix: 1,
+             noPrefix: 1
           }
         }
       },
@@ -523,6 +524,8 @@ class animateController {
             configPrefix.prefix + animatePrefix + animate.playInfo.link;
         }
       }
+    }else{
+       playLink = animatePrefix + animate.playInfo.link;
     }
     animate.playInfo.link = playLink;
 
