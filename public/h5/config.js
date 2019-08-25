@@ -6,6 +6,7 @@ window.config = {
   qq: '',
   email: '',
   app: '',
+  logo: '/img/config/9c007bab0896dd7042f5340c0d548756.jpg',
   headimg: '/img/config/9c007bab0896dd7042f5340c0d548756.jpg',
   mobleimg: '/img/config/30423325d3f8aed6c61d6ae2b4848e91.jpg',
   loginimg: '/img/config/ab99501bf70ac77f29c77cfc2005879e.jpg',

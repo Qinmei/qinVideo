@@ -16,7 +16,8 @@ const HigherSchema = new Schema(
       created: Number
     },
     update: {
-      time: Number,
+      use: Boolean,
+      error: Number,
       total: Number,
       success: Number,
       created: Number

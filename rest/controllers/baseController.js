@@ -223,12 +223,6 @@ class baseController {
         file.type === "image/vnd.microsoft.icon"
       ) {
         let fileName = file.hash;
-        if (
-          file.type === "image/x-icon" ||
-          file.type === "image/vnd.microsoft.icon"
-        ) {
-          fileName = "favicon";
-        }
         const fileExt = path.extname(file.name);
         const name = `${fileName}${fileExt}`;
         const oldPath = file.path;
@@ -247,8 +241,8 @@ class baseController {
 
     Array.isArray(file)
       ? file.map(item => {
-          saveFile(item);
-        })
+        saveFile(item);
+      })
       : saveFile(file);
 
     ctx.success({ data: result });

@@ -57,13 +57,34 @@ function generateSecurePathHash(url, expires, secret) {
 function htmlEncode(str) {
   return str
     ? str
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#x27;")
-        .replace(/\//g, "&#x2f;")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#x27;")
+      .replace(/\//g, "&#x2f;")
     : "";
+}
+
+const fixZero = num => {
+  if (num < 10) {
+    return `0000${num}`;
+  } else if (num < 100) {
+    return `000${num}`;
+  } else if (num < 1000) {
+    return `00${num}`;
+  } else if (num < 10000) {
+    return `0${num}`;
+  }
+  return num;
+};
+
+const sleep = (time = 5000) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve()
+    }, time)
+  })
 }
 
 module.exports = {
@@ -71,5 +92,7 @@ module.exports = {
   array2Tree,
   getChildArray,
   generateSecurePathHash,
-  htmlEncode
+  htmlEncode,
+  fixZero,
+  sleep
 };

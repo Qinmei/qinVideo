@@ -11,6 +11,7 @@ const ConfigSchema = new Schema({
   qq: { type: String, default: "" }, // qq群链接
   email: { type: String, default: "" }, // 邮箱
   app: { type: String, default: "" }, // app
+  logo: { type: String, default: "" }, // 网站logo
   headimg: { type: String, default: "" }, // 首页头图
   mobleimg: { type: String, default: "" }, // 手机头图
   loginimg: { type: String, default: "" }, // 登陆大图

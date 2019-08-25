@@ -40,6 +40,7 @@ class configController {
           qq: 1,
           email: 1,
           app: 1,
+          logo: 1,
           headimg: 1,
           mobleimg: 1,
           loginimg: 1,
