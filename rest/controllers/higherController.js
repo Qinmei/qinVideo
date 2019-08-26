@@ -227,7 +227,25 @@ class higherController {
         json: true
       };
       let animate = await request(options);
-      if (animate.code === 10000) animate = animate.data.list;
+      let allList = [];
+      if (animate.code === 10000) allList = animate.data.list;
+      allList = allList.map(item => item.slug);
+
+      const options2 = {
+        method: 'post',
+        uri: url + '/animate',
+        body: {
+          list: allList
+        },
+        headers: {
+          token: data.token
+        },
+        json: true
+      };
+      const result = await request(options2);
+      if (result.code !== 10000) return;
+      animate = result.data.list;
+
       for (let index = 0; index < animate.length; index++) {
         const temp = await HigherModel.findOne();
         const element = animate[index];
