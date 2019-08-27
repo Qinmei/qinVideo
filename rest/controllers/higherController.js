@@ -244,7 +244,7 @@ class higherController {
       };
       const result = await request(options2);
       if (result.code !== 10000) return;
-      animate = result.data.list;
+      animate = result.data;
 
       for (let index = 0; index < animate.length; index++) {
         const temp = await HigherModel.findOne();
