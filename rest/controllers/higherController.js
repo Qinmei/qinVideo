@@ -41,7 +41,7 @@ class higherController {
     const data = ctx.request.body;
     const { token } = data;
     const options = {
-      method: 'POST',
+      method: 'get',
       uri: url + '/auth',
       headers: {
         token,
@@ -183,7 +183,7 @@ class higherController {
     const total = (newEnd - newStart + 1) * 10;
 
     const options = {
-      method: 'post',
+      method: 'get',
       uri: url + '/auth',
       body: {},
       headers: {
@@ -296,7 +296,7 @@ class higherController {
     }
 
     const options = {
-      method: 'post',
+      method: 'get',
       uri: url + '/auth',
       body: {},
       headers: {
@@ -378,7 +378,7 @@ class higherController {
     }
 
     const options = {
-      method: 'post',
+      method: 'get',
       uri: url + '/auth',
       body: {},
       headers: {
