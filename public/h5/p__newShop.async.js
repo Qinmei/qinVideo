@@ -1,4 +1,4 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[18],{"OB+6":function(e,t,a){"use strict";a.r(t);a("miYZ");var l=a("tsqr"),s=(a("2qtc"),a("kLXV")),n=a("mrSG"),r=a("q1tI"),i=a.n(r),c=a("MuoO"),o=(a("+L6B"),a("2/Rp")),p=(a("R9oj"),a("ECub")),d=a("vOnD"),m=a("XEok"),u=a("LLXN"),h=a("l61h"),b=d["a"].div`
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[19],{"OB+6":function(e,t,a){"use strict";a.r(t);a("miYZ");var s=a("tsqr"),r=(a("2qtc"),a("kLXV")),i=a("mrSG"),n=a("q1tI"),l=a.n(n),o=a("MuoO"),c=(a("+L6B"),a("2/Rp")),p=(a("R9oj"),a("ECub")),d=a("vOnD"),m=a("XEok"),u=a("LLXN"),h=a("l61h"),g=d["a"].div`
   display: grid;
   grid-gap: 20px;
   grid-template-columns: 1fr;
@@ -22,6 +22,10 @@
 
     .lm {
       width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
       .label {
         margin: 0 10px;
         font-weight: bold;
@@ -30,7 +34,7 @@
       }
     }
   }
-`,g=e=>{var t=e.list,a=e.submit,l=Object(r["useContext"])(m["a"]),s=Object(r["useMemo"])(()=>l,[l]);return i.a.createElement(i.a.Fragment,null,0===t.length?i.a.createElement(p["a"],null):i.a.createElement(b,{color:s},t.map((e,t)=>i.a.createElement("div",{className:"list"},i.a.createElement("h2",null,e.title),i.a.createElement("p",null,e.introduce),i.a.createElement("div",{className:"lm"},i.a.createElement("ul",null,i.a.createElement("li",null,i.a.createElement("span",null,Object(u["formatMessage"])({id:"shop.price"}),":"),i.a.createElement("span",{className:"label"},e.price),i.a.createElement("span",null,Object(u["formatMessage"])({id:"shop.rmb"}))),i.a.createElement("li",null,i.a.createElement("span",null,Object(u["formatMessage"])({id:"shop.uplevel"}),":"),i.a.createElement("span",{className:"label"},e.upLevel),i.a.createElement("span",null,Object(u["formatMessage"])({id:"shop.level"}))),i.a.createElement("li",null,i.a.createElement("span",null,Object(u["formatMessage"])({id:"shop.upscorce"}),":"),i.a.createElement("span",{className:"label"},e.addScore),i.a.createElement("span",null,Object(u["formatMessage"])({id:"shop.scorce"}))),i.a.createElement("li",null,i.a.createElement("span",null,Object(u["formatMessage"])({id:"shop.upexpired"}),":"),i.a.createElement("span",{className:"label"},(e.addExpired/24/60/60).toFixed(2)),i.a.createElement("span",null,Object(u["formatMessage"])({id:"shop.day"}))))),i.a.createElement("div",{className:"right"},i.a.createElement(h["a"],null,i.a.createElement(o["a"],{type:"primary",size:"large",style:{width:"160px"},onClick:()=>{a(e._id)}},Object(u["formatMessage"])({id:"shop.buy"}))))))))},E=g,x=a("Dp36"),f=a("nLTe"),y=a("usdK"),O=d["a"].div`
+`,b=e=>{var t=e.list,a=e.submit,s=Object(n["useContext"])(m["a"]),r=Object(n["useMemo"])(()=>s,[s]);return l.a.createElement(l.a.Fragment,null,0===t.length?l.a.createElement(p["a"],null):l.a.createElement(g,{color:r},t.map((e,t)=>l.a.createElement("div",{className:"list"},l.a.createElement("h2",null,e.title),l.a.createElement("p",null,e.introduce),l.a.createElement("div",{className:"lm"},l.a.createElement("span",null,Object(u["formatMessage"])({id:"shop.price"}),":"),l.a.createElement("span",{className:"label"},e.price),l.a.createElement("span",null,Object(u["formatMessage"])({id:"shop.rmb"}))),l.a.createElement("div",{className:"right"},l.a.createElement(h["a"],null,l.a.createElement(c["a"],{type:"primary",size:"large",style:{width:"160px"},onClick:()=>{a(e._id)}},Object(u["formatMessage"])({id:"shop.buy"}))))))))},x=b,y=a("Dp36"),f=a("nLTe"),E=a("usdK"),w=d["a"].div`
   .tabs {
     display: flex;
 
@@ -55,4 +59,4 @@
       }
     }
   }
-`,j=class extends r["Component"]{constructor(){super(...arguments),this.state={cate:"newShop",query:{size:1e4,page:1}},this.initData=(()=>{var e=this.state.query,t=this.props.dispatch;t({type:"shop/queryList",payload:{query:e}})}),this.buy=(e=>{s["a"].confirm({title:Object(u["formatMessage"])({id:"shop.tips"}),content:Object(u["formatMessage"])({id:"shop.tips.text"}),onOk(){return x["a"].order({data:{shop:e}}).then(e=>{e&&(l["a"].success(Object(u["formatMessage"])({id:"shop.buy.success"})),y["a"].push("/user"))})},onCancel(){}})})}componentDidMount(){this.initData()}render(){var e=this.state,t=e.cate,a=(e.query,this.props),l=a.shop.list,s=(a.loading,a.category);s[t];return i.a.createElement(O,null,i.a.createElement(f["a"],{active:"newShop"}),i.a.createElement("div",{className:"container"},i.a.createElement(E,{list:l,submit:this.buy})))}};j=n["a"]([Object(c["connect"])(e=>{var t=e.shop,a=e.category,l=e.loading;return{shop:t.shop,category:a,loading:l.effects["shop/queryList"]}})],j);t["default"]=j}}]);
+`,v=class extends n["Component"]{constructor(){super(...arguments),this.state={cate:"newShop",query:{size:1e4,page:1}},this.initData=(()=>{var e=this.state.query,t=this.props.dispatch;t({type:"shop/queryList",payload:{query:e}})}),this.buy=(e=>{r["a"].confirm({title:Object(u["formatMessage"])({id:"shop.tips"}),content:Object(u["formatMessage"])({id:"shop.tips.text"}),onOk(){return y["a"].order({data:{shop:e}}).then(e=>{e&&(s["a"].success(Object(u["formatMessage"])({id:"shop.buy.success"})),E["a"].push("/user"))})},onCancel(){}})})}componentDidMount(){this.initData()}render(){var e=this.state,t=e.cate,a=(e.query,this.props),s=a.shop.list,r=(a.loading,a.category);r[t];return l.a.createElement(w,null,l.a.createElement(f["a"],{active:"newShop"}),l.a.createElement("div",{className:"container"},l.a.createElement(x,{list:s,submit:this.buy})))}};v=i["a"]([Object(o["connect"])(e=>{var t=e.shop,a=e.category,s=e.loading;return{shop:t.shop,category:a,loading:s.effects["shop/queryList"]}})],v);t["default"]=v}}]);

@@ -11,6 +11,7 @@ const ConfigSchema = new Schema({
   qq: { type: String, default: "" }, // qq群链接
   email: { type: String, default: "" }, // 邮箱
   app: { type: String, default: "" }, // app
+  logo: { type: String, default: "" }, // 网站logo
   headimg: { type: String, default: "" }, // 首页头图
   mobleimg: { type: String, default: "" }, // 手机头图
   loginimg: { type: String, default: "" }, // 登陆大图
@@ -27,6 +28,9 @@ const ConfigSchema = new Schema({
   pcIndex: [{ type: String }], // web首页
   h5Menu: [{ type: String }], // mobile菜单
   h5Index: [{ type: String }], // mobile首页
+  postMenu: [{ type: String }], //动态文章分类置顶
+  postTop: [{ type: String }], // 动态文章置顶
+  message: [{ type: String }], // 系统通知
   aboutus: { type: String, default: "" },
   playLimit: [
     {

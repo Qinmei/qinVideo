@@ -110,7 +110,12 @@ const relativeLookup = ["like", "unlike", "play", "comment", "danmu"].map(
           pipeline: [
             {
               $match: {
-                $expr: { $gt: [{ $indexOfBytes: ["$target", "$$value"] }, -1] }
+                $expr: {
+                  $and: [
+                    { $gt: [{ $indexOfBytes: ["$target", "$$value"] }, -1] },
+                    { $eq: ["$type", "play"] }
+                  ]
+                }
               }
             }
           ],
@@ -225,6 +230,9 @@ class animateController {
     ]);
 
     const total = await AnimateModel.countDocuments(animateQuery);
+    title &&
+      user.level < 100 &&
+      DataModel.create({ type: "search", target: title });
     ctx.send({ data, total });
   }
 
@@ -253,11 +261,11 @@ class animateController {
       animateShow = isAuthor
         ? { _id: 0, relative: 0 }
         : {
-            _id: 0,
-            eposide: 0,
-            relative: 0,
-            play: { linkPrefix: 0 }
-          };
+          _id: 0,
+          eposide: 0,
+          relative: 0,
+          play: { linkPrefix: 0 }
+        };
     }
     const data = await AnimateModel.aggregate([
       { $match: { slug } },
@@ -376,12 +384,14 @@ class animateController {
           return {
             $lookup: {
               from: "comments",
+              let: { value: "$slug" },
               pipeline: [
                 {
                   $match: {
                     $expr: {
                       $and: [
-                        { $eq: ["$belong", `${slug}S${season}E${eposide}`] },
+                        { $eq: ["$belong", "$$value"] },
+                        { $eq: ["$target", `S${season}E${eposide}`] },
                         { $eq: ["$type", "animate"] }
                       ]
                     }
@@ -398,7 +408,12 @@ class animateController {
               pipeline: [
                 {
                   $match: {
-                    $expr: { $eq: ["$belong", `${slug}S${season}E${eposide}`] }
+                    $expr: {
+                      $and: [
+                        { $eq: ["$target", `${slug}S${season}E${eposide}`] },
+                        { $eq: ["$type", "play"] }
+                      ]
+                    }
                   }
                 }
               ],
@@ -412,7 +427,9 @@ class animateController {
               pipeline: [
                 {
                   $match: {
-                    $expr: { $eq: ["$belong", `${slug}S${season}E${eposide}`] }
+                    $expr: {
+                      $eq: ["$player", `${slug}S${season}E${eposide}`]
+                    }
                   }
                 }
               ],
@@ -462,7 +479,8 @@ class animateController {
           play: {
             kind: 1,
             level: 1,
-            linkPrefix: 1
+            linkPrefix: 1,
+             noPrefix: 1
           }
         }
       },
@@ -484,10 +502,10 @@ class animateController {
     const animate = data[0];
     let playLink;
     const animatePrefix = animate.play.linkPrefix || "";
-    if (config) {
+    if (!animate.play.noPrefix && config) {
       if (animate.play.kind === "mp4" || animate.play.kind === "m3u8") {
         const configPrefix = config.playLimit
-          .filter(item => item.level <= animate.play.level)
+          .filter(item => item.level <= user.level)
           .sort((a, b) => b.level - a.level)[0];
         if (configPrefix) {
           const { prefix, key, expired } = configPrefix;
@@ -506,6 +524,8 @@ class animateController {
             configPrefix.prefix + animatePrefix + animate.playInfo.link;
         }
       }
+    }else{
+       playLink = animatePrefix + animate.playInfo.link;
     }
     animate.playInfo.link = playLink;
 

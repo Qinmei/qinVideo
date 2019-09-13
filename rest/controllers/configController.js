@@ -13,10 +13,20 @@ class configController {
   // config post
   static async config_post(ctx) {
     const data = ctx.request.body;
-    await ConfigModel.remove({});
-    const result = await ConfigModel.create(data).catch(err => {
-      return { code: 404, msg: err.message };
-    });
+    const exist = await ConfigModel.findOne();
+    let result;
+    if (exist) {
+      result = await ConfigModel.update({},
+        { $set: data },
+        { multi: true }).catch(err => {
+          return { code: 404, msg: err.message };
+        });
+    } else {
+      result = await ConfigModel.create(data).catch(err => {
+        return { code: 404, msg: err.message };
+      });
+    }
+
 
     if (!result.code) {
       const newConfig = await ConfigModel.findOne(
@@ -30,6 +40,7 @@ class configController {
           qq: 1,
           email: 1,
           app: 1,
+          logo: 1,
           headimg: 1,
           mobleimg: 1,
           loginimg: 1,
@@ -46,12 +57,15 @@ class configController {
           pcIndex: 1,
           h5Menu: 1,
           h5Index: 1,
+          postMenu: 1,
+          postTop: 1,
+          message: 1,
           aboutus: 1
         }
       );
       const category = await CategoryModel.find();
-      const { pcMenu, h5Menu, pcIndex, h5Index } = newConfig;
-      [pcMenu, h5Menu, pcIndex, h5Index].map(single =>
+      const { pcMenu, h5Menu, pcIndex, h5Index, postMenu, postTop, message } = newConfig;
+      [pcMenu, h5Menu, pcIndex, h5Index, postMenu, postTop, message].map(single =>
         single.map((item, key) => {
           if (!/new/.test(item)) {
             const categoryArr = JSON.parse(JSON.stringify(category)).filter(
@@ -70,7 +84,7 @@ class configController {
           config,
           `window.config=${JSON.stringify(newConfig)}`,
           "utf8",
-          function(err) {
+          function (err) {
             if (err) console.log(err);
           }
         );

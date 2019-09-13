@@ -13,7 +13,8 @@ const {
   orderController,
   shopController,
   keyController,
-  comicController
+  comicController,
+  higherController
 } = require("../controllers/index");
 const auth = require("../middleware/authRouter");
 
@@ -138,6 +139,20 @@ router
 
   // data
   .get("/data", auth(100), dataController.data_query)
-  .post("/data", auth(0), dataController.data_post);
+  .post("/data", auth(0), dataController.data_post)
+
+  // higher
+  .get("/higher", auth(100), higherController.get)
+  .post("/higher", auth(100), higherController.post)
+  .post("/higher/auth", auth(100), higherController.auth)
+  .get("/higher/animate", auth(100), higherController.query)
+  .post("/higher/animate", auth(100), higherController.list)
+  .post("/higher/import", auth(100), higherController.import)
+  .post("/higher/update", auth(100), higherController.update)
+  .post("/higher/eposide", auth(100), higherController.eposide)
+  .get("/higher/message", auth(100), higherController.message)
+  .get("/higher/message/:id", auth(100), higherController.info)
+  .post("/higher/replace", auth(100), higherController.replace)
+
 
 module.exports = router;

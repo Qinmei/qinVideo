@@ -189,7 +189,10 @@ const childrenLookup = {
         $unwind: "$author"
       },
       {
-        $unwind: "$replyTo"
+        $unwind: {
+          path: "$replyTo",
+          preserveNullAndEmptyArrays: true
+        }
       },
       { $addFields: { count: countSize } }
     ],
@@ -207,7 +210,8 @@ class commentController {
       type,
       belong,
       content,
-      status
+      status,
+      target
     } = ctx.query;
 
     const pattern = /^-/;
@@ -221,7 +225,8 @@ class commentController {
     content && (commentQuery.content = { $regex: content, $options: "$i" });
     status && (commentQuery.status = status);
     type && (commentQuery.type = type);
-    belong && (commentQuery.belong = { $regex: belong, $options: "$i" });
+    belong && (commentQuery.belong = belong);
+    target && (commentQuery.target = target);
 
     let arrLookup = [animateLookup, comicLookup, postLookup];
 
@@ -229,7 +234,6 @@ class commentController {
     if (user.level < 100) {
       // commentQuery.status = "publish";
       arrLookup = [];
-      belong && (commentQuery.belong = { $regex: `${belong}$`, $options: "m" });
     }
 
     const data = await CommentModel.aggregate([
@@ -286,7 +290,15 @@ class commentController {
       authorLookup,
       replyToLookup,
       childrenLookup,
-      ...unwindList
+      ...relativeLookup,
+      ...unwindList,
+      { $addFields: { count: countSize } },
+      {
+        $project: {
+          replyTo: 0,
+          relative: 0
+        }
+      }
     ]).catch(err => err);
     ctx.send({ data });
   }
