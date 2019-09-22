@@ -24,6 +24,7 @@
 
       i {
         font-size: 28px;
+        margin-bottom: 6px;
       }
     }
   }
