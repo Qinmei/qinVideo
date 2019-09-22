@@ -111,11 +111,17 @@
     }
 
     .button {
+      width: 100%;
       display: flex;
       justify-content: flex-start;
       align-items: flex-end;
 
+      section {
+        width: calc((100% - 30px) / 2);
+      }
+
       div {
+        min-width: calc((100% - 30px) / 2);
         height: 46px;
         padding: 0 25px;
         color: #fff;
