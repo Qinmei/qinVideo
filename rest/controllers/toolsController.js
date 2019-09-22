@@ -142,7 +142,6 @@ class toolController {
     const { type } = ctx.request.body;
     if (type === "year") {
       const total = await AnimateModel.countDocuments({});
-      const cate = await CategoryModel.find({ type: "year" });
 
       let result = {
         total,
@@ -161,6 +160,7 @@ class toolController {
           if (itemCat !== "20160606") {
             itemCat = itemCat.substr(0, 4);
             let newCat;
+            const cate = await CategoryModel.find({ type: "year" });
             if (!cate.some(single => single.slug === itemCat)) {
               newCat = await CategoryModel.create({
                 slug: itemCat,
