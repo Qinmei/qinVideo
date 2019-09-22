@@ -16,17 +16,18 @@ class configController {
     const exist = await ConfigModel.findOne();
     let result;
     if (exist) {
-      result = await ConfigModel.update({},
+      result = await ConfigModel.update(
+        {},
         { $set: data },
-        { multi: true }).catch(err => {
-          return { code: 404, msg: err.message };
-        });
+        { multi: true }
+      ).catch(err => {
+        return { code: 404, msg: err.message };
+      });
     } else {
       result = await ConfigModel.create(data).catch(err => {
         return { code: 404, msg: err.message };
       });
     }
-
 
     if (!result.code) {
       const newConfig = await ConfigModel.findOne(
@@ -64,18 +65,27 @@ class configController {
         }
       );
       const category = await CategoryModel.find();
-      const { pcMenu, h5Menu, pcIndex, h5Index, postMenu, postTop, message } = newConfig;
-      [pcMenu, h5Menu, pcIndex, h5Index, postMenu, postTop, message].map(single =>
-        single.map((item, key) => {
-          if (!/new/.test(item)) {
-            const categoryArr = JSON.parse(JSON.stringify(category)).filter(
-              cate => cate._id === item
-            );
-            if (categoryArr.length > 0) {
-              single[key] = categoryArr[0];
+      const {
+        pcMenu,
+        h5Menu,
+        pcIndex,
+        h5Index,
+        postMenu,
+        postTop,
+        message
+      } = newConfig;
+      [pcMenu, h5Menu, pcIndex, h5Index, postMenu, postTop, message].map(
+        single =>
+          single.map((item, key) => {
+            if (!/new/.test(item)) {
+              const categoryArr = JSON.parse(JSON.stringify(category)).filter(
+                cate => cate._id === item
+              );
+              if (categoryArr.length > 0) {
+                single[key] = categoryArr[0];
+              }
             }
-          }
-        })
+          })
       );
 
       ["pc", "h5"].map(item => {
@@ -84,20 +94,10 @@ class configController {
           config,
           `window.config=${JSON.stringify(newConfig)}`,
           "utf8",
-          function (err) {
+          function(err) {
             if (err) console.log(err);
           }
         );
-
-        const favicon = path.join(
-          __dirname,
-          "../../public/img/config/favicon.ico"
-        );
-        const dirPath = path.join(
-          __dirname,
-          `../../public/${item}/favicon.ico`
-        );
-        fs.writeFileSync(dirPath, fs.readFileSync(favicon));
       });
     }
 
