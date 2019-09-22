@@ -7,7 +7,7 @@ let rule = new schedule.RecurrenceRule();
 rule.minute = [0, 15, 30, 45];
 
 let rule2 = new schedule.RecurrenceRule();
-rule2.hour = [3, 15, 20];
+rule2.hour = [3, 15];
 rule2.minute = 0;
 
 module.exports = () => {
@@ -23,7 +23,6 @@ module.exports = () => {
   });
 
   schedule.scheduleJob(rule2, async () => {
-    console.log("sdd");
     const data = await HigherModel.findOne();
     if (data && data.update && data.update.use) {
       await higherController.update();

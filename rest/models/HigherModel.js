@@ -17,6 +17,7 @@ const HigherSchema = new Schema(
     },
     update: {
       use: Boolean,
+      eposide: Boolean,
       error: Number,
       total: Number,
       success: Number,
@@ -26,7 +27,7 @@ const HigherSchema = new Schema(
       name: String,
       logo: String,
       screen: String,
-      website: String,
+      website: String
     },
     addons: Schema.Types.Mixed
   },

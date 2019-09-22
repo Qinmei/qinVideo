@@ -14,7 +14,8 @@ const {
   shopController,
   keyController,
   comicController,
-  higherController
+  higherController,
+  toolsController
 } = require("../controllers/index");
 const auth = require("../middleware/authRouter");
 
@@ -148,11 +149,13 @@ router
   .get("/higher/animate", auth(100), higherController.query)
   .post("/higher/animate", auth(100), higherController.list)
   .post("/higher/import", auth(100), higherController.import)
-  .post("/higher/update", auth(100), higherController.update)
   .post("/higher/eposide", auth(100), higherController.eposide)
-  .get("/higher/message", auth(100), higherController.message)
-  .get("/higher/message/:id", auth(100), higherController.info)
-  .post("/higher/replace", auth(100), higherController.replace)
 
+  //tools
+  .get("/tools/message", auth(100), toolsController.message)
+  .get("/tools/message/:id", auth(100), toolsController.info)
+  .post("/tools/replace", auth(100), toolsController.replace)
+  .post("/tools/import", auth(100), toolsController.uploadFile)
+  .post("/tools/cattransfer", auth(100), toolsController.catTransfer);
 
 module.exports = router;
