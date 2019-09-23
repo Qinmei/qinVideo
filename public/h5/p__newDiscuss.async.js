@@ -8,7 +8,7 @@
     margin-bottom: 1px;
 
     .scrollList {
-      min-height: 100px;
+      min-height: ${e=>e.height};
       background-color: rgba(0, 0, 0, 0.1);
       background-size: cover;
       background-position: center;
@@ -35,7 +35,7 @@
       }
     }
   }
-`,f=e=>{var t=e.scroll,o=void 0===t?[]:t,n=e.menu,s=void 0===n?[]:n,c=Object(a["useState"])(100),r=u()(c,2),l=r[0],d=r[1],f=Object(a["useRef"])(null),b=e=>{m["a"].push(`/post/${e}`)},v=e=>{m["a"].push(`/cate/post/${e}`)},w=[{icon:"icon-special-copy",color:"#f44236"},{icon:"icon-NEWSIGN",color:"#337ab7"},{icon:"icon-gonggao",color:"#ff9700"},{icon:"icon-wenzhangjiankong",color:"#a671ff"},{icon:"icon-gouwu",color:"#00bcd5"}];return Object(a["useEffect"])(()=>{d(.27*f.current.clientWidth)}),i.a.createElement(h,null,i.a.createElement("div",{className:"disscroll",ref:f},i.a.createElement(p["a"],{autoplay:!0,infinite:!0},o.map(e=>i.a.createElement("div",{className:"scrollList",onClick:()=>b(e.slug),style:{backgroundImage:`url(${e.cover})`,height:l}})))),l,i.a.createElement("div",{className:"menu"},s.map((e,t)=>i.a.createElement("div",{className:"list",onClick:()=>v(e._id)},i.a.createElement(g["a"],{type:w[t].icon,style:{color:w[t].color}}),i.a.createElement("span",{style:{color:w[t].color}},e.slug)))))},b=f,v=l["a"].div`
+`,f=e=>{var t=e.scroll,o=void 0===t?[]:t,n=e.menu,s=void 0===n?[]:n,c=Object(a["useState"])(100),r=u()(c,2),l=r[0],d=r[1],f=Object(a["useRef"])(null),b=e=>{m["a"].push(`/post/${e}`)},v=e=>{m["a"].push(`/cate/post/${e}`)},w=[{icon:"icon-special-copy",color:"#f44236"},{icon:"icon-NEWSIGN",color:"#337ab7"},{icon:"icon-gonggao",color:"#ff9700"},{icon:"icon-wenzhangjiankong",color:"#a671ff"},{icon:"icon-gouwu",color:"#00bcd5"}];return Object(a["useEffect"])(()=>{d(.27*f.current.clientWidth)}),i.a.createElement(h,{height:l},i.a.createElement("div",{className:"disscroll",ref:f},i.a.createElement(p["a"],{autoplay:!0,infinite:!0},o.map(e=>i.a.createElement("div",{className:"scrollList",onClick:()=>b(e.slug),style:{backgroundImage:`url(${e.cover})`}})))),i.a.createElement("div",{className:"menu"},s.map((e,t)=>i.a.createElement("div",{className:"list",onClick:()=>v(e._id)},i.a.createElement(g["a"],{type:w[t].icon,style:{color:w[t].color}}),i.a.createElement("span",{style:{color:w[t].color}},e.slug)))))},b=f,v=l["a"].div`
   margin-top: 40px;
   width: 100%;
   .container {
