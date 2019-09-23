@@ -1,4 +1,4 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[18],{GKCt:function(e,t,o){"use strict";o.r(t);var n=o("mrSG"),a=o("q1tI"),s=o.n(a),c=o("MuoO"),i=o("8KYf"),l=o("nLTe"),r=o("vOnD"),p=(o("0mAl"),o("Ng4X")),u=o("qIgq"),d=o.n(u),m=o("usdK"),g=o("mNhR"),h=r["a"].div`
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[18],{GKCt:function(e,t,o){"use strict";o.r(t);var n=o("mrSG"),a=o("q1tI"),s=o.n(a),c=o("MuoO"),i=o("8KYf"),l=o("nLTe"),r=o("vOnD"),p=(o("0mAl"),o("Ng4X")),u=o("qIgq"),d=o.n(u),m=o("usdK"),g=o("mNhR"),f=r["a"].div`
   width: 100%;
 
   .scroll {
@@ -7,7 +7,6 @@
     background-position: center;
     border-radius: 5px;
     overflow: hidden;
-    height: 100px;
   }
 
   .menu {
@@ -29,7 +28,7 @@
       }
     }
   }
-`,f=e=>{var t=e.scroll,o=void 0===t?[]:t,n=e.menu,c=void 0===n?[]:n,i=Object(a["useState"])(200),l=d()(i,2),r=l[0],u=l[1],f=Object(a["useRef"])(null),b=e=>{m["a"].push(`/post/${e}`)},v=e=>{m["a"].push(`/cate/post/${e}`)},w=[{icon:"icon-special-copy",color:"#f44236"},{icon:"icon-NEWSIGN",color:"#337ab7"},{icon:"icon-gonggao",color:"#ff9700"},{icon:"icon-wenzhangjiankong",color:"#a671ff"},{icon:"icon-gouwu",color:"#00bcd5"}];return Object(a["useEffect"])(()=>{u(.27*f.current.clientWidth)}),s.a.createElement(h,null,s.a.createElement("div",{className:"scroll",ref:f},s.a.createElement(p["a"],{autoplay:!0,infinite:!0},o.map(e=>s.a.createElement("div",{className:"scroll",onClick:()=>b(e.slug),style:{backgroundImage:`url(${e.cover})`,height:r}})))),s.a.createElement("div",{className:"menu"},c.map((e,t)=>s.a.createElement("div",{className:"list",onClick:()=>v(e._id)},s.a.createElement(g["a"],{type:w[t].icon,style:{color:w[t].color}}),s.a.createElement("span",{style:{color:w[t].color}},e.slug)))))},b=f,v=r["a"].div`
+`,h=e=>{var t=e.scroll,o=void 0===t?[]:t,n=e.menu,c=void 0===n?[]:n,i=Object(a["useState"])(100),l=d()(i,2),r=l[0],u=l[1],h=Object(a["useRef"])(null),b=e=>{m["a"].push(`/post/${e}`)},v=e=>{m["a"].push(`/cate/post/${e}`)},w=[{icon:"icon-special-copy",color:"#f44236"},{icon:"icon-NEWSIGN",color:"#337ab7"},{icon:"icon-gonggao",color:"#ff9700"},{icon:"icon-wenzhangjiankong",color:"#a671ff"},{icon:"icon-gouwu",color:"#00bcd5"}];return Object(a["useEffect"])(()=>{u(.27*h.current.clientWidth)}),s.a.createElement(f,null,s.a.createElement("div",{className:"scroll",ref:h},s.a.createElement(p["a"],{autoplay:!0,infinite:!0},o.map(e=>s.a.createElement("div",{className:"scroll",onClick:()=>b(e.slug),style:{backgroundImage:`url(${e.cover})`,height:r}})))),s.a.createElement("div",{className:"menu"},c.map((e,t)=>s.a.createElement("div",{className:"list",onClick:()=>v(e._id)},s.a.createElement(g["a"],{type:w[t].icon,style:{color:w[t].color}}),s.a.createElement("span",{style:{color:w[t].color}},e.slug)))))},b=h,v=r["a"].div`
   margin-top: 40px;
   .line {
     height: 6px;
