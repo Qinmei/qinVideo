@@ -8,7 +8,7 @@
     margin-bottom: 1px;
 
     .scrollList {
-      min-height: ${e=>e.height};
+      min-height: ${e=>e.height}px;
       background-color: rgba(0, 0, 0, 0.1);
       background-size: cover;
       background-position: center;
