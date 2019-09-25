@@ -150,7 +150,8 @@ class postController {
       { $addFields: { ...countSize } },
       {
         $sort: {
-          [sortBy]: sortOrder
+          [sortBy]: sortOrder,
+          _id: -1
         }
       },
       { $skip: skip },

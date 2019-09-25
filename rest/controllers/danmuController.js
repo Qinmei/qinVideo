@@ -25,7 +25,8 @@ class danmuController {
       { $match: danmuQuery },
       {
         $sort: {
-          [sortBy]: sortOrder
+          [sortBy]: sortOrder,
+          _id: -1
         }
       },
       { $skip: skip },

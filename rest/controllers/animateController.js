@@ -214,7 +214,8 @@ class animateController {
       { $addFields: { count: countSize } },
       {
         $sort: {
-          [sortBy]: sortOrder
+          [sortBy]: sortOrder,
+          _id: -1
         }
       },
       { $skip: skip },
@@ -261,11 +262,11 @@ class animateController {
       animateShow = isAuthor
         ? { _id: 0, relative: 0 }
         : {
-          _id: 0,
-          eposide: 0,
-          relative: 0,
-          play: { linkPrefix: 0 }
-        };
+            _id: 0,
+            eposide: 0,
+            relative: 0,
+            play: { linkPrefix: 0 }
+          };
     }
     const data = await AnimateModel.aggregate([
       { $match: { slug } },
@@ -480,7 +481,7 @@ class animateController {
             kind: 1,
             level: 1,
             linkPrefix: 1,
-             noPrefix: 1
+            noPrefix: 1
           }
         }
       },
@@ -524,8 +525,8 @@ class animateController {
             configPrefix.prefix + animatePrefix + animate.playInfo.link;
         }
       }
-    }else{
-       playLink = animatePrefix + animate.playInfo.link;
+    } else {
+      playLink = animatePrefix + animate.playInfo.link;
     }
     animate.playInfo.link = playLink;
 
