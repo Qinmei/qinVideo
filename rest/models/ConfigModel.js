@@ -7,6 +7,7 @@ const ConfigSchema = new Schema({
   name: { type: String, default: "" }, // 网站名
   slogan: { type: String, default: "" }, // 标语
   information: { type: String, default: "" }, // 简介
+  tongji: { type: String, default: "" }, // 百度统计代码
   color: { type: String, default: "" }, // 主题色
   qq: { type: String, default: "" }, // qq群链接
   email: { type: String, default: "" }, // 邮箱
@@ -17,6 +18,7 @@ const ConfigSchema = new Schema({
   loginimg: { type: String, default: "" }, // 登陆大图
   avatar: { type: String, default: "" }, // 默认头像图
   background: { type: String, default: "" }, // 默认背景图
+  dplayer: { type: String, default: "" }, // 默认dplayer的背景图
   newAnimate: { type: String, default: "" }, // 新番
   newComic: { type: String, default: "" }, // 新漫
   newDiscuss: { type: String, default: "" }, // 讨论区
