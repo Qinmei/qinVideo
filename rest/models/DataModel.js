@@ -11,6 +11,7 @@ const DataSchema = new mongoose.Schema(
         "register",
         "login",
         "visit",
+        "read",
         "commentSend",
         "commentLike",
         "commentUnlike",
