@@ -1,6 +1,6 @@
 {
   "/vendors.css": "/backend/vendors.376e8cd8.chunk.css",
-  "/vendors.js": "/backend/vendors.702a6b62.async.js",
+  "/vendors.js": "/backend/vendors.9952de7c.async.js",
   "/layouts__BasicLayout.css": "/backend/layouts__BasicLayout.4dc5ba65.chunk.css",
   "/layouts__BasicLayout.js": "/backend/layouts__BasicLayout.27d94e2a.async.js",
   "/layouts__UserLayout.css": "/backend/layouts__UserLayout.b4682510.chunk.css",
@@ -23,7 +23,7 @@
   "/p__Danmu__List.js": "/backend/p__Danmu__List.28ac304b.async.js",
   "/p__Dashboard__Analysis.js": "/backend/p__Dashboard__Analysis.398f7cc9.async.js",
   "/p__Dashboard__Workplace.js": "/backend/p__Dashboard__Workplace.0b39e67d.async.js",
-  "/p__Higher__index.js": "/backend/p__Higher__index.62c3fa32.async.js",
+  "/p__Higher__index.js": "/backend/p__Higher__index.ba8db660.async.js",
   "/p__Image__List.css": "/backend/p__Image__List.53e85efc.chunk.css",
   "/p__Image__List.js": "/backend/p__Image__List.98de0ab1.async.js",
   "/p__Image__Type.js": "/backend/p__Image__Type.a6e703d3.async.js",
@@ -42,7 +42,7 @@
   "/p__User__Info.js": "/backend/p__User__Info.05d03dd7.async.js",
   "/p__User__List.js": "/backend/p__User__List.bfa7877d.async.js",
   "/umi.css": "/backend/umi.5bede779.css",
-  "/umi.js": "/backend/umi.85e92a56.js",
+  "/umi.js": "/backend/umi.7d72fbc1.js",
   "/34.d4719bdf.chunk.css": "/backend/34.d4719bdf.chunk.css",
   "/34.e01c7766.async.js": "/backend/34.e01c7766.async.js",
   "/35.74b6e666.chunk.css": "/backend/35.74b6e666.chunk.css",
@@ -72,7 +72,7 @@
   "/icons/icon-512x512.png": "/backend/icons/icon-512x512.png",
   "/index.html": "/backend/index.html",
   "/manifest.json": "/backend/manifest.json",
-  "/precache-manifest.064f87d44b1362f34316cdf57fa5110f.js": "/backend/precache-manifest.064f87d44b1362f34316cdf57fa5110f.js",
+  "/precache-manifest.d1ba731eb2976e554aeac60753b4e3b0.js": "/backend/precache-manifest.d1ba731eb2976e554aeac60753b4e3b0.js",
   "/pwacompat.min.js": "/backend/pwacompat.min.js",
   "/service-worker.js": "/backend/service-worker.js"
 }
