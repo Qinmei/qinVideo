@@ -13,21 +13,14 @@ class configController {
   // config post
   static async config_post(ctx) {
     const data = ctx.request.body;
+    delete data._id;
     const exist = await ConfigModel.findOne();
-    let result;
     if (exist) {
-      result = await ConfigModel.update(
-        {},
-        { $set: data },
-        { multi: true }
-      ).catch(err => {
-        return { code: 404, msg: err.message };
-      });
-    } else {
-      result = await ConfigModel.create(data).catch(err => {
-        return { code: 404, msg: err.message };
-      });
+      await ConfigModel.remove({});
     }
+    const result = await ConfigModel.create(data).catch(err => {
+      return { code: 404, msg: err.message };
+    });
 
     if (!result.code) {
       const newConfig = await ConfigModel.findOne(
@@ -37,6 +30,7 @@ class configController {
           name: 1,
           slogan: 1,
           information: 1,
+          tongji: 1,
           color: 1,
           qq: 1,
           email: 1,
@@ -46,6 +40,7 @@ class configController {
           mobleimg: 1,
           loginimg: 1,
           avatar: 1,
+          dplayer: 1,
           background: 1,
           newAnimate: 1,
           newComic: 1,
@@ -89,7 +84,38 @@ class configController {
       );
 
       ["pc", "h5"].map(item => {
-        const config = path.join(__dirname, `../../public/${item}/config.js`);
+        const configPath = path.join(__dirname, `../../public/${item}/`);
+        fs.readdir(configPath, (error, files) => {
+          if (error) throw error;
+
+          const file = files.filter(name => /config\.[^]*js/.test(name));
+          file.forEach(name => fs.unlinkSync(configPath + name));
+        });
+
+        if (exist) {
+          const indexHtml = path.join(
+            __dirname,
+            `../../public/${item}/index.html`
+          );
+
+          const html = fs.readFileSync(indexHtml, { encoding: "utf8" });
+          let newHtml = html;
+
+          newHtml = html.replace(
+            /config\.[^]*js/,
+            `config.${newConfig._id}.js`
+          );
+
+          fs.writeFile(indexHtml, newHtml, "utf8", function(err) {
+            if (err) console.log(err);
+          });
+        }
+
+        const config = path.join(
+          __dirname,
+          `../../public/${item}/config.${newConfig._id}.js`
+        );
+
         fs.writeFile(
           config,
           `window.config=${JSON.stringify(newConfig)}`,
