@@ -156,6 +156,7 @@ router
   .get("/tools/message/:id", auth(100), toolsController.info)
   .post("/tools/replace", auth(100), toolsController.replace)
   .post("/tools/import", auth(100), toolsController.uploadFile)
-  .post("/tools/cattransfer", auth(100), toolsController.catTransfer);
+  .post("/tools/cattransfer", auth(100), toolsController.catTransfer)
+  .post("/tools/downimg", auth(100), toolsController.downloadImg);
 
 module.exports = router;

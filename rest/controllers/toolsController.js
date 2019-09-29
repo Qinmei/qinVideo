@@ -1,5 +1,6 @@
 const request = require("request-promise");
 const fs = require("fs");
+const path = require("path");
 const { AnimateModel, ComicModel, CategoryModel } = require("../models/index");
 
 const url = "https://api.qinvideo.org/api/v2";
@@ -137,7 +138,7 @@ class toolController {
     ctx.success({ data: result });
   }
 
-  // 导入动漫
+  // 分类转换
   static async catTransfer(ctx) {
     const { type } = ctx.request.body;
     if (type === "year") {
@@ -191,6 +192,69 @@ class toolController {
     } else {
       return ctx.error({ code: 404, msg: "不支持的格式" });
     }
+  }
+
+  // 下载图片
+  static async downloadImg(ctx) {
+    const total = await AnimateModel.countDocuments({});
+
+    let result = {
+      total,
+      success: 0,
+      fail: 0
+    };
+
+    const download = async (url, name) => {
+      const exif = url.split(".").reverse()[0];
+      const newname = name + "." + exif;
+      const savePath = path.join(__dirname, "../../public/img/download/");
+      try {
+        fs.accessSync(savePath + newname);
+      } catch (error) {
+        await request(url).pipe(fs.createWriteStream(savePath + newname));
+      }
+      return `/img/download/${newname}`;
+    };
+
+    const length = Math.ceil(total / 100);
+    for (let index = 0; index < length; index++) {
+      const element = await AnimateModel.find({})
+        .limit(100)
+        .skip(100 * index);
+      for (let num = 0; num < element.length; num++) {
+        const item = element[num];
+        let vertical = item.cover.vertical;
+        let horizontal = item.cover.horizontal;
+
+        if (/^http/.test(vertical)) {
+          const newData = await download(vertical, item.slug);
+          newData && (vertical = newData);
+        }
+        if (item.cover.vertical !== item.cover.horizontal) {
+          if (/^http/.test(horizontal)) {
+            const newData = await download(horizontal, item.slug + "-h");
+            newData && (horizontal = newData);
+          }
+        } else {
+          horizontal = vertical;
+        }
+
+        item.cover = {
+          vertical,
+          horizontal
+        };
+        const totalresult = await AnimateModel.updateOne(
+          { slug: item.slug },
+          { $set: item }
+        ).catch(err => null);
+        if (totalresult) {
+          result.success++;
+        } else {
+          result.fail++;
+        }
+      }
+    }
+    ctx.success({ data: result });
   }
 }
 module.exports = toolController;
