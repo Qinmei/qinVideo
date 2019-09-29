@@ -241,8 +241,8 @@ class baseController {
 
     Array.isArray(file)
       ? file.map(item => {
-        saveFile(item);
-      })
+          saveFile(item);
+        })
       : saveFile(file);
 
     ctx.success({ data: result });
@@ -253,6 +253,7 @@ class baseController {
     const { type } = ctx.params;
     const typePath = [
       "animate",
+      "comic",
       "post",
       "comment",
       "avatar",
