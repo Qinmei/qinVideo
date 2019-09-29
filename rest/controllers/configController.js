@@ -102,7 +102,7 @@ class configController {
           let newHtml = html;
 
           newHtml = html.replace(
-            /config\.[^]*js/,
+            /config\.[^]{0,30}js/,
             `config.${newConfig._id}.js`
           );
 
