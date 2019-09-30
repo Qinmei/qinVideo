@@ -179,6 +179,13 @@ class animateController {
     status && (animateQuery.status = status);
     isUpdate && (animateQuery["information.isUpdate"] = isUpdate === "true");
 
+    let sample = {};
+    if (sortBy === "information.introduce") {
+      smaple = {
+        $sample: { size: size }
+      };
+    }
+
     if (area) {
       const areaData = await CategoryModel.find({ type: "area" });
       const areaList = getChildArray(areaData, area);
@@ -218,6 +225,7 @@ class animateController {
           _id: -1
         }
       },
+      sample,
       { $skip: skip },
       { $limit: parseInt(size) },
       {
