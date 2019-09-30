@@ -268,7 +268,7 @@ class baseController {
     const data = fs.readdirSync(dirPath).map(item => {
       const info = fs.statSync(dirPath + "/" + item);
       return {
-        name: item,
+        name: `/img/${typePath}/${item}`,
         ...info
       };
     });
