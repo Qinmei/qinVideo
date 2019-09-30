@@ -173,7 +173,7 @@ class animateController {
     const sortOrder = pattern.test(sort) ? -1 : 1;
     const sortBy = pattern.test(sort) ? sort.substring(1) : sort;
     const skip = (page - 1) * size;
-    const sample = { $sample: { size: size } };
+    const sample = { $sample: { size: parseInt(size) } };
 
     const animateQuery = {};
     title && (animateQuery.title = { $regex: title, $options: "$i" });
