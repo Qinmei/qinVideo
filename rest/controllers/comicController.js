@@ -135,6 +135,7 @@ class comicController {
     const sortOrder = pattern.test(sort) ? -1 : 1;
     const sortBy = pattern.test(sort) ? sort.substring(1) : sort;
     const skip = (page - 1) * size;
+    const sample = { $sample: { size: parseInt(size) } };
 
     const comicQuery = {};
     title && (comicQuery.title = { $regex: title, $options: "$i" });
@@ -156,12 +157,14 @@ class comicController {
       ...relativeLookup,
       ...unwindList,
       { $addFields: { count: countSize } },
-      {
-        $sort: {
-          [sortBy]: sortOrder,
-          _id: -1
-        }
-      },
+      sortBy === "information.introduce"
+        ? sample
+        : {
+            $sort: {
+              [sortBy]: sortOrder,
+              _id: -1
+            }
+          },
       { $skip: skip },
       { $limit: parseInt(size) },
       {
