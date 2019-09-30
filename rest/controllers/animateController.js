@@ -173,18 +173,12 @@ class animateController {
     const sortOrder = pattern.test(sort) ? -1 : 1;
     const sortBy = pattern.test(sort) ? sort.substring(1) : sort;
     const skip = (page - 1) * size;
+    const sample = { $sample: { size: size } };
 
     const animateQuery = {};
     title && (animateQuery.title = { $regex: title, $options: "$i" });
     status && (animateQuery.status = status);
     isUpdate && (animateQuery["information.isUpdate"] = isUpdate === "true");
-
-    let sample = {};
-    if (sortBy === "information.introduce") {
-      smaple = {
-        $sample: { size: size }
-      };
-    }
 
     if (area) {
       const areaData = await CategoryModel.find({ type: "area" });
@@ -225,7 +219,7 @@ class animateController {
           _id: -1
         }
       },
-      sample,
+      sortBy === "information.introduce" && sample,
       { $skip: skip },
       { $limit: parseInt(size) },
       {
