@@ -213,13 +213,14 @@ class animateController {
       ...relativeLookup,
       ...unwindList,
       { $addFields: { count: countSize } },
-      {
-        $sort: {
-          [sortBy]: sortOrder,
-          _id: -1
-        }
-      },
-      sortBy === "information.introduce" && sample,
+      sortBy === "information.introduce"
+        ? sample
+        : {
+            $sort: {
+              [sortBy]: sortOrder,
+              _id: -1
+            }
+          },
       { $skip: skip },
       { $limit: parseInt(size) },
       {
