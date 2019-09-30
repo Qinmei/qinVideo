@@ -265,9 +265,13 @@ class baseController {
       : "others";
     const dirPath = path.join(__dirname, `../../public/img/${typePath}`);
     !fs.existsSync(dirPath) && fs.mkdirSync(dirPath);
-    const data = fs
-      .readdirSync(dirPath)
-      .map(item => `/img/${typePath}/${item}`);
+    const data = fs.readdirSync(dirPath).map(item => {
+      const info = fs.statSync(dirPath + "/" + item);
+      return {
+        name: item,
+        ...info
+      };
+    });
     ctx.success({ data });
   }
 
