@@ -328,8 +328,7 @@ class userController {
       },
       {
         $sort: {
-          [sortBy]: sortOrder,
-          _id: -1
+          [sortBy]: sortOrder
         }
       },
       { $skip: skip },

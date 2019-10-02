@@ -145,7 +145,7 @@ class dataController {
           }
         },
         {
-          $sort: { count: -1, _id: -1 }
+          $sort: { count: -1 }
         },
         { $limit: 10 }
       ]);

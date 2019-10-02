@@ -217,8 +217,7 @@ class animateController {
         ? sample
         : {
             $sort: {
-              [sortBy]: sortOrder,
-              _id: -1
+              [sortBy]: sortOrder
             }
           },
       { $skip: skip },
