@@ -318,7 +318,7 @@ class toolController {
             }
           });
 
-          console.log(slug);
+          console.log(slug, item.count.comment);
 
           await AnimateModel.updateOne(
             { slug },
