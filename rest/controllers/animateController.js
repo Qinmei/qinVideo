@@ -140,6 +140,7 @@ class animateController {
     console.time("animate");
     const data = await AnimateModel.aggregate([
       { $match: animateQuery },
+      ...authorAndCat,
       sortBy === "information.introduce"
         ? sample
         : {
@@ -155,15 +156,12 @@ class animateController {
             $slice: ["$eposide", -1, 1]
           },
           "count.update": {
-            update: {
-              $size: {
-                $ifNull: ["$new.list", []]
-              }
+            $size: {
+              $ifNull: ["$new.list", []]
             }
           }
         }
       },
-      ...authorAndCat,
       {
         $project: {
           relative: 0,
@@ -218,7 +216,6 @@ class animateController {
       { $match: { slug } },
       authorLookup,
       ...categoryLookup,
-      ...relativeLookup,
       ...unwindList,
       {
         $addFields: {

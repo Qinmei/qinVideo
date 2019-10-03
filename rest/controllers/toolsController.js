@@ -1,7 +1,15 @@
 const request = require("request-promise");
 const fs = require("fs");
 const path = require("path");
-const { AnimateModel, ComicModel, CategoryModel } = require("../models/index");
+const {
+  AnimateModel,
+  ComicModel,
+  CategoryModel,
+  DanmuModel,
+  DataModel,
+  CommentModel,
+  UserModel
+} = require("../models/index");
 
 const url = "https://api.qinvideo.org/api/v2";
 
@@ -255,6 +263,70 @@ class toolController {
       }
     }
     ctx.success({ data: result });
+  }
+
+  // 数据同步
+  static async dataSync(ctx) {
+    const { type } = ctx.request.body;
+    if (type === "animate") {
+      const total = await AnimateModel.countDocuments({});
+
+      ctx.success({ data: { total } });
+
+      const length = Math.ceil(total / 100);
+      for (let index = 0; index < length; index++) {
+        const element = await AnimateModel.find({})
+          .limit(100)
+          .skip(100 * index);
+        for (let num = 0; num < element.length; num++) {
+          const item = element[num];
+          const slug = item.slug;
+          if (!item.count) {
+            item.count = {
+              like: 0,
+              unlike: 0,
+              play: 0,
+              comment: 0,
+              danmu: 0
+            };
+          }
+
+          item.count.danmu = await DanmuModel.countDocuments({
+            player: { $regex: slug, $options: "$i" }
+          });
+
+          item.count.comment = await CommentModel.countDocuments({
+            belong: { $regex: slug, $options: "$i" },
+            target: null
+          });
+
+          item.count.play = await DataModel.countDocuments({
+            target: { $regex: slug, $options: "$i" },
+            type: "play"
+          });
+
+          item.count.like = await UserModel.countDocuments({
+            animate: {
+              like: {
+                $elemMatch: item._id
+              }
+            }
+          });
+
+          item.count.unlike = await UserModel.countDocuments({
+            animate: {
+              unlike: {
+                $elemMatch: item._id
+              }
+            }
+          });
+
+          await AnimateModel.updateOne({ slug }, { $set: item });
+        }
+      }
+    } else {
+      return ctx.error({ code: 404, msg: "不支持的类型" });
+    }
   }
 }
 module.exports = toolController;
