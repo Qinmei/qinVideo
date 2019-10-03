@@ -273,7 +273,6 @@ class toolController {
       const total = await AnimateModel.countDocuments({});
 
       ctx.success({ data: { total } });
-      const item = await AnimateModel.findOne({ slug: "av600648" });
 
       const length = Math.ceil(total / 100);
       for (let index = 0; index < length; index++) {
@@ -319,7 +318,12 @@ class toolController {
             }
           });
 
-          await AnimateModel.updateOne({ slug }, { $set: item });
+          console.log(slug);
+
+          await AnimateModel.updateOne(
+            { slug },
+            { $set: { count: item.count } }
+          );
         }
       }
     } else {
