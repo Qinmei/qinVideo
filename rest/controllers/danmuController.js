@@ -77,7 +77,7 @@ class danmuController {
     );
 
     try {
-      AnimateModel.update(
+      await AnimateModel.update(
         { slug: danmu.player.split("S")[0] },
         { $inc: { "count.danmu": 1 } }
       );

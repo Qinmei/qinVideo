@@ -279,7 +279,7 @@ class commentController {
     });
 
     try {
-      AnimateModel.update(
+      await AnimateModel.update(
         { slug: comment.belong },
         { $inc: { "count.comment": 1 } }
       );
