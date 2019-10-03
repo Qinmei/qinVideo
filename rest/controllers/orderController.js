@@ -83,8 +83,7 @@ class orderController {
       ...unwindList,
       {
         $sort: {
-          [sortBy]: sortOrder,
-          _id: -1
+          [sortBy]: sortOrder
         }
       },
       { $skip: skip },
