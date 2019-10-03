@@ -278,12 +278,12 @@ class commentController {
       return { code: 404, msg: err.message };
     });
 
-    if (!comment.target) {
+    try {
       AnimateModel.update(
         { slug: comment.belong },
         { $inc: { "count.comment": 1 } }
       );
-    }
+    } catch (error) {}
 
     ctx.send({ data });
   }

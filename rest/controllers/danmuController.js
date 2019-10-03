@@ -1,4 +1,4 @@
-const { DanmuModel, DataModel } = require("../models/index");
+const { DanmuModel, DataModel, AnimateModel } = require("../models/index");
 const { htmlEncode } = require("../utils/common");
 
 class danmuController {
@@ -79,7 +79,7 @@ class danmuController {
     try {
       AnimateModel.update(
         { slug: danmu.player.split("S")[0] },
-        { $inc: { "count.comment": 1 } }
+        { $inc: { "count.danmu": 1 } }
       );
     } catch (error) {
       console.log(error);
