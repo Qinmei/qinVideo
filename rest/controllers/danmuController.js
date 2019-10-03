@@ -76,6 +76,16 @@ class danmuController {
     await DataModel.create({ type: "danmu", target: danmu.player }).catch(
       err => err
     );
+
+    try {
+      AnimateModel.update(
+        { slug: danmu.player.split("S")[0] },
+        { $inc: { "count.comment": 1 } }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+
     ctx.send({ data });
   }
 

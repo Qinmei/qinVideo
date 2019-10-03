@@ -4,7 +4,10 @@ const Schema = mongoose.Schema;
 
 const DataSchema = new mongoose.Schema(
   {
-    target: String,
+    target: {
+      type: String,
+      index: true
+    },
     type: {
       type: String,
       enum: [

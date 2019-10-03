@@ -1,4 +1,4 @@
-const { CommentModel, DataModel } = require("../models/index");
+const { CommentModel, DataModel, AnimateModel } = require("../models/index");
 const mongoose = require("mongoose");
 const authorLookup = {
   $lookup: {
@@ -279,7 +279,13 @@ class commentController {
       return { code: 404, msg: err.message };
     });
 
-    await DataModel.create({ type: "commentSend" }).catch(err => err);
+    if (!comment.target) {
+      AnimateModel.update(
+        { slug: comment.belong },
+        { $inc: { "count.comment": 1 } }
+      );
+    }
+
     ctx.send({ data });
   }
 

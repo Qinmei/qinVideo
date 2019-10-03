@@ -69,84 +69,7 @@ const unwindList = [
   };
 });
 
-const relativeLookup = ["like", "unlike", "play", "comment", "danmu"].map(
-  item => {
-    if (item === "like" || item === "unlike") {
-      return {
-        $lookup: {
-          from: "users",
-          let: { value: "$_id" },
-          pipeline: [
-            { $match: { $expr: { $in: ["$$value", `$animate.${item}`] } } }
-          ],
-          as: `relative.${item}`
-        }
-      };
-    } else if (item === "comment") {
-      return {
-        $lookup: {
-          from: "comments",
-          let: { value: "$slug" },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $and: [
-                    { $eq: ["$belong", "$$value"] },
-                    { $eq: ["$type", "animate"] }
-                  ]
-                }
-              }
-            }
-          ],
-          as: `relative.${item}`
-        }
-      };
-    } else if (item === "play") {
-      return {
-        $lookup: {
-          from: "datas",
-          let: { value: "$slug" },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $and: [
-                    { $gt: [{ $indexOfBytes: ["$target", "$$value"] }, -1] },
-                    { $eq: ["$type", "play"] }
-                  ]
-                }
-              }
-            }
-          ],
-          as: `relative.${item}`
-        }
-      };
-    } else if (item === "danmu") {
-      return {
-        $lookup: {
-          from: "danmus",
-          let: { value: "$slug" },
-          pipeline: [
-            {
-              $match: {
-                $expr: { $gt: [{ $indexOfBytes: ["$player", "$$value"] }, -1] }
-              }
-            }
-          ],
-          as: `relative.${item}`
-        }
-      };
-    }
-  }
-);
-
 const countSize = {
-  like: { $size: "$relative.like" },
-  unlike: { $size: "$relative.unlike" },
-  play: { $size: "$relative.play" },
-  comment: { $size: "$relative.comment" },
-  danmu: { $size: "$relative.danmu" },
   update: {
     $size: {
       $ifNull: ["$new.list", []]
@@ -199,20 +122,24 @@ class animateController {
     const { user } = ctx.state;
     user.level < 100 && (animateQuery.status = "publish");
 
-    const data = await AnimateModel.aggregate([
-      { $match: animateQuery },
-      {
-        $addFields: {
-          new: {
-            $slice: ["$eposide", -1, 1]
+    let authorAndCat = [];
+
+    if (user.level < 100) {
+      authorAndCat = [
+        {
+          $unwind: {
+            path: "$new",
+            preserveNullAndEmptyArrays: true
           }
         }
-      },
-      authorLookup,
-      ...categoryLookup,
-      ...relativeLookup,
-      ...unwindList,
-      { $addFields: { count: countSize } },
+      ];
+    } else {
+      authorAndCat = [authorLookup, ...categoryLookup, ...unwindList];
+    }
+
+    console.time("animate");
+    const data = await AnimateModel.aggregate([
+      { $match: animateQuery },
       sortBy === "information.introduce"
         ? sample
         : {
@@ -224,6 +151,21 @@ class animateController {
       { $skip: skip },
       { $limit: parseInt(size) },
       {
+        $addFields: {
+          new: {
+            $slice: ["$eposide", -1, 1]
+          },
+          "count.update": {
+            update: {
+              $size: {
+                $ifNull: ["$new.list", []]
+              }
+            }
+          }
+        }
+      },
+      ...authorAndCat,
+      {
         $project: {
           relative: 0,
           eposide: 0,
@@ -232,8 +174,10 @@ class animateController {
         }
       }
     ]);
+    console.timeLog("animate");
 
     const total = await AnimateModel.countDocuments(animateQuery);
+    console.timeEnd("animate");
     title &&
       user.level < 100 &&
       DataModel.create({ type: "search", target: title });
@@ -381,6 +325,12 @@ class animateController {
       "play.level": { $lte: user.level }
     });
     if (!result) return ctx.error({ code: 402, msg: "权限不足" });
+    try {
+      AnimateModel.update({ slug }, { $inc: { "count.play": 1 } });
+    } catch (error) {
+      console.log(error);
+    }
+
     const data = await AnimateModel.aggregate([
       { $match: { slug, "play.level": { $lte: user.level } } },
       ...["play", "comment", "danmu"].map(item => {

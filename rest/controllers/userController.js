@@ -534,8 +534,10 @@ class userController {
 
     if (userArr.indexOf(id) > -1) {
       userArr.splice(userArr.findIndex(item => item === id), 1);
+      data.count[kind]--;
     } else {
       userArr.push(id);
+      data.count[kind]++;
     }
 
     if (type === "history") {
@@ -550,6 +552,12 @@ class userController {
       { $set: userInfo },
       { new: true, select: { comic: 1, post: 1, animate: 1, comment: 1 } }
     );
+
+    try {
+      await AnimateModel.findByIdAndUpdate(data._id, { $set: data });
+    } catch (error) {
+      console.log(error);
+    }
 
     const target = data.slug;
 

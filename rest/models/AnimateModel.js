@@ -7,7 +7,8 @@ const AnimateSchema = new Schema(
     title: {
       // 标题
       type: String,
-      required: true
+      required: true,
+      index: true
     },
     slug: {
       // 别名, 唯一标识符
@@ -43,7 +44,7 @@ const AnimateSchema = new Schema(
         default: "mp4"
       }, // 播放类型
       noPrefix: { type: Boolean, default: false }, // 不使用设置的等级前缀
-      level: { type: Number, default: 0 }, // 等级限定
+      level: { type: Number, default: 0, index: true }, // 等级限定
       linkPrefix: { type: String, default: "" }, // 链接前缀
       downTitle: { type: String, default: "" }, // 下载标题
       downLink: { type: String, default: "" } // 下载链接
@@ -64,6 +65,13 @@ const AnimateSchema = new Schema(
     cover: {
       vertical: { type: String, default: "" }, // 竖向大图
       horizontal: { type: String, default: "" } // 横向大图
+    },
+    count: {
+      like: { type: Number, default: 0, index: true },
+      unlike: { type: Number, default: 0, index: true },
+      play: { type: Number, default: 0, index: true },
+      comment: { type: Number, default: 0, index: true },
+      danmu: { type: Number, default: 0, index: true }
     },
     category: {
       area: Schema.Types.ObjectId, // 地区
