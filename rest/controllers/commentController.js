@@ -277,13 +277,14 @@ class commentController {
     const data = await CommentModel.create(comment).catch(err => {
       return { code: 404, msg: err.message };
     });
-
-    try {
-      await AnimateModel.update(
-        { slug: comment.belong },
-        { $inc: { "count.comment": 1 } }
-      );
-    } catch (error) {}
+    if (comment.target === "P00") {
+      try {
+        await AnimateModel.update(
+          { slug: comment.belong },
+          { $inc: { "count.comment": 1 } }
+        );
+      } catch (error) {}
+    }
 
     ctx.send({ data });
   }
