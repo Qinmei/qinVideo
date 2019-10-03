@@ -1,6 +1,7 @@
 const request = require("request-promise");
 const fs = require("fs");
 const path = require("path");
+
 const {
   AnimateModel,
   ComicModel,
@@ -272,6 +273,7 @@ class toolController {
       const total = await AnimateModel.countDocuments({});
 
       ctx.success({ data: { total } });
+      const item = await AnimateModel.findOne({ slug: "av600648" });
 
       const length = Math.ceil(total / 100);
       for (let index = 0; index < length; index++) {
@@ -296,8 +298,8 @@ class toolController {
           });
 
           item.count.comment = await CommentModel.countDocuments({
-            belong: { $regex: slug, $options: "$i" },
-            target: null
+            belong: slug,
+            target: "P00"
           });
 
           item.count.play = await DataModel.countDocuments({
@@ -306,18 +308,14 @@ class toolController {
           });
 
           item.count.like = await UserModel.countDocuments({
-            animate: {
-              like: {
-                $elemMatch: item._id
-              }
+            "animate.like": {
+              $in: [item._id]
             }
           });
 
           item.count.unlike = await UserModel.countDocuments({
-            animate: {
-              unlike: {
-                $elemMatch: item._id
-              }
+            "animate.unlike": {
+              $in: [item._id]
             }
           });
 
