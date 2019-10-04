@@ -154,7 +154,17 @@ class animateController {
         $addFields: {
           new: {
             $slice: ["$eposide", -1, 1]
-          },
+          }
+        }
+      },
+      {
+        $unwind: {
+          path: "$new",
+          preserveNullAndEmptyArrays: true
+        }
+      },
+      {
+        $addFields: {
           "count.update": {
             $size: {
               $ifNull: ["$new.list", []]
