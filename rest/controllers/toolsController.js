@@ -127,9 +127,11 @@ class toolController {
           }
         }
 
-        fs.exists(oldPath, () => {
-          fs.unlinkSync(oldPath);
-        });
+        try {
+          fs.exists(oldPath, () => {
+            fs.unlinkSync(oldPath);
+          });
+        } catch (error) {}
       } else {
         return ctx.error({ code: 404, msg: "不支持的格式" });
       }
