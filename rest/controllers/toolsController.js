@@ -224,6 +224,7 @@ class toolController {
       } catch (error) {
         await request(url).pipe(fs.createWriteStream(savePath + newname));
       }
+      if (fs.statSync(savePath + newname).size === 0) return null;
       return `/img/download/${newname}`;
     };
 
@@ -233,41 +234,43 @@ class toolController {
         .limit(100)
         .skip(100 * index);
       for (let num = 0; num < element.length; num++) {
-        const item = element[num];
-        let vertical = item.cover.vertical;
-        let horizontal = item.cover.horizontal;
+        setTimeout(async () => {
+          const item = element[num];
+          let vertical = item.cover.vertical;
+          let horizontal = item.cover.horizontal;
 
-        if (!/^\/img/.test(vertical)) {
-          const prefix = /^http/.test(vertical) ? "http:" : "";
-          const newData = await download(prefix + vertical, item.slug);
-          newData && (vertical = newData);
-        }
-        if (item.cover.vertical !== item.cover.horizontal) {
-          if (!/^\/img/.test(horizontal)) {
-            const prefix = /^http/.test(vertical) ? "http:" : "";
-            const newData = await download(
-              prefix + horizontal,
-              item.slug + "-h"
-            );
-            newData && (horizontal = newData);
+          if (!/^\/img/.test(vertical)) {
+            const prefix = /^http/.test(vertical) ? "https:" : "";
+            const newData = await download(prefix + vertical, item.slug);
+            newData && (vertical = newData);
           }
-        } else {
-          horizontal = vertical;
-        }
+          if (item.cover.vertical !== item.cover.horizontal) {
+            if (!/^\/img/.test(horizontal)) {
+              const prefix = /^http/.test(vertical) ? "https:" : "";
+              const newData = await download(
+                prefix + horizontal,
+                item.slug + "-h"
+              );
+              newData && (horizontal = newData);
+            }
+          } else {
+            horizontal = vertical;
+          }
 
-        item.cover = {
-          vertical,
-          horizontal
-        };
-        const totalresult = await AnimateModel.updateOne(
-          { slug: item.slug },
-          { $set: item }
-        ).catch(err => null);
-        if (totalresult) {
-          result.success++;
-        } else {
-          result.fail++;
-        }
+          item.cover = {
+            vertical,
+            horizontal
+          };
+          const totalresult = await AnimateModel.updateOne(
+            { slug: item.slug },
+            { $set: item }
+          ).catch(err => null);
+          if (totalresult) {
+            result.success++;
+          } else {
+            result.fail++;
+          }
+        }, (index + 1) * (num + 1) * 500);
       }
     }
     ctx.success({ data: result });
