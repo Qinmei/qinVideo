@@ -221,10 +221,16 @@ class toolController {
       const savePath = path.join(__dirname, "../../public/img/download/");
       try {
         fs.accessSync(savePath + newname);
+        if (fs.statSync(savePath + newname).size === 0) {
+          fs.unlinkSync(savePath + newname);
+        }
       } catch (error) {
         await request(url).pipe(fs.createWriteStream(savePath + newname));
       }
-      if (fs.statSync(savePath + newname).size === 0) return null;
+      if (fs.statSync(savePath + newname).size === 0) {
+        fs.unlinkSync(savePath + newname);
+        return null;
+      }
       return `/img/download/${newname}`;
     };
 
