@@ -237,12 +237,12 @@ class toolController {
         let vertical = item.cover.vertical;
         let horizontal = item.cover.horizontal;
 
-        if (/^http/.test(vertical)) {
+        if (!/^\/img/.test(vertical)) {
           const newData = await download(vertical, item.slug);
           newData && (vertical = newData);
         }
         if (item.cover.vertical !== item.cover.horizontal) {
-          if (/^http/.test(horizontal)) {
+          if (!/^\/img/.test(horizontal)) {
             const newData = await download(horizontal, item.slug + "-h");
             newData && (horizontal = newData);
           }
