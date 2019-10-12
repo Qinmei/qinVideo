@@ -238,12 +238,17 @@ class toolController {
         let horizontal = item.cover.horizontal;
 
         if (!/^\/img/.test(vertical)) {
-          const newData = await download(vertical, item.slug);
+          const prefix = /^http/.test(vertical) ? "http:" : "";
+          const newData = await download(prefix + vertical, item.slug);
           newData && (vertical = newData);
         }
         if (item.cover.vertical !== item.cover.horizontal) {
           if (!/^\/img/.test(horizontal)) {
-            const newData = await download(horizontal, item.slug + "-h");
+            const prefix = /^http/.test(vertical) ? "http:" : "";
+            const newData = await download(
+              prefix + horizontal,
+              item.slug + "-h"
+            );
             newData && (horizontal = newData);
           }
         } else {
