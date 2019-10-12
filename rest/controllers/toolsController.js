@@ -237,43 +237,41 @@ class toolController {
         .limit(100)
         .skip(100 * index);
       for (let num = 0; num < element.length; num++) {
-        setTimeout(async () => {
-          const item = element[num];
-          let vertical = item.cover.vertical;
-          let horizontal = item.cover.horizontal;
+        const item = element[num];
+        let vertical = item.cover.vertical;
+        let horizontal = item.cover.horizontal;
 
-          if (!/^\/img/.test(vertical)) {
+        if (!/^\/img/.test(vertical)) {
+          const prefix = /^http/.test(vertical) ? "" : "https:";
+          const newData = await download(prefix + vertical, item.slug);
+          newData && (vertical = newData);
+        }
+        if (item.cover.vertical !== item.cover.horizontal) {
+          if (!/^\/img/.test(horizontal)) {
             const prefix = /^http/.test(vertical) ? "" : "https:";
-            const newData = await download(prefix + vertical, item.slug);
-            newData && (vertical = newData);
+            const newData = await download(
+              prefix + horizontal,
+              item.slug + "-h"
+            );
+            newData && (horizontal = newData);
           }
-          if (item.cover.vertical !== item.cover.horizontal) {
-            if (!/^\/img/.test(horizontal)) {
-              const prefix = /^http/.test(vertical) ? "" : "https:";
-              const newData = await download(
-                prefix + horizontal,
-                item.slug + "-h"
-              );
-              newData && (horizontal = newData);
-            }
-          } else {
-            horizontal = vertical;
-          }
+        } else {
+          horizontal = vertical;
+        }
 
-          item.cover = {
-            vertical,
-            horizontal
-          };
-          const totalresult = await AnimateModel.updateOne(
-            { slug: item.slug },
-            { $set: item }
-          ).catch(err => null);
-          if (totalresult) {
-            result.success++;
-          } else {
-            result.fail++;
-          }
-        }, (index + 1) * (num + 1) * 500);
+        item.cover = {
+          vertical,
+          horizontal
+        };
+        const totalresult = await AnimateModel.updateOne(
+          { slug: item.slug },
+          { $set: item }
+        ).catch(err => null);
+        if (totalresult) {
+          result.success++;
+        } else {
+          result.fail++;
+        }
       }
     }
     ctx.success({ data: result });
