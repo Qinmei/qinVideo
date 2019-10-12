@@ -221,9 +221,6 @@ class toolController {
       const savePath = path.join(__dirname, "../../public/img/download/");
       try {
         fs.accessSync(savePath + newname);
-        if (fs.statSync(savePath + newname).size === 0) {
-          fs.unlinkSync(savePath + newname);
-        }
       } catch (error) {
         await request(url).pipe(fs.createWriteStream(savePath + newname));
       }
@@ -246,13 +243,13 @@ class toolController {
           let horizontal = item.cover.horizontal;
 
           if (!/^\/img/.test(vertical)) {
-            const prefix = /^http/.test(vertical) ? "https:" : "";
+            const prefix = /^http/.test(vertical) ? "" : "https:";
             const newData = await download(prefix + vertical, item.slug);
             newData && (vertical = newData);
           }
           if (item.cover.vertical !== item.cover.horizontal) {
             if (!/^\/img/.test(horizontal)) {
-              const prefix = /^http/.test(vertical) ? "https:" : "";
+              const prefix = /^http/.test(vertical) ? "" : "https:";
               const newData = await download(
                 prefix + horizontal,
                 item.slug + "-h"
