@@ -21,6 +21,8 @@ module.exports = app => {
       bilibili: {
         type: String
       },
+      noSetPrefix: { type: Boolean, default: false },
+      noParentPrefix: { type: Boolean, default: false },
       addons: Schema.Types.Mixed
     },
     {
