@@ -1,5 +1,4 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from "egg";
-const code = require("./code");
 
 export default (appInfo: EggAppInfo) => {
   const config = {} as PowerPartial<EggAppConfig>;
@@ -9,16 +8,24 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + "_1571145237182_4234";
 
   // add your egg config in here
-  config.middleware = ["data", "errorHandler"];
+  config.middleware = ["errorHandler"];
 
   // add your special config in here
   const bizConfig = {
-    code,
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
+    proxy: true,
+    ipHeaders: "X-Real-Ip, X-Forwarded-For",
+    maxProxyCount: 1,
+    hostHeaders: "X-Forwarded-Host",
     security: {
       csrf: {
-        enable: false
+        enable: true
       }
+    },
+
+    validate: {
+      convert: true
+      // validateRoot: false,
     },
 
     mongoose: {
@@ -27,10 +34,8 @@ export default (appInfo: EggAppInfo) => {
         options: {}
       }
     },
-    proxy: true,
-    ipHeaders: "X-Real-Ip, X-Forwarded-For",
-    maxProxyCount: 1,
-    hostHeaders: "X-Forwarded-Host"
+    salt: "qinmei",
+    tokenSecret: "qinmei"
   };
 
   // the return config will combines to EggAppConfig

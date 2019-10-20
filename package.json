@@ -23,10 +23,11 @@
   },
   "dependencies": {
     "egg": "^2.6.1",
-    "egg-scripts": "^2.6.0",
     "egg-mongoose": "^3.2.0",
+    "egg-scripts": "^2.6.0",
+    "egg-validate": "^2.0.2",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
-    "parameter": "^3.6.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
   },
@@ -36,8 +37,8 @@
     "@types/supertest": "^2.0.0",
     "autod": "^3.0.1",
     "autod-egg": "^1.1.0",
-    "egg-ci": "^1.8.0",
     "egg-bin": "^4.11.0",
+    "egg-ci": "^1.8.0",
     "egg-mock": "^3.16.0",
     "tslib": "^1.9.0",
     "tslint": "^5.0.0",

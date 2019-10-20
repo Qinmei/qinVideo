@@ -1,6 +1,5 @@
-const rules = require("../utils/validate");
-const Parameter = require("parameter");
-const validator = new Parameter();
+import rules from "../utils/validate";
+import codes from "../utils/code";
 
 module.exports = {
   // 处理成功响应
@@ -9,16 +8,16 @@ module.exports = {
       code: 10000,
       data
     };
-    return;
+    throw "code";
   },
 
   // 处理失败响应
   error(code) {
     this.ctx.body = {
       code,
-      msg: this.app.config.code[code]
+      msg: codes[code]
     };
-    return;
+    throw "code";
   },
 
   // 自己判断
@@ -27,13 +26,14 @@ module.exports = {
   },
 
   validate(rule, data) {
-    const err = validator.validate(rules[rule], data);
-    if (err) {
+    try {
+      this.ctx.validate(rules[rule], data);
+    } catch (err) {
       this.ctx.body = {
         code: 10004,
         msg: err
       };
-      return;
+      throw "code";
     }
   }
 };

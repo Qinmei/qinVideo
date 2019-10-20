@@ -1,4 +1,4 @@
-module.exports = app => {
+export default app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
 
@@ -21,8 +21,8 @@ module.exports = app => {
       introduce: { type: String, default: "" }, // 简介
       status: {
         type: String,
-        enum: ["inactive", "active", "unused"],
-        default: "inactive"
+        enum: ["draft", "publish", "reject"],
+        default: "draft"
       },
       money: { type: Number, default: 0 }, // 金钱
       expired: { type: Number, default: 0 }, // 会员过期时间

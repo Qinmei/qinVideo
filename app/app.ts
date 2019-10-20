@@ -1,5 +1,5 @@
 import { Application } from "egg";
-const path = require("path");
+import * as path from "path";
 
 class AppBootHook {
   constructor(app: Application) {
@@ -37,4 +37,4 @@ class AppBootHook {
   }
 }
 
-module.exports = AppBootHook;
+export default AppBootHook;
