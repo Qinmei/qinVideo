@@ -29,7 +29,8 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4"
+    "request-promise": "^4.2.4",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",

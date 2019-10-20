@@ -1,5 +1,6 @@
 import rules from "../utils/validate";
 import codes from "../utils/code";
+import * as common from "../utils/common";
 
 module.exports = {
   // 处理成功响应
@@ -29,11 +30,13 @@ module.exports = {
     try {
       this.ctx.validate(rules[rule], data);
     } catch (err) {
+      console.log(err);
       this.ctx.body = {
         code: 10004,
         msg: err
       };
       throw "code";
     }
-  }
+  },
+  ...common
 };

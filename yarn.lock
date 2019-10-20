@@ -2666,6 +2666,13 @@ egg-utils@^2.4.1:
     mkdirp "^0.5.1"
     utility "^1.13.1"
 
+egg-validate@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.npm.taobao.org/egg-validate/download/egg-validate-2.0.2.tgz#c236c730a3730fe4e0655e1a2799398178ab3dd3"
+  integrity sha1-wjbHMKNzD+TgZV4aJ5k5gXirPdM=
+  dependencies:
+    parameter "^3.0.0"
+
 egg-view@^2.1.2:
   version "2.1.2"
   resolved "https://registry.npm.taobao.org/egg-view/download/egg-view-2.1.2.tgz#144698b23d1b187e1764e5edceae1819810d7a1f"
@@ -5295,7 +5302,7 @@ param-case@^2.1.0:
   dependencies:
     no-case "^2.2.0"
 
-parameter@^3.6.0:
+parameter@^3.0.0:
   version "3.6.0"
   resolved "https://registry.npm.taobao.org/parameter/download/parameter-3.6.0.tgz#bcf81327e98e433c72c134830ec84d15e81b963d"
   integrity sha1-vPgTJ+mOQzxywTSDDshNFegblj0=
@@ -6914,6 +6921,11 @@ utility@^1.12.0, utility@^1.13.1, utility@^1.14.0, utility@^1.15.0, utility@^1.1
 uuid@^3.0.1, uuid@^3.3.2:
   version "3.3.3"
   resolved "https://registry.npm.taobao.org/uuid/download/uuid-3.3.3.tgz?cache=0&sync_timestamp=1566221202613&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fuuid%2Fdownload%2Fuuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
+  integrity sha1-RWjwIW54dg7h2/Ok0s9T4iQRKGY=
+
+uuid@^3.3.3:
+  version "3.3.3"
+  resolved "https://registry.npm.taobao.org/uuid/download/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
   integrity sha1-RWjwIW54dg7h2/Ok0s9T4iQRKGY=
 
 validate-npm-package-license@^3.0.1:

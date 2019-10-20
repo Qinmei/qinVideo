@@ -19,7 +19,7 @@ export default (appInfo: EggAppInfo) => {
     hostHeaders: "X-Forwarded-Host",
     security: {
       csrf: {
-        enable: true
+        enable: false
       }
     },
 
