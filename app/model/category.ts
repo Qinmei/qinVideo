@@ -12,7 +12,18 @@ export default app => {
     },
     type: {
       type: String,
-      enum: ["aarea", "ayear", "akind", "atag", "pkind", "ptag"],
+      enum: [
+        "aarea",
+        "ayear",
+        "akind",
+        "atag",
+        "carea",
+        "cyear",
+        "ckind",
+        "ctag",
+        "pkind",
+        "ptag"
+      ],
       required: true
     },
     cover: {

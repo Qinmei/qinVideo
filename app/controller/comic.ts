@@ -1,13 +1,13 @@
 import { Controller } from "egg";
 
-class UserController extends Controller {
+class ComicController extends Controller {
   async query() {
     const { ctx, service } = this;
     const { query } = ctx;
 
     ctx.helper.validate("query", query);
 
-    const result = await service.user.query(query).catch(() => 11000);
+    const result = await service.comic.query(query).catch(() => 13000);
     ctx.helper.send(result);
   }
 
@@ -17,18 +17,19 @@ class UserController extends Controller {
 
     ctx.helper.validate("id", { id });
 
-    const result = await service.user.info(id).catch(() => 11001);
+    const result = await service.comic.info(id).catch(() => 13001);
     ctx.helper.send(result);
   }
 
   async create() {
     const { ctx, service } = this;
     const data = ctx.request.body;
+    const userId = ctx.state.user._id;
 
-    ctx.helper.validate("user", data, true);
+    data.author = userId;
+    ctx.helper.validate("comic", data, true);
 
-    data.password = ctx.helper.MD5(ctx.app.config.salt + data.password);
-    const result = await service.user.create(data).catch(err => 11002);
+    const result = await service.comic.create(data).catch(() => 13002);
     ctx.helper.send(result);
   }
 
@@ -38,9 +39,9 @@ class UserController extends Controller {
     const id = ctx.params.id;
 
     ctx.helper.validate("id", { id });
-    ctx.helper.validate("user", data);
+    ctx.helper.validate("comic", data);
 
-    const result = await service.user.update([id], data).catch(() => 11003);
+    const result = await service.comic.update([id], data).catch(() => 13003);
     ctx.helper.send(result);
   }
 
@@ -50,9 +51,11 @@ class UserController extends Controller {
     const { ids } = data;
 
     ctx.helper.validate("ids", { ids });
-    ctx.helper.validate("user", data);
+    ctx.helper.validate("comic", data);
 
-    const result = await service.user.update(data.ids, data).catch(() => 11003);
+    const result = await service.comic
+      .update(data.ids, data)
+      .catch(() => 13003);
     ctx.helper.send(result);
   }
 
@@ -62,7 +65,7 @@ class UserController extends Controller {
 
     ctx.helper.validate("id", { id });
 
-    const result = await service.user.destroy([id]).catch(() => 11004);
+    const result = await service.comic.destroy([id]).catch(() => 13004);
     ctx.helper.send(result);
   }
 
@@ -72,9 +75,9 @@ class UserController extends Controller {
 
     ctx.helper.validate("ids", { ids });
 
-    const result = await service.user.destroy(ids).catch(() => 11004);
+    const result = await service.comic.destroy(ids).catch(() => 13004);
     ctx.helper.send(result);
   }
 }
 
-export default UserController;
+export default ComicController;

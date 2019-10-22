@@ -4,6 +4,7 @@
 import 'egg';
 import ExportAnimate from '../../../app/model/animate';
 import ExportCategory from '../../../app/model/category';
+import ExportComic from '../../../app/model/comic';
 import ExportComment from '../../../app/model/comment';
 import ExportConfig from '../../../app/model/config';
 import ExportDanmu from '../../../app/model/danmu';
@@ -22,6 +23,7 @@ declare module 'egg' {
   interface IModel {
     Animate: ReturnType<typeof ExportAnimate>;
     Category: ReturnType<typeof ExportCategory>;
+    Comic: ReturnType<typeof ExportComic>;
     Comment: ReturnType<typeof ExportComment>;
     Config: ReturnType<typeof ExportConfig>;
     Danmu: ReturnType<typeof ExportDanmu>;
