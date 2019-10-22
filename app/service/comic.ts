@@ -1,11 +1,14 @@
 import { Service } from "egg";
 
 class ComicService extends Service {
-  async query({ page, size, sortBy, sortOrder }) {
-    const skip = (page - 1) * size;
-    const limit = size;
+  async query({ page, size, sortBy, sortOrder, name, status, update }) {
+    const skip: number = (page - 1) * size;
+    const limit: number = size;
 
-    const query = {};
+    const query: any = {};
+    name && (query.title = { $regex: name, $options: "$i" });
+    status && (query.status = status);
+    update && (query["information.isUpdate"] = update);
 
     const result = await this.ctx.model.Comic.find(query)
       .skip(skip)

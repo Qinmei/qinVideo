@@ -9,6 +9,11 @@ export default app => {
       image: [{ type: String }],
       target: Schema.Types.ObjectId, // 举报对象
       reply: String,
+      type: {
+        type: String,
+        enum: ["animate", "comic", "post", "comment", "others"],
+        default: "others"
+      },
       status: {
         type: String,
         enum: ["draft", "publish", "reject"],

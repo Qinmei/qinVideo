@@ -1,9 +1,5 @@
 const ruleobj = {
   query: {
-    name: {
-      type: "string",
-      required: false
-    },
     page: {
       type: "number",
       required: true
@@ -16,10 +12,72 @@ const ruleobj = {
     },
     sortBy: {
       type: "string",
+      default: "updatedAt",
       required: false
     },
     sortOrder: {
       type: "number",
+      default: -1,
+      required: false
+    },
+    name: {
+      type: "string",
+      required: false
+    },
+    email: {
+      type: "string",
+      required: false
+    },
+    type: {
+      type: "string",
+      required: false
+    },
+    status: {
+      type: "string",
+      required: false
+    },
+    update: {
+      type: "boolean",
+      required: false
+    },
+    akind: {
+      type: "string",
+      required: false
+    },
+    aarea: {
+      type: "string",
+      required: false
+    },
+    ayear: {
+      type: "string",
+      required: false
+    },
+    atag: {
+      type: "string",
+      required: false
+    },
+    ckind: {
+      type: "string",
+      required: false
+    },
+    carea: {
+      type: "string",
+      required: false
+    },
+    cyear: {
+      type: "string",
+      required: false
+    },
+    ctag: {
+      type: "string",
+      required: false
+    },
+    pkind: {
+      type: "string",
+      required: false
+    },
+    ptag: {
+      type: "string",
       required: false
     }
   },
@@ -47,7 +105,7 @@ const ruleobj = {
     avatar: { type: "string", required: false },
     background: { type: "string", required: false },
     introduce: { type: "string", required: false },
-    status: { type: "string", required: false },
+    status: { type: "string", required: force },
     money: { type: "number", required: false },
     expired: { type: "number", required: false }
   }),
@@ -64,7 +122,7 @@ const ruleobj = {
       type: "string",
       required: force
     },
-    status: { type: "string", required: false },
+    status: { type: "string", required: force },
     information: {
       introduce: { type: "string", required: false },
       staff: { type: "string", required: false },
@@ -114,7 +172,7 @@ const ruleobj = {
       type: "string",
       required: force
     },
-    status: { type: "string", required: false },
+    status: { type: "string", required: force },
     information: {
       introduce: { type: "string", required: false },
       staff: { type: "string", required: false },
@@ -212,7 +270,57 @@ const ruleobj = {
         key: { type: "string", default: "", required: false }
       }
     }
-  }
+  },
+  danmu: (force: boolean) => ({
+    player: {
+      type: "string",
+      required: force
+    },
+    author: { type: "string", required: false },
+    time: { type: "number", required: false },
+    text: { type: "string", required: force },
+    color: { type: "number", required: false },
+    type: { type: "number", required: false },
+    ip: { type: "string", required: false },
+    referer: { type: "string", required: false }
+  }),
+  shop: (force: boolean) => ({
+    title: {
+      type: "string",
+      required: force
+    },
+    status: {
+      type: "string",
+      require: force
+    },
+    price: { type: "number", required: force },
+    upLevel: { type: "number", required: false },
+    addScore: { type: "number", required: false },
+    addExpired: { type: "number", required: false },
+    introduce: { type: "string", required: false },
+    cover: { type: "string", required: false }
+  }),
+  report: (force: boolean) => ({
+    author: {
+      type: "string",
+      require: force
+    },
+    content: { type: "string", required: force },
+    image: { type: "array", required: false },
+    target: {
+      type: "string",
+      require: force
+    },
+    reply: "string",
+    type: {
+      type: "string",
+      require: force
+    },
+    status: {
+      type: "string",
+      require: force
+    }
+  })
 };
 
 const rules = (rule: string, force: boolean) => {

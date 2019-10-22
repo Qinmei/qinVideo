@@ -1,21 +1,20 @@
 import { Service } from "egg";
 
-class AnimateService extends Service {
-  async query({ page, size, sortBy, sortOrder, name, status, update }) {
+class KeyService extends Service {
+  async query({ page, size, sortBy, sortOrder, name, status }) {
     const skip: number = (page - 1) * size;
     const limit: number = size;
 
     const query: any = {};
-    name && (query.title = { $regex: name, $options: "$i" });
+    name && (query.name = { $regex: name, $options: "$i" });
     status && (query.status = status);
-    update && (query["information.isUpdate"] = update);
 
-    const result = await this.ctx.model.Animate.find(query)
+    const result = await this.ctx.model.Key.find(query)
       .skip(skip)
       .limit(limit)
       .sort({ [sortBy]: sortOrder, _id: -1 });
 
-    const total = await this.ctx.model.Animate.find(query).countDocuments();
+    const total = await this.ctx.model.Key.find(query).countDocuments();
 
     return {
       list: result,
@@ -24,17 +23,17 @@ class AnimateService extends Service {
   }
 
   async info(id: string) {
-    const data = this.ctx.model.Animate.findById(id);
+    const data = this.ctx.model.Key.findById(id);
     return data;
   }
 
   async create(data: any) {
-    const result = await this.ctx.model.Animate.create(data);
+    const result = await this.ctx.model.Key.create(data);
     return result;
   }
 
   async update(ids: Array<string>, data: any) {
-    const result = await this.ctx.model.Animate.updateMany(
+    const result = await this.ctx.model.Key.updateMany(
       { _id: { $in: ids } },
       { $set: data }
     );
@@ -42,11 +41,11 @@ class AnimateService extends Service {
   }
 
   async destroy(ids: Array<string>) {
-    const result = await this.ctx.model.Animate.deleteMany({
+    const result = await this.ctx.model.Key.deleteMany({
       _id: { $in: ids }
     });
     return result;
   }
 }
 
-export default AnimateService;
+export default KeyService;
