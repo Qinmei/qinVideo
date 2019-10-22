@@ -26,11 +26,18 @@ module.exports = {
     typeof data === "number" ? this.error(data) : this.success(data);
   },
 
-  validate(rule, data) {
+  validate(type: string, data: any, force: boolean = false) {
     try {
-      this.ctx.validate(rules[rule], data);
+      const rule = rules(type, force);
+      this.ctx.validate(rule, data);
+      const ruleKeys = Object.keys(rule);
+
+      for (const key in data) {
+        if (!ruleKeys.includes(key)) {
+          delete data[key];
+        }
+      }
     } catch (err) {
-      console.log(err);
       this.ctx.body = {
         code: 10004,
         msg: err

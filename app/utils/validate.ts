@@ -1,4 +1,4 @@
-export default {
+const ruleobj = {
   query: {
     name: {
       type: "string",
@@ -35,48 +35,48 @@ export default {
       required: true
     }
   },
-  animate: {
+  animate: (force: boolean) => ({
     title: {
       type: "string",
-      required: true
+      required: force
     },
     slug: {
       type: "string",
-      required: true
+      required: force
     },
     author: {
       type: "string",
-      required: true
+      required: force
     },
-    status: ["draft", "publish", "reject"],
+    status: { type: "string", required: false },
     information: {
-      introduce: { type: "string", default: "", required: false },
-      staff: { type: "string", default: "", required: false },
-      actor: { type: "string", default: "", required: false },
-      firstPlay: { type: "string", default: "20160606", required: false },
-      isUpdate: { type: "boolean", default: false, required: false },
-      updateDay: { type: "number", default: 0, required: false },
-      rateStar: { type: "number", default: 8, required: false },
-      rateCount: { type: "number", default: 1000, required: false },
-      impression: { type: "string", default: "", required: false },
-      eposideCount: { type: "number", default: 0, required: false }
+      introduce: { type: "string", required: false },
+      staff: { type: "string", required: false },
+      actor: { type: "string", required: false },
+      firstPlay: { type: "string", required: false },
+      isUpdate: { type: "boolean", required: false },
+      updateDay: { type: "number", required: false },
+      rateStar: { type: "number", required: false },
+      rateCount: { type: "number", required: false },
+      impression: { type: "string", required: false },
+      eposideCount: { type: "number", required: false }
     },
     play: {
       kind: ["mp4", "m3u8", "php"],
-      noPrefix: { type: "boolean", default: false, required: false },
-      level: { type: "number", default: 0, required: false },
-      linkPrefix: { type: "string", default: "", required: false },
-      downTitle: { type: "string", default: "", required: false },
-      downLink: { type: "string", default: "", required: false }
+      noPrefix: { type: "boolean", required: false },
+      level: { type: "number", required: false },
+      linkPrefix: { type: "string", required: false },
+      downTitle: { type: "string", required: false },
+      downLink: { type: "string", required: false }
     },
     eposide: {
-      name: { type: "string", default: "", required: false },
+      name: { type: "string", required: false },
       relative: { type: "string", required: false },
       list: { type: "array", required: false }
     },
     cover: {
-      vertical: { type: "string", default: "" },
-      horizontal: { type: "string", default: "" }
+      vertical: { type: "string" },
+      horizontal: { type: "string" }
     },
     category: {
       area: { type: "array", required: false },
@@ -84,36 +84,31 @@ export default {
       year: { type: "array", required: false },
       tag: { type: "array", required: false }
     }
-  },
-  user: {
+  }),
+  user: (force: boolean) => ({
     name: {
       type: "string",
-      required: true
+      required: force
     },
-    password: { type: "password", required: true },
-    email: { type: "email", required: true },
-    level: { type: "number", default: 1, required: false },
-    score: { type: "number", default: 0, required: false },
-    avatar: { type: "string", default: "", required: false },
-    background: { type: "string", default: "", required: false },
-    introduce: { type: "string", default: "", required: false },
-    status: ["draft", "publish", "reject"],
-    money: { type: "number", default: 0, required: false },
-    expired: { type: "number", default: 0, required: false }
-  },
-  userUpdate: {
-    name: {
-      type: "string",
-      required: false
-    },
-    password: { type: "password", required: false },
-    email: { type: "email", required: false },
-    level: { type: "number", default: 1, required: false },
-    score: { type: "number", default: 0, required: false },
-    avatar: { type: "string", default: "", required: false },
-    background: { type: "string", default: "", required: false },
-    introduce: { type: "string", default: "", required: false },
-    money: { type: "number", default: 0, required: false },
-    expired: { type: "number", default: 0, required: false }
+    password: { type: "password", required: force },
+    email: { type: "email", required: force },
+    level: { type: "number", required: false },
+    score: { type: "number", required: false },
+    avatar: { type: "string", required: false },
+    background: { type: "string", required: false },
+    introduce: { type: "string", required: false },
+    status: { type: "string", required: false },
+    money: { type: "number", required: false },
+    expired: { type: "number", required: false }
+  })
+};
+
+const rules = (rule: string, force: boolean) => {
+  if (typeof ruleobj[rule] === "function") {
+    return ruleobj[rule](force);
+  } else {
+    return ruleobj[rule];
   }
 };
+
+export default rules;
