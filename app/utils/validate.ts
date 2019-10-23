@@ -140,7 +140,7 @@ const ruleobj = {
 			eposideCount: { type: 'number', required: false }
 		},
 		play: {
-			kind: ['mp4', 'm3u8', 'php'],
+			kind: { type: 'string', required: false },
 			noPrefix: { type: 'boolean', required: false },
 			level: { type: 'number', required: false },
 			linkPrefix: { type: 'string', required: false },
@@ -164,18 +164,9 @@ const ruleobj = {
 		}
 	}),
 	comic: (force: boolean) => ({
-		title: {
-			type: 'string',
-			required: force
-		},
-		slug: {
-			type: 'string',
-			required: force
-		},
-		author: {
-			type: 'string',
-			required: force
-		},
+		title: { type: 'string', required: force },
+		slug: { type: 'string', required: force },
+		author: { type: 'string', required: force },
 		status: { type: 'string', required: force },
 		information: {
 			introduce: { type: 'string', required: false },
@@ -190,7 +181,7 @@ const ruleobj = {
 			eposideCount: { type: 'number', required: false }
 		},
 		play: {
-			kind: ['mp4', 'm3u8', 'php'],
+			kind: { type: 'string', required: false },
 			noPrefix: { type: 'boolean', required: false },
 			level: { type: 'number', required: false },
 			linkPrefix: { type: 'string', required: false },
@@ -276,10 +267,7 @@ const ruleobj = {
 		}
 	},
 	danmu: (force: boolean) => ({
-		player: {
-			type: 'string',
-			required: force
-		},
+		player: { type: 'string', required: force },
 		author: { type: 'string', required: false },
 		time: { type: 'number', required: false },
 		text: { type: 'string', required: force },
@@ -289,14 +277,8 @@ const ruleobj = {
 		referer: { type: 'string', required: false }
 	}),
 	shop: (force: boolean) => ({
-		title: {
-			type: 'string',
-			required: force
-		},
-		status: {
-			type: 'string',
-			require: force
-		},
+		title: { type: 'string', required: force },
+		status: { type: 'string', require: force },
 		price: { type: 'number', required: force },
 		upLevel: { type: 'number', required: false },
 		addScore: { type: 'number', required: false },
@@ -305,47 +287,55 @@ const ruleobj = {
 		cover: { type: 'string', required: false }
 	}),
 	report: (force: boolean) => ({
-		author: {
-			type: 'string',
-			require: force
-		},
+		author: { type: 'string', required: force },
 		content: { type: 'string', required: force },
 		image: { type: 'array', required: false },
-		target: {
-			type: 'string',
-			require: force
-		},
+		target: { type: 'string', required: force },
 		reply: 'string',
-		type: {
-			type: 'string',
-			require: force
-		},
-		status: {
-			type: 'string',
-			require: force
-		}
+		type: { type: 'string', required: force },
+		status: { type: 'string', required: force }
 	}),
 	category: (force: boolean) => ({
-		name: {
+		name: { type: 'string', required: force },
+		type: { type: 'string', required: force },
+		cover: { type: 'string', required: false },
+		introduce: { type: 'string', required: false },
+		parent: { type: 'string', required: false }
+	}),
+	comment: (force: boolean) => ({
+		author: { type: 'string', required: force },
+		animate: { type: 'string', required: false },
+		comic: { type: 'string', required: false },
+		eposide: { type: 'string', required: false },
+		post: { type: 'string', required: false },
+		replyTo: { type: 'string', required: false },
+		parent: { type: 'string', required: false },
+		content: { type: 'string', required: force },
+		image: { type: 'array', required: false },
+		video: { type: 'string', required: false },
+		status: {
 			type: 'string',
 			required: force
-		},
-		type: {
-			type: 'string',
-			required: force
-		},
-		cover: {
-			type: 'string',
-			required: false
-		},
-		introduce: {
-			type: 'string',
-			required: false
-		},
-		parent: {
-			type: 'string',
-			required: false
 		}
+	}),
+	key: (force: boolean) => ({
+		name: { type: 'string', required: force },
+		status: { type: 'string', required: force },
+		price: { type: 'number', required: force }
+	}),
+	post: (force: boolean) => ({
+		title: { type: 'string', required: force },
+		slug: { type: 'string', required: force },
+		status: { type: 'string', required: force },
+		level: { type: 'number', required: force },
+		author: { type: 'string', required: force },
+		category: {
+			post: { type: 'array', required: false },
+			tag: { type: 'array', required: false }
+		},
+		cover: { type: 'string', required: false },
+		introduce: { type: 'string', required: false },
+		content: { type: 'string', required: false }
 	})
 };
 
