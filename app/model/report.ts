@@ -8,10 +8,12 @@ export default (app) => {
 			content: { type: String, required: true }, // 内容
 			image: [{ type: String }],
 			reply: String,
-			animate: { type: Schema.Types.ObjectId, ref: 'Animate' },
-			comic: { type: Schema.Types.ObjectId, ref: 'Comic' },
-			post: { type: Schema.Types.ObjectId, ref: 'Post' },
-			comment: { type: Schema.Types.ObjectId, ref: 'Comment' },
+			target: { type: Schema.Types.ObjectId, required: true, refPath: 'onModel' },
+			onModel: {
+				type: String,
+				required: true,
+				enum: ['Comic', 'Animate', 'Comment', 'Post']
+			},
 			status: {
 				type: String,
 				enum: ['draft', 'publish', 'reject'],

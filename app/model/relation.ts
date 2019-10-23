@@ -4,10 +4,12 @@ export default (app) => {
 
 	const RelationSchema = new Schema(
 		{
-			user: { type: Schema.Types.ObjectId, ref: 'User' },
-			animate: { type: Schema.Types.ObjectId, ref: 'Animate' },
-			comic: { type: Schema.Types.ObjectId, ref: 'Comic' },
-			post: { type: Schema.Types.ObjectId, ref: 'Post' },
+			target: { type: Schema.Types.ObjectId, required: true, refPath: 'onModel' },
+			onModel: {
+				type: String,
+				required: true,
+				enum: ['Comic', 'Animate', 'User', 'Post']
+			},
 			author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 			addons: Schema.Types.Mixed
 		},

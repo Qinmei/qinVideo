@@ -127,82 +127,62 @@ const ruleobj = {
 			required: force
 		},
 		status: { type: 'string', required: force },
-		information: {
-			introduce: { type: 'string', required: false },
-			staff: { type: 'string', required: false },
-			actor: { type: 'string', required: false },
-			firstPlay: { type: 'string', required: false },
-			isUpdate: { type: 'boolean', required: false },
-			updateDay: { type: 'number', required: false },
-			rateStar: { type: 'number', required: false },
-			rateCount: { type: 'number', required: false },
-			impression: { type: 'string', required: false },
-			eposideCount: { type: 'number', required: false }
-		},
-		play: {
-			kind: { type: 'string', required: false },
-			noPrefix: { type: 'boolean', required: false },
-			level: { type: 'number', required: false },
-			linkPrefix: { type: 'string', required: false },
-			downTitle: { type: 'string', required: false },
-			downLink: { type: 'string', required: false }
-		},
-		eposide: {
-			name: { type: 'string', required: false },
-			relative: { type: 'string', required: false },
-			list: { type: 'array', required: false }
-		},
-		cover: {
-			vertical: { type: 'string' },
-			horizontal: { type: 'string' }
-		},
-		category: {
-			area: { type: 'array', required: false },
-			kind: { type: 'array', required: false },
-			year: { type: 'array', required: false },
-			tag: { type: 'array', required: false }
-		}
+		introduce: { type: 'string', required: false },
+		staff: { type: 'string', required: false },
+		actor: { type: 'string', required: false },
+		firstPlay: { type: 'string', required: false },
+		isUpdate: { type: 'boolean', required: false },
+		updateDay: { type: 'number', required: false },
+		rateStar: { type: 'number', required: false },
+		rateCount: { type: 'number', required: false },
+		impression: { type: 'string', required: false },
+		eposideCount: { type: 'number', required: false },
+		playType: { type: 'string', required: false },
+		noPrefix: { type: 'boolean', required: false },
+		level: { type: 'number', required: false },
+		linkPrefix: { type: 'string', required: false },
+		downTitle: { type: 'string', required: false },
+		downLink: { type: 'string', required: false },
+		season: { type: 'string', required: false },
+		relative: { type: 'string', required: false },
+		eposide: { type: 'array', required: false },
+		coverVertical: { type: 'string', required: false },
+		coverHorizontal: { type: 'string', required: false },
+		area: { type: 'array', required: false },
+		kind: { type: 'array', required: false },
+		year: { type: 'array', required: false },
+		tag: { type: 'array', required: false }
 	}),
 	comic: (force: boolean) => ({
 		title: { type: 'string', required: force },
 		slug: { type: 'string', required: force },
 		author: { type: 'string', required: force },
 		status: { type: 'string', required: force },
-		information: {
-			introduce: { type: 'string', required: false },
-			staff: { type: 'string', required: false },
-			actor: { type: 'string', required: false },
-			firstPlay: { type: 'string', required: false },
-			isUpdate: { type: 'boolean', required: false },
-			updateDay: { type: 'number', required: false },
-			rateStar: { type: 'number', required: false },
-			rateCount: { type: 'number', required: false },
-			impression: { type: 'string', required: false },
-			eposideCount: { type: 'number', required: false }
-		},
-		play: {
-			kind: { type: 'string', required: false },
-			noPrefix: { type: 'boolean', required: false },
-			level: { type: 'number', required: false },
-			linkPrefix: { type: 'string', required: false },
-			downTitle: { type: 'string', required: false },
-			downLink: { type: 'string', required: false }
-		},
-		eposide: {
-			name: { type: 'string', required: false },
-			relative: { type: 'string', required: false },
-			list: { type: 'array', required: false }
-		},
-		cover: {
-			vertical: { type: 'string' },
-			horizontal: { type: 'string' }
-		},
-		category: {
-			area: { type: 'array', required: false },
-			kind: { type: 'array', required: false },
-			year: { type: 'array', required: false },
-			tag: { type: 'array', required: false }
-		}
+		introduce: { type: 'string', required: false },
+		staff: { type: 'string', required: false },
+		actor: { type: 'string', required: false },
+		firstPlay: { type: 'string', required: false },
+		isUpdate: { type: 'boolean', required: false },
+		updateDay: { type: 'number', required: false },
+		rateStar: { type: 'number', required: false },
+		rateCount: { type: 'number', required: false },
+		impression: { type: 'string', required: false },
+		eposideCount: { type: 'number', required: false },
+		playType: { type: 'string', required: false },
+		noPrefix: { type: 'boolean', required: false },
+		level: { type: 'number', required: false },
+		linkPrefix: { type: 'string', required: false },
+		downTitle: { type: 'string', required: false },
+		downLink: { type: 'string', required: false },
+		season: { type: 'string', required: false },
+		relative: { type: 'string', required: false },
+		eposide: { type: 'array', required: false },
+		coverVertical: { type: 'string', required: false },
+		coverHorizontal: { type: 'string', required: false },
+		area: { type: 'array', required: false },
+		kind: { type: 'array', required: false },
+		year: { type: 'array', required: false },
+		tag: { type: 'array', required: false }
 	}),
 	config: {
 		favcion: { type: 'string', default: '', required: false },
@@ -238,33 +218,15 @@ const ruleobj = {
 		aboutus: { type: 'string', default: '', required: false },
 		playLimit: { type: 'array', required: false },
 		jiexi: { type: 'array', required: false },
-		emailSetting: {
-			type: 'object',
-			required: false,
-			rule: {
-				type: { type: 'string', default: 'smtp', required: false },
-				name: { type: 'string', default: '', required: false },
-				sender: { type: 'string', default: '', required: false }
-			}
-		},
-		smtp: {
-			type: 'object',
-			required: false,
-			rule: {
-				host: { type: 'string', default: '', required: false },
-				port: { type: 'number', default: 465, required: false },
-				secure: { type: 'string', default: '', required: false },
-				user: { type: 'string', default: '', required: false },
-				pass: { type: 'string', default: '', required: false }
-			}
-		},
-		sendgrid: {
-			type: 'object',
-			required: false,
-			rule: {
-				key: { type: 'string', default: '', required: false }
-			}
-		}
+		emailType: { type: 'string', default: 'smtp', required: false },
+		emailName: { type: 'string', default: '', required: false },
+		emailSender: { type: 'string', default: '', required: false },
+		smtpHost: { type: 'string', default: '', required: false },
+		smtpPort: { type: 'number', default: 465, required: false },
+		smtpSecure: { type: 'string', default: '', required: false },
+		smtpUser: { type: 'string', default: '', required: false },
+		smtpPass: { type: 'string', default: '', required: false },
+		sendgrid: { type: 'string', default: '', required: false }
 	},
 	danmu: (force: boolean) => ({
 		player: { type: 'string', required: force },
@@ -329,10 +291,8 @@ const ruleobj = {
 		status: { type: 'string', required: force },
 		level: { type: 'number', required: force },
 		author: { type: 'string', required: force },
-		category: {
-			post: { type: 'array', required: false },
-			tag: { type: 'array', required: false }
-		},
+		category: { type: 'array', required: false },
+		tag: { type: 'array', required: false },
 		cover: { type: 'string', required: false },
 		introduce: { type: 'string', required: false },
 		content: { type: 'string', required: false }

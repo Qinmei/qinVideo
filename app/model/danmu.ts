@@ -4,6 +4,7 @@ export default (app) => {
 
 	const DanmuSchema = new mongoose.Schema(
 		{
+			target: { type: Schema.Types.ObjectId, ref: 'Animate' },
 			player: {
 				type: String,
 				index: true,

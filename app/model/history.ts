@@ -4,20 +4,11 @@ export default (app) => {
 
 	const HistorySchema = new mongoose.Schema(
 		{
-			animate: {
-				type: Schema.Types.ObjectId,
-				index: true,
-				ref: 'Animate'
-			},
-			comic: {
-				type: Schema.Types.ObjectId,
-				index: true,
-				ref: 'Comic'
-			},
-			post: {
-				type: Schema.Types.ObjectId,
-				index: true,
-				ref: 'Post'
+			target: { type: Schema.Types.ObjectId, required: true, refPath: 'onModel' },
+			onModel: {
+				type: String,
+				required: true,
+				enum: ['Comic', 'Animate', 'Eposide', 'Post']
 			},
 			author: { type: Schema.Types.ObjectId, ref: 'User' },
 			ip: String,

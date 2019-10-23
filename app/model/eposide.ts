@@ -12,13 +12,11 @@ export default (app) => {
 			cover: {
 				type: String
 			},
-			animate: {
-				type: Schema.Types.ObjectId,
-				ref: 'Animate'
-			},
-			comic: {
-				type: Schema.Types.ObjectId,
-				ref: 'Comic'
+			target: { type: Schema.Types.ObjectId, required: true, refPath: 'onModel' },
+			onModel: {
+				type: String,
+				required: true,
+				enum: ['Comic', 'Animate']
 			},
 			link: {
 				type: String
