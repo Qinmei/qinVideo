@@ -7,7 +7,7 @@ class PostController extends Controller {
 
 		ctx.helper.validate('query', query);
 
-		const result = await service.post.query(query).catch(() => 12000);
+		const result = await service.post.query(query).catch(() => 14000);
 		ctx.helper.send(result);
 	}
 
@@ -17,7 +17,7 @@ class PostController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.post.info(id).catch(() => 12001);
+		const result = await service.post.info(id).catch(() => 14001);
 		ctx.helper.send(result);
 	}
 
@@ -29,7 +29,7 @@ class PostController extends Controller {
 		data.author = userId;
 		ctx.helper.validate('post', data, true);
 
-		const result = await service.post.create(data).catch(() => 12002);
+		const result = await service.post.create(data).catch(() => 14002);
 		ctx.helper.send(result);
 	}
 
@@ -41,7 +41,7 @@ class PostController extends Controller {
 		ctx.helper.validate('id', { id });
 		ctx.helper.validate('post', data);
 
-		const result = await service.post.update([id], data).catch(() => 12003);
+		const result = await service.post.update([id], data).catch(() => 14003);
 		ctx.helper.send(result);
 	}
 
@@ -53,7 +53,7 @@ class PostController extends Controller {
 		ctx.helper.validate('ids', { ids });
 		ctx.helper.validate('post', data);
 
-		const result = await service.post.update(data.ids, data).catch(() => 12003);
+		const result = await service.post.update(data.ids, data).catch(() => 14003);
 		ctx.helper.send(result);
 	}
 
@@ -63,7 +63,7 @@ class PostController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.post.destroy([id]).catch(() => 12004);
+		const result = await service.post.destroy([id]).catch(() => 14004);
 		ctx.helper.send(result);
 	}
 
@@ -73,7 +73,7 @@ class PostController extends Controller {
 
 		ctx.helper.validate('ids', { ids });
 
-		const result = await service.post.destroy(ids).catch(() => 12004);
+		const result = await service.post.destroy(ids).catch(() => 14004);
 		ctx.helper.send(result);
 	}
 }

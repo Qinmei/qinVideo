@@ -7,7 +7,7 @@ class CommentController extends Controller {
 
 		ctx.helper.validate('query', query);
 
-		const result = await service.comment.query(query).catch(() => 12000);
+		const result = await service.comment.query(query).catch(() => 17000);
 		ctx.helper.send(result);
 	}
 
@@ -17,7 +17,7 @@ class CommentController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.comment.info(id).catch(() => 12001);
+		const result = await service.comment.info(id).catch(() => 17001);
 		ctx.helper.send(result);
 	}
 
@@ -29,7 +29,7 @@ class CommentController extends Controller {
 		data.author = userId;
 		ctx.helper.validate('comment', data, true);
 
-		const result = await service.comment.create(data).catch(() => 12002);
+		const result = await service.comment.create(data).catch(() => 17002);
 		ctx.helper.send(result);
 	}
 
@@ -41,7 +41,7 @@ class CommentController extends Controller {
 		ctx.helper.validate('id', { id });
 		ctx.helper.validate('comment', data);
 
-		const result = await service.comment.update([id], data).catch(() => 12003);
+		const result = await service.comment.update([id], data).catch(() => 17003);
 		ctx.helper.send(result);
 	}
 
@@ -53,7 +53,7 @@ class CommentController extends Controller {
 		ctx.helper.validate('ids', { ids });
 		ctx.helper.validate('comment', data);
 
-		const result = await service.comment.update(data.ids, data).catch(() => 12003);
+		const result = await service.comment.update(data.ids, data).catch(() => 17003);
 		ctx.helper.send(result);
 	}
 
@@ -63,7 +63,7 @@ class CommentController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.comment.destroy([id]).catch(() => 12004);
+		const result = await service.comment.destroy([id]).catch(() => 17004);
 		ctx.helper.send(result);
 	}
 
@@ -73,7 +73,7 @@ class CommentController extends Controller {
 
 		ctx.helper.validate('ids', { ids });
 
-		const result = await service.comment.destroy(ids).catch(() => 12004);
+		const result = await service.comment.destroy(ids).catch(() => 17004);
 		ctx.helper.send(result);
 	}
 }
