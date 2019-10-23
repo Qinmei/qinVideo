@@ -1,18 +1,20 @@
-export default app => {
-  const mongoose = app.mongoose;
-  const Schema = mongoose.Schema;
+export default (app) => {
+	const mongoose = app.mongoose;
+	const Schema = mongoose.Schema;
 
-  const RelationSchema = new Schema(
-    {
-      user: Schema.Types.ObjectId,
-      target: Schema.Types.ObjectId, // 目标
-      belong: Schema.Types.ObjectId, // 所属
-      addons: Schema.Types.Mixed
-    },
-    {
-      timestamps: true
-    }
-  );
+	const RelationSchema = new Schema(
+		{
+			user: { type: Schema.Types.ObjectId, ref: 'User' },
+			animate: { type: Schema.Types.ObjectId, ref: 'Animate' },
+			comic: { type: Schema.Types.ObjectId, ref: 'Comic' },
+			post: { type: Schema.Types.ObjectId, ref: 'Post' },
+			author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+			addons: Schema.Types.Mixed
+		},
+		{
+			timestamps: true
+		}
+	);
 
-  return mongoose.model("Relation", RelationSchema);
+	return mongoose.model('Relation', RelationSchema);
 };

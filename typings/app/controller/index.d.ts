@@ -2,24 +2,36 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
-import ExportAnimate from '../../../app/controller/animate';
-import ExportComic from '../../../app/controller/comic';
-import ExportConfig from '../../../app/controller/config';
-import ExportDanmu from '../../../app/controller/danmu';
-import ExportKey from '../../../app/controller/key';
-import ExportReport from '../../../app/controller/report';
-import ExportShop from '../../../app/controller/shop';
-import ExportUser from '../../../app/controller/user';
+import ExportBackendAnimate from '../../../app/controller/backend/animate';
+import ExportBackendCategory from '../../../app/controller/backend/category';
+import ExportBackendComic from '../../../app/controller/backend/comic';
+import ExportBackendComment from '../../../app/controller/backend/comment';
+import ExportBackendConfig from '../../../app/controller/backend/config';
+import ExportBackendDanmu from '../../../app/controller/backend/danmu';
+import ExportBackendKey from '../../../app/controller/backend/key';
+import ExportBackendPost from '../../../app/controller/backend/post';
+import ExportBackendReport from '../../../app/controller/backend/report';
+import ExportBackendShop from '../../../app/controller/backend/shop';
+import ExportBackendUser from '../../../app/controller/backend/user';
+import ExportFrontendUser from '../../../app/controller/frontend/user';
 
 declare module 'egg' {
   interface IController {
-    animate: ExportAnimate;
-    comic: ExportComic;
-    config: ExportConfig;
-    danmu: ExportDanmu;
-    key: ExportKey;
-    report: ExportReport;
-    shop: ExportShop;
-    user: ExportUser;
+    backend: {
+      animate: ExportBackendAnimate;
+      category: ExportBackendCategory;
+      comic: ExportBackendComic;
+      comment: ExportBackendComment;
+      config: ExportBackendConfig;
+      danmu: ExportBackendDanmu;
+      key: ExportBackendKey;
+      post: ExportBackendPost;
+      report: ExportBackendReport;
+      shop: ExportBackendShop;
+      user: ExportBackendUser;
+    }
+    frontend: {
+      user: ExportFrontendUser;
+    }
   }
 }
