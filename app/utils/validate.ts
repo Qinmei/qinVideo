@@ -280,7 +280,16 @@ const ruleobj = {
 		cover: { type: 'string', required: false },
 		introduce: { type: 'string', required: false },
 		content: { type: 'string', required: false }
-	})
+	}),
+	login: {
+		name: { type: 'string' },
+		password: { type: 'string' }
+	},
+	register: {
+		name: { type: 'string', min: 6 },
+		password: { type: 'string' },
+		email: { type: 'string' }
+	}
 };
 
 const rules = (rule: string, force: boolean) => {

@@ -18,6 +18,7 @@ import ExportRelation from '../../../app/service/relation';
 import ExportReport from '../../../app/service/report';
 import ExportShop from '../../../app/service/shop';
 import ExportUser from '../../../app/service/user';
+import ExportUtils from '../../../app/service/utils';
 
 declare module 'egg' {
   interface IService {
@@ -37,5 +38,6 @@ declare module 'egg' {
     report: ExportReport;
     shop: ExportShop;
     user: ExportUser;
+    utils: ExportUtils;
   }
 }

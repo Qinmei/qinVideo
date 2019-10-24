@@ -22,12 +22,14 @@
     "clean": "ets clean"
   },
   "dependencies": {
+    "@sendgrid/mail": "^6.4.0",
     "egg": "^2.6.1",
     "egg-mongoose": "^3.2.0",
     "egg-scripts": "^2.6.0",
     "egg-validate": "^2.0.2",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
+    "nodemailer": "^6.3.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "uuid": "^3.3.3"
