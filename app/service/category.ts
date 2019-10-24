@@ -9,9 +9,9 @@ class CategoryService extends Service {
 		type && (query.type = type);
 
 		const result = await this.ctx.model.Category.find(query)
+			.sort({ [sortBy]: sortOrder, _id: -1 })
 			.skip(skip)
-			.limit(limit)
-			.sort({ [sortBy]: sortOrder, _id: -1 });
+			.limit(limit);
 
 		const total = await this.ctx.model.Category.find(query).countDocuments();
 

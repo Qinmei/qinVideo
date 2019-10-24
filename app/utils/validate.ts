@@ -98,10 +98,7 @@ const ruleobj = {
 		}
 	},
 	user: (force: boolean) => ({
-		name: {
-			type: 'string',
-			required: force
-		},
+		name: { type: 'string', required: force },
 		password: { type: 'password', required: force },
 		email: { type: 'email', required: force },
 		level: { type: 'number', required: false },
@@ -114,18 +111,9 @@ const ruleobj = {
 		expired: { type: 'number', required: false }
 	}),
 	animate: (force: boolean) => ({
-		title: {
-			type: 'string',
-			required: force
-		},
-		slug: {
-			type: 'string',
-			required: force
-		},
-		author: {
-			type: 'string',
-			required: force
-		},
+		title: { type: 'string', required: force },
+		slug: { type: 'string', required: force },
+		author: { type: 'string', required: force },
 		status: { type: 'string', required: force },
 		introduce: { type: 'string', required: false },
 		staff: { type: 'string', required: false },
@@ -229,6 +217,7 @@ const ruleobj = {
 		sendgrid: { type: 'string', default: '', required: false }
 	},
 	danmu: (force: boolean) => ({
+		target: { type: 'string', required: force },
 		player: { type: 'string', required: force },
 		author: { type: 'string', required: false },
 		time: { type: 'number', required: false },
@@ -253,8 +242,8 @@ const ruleobj = {
 		content: { type: 'string', required: force },
 		image: { type: 'array', required: false },
 		target: { type: 'string', required: force },
-		reply: 'string',
-		type: { type: 'string', required: force },
+		onModel: { type: 'string', required: force },
+		reply: { type: 'array', required: false },
 		status: { type: 'string', required: force }
 	}),
 	category: (force: boolean) => ({
@@ -266,19 +255,14 @@ const ruleobj = {
 	}),
 	comment: (force: boolean) => ({
 		author: { type: 'string', required: force },
-		animate: { type: 'string', required: false },
-		comic: { type: 'string', required: false },
-		eposide: { type: 'string', required: false },
-		post: { type: 'string', required: false },
+		target: { type: 'string', required: force },
+		onModel: { type: 'string', required: force },
 		replyTo: { type: 'string', required: false },
 		parent: { type: 'string', required: false },
 		content: { type: 'string', required: force },
 		image: { type: 'array', required: false },
 		video: { type: 'string', required: false },
-		status: {
-			type: 'string',
-			required: force
-		}
+		status: { type: 'string', required: force }
 	}),
 	key: (force: boolean) => ({
 		name: { type: 'string', required: force },

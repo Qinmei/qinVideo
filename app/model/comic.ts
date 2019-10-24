@@ -50,7 +50,6 @@ export default (app) => {
 			downLink: { type: String, default: '' }, // 下载链接
 			season: String,
 			relative: Schema.Types.ObjectId,
-			eposide: [{ type: Schema.Types.ObjectId, ref: 'Eposide' }],
 			coverVertical: { type: String, default: '' }, // 竖向大图
 			coverHorizontal: { type: String, default: '' }, // 横向大图
 			area: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 地区
@@ -60,9 +59,38 @@ export default (app) => {
 			addons: Schema.Types.Mixed
 		},
 		{
-			timestamps: true
+			timestamps: true,
+			toJSON: { virtuals: true }
 		}
 	);
+
+	ComicSchema.virtual('coutPlay', {
+		ref: 'History',
+		localField: '_id',
+		foreignField: 'target',
+		count: true
+	});
+
+	ComicSchema.virtual('coutLike', {
+		ref: 'Relation',
+		localField: '_id',
+		foreignField: 'target',
+		count: true
+	});
+
+	ComicSchema.virtual('coutComment', {
+		ref: 'Comment',
+		localField: '_id',
+		foreignField: 'target',
+		count: true
+	});
+
+	ComicSchema.virtual('eposide', {
+		ref: 'Eposide',
+		localField: '_id',
+		foreignField: 'target',
+		count: true
+	});
 
 	return mongoose.model('Comic', ComicSchema);
 };

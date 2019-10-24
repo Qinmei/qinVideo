@@ -24,9 +24,17 @@ export default (app) => {
 			addons: Schema.Types.Mixed
 		},
 		{
-			timestamps: true
+			timestamps: true,
+			toJSON: { virtuals: true }
 		}
 	);
+
+	CommentSchema.virtual('coutLike', {
+		ref: 'Relation',
+		localField: '_id',
+		foreignField: 'target',
+		count: true
+	});
 
 	return mongoose.model('Comment', CommentSchema);
 };

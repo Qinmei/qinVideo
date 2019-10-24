@@ -11,11 +11,14 @@ class AnimateService extends Service {
 		update && (query.isUpdate = update);
 
 		const result = await this.ctx.model.Animate.find(query)
+			.populate('coutPlay')
+			.populate('coutLike')
+			.populate('coutComment')
+			.populate('coutDanmu')
+			.sort({ [sortBy]: sortOrder, _id: -1 })
 			.skip(skip)
 			.limit(limit)
-			.populate({ path: 'author', select: 'name avatar level introduce' })
-			.populate('coutPlay')
-			.sort({ [sortBy]: sortOrder, _id: -1 });
+			.populate({ path: 'author', select: 'name avatar level introduce background' });
 
 		const total = await this.ctx.model.Animate.find(query).countDocuments();
 
@@ -26,7 +29,12 @@ class AnimateService extends Service {
 	}
 
 	async info(id: string) {
-		const data = this.ctx.model.Animate.findById(id);
+		const data = this.ctx.model.Animate.findById(id)
+			.populate('coutPlay')
+			.populate('coutLike')
+			.populate('coutComment')
+			.populate('coutDanmu')
+			.populate({ path: 'author', select: 'name avatar level introduce background' });
 		return data;
 	}
 

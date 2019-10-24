@@ -8,7 +8,7 @@ export default (app) => {
 			onModel: {
 				type: String,
 				required: true,
-				enum: ['Comic', 'Animate', 'Eposide', 'Post']
+				enum: ['Comic', 'Animate', 'Eposide', 'Post', 'User']
 			},
 			author: { type: Schema.Types.ObjectId, ref: 'User' },
 			ip: String,

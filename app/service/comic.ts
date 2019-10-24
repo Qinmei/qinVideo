@@ -11,9 +11,13 @@ class ComicService extends Service {
 		update && (query.isUpdate = update);
 
 		const result = await this.ctx.model.Comic.find(query)
+			.populate('coutPlay')
+			.populate('coutLike')
+			.populate('coutComment')
+			.sort({ [sortBy]: sortOrder, _id: -1 })
 			.skip(skip)
 			.limit(limit)
-			.sort({ [sortBy]: sortOrder, _id: -1 });
+			.populate({ path: 'author', select: 'name avatar level introduce background' });
 
 		const total = await this.ctx.model.Comic.find(query).countDocuments();
 
@@ -24,7 +28,11 @@ class ComicService extends Service {
 	}
 
 	async info(id: string) {
-		const data = this.ctx.model.Comic.findById(id);
+		const data = this.ctx.model.Comic.findById(id)
+			.populate('coutPlay')
+			.populate('coutLike')
+			.populate('coutComment')
+			.populate({ path: 'author', select: 'name avatar level introduce background' });
 		return data;
 	}
 

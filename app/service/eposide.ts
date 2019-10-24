@@ -1,19 +1,10 @@
 import { Service } from 'egg';
 
 class EposideService extends Service {
-	async query({ page, size, sortBy, sortOrder, animate, comic }) {
-		const skip: number = (page - 1) * size;
-		const limit: number = size;
+	async query({ target }) {
+		const query = { target };
 
-		const query: any = {};
-		animate && (query.animate = animate);
-		comic && (query.comic = comic);
-
-		const result = await this.ctx.model.Eposide.find(query)
-			.skip(skip)
-			.limit(limit)
-			.sort({ [sortBy]: sortOrder, _id: -1 });
-
+		const result = await this.ctx.model.Eposide.find(query).sort({ _id: -1 });
 		const total = await this.ctx.model.Eposide.find(query).countDocuments();
 
 		return {
@@ -23,7 +14,11 @@ class EposideService extends Service {
 	}
 
 	async info(id: string) {
-		const data = this.ctx.model.Eposide.findById(id);
+		const data = this.ctx.model.Eposide.findById(id)
+			.populate('target')
+			.populate('coutPlay')
+			.populate('coutComment')
+			.populate('coutDanmu');
 		return data;
 	}
 

@@ -18,9 +18,19 @@ export default (app) => {
 				required: true,
 				enum: ['Comic', 'Animate']
 			},
-			link: {
-				type: String
-			},
+			link: [
+				{
+					name: String,
+					value: String
+				}
+			],
+			subtitle: [
+				{
+					name: String,
+					value: String
+				}
+			],
+			preview: [{ type: String }],
 			bilibili: {
 				type: String
 			},
@@ -29,9 +39,31 @@ export default (app) => {
 			addons: Schema.Types.Mixed
 		},
 		{
-			timestamps: true
+			timestamps: true,
+			toJSON: { virtuals: true }
 		}
 	);
+
+	EposideSchema.virtual('coutPlay', {
+		ref: 'History',
+		localField: '_id',
+		foreignField: 'target',
+		count: true
+	});
+
+	EposideSchema.virtual('coutComment', {
+		ref: 'Comment',
+		localField: '_id',
+		foreignField: 'target',
+		count: true
+	});
+
+	EposideSchema.virtual('coutDanmu', {
+		ref: 'Danmu',
+		localField: '_id',
+		foreignField: 'target',
+		count: true
+	});
 
 	return mongoose.model('Eposide', EposideSchema);
 };

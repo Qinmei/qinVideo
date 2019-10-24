@@ -1,18 +1,21 @@
 import { Service } from 'egg';
 
 class CommentService extends Service {
-	async query({ page, size, sortBy, sortOrder, name, status }) {
+	async query({ page, size, sortBy, sortOrder, name, target, status }) {
 		const skip: number = (page - 1) * size;
 		const limit: number = size;
 
 		const query: any = {};
 		name && (query.content = { $regex: name, $options: '$i' });
 		status && (query.status = status);
+		target && (query.target = target);
 
 		const result = await this.ctx.model.Comment.find(query)
+			.populate('coutLike')
+			.sort({ [sortBy]: sortOrder, _id: -1 })
 			.skip(skip)
 			.limit(limit)
-			.sort({ [sortBy]: sortOrder, _id: -1 });
+			.populate('target');
 
 		const total = await this.ctx.model.Comment.find(query).countDocuments();
 
@@ -23,7 +26,9 @@ class CommentService extends Service {
 	}
 
 	async info(id: string) {
-		const data = this.ctx.model.Comment.findById(id);
+		const data = this.ctx.model.Comment.findById(id)
+			.populate('coutLike')
+			.populate('target');
 		return data;
 	}
 

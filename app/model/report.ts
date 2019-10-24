@@ -4,15 +4,15 @@ export default (app) => {
 
 	const ReportSchema = new Schema(
 		{
-			author: Schema.Types.ObjectId, // 用户名
-			content: { type: String, required: true }, // 内容
+			author: { type: Schema.Types.ObjectId, ref: 'User' },
+			content: { type: String, required: true },
 			image: [{ type: String }],
 			reply: String,
 			target: { type: Schema.Types.ObjectId, required: true, refPath: 'onModel' },
 			onModel: {
 				type: String,
 				required: true,
-				enum: ['Comic', 'Animate', 'Comment', 'Post']
+				enum: ['Comic', 'Animate', 'Comment', 'User', 'Post']
 			},
 			status: {
 				type: String,

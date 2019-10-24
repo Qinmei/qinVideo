@@ -32,9 +32,31 @@ export default (app) => {
 			addons: Schema.Types.Mixed
 		},
 		{
-			timestamps: true
+			timestamps: true,
+			toJSON: { virtuals: true }
 		}
 	);
+
+	PostSchema.virtual('coutPlay', {
+		ref: 'History',
+		localField: '_id',
+		foreignField: 'target',
+		count: true
+	});
+
+	PostSchema.virtual('coutLike', {
+		ref: 'Relation',
+		localField: '_id',
+		foreignField: 'target',
+		count: true
+	});
+
+	PostSchema.virtual('coutComment', {
+		ref: 'Comment',
+		localField: '_id',
+		foreignField: 'target',
+		count: true
+	});
 
 	return mongoose.model('Post', PostSchema);
 };

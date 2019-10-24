@@ -10,9 +10,13 @@ class PostService extends Service {
 		status && (query.status = status);
 
 		const result = await this.ctx.model.Post.find(query)
+			.populate('coutPlay')
+			.populate('coutLike')
+			.populate('coutComment')
+			.sort({ [sortBy]: sortOrder, _id: -1 })
 			.skip(skip)
 			.limit(limit)
-			.sort({ [sortBy]: sortOrder, _id: -1 });
+			.populate({ path: 'author', select: 'name avatar level introduce background' });
 
 		const total = await this.ctx.model.Post.find(query).countDocuments();
 
@@ -23,7 +27,11 @@ class PostService extends Service {
 	}
 
 	async info(id: string) {
-		const data = this.ctx.model.Post.findById(id);
+		const data = this.ctx.model.Post.findById(id)
+			.populate('coutPlay')
+			.populate('coutLike')
+			.populate('coutComment')
+			.populate({ path: 'author', select: 'name avatar level introduce background' });
 		return data;
 	}
 
