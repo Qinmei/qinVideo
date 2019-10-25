@@ -27,6 +27,11 @@ class EposideService extends Service {
 		return result;
 	}
 
+	async insertMany(data: Array<any>) {
+		const result = await this.ctx.model.Eposide.insertMany(data);
+		return result;
+	}
+
 	async update(ids: Array<string>, data: any) {
 		const result = await this.ctx.model.Eposide.updateMany({ _id: { $in: ids } }, { $set: data });
 		return result;

@@ -8,6 +8,7 @@ import ExportBackendComic from '../../../app/controller/backend/comic';
 import ExportBackendComment from '../../../app/controller/backend/comment';
 import ExportBackendConfig from '../../../app/controller/backend/config';
 import ExportBackendDanmu from '../../../app/controller/backend/danmu';
+import ExportBackendEposide from '../../../app/controller/backend/eposide';
 import ExportBackendKey from '../../../app/controller/backend/key';
 import ExportBackendPost from '../../../app/controller/backend/post';
 import ExportBackendReport from '../../../app/controller/backend/report';
@@ -24,6 +25,7 @@ declare module 'egg' {
       comment: ExportBackendComment;
       config: ExportBackendConfig;
       danmu: ExportBackendDanmu;
+      eposide: ExportBackendEposide;
       key: ExportBackendKey;
       post: ExportBackendPost;
       report: ExportBackendReport;

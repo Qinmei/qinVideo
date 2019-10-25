@@ -30,6 +30,18 @@ class AnimateController extends Controller {
 		ctx.helper.validate('animate', data, true);
 
 		const result = await service.animate.create(data).catch(() => 12002);
+
+		if (typeof result !== 'number') {
+			const { eposide } = data;
+			const id = result._id;
+			eposide.map((item: any) => {
+				item.onModel = 'Animate';
+				item.target = id;
+			});
+
+			await service.eposide.insertMany(eposide);
+		}
+
 		ctx.helper.send(result);
 	}
 

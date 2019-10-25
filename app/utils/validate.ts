@@ -289,6 +289,18 @@ const ruleobj = {
 		name: { type: 'string', min: 6 },
 		password: { type: 'string' },
 		email: { type: 'string' }
+	},
+	eposide: {
+		title: { type: 'string', required: false },
+		cover: { type: 'string', required: false },
+		target: { type: 'string', required: false },
+		onModel: { type: 'string', required: false },
+		link: { type: 'array', required: false },
+		subtitle: { type: 'array', required: false },
+		preview: { type: 'array', required: false },
+		bilibili: { type: 'string', required: false },
+		noSetPrefix: { type: 'boolean', required: false },
+		noParentPrefix: { type: 'boolean', required: false }
 	}
 };
 
