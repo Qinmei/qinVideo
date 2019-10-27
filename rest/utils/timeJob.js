@@ -3,15 +3,8 @@ const schedule = require("node-schedule");
 const { UserModel, HigherModel } = require("../models/index");
 const { higherController } = require("../controllers");
 
-let rule = new schedule.RecurrenceRule();
-rule.minute = [0, 15, 30, 45];
-
-let rule2 = new schedule.RecurrenceRule();
-rule2.hour = [3, 15];
-rule2.minute = 0;
-
 module.exports = () => {
-  schedule.scheduleJob(rule, async () => {
+  schedule.scheduleJob("0 */15 * * * *", async () => {
     await UserModel.update(
       { expired: { $gte: 900 }, level: { $lte: 99 } },
       { $inc: { expired: -900 } }
@@ -22,7 +15,7 @@ module.exports = () => {
     );
   });
 
-  schedule.scheduleJob(rule2, async () => {
+  schedule.scheduleJob("0 0 3 * * *", async () => {
     const data = await HigherModel.findOne();
     if (data && data.update && data.update.use) {
       await higherController.update();
