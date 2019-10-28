@@ -24,7 +24,7 @@ export default (app) => {
 			},
 			level: { type: Number, default: 0 }, // 等级限定
 			author: { type: Schema.Types.ObjectId, ref: 'User' }, // 用户名
-			category: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 分类
+			kind: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 分类
 			tag: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 标签
 			cover: { type: String, default: '' }, // 封面图
 			introduce: { type: String, default: '' },
@@ -37,21 +37,21 @@ export default (app) => {
 		}
 	);
 
-	PostSchema.virtual('coutPlay', {
+	PostSchema.virtual('countPlay', {
 		ref: 'History',
 		localField: '_id',
 		foreignField: 'target',
 		count: true
 	});
 
-	PostSchema.virtual('coutLike', {
+	PostSchema.virtual('countLike', {
 		ref: 'Relation',
 		localField: '_id',
 		foreignField: 'target',
 		count: true
 	});
 
-	PostSchema.virtual('coutComment', {
+	PostSchema.virtual('countComment', {
 		ref: 'Comment',
 		localField: '_id',
 		foreignField: 'target',

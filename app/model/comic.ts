@@ -64,21 +64,21 @@ export default (app) => {
 		}
 	);
 
-	ComicSchema.virtual('coutPlay', {
+	ComicSchema.virtual('countPlay', {
 		ref: 'History',
 		localField: '_id',
 		foreignField: 'target',
 		count: true
 	});
 
-	ComicSchema.virtual('coutLike', {
+	ComicSchema.virtual('countLike', {
 		ref: 'Relation',
 		localField: '_id',
 		foreignField: 'target',
 		count: true
 	});
 
-	ComicSchema.virtual('coutComment', {
+	ComicSchema.virtual('countComment', {
 		ref: 'Comment',
 		localField: '_id',
 		foreignField: 'target',

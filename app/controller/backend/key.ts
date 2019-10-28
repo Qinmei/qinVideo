@@ -53,7 +53,7 @@ class KeyController extends Controller {
 		ctx.helper.validate('ids', { ids });
 		ctx.helper.validate('key', data);
 
-		const result = await service.key.update(data.ids, data).catch(() => 19003);
+		const result = await service.key.update(ids, data).catch(() => 19003);
 		ctx.helper.send(result);
 	}
 

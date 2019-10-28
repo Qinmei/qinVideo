@@ -24,7 +24,7 @@ class ComicController extends Controller {
 	async create() {
 		const { ctx, service } = this;
 		const data = ctx.request.body;
-		const userId = ctx.state.user._id;
+		const userId = ctx.state.user.id;
 
 		data.author = userId;
 		ctx.helper.validate('comic', data, true);
@@ -53,7 +53,7 @@ class ComicController extends Controller {
 		ctx.helper.validate('ids', { ids });
 		ctx.helper.validate('comic', data);
 
-		const result = await service.comic.update(data.ids, data).catch(() => 13003);
+		const result = await service.comic.update(ids, data).catch(() => 13003);
 		ctx.helper.send(result);
 	}
 

@@ -24,7 +24,7 @@ class PostController extends Controller {
 	async create() {
 		const { ctx, service } = this;
 		const data = ctx.request.body;
-		const userId = ctx.state.user._id;
+		const userId = ctx.state.user.id;
 
 		data.author = userId;
 		ctx.helper.validate('post', data, true);
@@ -53,7 +53,7 @@ class PostController extends Controller {
 		ctx.helper.validate('ids', { ids });
 		ctx.helper.validate('post', data);
 
-		const result = await service.post.update(data.ids, data).catch(() => 14003);
+		const result = await service.post.update(ids, data).catch(() => 14003);
 		ctx.helper.send(result);
 	}
 

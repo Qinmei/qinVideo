@@ -5,7 +5,7 @@ class CategoryController extends Controller {
 		const { ctx, service } = this;
 		const { query } = ctx;
 
-		ctx.helper.validate('query', query);
+		ctx.helper.validate('cateQuery', query);
 
 		const result = await service.category.query(query).catch(() => 16000);
 		ctx.helper.send(result);
@@ -24,9 +24,7 @@ class CategoryController extends Controller {
 	async create() {
 		const { ctx, service } = this;
 		const data = ctx.request.body;
-		const userId = ctx.state.user._id;
 
-		data.author = userId;
 		ctx.helper.validate('category', data, true);
 
 		const result = await service.category.create(data).catch(() => 16002);
@@ -53,7 +51,7 @@ class CategoryController extends Controller {
 		ctx.helper.validate('ids', { ids });
 		ctx.helper.validate('category', data);
 
-		const result = await service.category.update(data.ids, data).catch(() => 16003);
+		const result = await service.category.update(ids, data).catch(() => 16003);
 		ctx.helper.send(result);
 	}
 
@@ -69,11 +67,11 @@ class CategoryController extends Controller {
 
 	async destroyMany() {
 		const { ctx, service } = this;
-		const { ids } = ctx.request.body;
+		const { ids, type } = ctx.request.body;
 
 		ctx.helper.validate('ids', { ids });
 
-		const result = await service.category.destroy(ids).catch(() => 16004);
+		const result = await service.category.destroy(ids, type).catch(() => 16004);
 		ctx.helper.send(result);
 	}
 }

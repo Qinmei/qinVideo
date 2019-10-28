@@ -1,12 +1,12 @@
 import { Service } from 'egg';
 
 class CategoryService extends Service {
-	async query({ page, size, sortBy, sortOrder, type }) {
+	async query({ page, size, sortBy, sortOrder, type, title }) {
 		const skip: number = (page - 1) * size;
 		const limit: number = size;
-
 		const query: any = {};
 		type && (query.type = type);
+		title && (query.name = { $regex: title, $options: '$i' });
 
 		const result = await this.ctx.model.Category.find(query)
 			.sort({ [sortBy]: sortOrder, _id: -1 })
@@ -32,14 +32,14 @@ class CategoryService extends Service {
 	}
 
 	async update(ids: Array<string>, data: any) {
-		const result = await this.ctx.model.Category.updateMany({ _id: { $in: ids } }, { $set: data });
+		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
+		const result = await this.ctx.model.Category.updateMany(query, { $set: data });
 		return result;
 	}
 
-	async destroy(ids: Array<string>) {
-		const result = await this.ctx.model.Category.deleteMany({
-			_id: { $in: ids }
-		});
+	async destroy(ids: Array<string>, type?: string) {
+		const query = ids.length > 0 ? { _id: { $in: ids } } : { type };
+		const result = await this.ctx.model.Category.deleteMany(query);
 		return result;
 	}
 }

@@ -63,28 +63,28 @@ export default (app) => {
 		}
 	);
 
-	AnimateSchema.virtual('coutPlay', {
+	AnimateSchema.virtual('countPlay', {
 		ref: 'History',
 		localField: '_id',
 		foreignField: 'target',
 		count: true
 	});
 
-	AnimateSchema.virtual('coutLike', {
+	AnimateSchema.virtual('countLike', {
 		ref: 'Relation',
 		localField: '_id',
 		foreignField: 'target',
 		count: true
 	});
 
-	AnimateSchema.virtual('coutComment', {
+	AnimateSchema.virtual('countComment', {
 		ref: 'Comment',
 		localField: '_id',
 		foreignField: 'target',
 		count: true
 	});
 
-	AnimateSchema.virtual('coutDanmu', {
+	AnimateSchema.virtual('countDanmu', {
 		ref: 'Danmu',
 		localField: '_id',
 		foreignField: 'target',

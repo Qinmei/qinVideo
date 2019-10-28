@@ -53,7 +53,7 @@ class CommentController extends Controller {
 		ctx.helper.validate('ids', { ids });
 		ctx.helper.validate('comment', data);
 
-		const result = await service.comment.update(data.ids, data).catch(() => 17003);
+		const result = await service.comment.update(ids, data).catch(() => 17003);
 		ctx.helper.send(result);
 	}
 

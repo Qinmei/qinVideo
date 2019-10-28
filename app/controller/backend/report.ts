@@ -53,7 +53,7 @@ class ReportController extends Controller {
 		ctx.helper.validate('ids', { ids });
 		ctx.helper.validate('report', data);
 
-		const result = await service.report.update(data.ids, data).catch(() => 23003);
+		const result = await service.report.update(ids, data).catch(() => 23003);
 		ctx.helper.send(result);
 	}
 

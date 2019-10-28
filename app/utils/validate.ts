@@ -12,7 +12,7 @@ const ruleobj = {
 		},
 		sortBy: {
 			type: 'string',
-			default: 'updatedAt',
+			default: 'createdAt',
 			required: false
 		},
 		sortOrder: {
@@ -20,7 +20,7 @@ const ruleobj = {
 			default: -1,
 			required: false
 		},
-		name: {
+		title: {
 			type: 'string',
 			required: false
 		},
@@ -41,46 +41,22 @@ const ruleobj = {
 			required: false
 		},
 		update: {
-			type: 'boolean',
-			required: false
-		},
-		akind: {
 			type: 'string',
 			required: false
 		},
-		aarea: {
+		kind: {
 			type: 'string',
 			required: false
 		},
-		ayear: {
+		area: {
 			type: 'string',
 			required: false
 		},
-		atag: {
+		year: {
 			type: 'string',
 			required: false
 		},
-		ckind: {
-			type: 'string',
-			required: false
-		},
-		carea: {
-			type: 'string',
-			required: false
-		},
-		cyear: {
-			type: 'string',
-			required: false
-		},
-		ctag: {
-			type: 'string',
-			required: false
-		},
-		pkind: {
-			type: 'string',
-			required: false
-		},
-		ptag: {
+		tag: {
 			type: 'string',
 			required: false
 		}
@@ -250,8 +226,7 @@ const ruleobj = {
 		name: { type: 'string', required: force },
 		type: { type: 'string', required: force },
 		cover: { type: 'string', required: false },
-		introduce: { type: 'string', required: false },
-		parent: { type: 'string', required: false }
+		introduce: { type: 'string', required: false }
 	}),
 	comment: (force: boolean) => ({
 		author: { type: 'string', required: force },
@@ -275,7 +250,7 @@ const ruleobj = {
 		status: { type: 'string', required: force },
 		level: { type: 'number', required: force },
 		author: { type: 'string', required: force },
-		category: { type: 'array', required: false },
+		kind: { type: 'array', required: false },
 		tag: { type: 'array', required: false },
 		cover: { type: 'string', required: false },
 		introduce: { type: 'string', required: false },
@@ -301,6 +276,35 @@ const ruleobj = {
 		bilibili: { type: 'string', required: false },
 		noSetPrefix: { type: 'boolean', required: false },
 		noParentPrefix: { type: 'boolean', required: false }
+	},
+	cateQuery: {
+		page: {
+			type: 'number',
+			required: true
+		},
+		size: {
+			type: 'number',
+			min: 1,
+			required: true
+		},
+		sortBy: {
+			type: 'string',
+			default: 'updatedAt',
+			required: false
+		},
+		sortOrder: {
+			type: 'number',
+			default: -1,
+			required: false
+		},
+		title: {
+			type: 'string',
+			required: false
+		},
+		type: {
+			type: 'string',
+			required: false
+		}
 	}
 };
 

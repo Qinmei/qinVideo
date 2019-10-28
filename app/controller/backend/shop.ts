@@ -53,7 +53,7 @@ class ShopController extends Controller {
 		ctx.helper.validate('ids', { ids });
 		ctx.helper.validate('shop', data);
 
-		const result = await service.shop.update(data.ids, data).catch(() => 21003);
+		const result = await service.shop.update(ids, data).catch(() => 21003);
 		ctx.helper.send(result);
 	}
 

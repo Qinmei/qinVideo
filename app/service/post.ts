@@ -1,22 +1,26 @@
 import { Service } from 'egg';
 
 class PostService extends Service {
-	async query({ page, size, sortBy, sortOrder, status, name }) {
+	async query({ page, size, sortBy, sortOrder, status, title, kind, tag }) {
 		const skip: number = (page - 1) * size;
 		const limit: number = size;
 
 		const query: any = {};
-		name && (query.title = { $regex: name, $options: '$i' });
+		title && (query.title = { $regex: title, $options: '$i' });
 		status && (query.status = status);
+		kind && (query.kind = kind);
+		tag && (query.tag = tag);
 
 		const result = await this.ctx.model.Post.find(query)
-			.populate('coutPlay')
-			.populate('coutLike')
-			.populate('coutComment')
+			.populate('countPlay')
+			.populate('countLike')
+			.populate('countComment')
 			.sort({ [sortBy]: sortOrder, _id: -1 })
 			.skip(skip)
 			.limit(limit)
-			.populate({ path: 'author', select: 'name avatar level introduce background' });
+			.populate({ path: 'author', select: 'name avatar level introduce background' })
+			.populate('kind')
+			.populate('tag');
 
 		const total = await this.ctx.model.Post.find(query).countDocuments();
 
@@ -28,10 +32,12 @@ class PostService extends Service {
 
 	async info(id: string) {
 		const data = this.ctx.model.Post.findById(id)
-			.populate('coutPlay')
-			.populate('coutLike')
-			.populate('coutComment')
-			.populate({ path: 'author', select: 'name avatar level introduce background' });
+			.populate('countPlay')
+			.populate('countLike')
+			.populate('countComment')
+			.populate({ path: 'author', select: 'name avatar level introduce background' })
+			.populate('kind')
+			.populate('tag');
 		return data;
 	}
 
@@ -41,14 +47,14 @@ class PostService extends Service {
 	}
 
 	async update(ids: Array<string>, data: any) {
-		const result = await this.ctx.model.Post.updateMany({ _id: { $in: ids } }, { $set: data });
+		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
+		const result = await this.ctx.model.Post.updateMany(query, { $set: data });
 		return result;
 	}
 
 	async destroy(ids: Array<string>) {
-		const result = await this.ctx.model.Post.deleteMany({
-			_id: { $in: ids }
-		});
+		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
+		const result = await this.ctx.model.Post.deleteMany(query);
 		return result;
 	}
 }

@@ -22,9 +22,6 @@ export default (app) => {
 		introduce: {
 			type: String,
 			default: ''
-		},
-		parent: {
-			type: Schema.Types.ObjectId
 		}
 	});
 

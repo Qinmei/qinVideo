@@ -31,17 +31,6 @@ class AnimateController extends Controller {
 
 		const result = await service.animate.create(data).catch(() => 12002);
 
-		if (typeof result !== 'number') {
-			const { eposide } = data;
-			const id = result._id;
-			eposide.map((item: any) => {
-				item.onModel = 'Animate';
-				item.target = id;
-			});
-
-			await service.eposide.insertMany(eposide);
-		}
-
 		ctx.helper.send(result);
 	}
 
@@ -65,7 +54,7 @@ class AnimateController extends Controller {
 		ctx.helper.validate('ids', { ids });
 		ctx.helper.validate('animate', data);
 
-		const result = await service.animate.update(data.ids, data).catch(() => 12003);
+		const result = await service.animate.update(ids, data).catch(() => 12003);
 		ctx.helper.send(result);
 	}
 

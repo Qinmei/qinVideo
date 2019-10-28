@@ -43,7 +43,7 @@ class EposideController extends Controller {
 		ctx.helper.validate('ids', { ids });
 		ctx.helper.validate('eposide', data);
 
-		const result = await service.eposide.update(data.ids, data).catch(() => 17003);
+		const result = await service.eposide.update(ids, data).catch(() => 17003);
 		ctx.helper.send(result);
 	}
 
