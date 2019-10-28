@@ -50,6 +50,42 @@ export default (app: Application) => {
 	router.delete(`${api}/category/:id`, auth(100), controller.backend.category.destroy);
 	router.delete(`${api}/category`, auth(100), controller.backend.category.destroyMany);
 
+	// 评论
+	router.get(`${api}/comments`, auth(100), controller.backend.category.query);
+	router.get(`${api}/comments/:id`, auth(100), controller.backend.category.info);
+	router.post(`${api}/comments`, auth(100), controller.backend.category.create);
+	router.put(`${api}/comments/:id`, auth(100), controller.backend.category.update);
+	router.put(`${api}/comments`, auth(100), controller.backend.category.updateMany);
+	router.delete(`${api}/comments/:id`, auth(100), controller.backend.category.destroy);
+	router.delete(`${api}/comments`, auth(100), controller.backend.category.destroyMany);
+
+	// 商品
+	router.get(`${api}/shop`, auth(100), controller.backend.shop.query);
+	router.get(`${api}/shop/:id`, auth(100), controller.backend.shop.info);
+	router.post(`${api}/shop`, auth(100), controller.backend.shop.create);
+	router.put(`${api}/shop/:id`, auth(100), controller.backend.shop.update);
+	router.put(`${api}/shop`, auth(100), controller.backend.shop.updateMany);
+	router.delete(`${api}/shop/:id`, auth(100), controller.backend.shop.destroy);
+	router.delete(`${api}/shop`, auth(100), controller.backend.shop.destroyMany);
+
+	// 激活码
+	router.get(`${api}/key`, auth(100), controller.backend.key.query);
+	router.get(`${api}/key/:id`, auth(100), controller.backend.key.info);
+	router.post(`${api}/key`, auth(100), controller.backend.key.create);
+	router.put(`${api}/key/:id`, auth(100), controller.backend.key.update);
+	router.put(`${api}/key`, auth(100), controller.backend.key.updateMany);
+	router.delete(`${api}/key/:id`, auth(100), controller.backend.key.destroy);
+	router.delete(`${api}/key`, auth(100), controller.backend.key.destroyMany);
+
+	// 订单
+	router.get(`${api}/order`, auth(100), controller.backend.order.query);
+	router.get(`${api}/order/:id`, auth(100), controller.backend.order.info);
+	router.post(`${api}/order`, auth(100), controller.backend.order.create);
+	router.put(`${api}/order/:id`, auth(100), controller.backend.order.update);
+	router.put(`${api}/order`, auth(100), controller.backend.order.updateMany);
+	router.delete(`${api}/order/:id`, auth(100), controller.backend.order.destroy);
+	router.delete(`${api}/order`, auth(100), controller.backend.order.destroyMany);
+
 	// 配置
 	router.get(`${api}/config`, auth(100), controller.backend.config.query);
 	router.post(`${api}/config`, auth(100), controller.backend.config.create);
