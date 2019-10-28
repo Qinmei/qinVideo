@@ -5,7 +5,9 @@ class CommentService extends Service {
 		const skip: number = (page - 1) * size;
 		const limit: number = size;
 
-		const query: any = {};
+		const query: any = {
+			parent: null
+		};
 		name && (query.content = { $regex: name, $options: '$i' });
 		status && (query.status = status);
 		target && (query.target = target);
@@ -15,7 +17,8 @@ class CommentService extends Service {
 			.sort({ [sortBy]: sortOrder, _id: -1 })
 			.skip(skip)
 			.limit(limit)
-			.populate('target');
+			.populate('target')
+			.populate('children');
 
 		const total = await this.ctx.model.Comment.find(query).countDocuments();
 
@@ -28,7 +31,8 @@ class CommentService extends Service {
 	async info(id: string) {
 		const data = this.ctx.model.Comment.findById(id)
 			.populate('coutLike')
-			.populate('target');
+			.populate('target')
+			.populate('children');
 		return data;
 	}
 

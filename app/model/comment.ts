@@ -36,5 +36,11 @@ export default (app) => {
 		count: true
 	});
 
+	CommentSchema.virtual('children', {
+		ref: 'Comment',
+		localField: '_id',
+		foreignField: 'parent'
+	});
+
 	return mongoose.model('Comment', CommentSchema);
 };
