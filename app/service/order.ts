@@ -1,12 +1,12 @@
 import { Service } from 'egg';
 
 class OrderService extends Service {
-	async query({ page, size, sortBy, sortOrder, name }) {
+	async query({ page, size, sortBy, sortOrder, title }) {
 		const skip: number = (page - 1) * size;
 		const limit: number = size;
 
 		const query: any = {};
-		name && (query._id = { $in: [name] });
+		title && (query._id = { $in: [title] });
 
 		const result = await this.ctx.model.Danmu.find(query)
 			.sort({ [sortBy]: sortOrder, _id: -1 })
@@ -36,14 +36,14 @@ class OrderService extends Service {
 	}
 
 	async update(ids: Array<string>, data: any) {
-		const result = await this.ctx.model.Danmu.updateMany({ _id: { $in: ids } }, { $set: data });
+		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
+		const result = await this.ctx.model.Danmu.updateMany(query, { $set: data });
 		return result;
 	}
 
 	async destroy(ids: Array<string>) {
-		const result = await this.ctx.model.Danmu.deleteMany({
-			_id: { $in: ids }
-		});
+		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
+		const result = await this.ctx.model.Danmu.deleteMany(query);
 		return result;
 	}
 }

@@ -1,12 +1,12 @@
 import { Service } from 'egg';
 
 class KeyService extends Service {
-	async query({ page, size, sortBy, sortOrder, name, status }) {
+	async query({ page, size, sortBy, sortOrder, title, status }) {
 		const skip: number = (page - 1) * size;
 		const limit: number = size;
 
 		const query: any = {};
-		name && (query.name = { $regex: name, $options: '$i' });
+		title && (query.key = { $regex: title, $options: '$i' });
 		status && (query.status = status);
 
 		const result = await this.ctx.model.Key.find(query)
@@ -33,14 +33,14 @@ class KeyService extends Service {
 	}
 
 	async update(ids: Array<string>, data: any) {
-		const result = await this.ctx.model.Key.updateMany({ _id: { $in: ids } }, { $set: data });
+		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
+		const result = await this.ctx.model.Key.updateMany(query, { $set: data });
 		return result;
 	}
 
 	async destroy(ids: Array<string>) {
-		const result = await this.ctx.model.Key.deleteMany({
-			_id: { $in: ids }
-		});
+		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
+		const result = await this.ctx.model.Key.deleteMany(query);
 		return result;
 	}
 }

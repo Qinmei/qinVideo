@@ -4,7 +4,7 @@ export default (app) => {
 
 	const KeySchema = new Schema(
 		{
-			name: {
+			key: {
 				// 密钥
 				type: String,
 				required: true,
