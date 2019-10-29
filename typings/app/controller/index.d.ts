@@ -10,6 +10,7 @@ import ExportBackendConfig from '../../../app/controller/backend/config';
 import ExportBackendDanmu from '../../../app/controller/backend/danmu';
 import ExportBackendEposide from '../../../app/controller/backend/eposide';
 import ExportBackendKey from '../../../app/controller/backend/key';
+import ExportBackendOrder from '../../../app/controller/backend/order';
 import ExportBackendPost from '../../../app/controller/backend/post';
 import ExportBackendReport from '../../../app/controller/backend/report';
 import ExportBackendShop from '../../../app/controller/backend/shop';
@@ -27,6 +28,7 @@ declare module 'egg' {
       danmu: ExportBackendDanmu;
       eposide: ExportBackendEposide;
       key: ExportBackendKey;
+      order: ExportBackendOrder;
       post: ExportBackendPost;
       report: ExportBackendReport;
       shop: ExportBackendShop;

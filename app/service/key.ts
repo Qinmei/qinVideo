@@ -1,4 +1,5 @@
 import { Service } from 'egg';
+import * as short from 'short-uuid';
 
 class KeyService extends Service {
 	async query({ page, size, sortBy, sortOrder, title, status }) {
@@ -28,7 +29,18 @@ class KeyService extends Service {
 	}
 
 	async create(data: any) {
-		const result = await this.ctx.model.Key.create(data);
+		const { count, price, expired } = data;
+		const newData: Array<{}> = [];
+		for (let i = 0; i < count; i++) {
+			const item = {
+				key: short.generate(),
+				price,
+				expired,
+				status: 'draft'
+			};
+			newData.push(item);
+		}
+		const result = await this.ctx.model.Key.create(newData);
 		return result;
 	}
 

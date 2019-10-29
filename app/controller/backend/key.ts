@@ -29,7 +29,7 @@ class KeyController extends Controller {
 		data.author = userId;
 		ctx.helper.validate('key', data, true);
 
-		const result = await service.key.create(data).catch(() => 19002);
+		const result = await service.key.create(data).catch((err) => console.log(err));
 		ctx.helper.send(result);
 	}
 

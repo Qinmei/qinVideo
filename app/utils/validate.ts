@@ -240,9 +240,9 @@ const ruleobj = {
 		status: { type: 'string', required: force }
 	}),
 	key: (force: boolean) => ({
-		name: { type: 'string', required: force },
-		status: { type: 'string', required: force },
-		price: { type: 'number', required: force }
+		count: { type: 'number', required: force },
+		price: { type: 'number', required: force },
+		expired: { type: 'number', required: force }
 	}),
 	post: (force: boolean) => ({
 		title: { type: 'string', required: force },

@@ -15,7 +15,8 @@ export default (app) => {
 				enum: ['draft', 'publish', 'reject'],
 				default: 'draft'
 			},
-			price: { type: Number, required: true }, // 价格
+			price: { type: Number, required: true },
+			expired: { type: Number, required: true },
 			addons: Schema.Types.Mixed
 		},
 		{

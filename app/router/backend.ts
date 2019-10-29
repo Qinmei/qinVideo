@@ -81,8 +81,6 @@ export default (app: Application) => {
 	router.get(`${api}/order`, auth(100), controller.backend.order.query);
 	router.get(`${api}/order/:id`, auth(100), controller.backend.order.info);
 	router.post(`${api}/order`, auth(100), controller.backend.order.create);
-	router.put(`${api}/order/:id`, auth(100), controller.backend.order.update);
-	router.put(`${api}/order`, auth(100), controller.backend.order.updateMany);
 	router.delete(`${api}/order/:id`, auth(100), controller.backend.order.destroy);
 	router.delete(`${api}/order`, auth(100), controller.backend.order.destroyMany);
 
