@@ -1,14 +1,13 @@
 import { Service } from 'egg';
 
 class ReportService extends Service {
-	async query({ page, size, sortBy, sortOrder, content, status, name }) {
+	async query({ page, size, sortBy, sortOrder, title, status }) {
 		const skip: number = (page - 1) * size;
 		const limit: number = size;
 
 		const query: any = {};
-		content && (query.content = { $regex: content, $options: '$i' });
+		title && (query.content = { $regex: title, $options: '$i' });
 		status && (query.status = status);
-		name && (query._id = { $in: [name] });
 
 		const result = await this.ctx.model.Report.find(query)
 			.sort({ [sortBy]: sortOrder, _id: -1 })
@@ -38,14 +37,14 @@ class ReportService extends Service {
 	}
 
 	async update(ids: Array<string>, data: any) {
-		const result = await this.ctx.model.Report.updateMany({ _id: { $in: ids } }, { $set: data });
+		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
+		const result = await this.ctx.model.Report.updateMany(query, { $set: data });
 		return result;
 	}
 
 	async destroy(ids: Array<string>) {
-		const result = await this.ctx.model.Report.deleteMany({
-			_id: { $in: ids }
-		});
+		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
+		const result = await this.ctx.model.Report.deleteMany(query);
 		return result;
 	}
 }

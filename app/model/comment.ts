@@ -5,10 +5,9 @@ export default (app) => {
 	const CommentSchema = new Schema(
 		{
 			author: { type: Schema.Types.ObjectId, ref: 'User' }, // 用户名
-			target: { type: Schema.Types.ObjectId, required: true, refPath: 'onModel' },
+			target: { type: Schema.Types.ObjectId, refPath: 'onModel' },
 			onModel: {
 				type: String,
-				required: true,
 				enum: ['Comic', 'Animate', 'Eposide', 'Post']
 			},
 			replyTo: { type: Schema.Types.ObjectId, ref: 'User' }, // 回复人
@@ -29,7 +28,7 @@ export default (app) => {
 		}
 	);
 
-	CommentSchema.virtual('coutLike', {
+	CommentSchema.virtual('countLike', {
 		ref: 'Relation',
 		localField: '_id',
 		foreignField: 'target',

@@ -24,7 +24,7 @@ class DanmuController extends Controller {
 	async create() {
 		const { ctx, service } = this;
 		const data = ctx.request.body;
-		const userId = ctx.state.user._id;
+		const userId = ctx.state.user.name;
 
 		data.author = userId;
 		ctx.helper.validate('danmu', data, true);

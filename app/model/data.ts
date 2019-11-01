@@ -33,9 +33,9 @@ export default (app) => {
 					'other'
 				],
 				default: 'other',
-				required: true
+				required: true,
+				index: true
 			},
-			time: Number,
 			author: String,
 			ip: String,
 			referer: String,

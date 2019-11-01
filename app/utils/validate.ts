@@ -219,7 +219,7 @@ const ruleobj = {
 		image: { type: 'array', required: false },
 		target: { type: 'string', required: force },
 		onModel: { type: 'string', required: force },
-		reply: { type: 'array', required: false },
+		reply: { type: 'string', required: false },
 		status: { type: 'string', required: force }
 	}),
 	category: (force: boolean) => ({
@@ -230,8 +230,8 @@ const ruleobj = {
 	}),
 	comment: (force: boolean) => ({
 		author: { type: 'string', required: force },
-		target: { type: 'string', required: force },
-		onModel: { type: 'string', required: force },
+		target: { type: 'string', required: false },
+		onModel: { type: 'string', required: false },
 		replyTo: { type: 'string', required: false },
 		parent: { type: 'string', required: false },
 		content: { type: 'string', required: force },
@@ -302,6 +302,26 @@ const ruleobj = {
 			required: false
 		},
 		type: {
+			type: 'string',
+			required: false
+		}
+	},
+	data: {
+		target: {
+			type: 'string',
+			required: false
+		},
+		type: {
+			type: 'string',
+			required: true
+		},
+		author: {
+			type: 'string',
+			required: true
+		}
+	},
+	string: {
+		string: {
 			type: 'string',
 			required: false
 		}

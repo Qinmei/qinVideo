@@ -12,7 +12,7 @@ export default (app) => {
 				trim: true
 			},
 			author: String,
-			time: { type: Number, default: 0 },
+			time: { type: Number, default: 0, index: true },
 			text: { type: String, required: true },
 			color: { type: Number, default: 16777215 },
 			type: { type: Number, default: 0 },

@@ -5,15 +5,6 @@ export default (app: Application) => {
 	const auth = middleware.auth;
 	const api = '/api/v1';
 
-	// 用户
-	router.get(`${api}/users`, auth(100), controller.backend.user.query);
-	router.get(`${api}/users/:id`, auth(100), controller.backend.user.info);
-	router.post(`${api}/users`, auth(100), controller.backend.user.create);
-	router.put(`${api}/users/:id`, auth(100), controller.backend.user.update);
-	router.put(`${api}/users`, auth(100), controller.backend.user.updateMany);
-	router.delete(`${api}/users/:id`, auth(100), controller.backend.user.destroy);
-	router.delete(`${api}/users`, auth(100), controller.backend.user.destroyMany);
-
 	// 视频
 	router.get(`${api}/animates`, auth(100), controller.backend.animate.query);
 	router.get(`${api}/animates/:id`, auth(100), controller.backend.animate.info);
@@ -50,14 +41,14 @@ export default (app: Application) => {
 	router.delete(`${api}/category/:id`, auth(100), controller.backend.category.destroy);
 	router.delete(`${api}/category`, auth(100), controller.backend.category.destroyMany);
 
-	// 评论
-	router.get(`${api}/comments`, auth(100), controller.backend.category.query);
-	router.get(`${api}/comments/:id`, auth(100), controller.backend.category.info);
-	router.post(`${api}/comments`, auth(100), controller.backend.category.create);
-	router.put(`${api}/comments/:id`, auth(100), controller.backend.category.update);
-	router.put(`${api}/comments`, auth(100), controller.backend.category.updateMany);
-	router.delete(`${api}/comments/:id`, auth(100), controller.backend.category.destroy);
-	router.delete(`${api}/comments`, auth(100), controller.backend.category.destroyMany);
+	// 用户
+	router.get(`${api}/users`, auth(100), controller.backend.user.query);
+	router.get(`${api}/users/:id`, auth(100), controller.backend.user.info);
+	router.post(`${api}/users`, auth(100), controller.backend.user.create);
+	router.put(`${api}/users/:id`, auth(100), controller.backend.user.update);
+	router.put(`${api}/users`, auth(100), controller.backend.user.updateMany);
+	router.delete(`${api}/users/:id`, auth(100), controller.backend.user.destroy);
+	router.delete(`${api}/users`, auth(100), controller.backend.user.destroyMany);
 
 	// 商品
 	router.get(`${api}/shop`, auth(100), controller.backend.shop.query);
@@ -84,7 +75,42 @@ export default (app: Application) => {
 	router.delete(`${api}/order/:id`, auth(100), controller.backend.order.destroy);
 	router.delete(`${api}/order`, auth(100), controller.backend.order.destroyMany);
 
+	// 评论
+	router.get(`${api}/comments`, auth(100), controller.backend.comment.query);
+	router.get(`${api}/comments/:id`, auth(100), controller.backend.comment.info);
+	router.post(`${api}/comments`, auth(100), controller.backend.comment.create);
+	router.put(`${api}/comments/:id`, auth(100), controller.backend.comment.update);
+	router.put(`${api}/comments`, auth(100), controller.backend.comment.updateMany);
+	router.delete(`${api}/comments/:id`, auth(100), controller.backend.comment.destroy);
+	router.delete(`${api}/comments`, auth(100), controller.backend.comment.destroyMany);
+
+	// 弹幕
+	router.get(`${api}/danmus`, auth(100), controller.backend.danmu.query);
+	router.get(`${api}/danmus/:id`, auth(100), controller.backend.danmu.info);
+	router.post(`${api}/danmus`, auth(100), controller.backend.danmu.create);
+	router.put(`${api}/danmus/:id`, auth(100), controller.backend.danmu.update);
+	router.put(`${api}/danmus`, auth(100), controller.backend.danmu.updateMany);
+	router.delete(`${api}/danmus/:id`, auth(100), controller.backend.danmu.destroy);
+	router.delete(`${api}/danmus`, auth(100), controller.backend.danmu.destroyMany);
+
+	// 举报
+	router.get(`${api}/reports`, auth(100), controller.backend.report.query);
+	router.get(`${api}/reports/:id`, auth(100), controller.backend.report.info);
+	router.post(`${api}/reports`, auth(100), controller.backend.report.create);
+	router.put(`${api}/reports/:id`, auth(100), controller.backend.report.update);
+	router.put(`${api}/reports`, auth(100), controller.backend.report.updateMany);
+	router.delete(`${api}/reports/:id`, auth(100), controller.backend.report.destroy);
+	router.delete(`${api}/reports`, auth(100), controller.backend.report.destroyMany);
+
 	// 配置
 	router.get(`${api}/config`, auth(100), controller.backend.config.query);
 	router.post(`${api}/config`, auth(100), controller.backend.config.create);
+
+	// 文件相关
+	router.post(`${api}/upload/image`, auth(100), controller.backend.uploads.uploadImg);
+	router.get(`${api}/image/:type`, auth(100), controller.backend.uploads.queryImg);
+	router.delete(`${api}/image`, auth(100), controller.backend.uploads.deleteImg);
+
+	// 记录
+	router.get(`${api}/data`, auth(100), controller.backend.data.query);
 };

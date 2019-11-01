@@ -11,8 +11,6 @@ export default (app) => {
 				enum: ['Comic', 'Animate', 'Eposide', 'Post', 'User']
 			},
 			author: { type: Schema.Types.ObjectId, ref: 'User' },
-			ip: String,
-			referer: String,
 			addons: Schema.Types.Mixed
 		},
 		{

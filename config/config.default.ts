@@ -1,4 +1,6 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
+import * as path from 'path';
+import * as os from 'os';
 
 export default (appInfo: EggAppInfo) => {
 	const config = {} as PowerPartial<EggAppConfig>;
@@ -20,6 +22,14 @@ export default (appInfo: EggAppInfo) => {
 		security: {
 			csrf: {
 				enable: false
+			}
+		},
+		multipart: {
+			mode: 'file',
+			fileSize: '20mb',
+			tmpdir: path.join(os.tmpdir(), 'uploads', appInfo.name),
+			cleanSchedule: {
+				cron: '0 30 4 * * *'
 			}
 		},
 

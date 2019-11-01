@@ -24,7 +24,7 @@ class CommentController extends Controller {
 	async create() {
 		const { ctx, service } = this;
 		const data = ctx.request.body;
-		const userId = ctx.state.user._id;
+		const userId = ctx.state.user.id;
 
 		data.author = userId;
 		ctx.helper.validate('comment', data, true);

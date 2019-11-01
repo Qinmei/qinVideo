@@ -1,20 +1,20 @@
 import { Service } from 'egg';
 
 class DanmuService extends Service {
-	async query({ page, size, sortBy, sortOrder, name, player, target }) {
+	async query({ page, size, sortBy, sortOrder, title, player, target }) {
 		const skip: number = (page - 1) * size;
 		const limit: number = size;
 
 		const query: any = {};
-		name && (query.text = { $regex: name, $options: '$i' });
-		player && (query.player = { $regex: player, $options: '$i' });
+		title && (query.text = { $regex: title, $options: '$i' });
+		player && (query.player = player);
 		target && (query.target = target);
 
 		const result = await this.ctx.model.Danmu.find(query)
 			.sort({ [sortBy]: sortOrder, _id: -1 })
 			.skip(skip)
 			.limit(limit)
-			.populate('target');
+			.populate('target', 'title _id');
 
 		const total = await this.ctx.model.Danmu.find(query).countDocuments();
 
@@ -35,14 +35,14 @@ class DanmuService extends Service {
 	}
 
 	async update(ids: Array<string>, data: any) {
-		const result = await this.ctx.model.Danmu.updateMany({ _id: { $in: ids } }, { $set: data });
+		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
+		const result = await this.ctx.model.Danmu.updateMany(query, { $set: data });
 		return result;
 	}
 
 	async destroy(ids: Array<string>) {
-		const result = await this.ctx.model.Danmu.deleteMany({
-			_id: { $in: ids }
-		});
+		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
+		const result = await this.ctx.model.Danmu.deleteMany(query);
 		return result;
 	}
 }

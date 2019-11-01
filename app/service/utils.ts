@@ -1,8 +1,19 @@
 import { Service } from 'egg';
+import * as crypto from 'crypto';
+import * as fs from 'fs';
+
 import * as nodemailer from 'nodemailer';
 import * as sendgridgMail from '@sendgrid/mail';
 
 class UtilsService extends Service {
+	async md5(filepath) {
+		const buffer = fs.readFileSync(filepath);
+		const fsHash = crypto.createHash('md5');
+		fsHash.update(buffer);
+		const md5 = fsHash.digest('hex');
+		return md5;
+	}
+
 	async sendMail({ to, subject, text, html }) {
 		let content = {
 			from: '',
