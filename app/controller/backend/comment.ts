@@ -13,11 +13,14 @@ class CommentController extends Controller {
 
 	async info() {
 		const { ctx, service } = this;
-		const id = ctx.params.id;
+		const target = ctx.params.id;
+		let query = ctx.query;
 
-		ctx.helper.validate('id', { id });
+		query.target = target;
 
-		const result = await service.comment.info(id).catch(() => 17001);
+		ctx.helper.validate('query', query);
+
+		const result = await service.comment.info(query).catch(() => 17001);
 		ctx.helper.send(result);
 	}
 

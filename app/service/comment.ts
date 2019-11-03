@@ -30,7 +30,7 @@ class CommentService extends Service {
 		};
 	}
 
-	async list({ page, size, sortBy, sortOrder, title, target, status }) {
+	async info({ page, size, sortBy, sortOrder, title, target, status }) {
 		const skip: number = (page - 1) * size;
 		const limit: number = size;
 
@@ -46,7 +46,6 @@ class CommentService extends Service {
 			.sort({ [sortBy]: sortOrder, _id: -1 })
 			.skip(skip)
 			.limit(limit)
-			.populate({ path: 'target', select: '_id title' })
 			.populate({
 				path: 'children',
 				populate: [
@@ -71,30 +70,6 @@ class CommentService extends Service {
 			list: result,
 			total
 		};
-	}
-
-	async info(id: string) {
-		const data = this.ctx.model.Comment.findById(id)
-			.populate('countLike')
-			.populate({ path: 'target', select: '_id title' })
-			.populate({
-				path: 'children',
-				populate: [
-					{
-						path: 'author',
-						select: 'name avatar level introduce background'
-					},
-					{
-						path: 'countLike'
-					},
-					{
-						path: 'replyTo',
-						select: 'name avatar level introduce background'
-					}
-				]
-			})
-			.populate({ path: 'author', select: 'name avatar level introduce background' });
-		return data;
 	}
 
 	async create(data: any) {

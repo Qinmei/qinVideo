@@ -15,6 +15,7 @@ import ExportBackendOrder from '../../../app/controller/backend/order';
 import ExportBackendPost from '../../../app/controller/backend/post';
 import ExportBackendReport from '../../../app/controller/backend/report';
 import ExportBackendShop from '../../../app/controller/backend/shop';
+import ExportBackendTools from '../../../app/controller/backend/tools';
 import ExportBackendUploads from '../../../app/controller/backend/uploads';
 import ExportBackendUser from '../../../app/controller/backend/user';
 import ExportFrontendData from '../../../app/controller/frontend/data';
@@ -36,6 +37,7 @@ declare module 'egg' {
       post: ExportBackendPost;
       report: ExportBackendReport;
       shop: ExportBackendShop;
+      tools: ExportBackendTools;
       uploads: ExportBackendUploads;
       user: ExportBackendUser;
     }

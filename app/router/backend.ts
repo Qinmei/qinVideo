@@ -113,4 +113,9 @@ export default (app: Application) => {
 
 	// 记录
 	router.get(`${api}/data`, auth(100), controller.backend.data.query);
+
+	// 工具
+	router.post(`${api}/tools/replace`, auth(100), controller.backend.tools.replace);
+	router.post(`${api}/tools/downimg`, auth(100), controller.backend.tools.downImg);
+	router.post(`${api}/tools/upload`, auth(100), controller.backend.tools.upload);
 };

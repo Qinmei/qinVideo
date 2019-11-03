@@ -52,9 +52,6 @@ class UploadsService extends Service {
 		});
 		const { page, size, title, sortBy, sortOrder } = query;
 
-		console.log(query);
-		console.log(data);
-
 		const filter = (a, b) => (sortOrder > 0 ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy]);
 		const reg = new RegExp(title);
 		const start = (page - 1) * size;

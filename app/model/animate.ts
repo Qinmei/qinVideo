@@ -36,7 +36,6 @@ export default (app) => {
 			rateStar: { type: Number, default: 8 }, // 评分星级
 			rateCount: { type: Number, default: 1000 }, // 评分人数
 			impression: { type: String, default: '' }, // 印象
-			eposideCount: { type: Number, default: 0 }, // 总集数
 			playType: {
 				type: String,
 				enum: ['mp4', 'm3u8', 'php'],
@@ -55,6 +54,7 @@ export default (app) => {
 			kind: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 类型
 			year: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 年份
 			tag: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 标签
+			sourceId: String,
 			addons: Schema.Types.Mixed
 		},
 		{
@@ -91,11 +91,17 @@ export default (app) => {
 		count: true
 	});
 
-	AnimateSchema.virtual('eposide', {
+	AnimateSchema.virtual('countEposide', {
 		ref: 'Eposide',
 		localField: '_id',
 		foreignField: 'target',
 		count: true
+	});
+
+	AnimateSchema.virtual('eposide', {
+		ref: 'Eposide',
+		localField: '_id',
+		foreignField: 'target'
 	});
 
 	return mongoose.model('Animate', AnimateSchema);

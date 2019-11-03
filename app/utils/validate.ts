@@ -32,7 +32,7 @@ const ruleobj = {
 			type: 'string',
 			required: false
 		},
-		belong: {
+		target: {
 			type: 'string',
 			required: false
 		},
@@ -318,12 +318,41 @@ const ruleobj = {
 		author: {
 			type: 'string',
 			required: true
+		},
+		time: {
+			type: 'number',
+			required: false
 		}
 	},
 	string: {
 		string: {
 			type: 'string',
 			required: false
+		}
+	},
+	replace: {
+		type: {
+			type: 'string'
+		},
+		kind: {
+			type: 'string'
+		},
+		before: {
+			type: 'string'
+		},
+		after: {
+			type: 'string'
+		}
+	},
+	downimg: {
+		type: {
+			type: 'string'
+		},
+		kind: {
+			type: 'string'
+		},
+		replace: {
+			type: 'boolean'
 		}
 	}
 };

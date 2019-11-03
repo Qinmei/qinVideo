@@ -1,7 +1,7 @@
 import { Service } from 'egg';
 
 class DataService extends Service {
-	async query({ target, kind = 'normal', startTime = '2018-06-24', endTime = '2019-08-08' }) {
+	async query({ target, kind = 'search', startTime = '2018-06-24', endTime = '2019-08-08' }) {
 		if (kind === 'normal') {
 			const dataQuery: any = {
 				createdAt: {

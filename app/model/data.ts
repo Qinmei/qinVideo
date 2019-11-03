@@ -32,6 +32,7 @@ export default (app) => {
 					'search',
 					'other'
 				],
+				time: Number,
 				default: 'other',
 				required: true,
 				index: true

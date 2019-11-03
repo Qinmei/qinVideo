@@ -18,6 +18,7 @@ class ComicService extends Service {
 			.populate('countPlay')
 			.populate('countLike')
 			.populate('countComment')
+			.populate('countEposide')
 			.sort({ [sortBy]: sortOrder, _id: -1 })
 			.skip(skip)
 			.limit(limit)
@@ -51,6 +52,21 @@ class ComicService extends Service {
 	async create(data: any) {
 		const result = await this.ctx.model.Comic.create(data);
 		return result;
+	}
+
+	async import(data: any) {
+		const result = await this.create(data);
+
+		const { eposide = [] } = data;
+
+		eposide.map((item) => {
+			item.target = result._id;
+			item.onModel = 'Comic';
+		});
+
+		const eposideData = await this.ctx.service.eposide.create(eposide);
+
+		return eposideData;
 	}
 
 	async update(ids: Array<string>, data: any) {

@@ -19,6 +19,7 @@ class AnimateService extends Service {
 			.populate('countLike')
 			.populate('countComment')
 			.populate('countDanmu')
+			.populate('countEposide')
 			.sort({ [sortBy]: sortOrder, _id: -1 })
 			.skip(skip)
 			.limit(limit)
@@ -53,6 +54,25 @@ class AnimateService extends Service {
 	async create(data: any) {
 		const result = await this.ctx.model.Animate.create(data);
 		return result;
+	}
+
+	async import(data: any) {
+		const result = await this.create(data);
+
+		const { eposide = [] } = data;
+
+		eposide.map((item) => {
+			item.target = result._id;
+			item.onModel = 'Animate';
+		});
+
+		const eposideData = await this.ctx.service.eposide.create(eposide).catch(() => false);
+
+		if (!eposideData) {
+			await this.destroy([result._id]);
+		}
+
+		return eposideData;
 	}
 
 	async update(ids: Array<string>, data: any) {

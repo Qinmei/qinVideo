@@ -17,6 +17,7 @@ import ExportPost from '../../../app/service/post';
 import ExportRelation from '../../../app/service/relation';
 import ExportReport from '../../../app/service/report';
 import ExportShop from '../../../app/service/shop';
+import ExportTools from '../../../app/service/tools';
 import ExportUpload from '../../../app/service/upload';
 import ExportUser from '../../../app/service/user';
 import ExportUtils from '../../../app/service/utils';
@@ -38,6 +39,7 @@ declare module 'egg' {
     relation: ExportRelation;
     report: ExportReport;
     shop: ExportShop;
+    tools: ExportTools;
     upload: ExportUpload;
     user: ExportUser;
     utils: ExportUtils;
