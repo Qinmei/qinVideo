@@ -54,7 +54,6 @@ export default (app) => {
 			kind: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 类型
 			year: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 年份
 			tag: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 标签
-			sourceId: String,
 			addons: Schema.Types.Mixed
 		},
 		{
@@ -101,7 +100,8 @@ export default (app) => {
 	AnimateSchema.virtual('eposide', {
 		ref: 'Eposide',
 		localField: '_id',
-		foreignField: 'target'
+		foreignField: 'target',
+		options: { sort: { sort: -1 } }
 	});
 
 	return mongoose.model('Animate', AnimateSchema);

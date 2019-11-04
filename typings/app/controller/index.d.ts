@@ -4,6 +4,7 @@
 import 'egg';
 import ExportBackendAnimate from '../../../app/controller/backend/animate';
 import ExportBackendCategory from '../../../app/controller/backend/category';
+import ExportBackendCloud from '../../../app/controller/backend/cloud';
 import ExportBackendComic from '../../../app/controller/backend/comic';
 import ExportBackendComment from '../../../app/controller/backend/comment';
 import ExportBackendConfig from '../../../app/controller/backend/config';
@@ -15,6 +16,7 @@ import ExportBackendOrder from '../../../app/controller/backend/order';
 import ExportBackendPost from '../../../app/controller/backend/post';
 import ExportBackendReport from '../../../app/controller/backend/report';
 import ExportBackendShop from '../../../app/controller/backend/shop';
+import ExportBackendTest from '../../../app/controller/backend/test';
 import ExportBackendTools from '../../../app/controller/backend/tools';
 import ExportBackendUploads from '../../../app/controller/backend/uploads';
 import ExportBackendUser from '../../../app/controller/backend/user';
@@ -26,6 +28,7 @@ declare module 'egg' {
     backend: {
       animate: ExportBackendAnimate;
       category: ExportBackendCategory;
+      cloud: ExportBackendCloud;
       comic: ExportBackendComic;
       comment: ExportBackendComment;
       config: ExportBackendConfig;
@@ -37,6 +40,7 @@ declare module 'egg' {
       post: ExportBackendPost;
       report: ExportBackendReport;
       shop: ExportBackendShop;
+      test: ExportBackendTest;
       tools: ExportBackendTools;
       uploads: ExportBackendUploads;
       user: ExportBackendUser;

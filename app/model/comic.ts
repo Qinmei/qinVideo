@@ -5,13 +5,11 @@ export default (app) => {
 	const ComicSchema = new Schema(
 		{
 			title: {
-				// 标题
 				type: String,
 				required: true,
 				index: true
 			},
 			slug: {
-				// 别名, 唯一标识符
 				type: String,
 				required: true,
 				index: true,
@@ -27,35 +25,33 @@ export default (app) => {
 				enum: ['draft', 'publish', 'reject'],
 				default: 'draft'
 			},
-			// 动漫详情
-			introduce: { type: String, default: '' }, // 简介
-			staff: { type: String, default: '' }, // 工作人员
-			actor: { type: String, default: '' }, // 声优
-			firstPlay: { type: String, default: '20160606' }, // 首播
-			isUpdate: { type: Boolean, default: false }, // 是否连载
-			updateDay: { type: Number, default: 0 }, // 周几播放
-			rateStar: { type: Number, default: 8 }, // 评分星级
-			rateCount: { type: Number, default: 1000 }, // 评分人数
-			impression: { type: String, default: '' }, // 印象
+			introduce: { type: String, default: '' },
+			staff: { type: String, default: '' },
+			actor: { type: String, default: '' },
+			firstPlay: { type: String, default: '20160606' },
+			isUpdate: { type: Boolean, default: false },
+			updateDay: { type: Number, default: 0 },
+			rateStar: { type: Number, default: 8 },
+			rateCount: { type: Number, default: 1000 },
+			impression: { type: String, default: '' },
 			playType: {
 				type: String,
 				enum: ['local', 'image', 'api'],
 				default: 'local'
 			}, // 显示类型, local:本地文件夹, image:图片外链, api:图片接口
-			noPrefix: { type: Boolean, default: false }, // 不使用设置的等级前缀
-			level: { type: Number, default: 0, index: true }, // 等级限定
-			linkPrefix: { type: String, default: '' }, // 链接前缀
-			downTitle: { type: String, default: '' }, // 下载标题
-			downLink: { type: String, default: '' }, // 下载链接
+			noPrefix: { type: Boolean, default: false },
+			level: { type: Number, default: 0, index: true },
+			linkPrefix: { type: String, default: '' },
+			downTitle: { type: String, default: '' },
+			downLink: { type: String, default: '' },
 			season: String,
 			relative: Schema.Types.ObjectId,
-			coverVertical: { type: String, default: '' }, // 竖向大图
-			coverHorizontal: { type: String, default: '' }, // 横向大图
+			coverVertical: { type: String, default: '' },
+			coverHorizontal: { type: String, default: '' },
 			area: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 地区
 			kind: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 类型
 			year: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 年份
 			tag: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 标签
-			sourceId: String,
 			addons: Schema.Types.Mixed
 		},
 		{
@@ -95,7 +91,8 @@ export default (app) => {
 	ComicSchema.virtual('eposide', {
 		ref: 'Eposide',
 		localField: '_id',
-		foreignField: 'target'
+		foreignField: 'target',
+		options: { sort: { sort: -1 } }
 	});
 
 	return mongoose.model('Comic', ComicSchema);

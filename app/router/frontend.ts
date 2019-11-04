@@ -11,4 +11,5 @@ export default (app: Application) => {
 	router.post(`${api}/auth/register`, auth(0), controller.frontend.user.register);
 	router.post(`${api}/auth/send`, auth(0), controller.frontend.user.resetPasswordMail);
 	router.post(`${api}/auth/reset`, auth(0), controller.frontend.user.resetPasswordAuth);
+	router.get(`${api}/test`, auth(0), controller.backend.test.test);
 };

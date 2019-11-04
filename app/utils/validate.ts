@@ -354,6 +354,13 @@ const ruleobj = {
 		replace: {
 			type: 'boolean'
 		}
+	},
+	cloudSetting: {
+		source: { type: 'array', required: false },
+		update: { type: 'boolean', required: false },
+		slugPrefix: { type: 'string', required: false },
+		process: { type: 'string', required: false },
+		history: { type: 'array', required: false }
 	}
 };
 

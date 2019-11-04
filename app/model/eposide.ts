@@ -9,6 +9,11 @@ export default (app) => {
 				required: true,
 				index: true
 			},
+			sort: {
+				type: String,
+				required: true,
+				index: true
+			},
 			cover: {
 				type: String
 			},

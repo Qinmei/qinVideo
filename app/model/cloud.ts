@@ -5,33 +5,31 @@ export default (app) => {
 	const CloudSchema = new Schema(
 		{
 			title: {
-				// 标题
 				type: String,
 				required: true,
 				index: true
 			},
 			slug: {
-				// 别名, 唯一标识符
 				type: String,
 				required: true,
 				index: true,
 				unique: true,
 				trim: true
 			},
-			type: { type: String, enum: ['animate', 'comic'] },
-			introduce: { type: String, default: '' }, // 简介
-			staff: { type: String, default: '' }, // 工作人员
-			actor: { type: String, default: '' }, // 声优
-			firstPlay: { type: String }, // 首播
-			isUpdate: { type: Boolean, default: false }, // 是否连载
-			updateDay: { type: Number, default: 0 }, // 周几播放
-			rateStar: { type: Number, default: 0 }, // 评分星级
-			rateCount: { type: Number, default: 0 }, // 评分人数
-			impression: { type: String, default: '' }, // 印象
+			type: { type: String, enum: ['Animate', 'Comic'] },
+			introduce: { type: String, default: '' },
+			staff: { type: String, default: '' },
+			actor: { type: String, default: '' },
+			firstPlay: { type: String },
+			isUpdate: { type: Boolean, default: false },
+			updateDay: { type: Number, default: 0 },
+			rateStar: { type: Number, default: 0 },
+			rateCount: { type: Number, default: 0 },
+			impression: { type: String, default: '' },
 			playType: {
 				type: String,
 				enum: ['mp4', 'm3u8', 'php', 'local', 'image', 'api']
-			}, // 播放类型
+			},
 			eposide: [
 				{
 					title: {
@@ -61,19 +59,20 @@ export default (app) => {
 					noParentPrefix: { type: Boolean, default: false }
 				}
 			],
-			noPrefix: { type: Boolean, default: false }, // 不使用设置的等级前缀
-			level: { type: Number, default: 0, index: true }, // 等级限定
-			linkPrefix: { type: String, default: '' }, // 链接前缀
-			downTitle: { type: String, default: '' }, // 下载标题
-			downLink: { type: String, default: '' }, // 下载链接
+			noPrefix: { type: Boolean, default: false },
+			level: { type: Number, default: 0, index: true },
+			linkPrefix: { type: String, default: '' },
+			downTitle: { type: String, default: '' },
+			downLink: { type: String, default: '' },
 			season: String,
 			relative: Schema.Types.ObjectId,
-			coverVertical: { type: String, default: '' }, // 竖向大图
-			coverHorizontal: { type: String, default: '' }, // 横向大图
-			area: [{ type: String }], // 地区
-			kind: [{ type: String }], // 类型
-			year: [{ type: String }], // 年份
-			tag: [{ type: String }], // 标签
+			coverVertical: { type: String, default: '' },
+			coverHorizontal: { type: String, default: '' },
+			area: [{ type: String }],
+			kind: [{ type: String }],
+			year: [{ type: String }],
+			tag: [{ type: String }],
+			source: String,
 			sourceId: String,
 			addons: Schema.Types.Mixed
 		},

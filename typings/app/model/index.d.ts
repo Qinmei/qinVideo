@@ -5,6 +5,7 @@ import 'egg';
 import ExportAnimate from '../../../app/model/animate';
 import ExportCategory from '../../../app/model/category';
 import ExportCloud from '../../../app/model/cloud';
+import ExportCloudSetting from '../../../app/model/cloudSetting';
 import ExportComic from '../../../app/model/comic';
 import ExportComment from '../../../app/model/comment';
 import ExportConfig from '../../../app/model/config';
@@ -25,6 +26,7 @@ declare module 'egg' {
     Animate: ReturnType<typeof ExportAnimate>;
     Category: ReturnType<typeof ExportCategory>;
     Cloud: ReturnType<typeof ExportCloud>;
+    CloudSetting: ReturnType<typeof ExportCloudSetting>;
     Comic: ReturnType<typeof ExportComic>;
     Comment: ReturnType<typeof ExportComment>;
     Config: ReturnType<typeof ExportConfig>;

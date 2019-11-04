@@ -4,6 +4,7 @@
 import 'egg';
 import ExportAnimate from '../../../app/service/animate';
 import ExportCategory from '../../../app/service/category';
+import ExportCloud from '../../../app/service/cloud';
 import ExportComic from '../../../app/service/comic';
 import ExportComment from '../../../app/service/comment';
 import ExportConfig from '../../../app/service/config';
@@ -12,6 +13,7 @@ import ExportData from '../../../app/service/data';
 import ExportEposide from '../../../app/service/eposide';
 import ExportHistory from '../../../app/service/history';
 import ExportKey from '../../../app/service/key';
+import ExportMaccms from '../../../app/service/maccms';
 import ExportOrder from '../../../app/service/order';
 import ExportPost from '../../../app/service/post';
 import ExportRelation from '../../../app/service/relation';
@@ -26,6 +28,7 @@ declare module 'egg' {
   interface IService {
     animate: ExportAnimate;
     category: ExportCategory;
+    cloud: ExportCloud;
     comic: ExportComic;
     comment: ExportComment;
     config: ExportConfig;
@@ -34,6 +37,7 @@ declare module 'egg' {
     eposide: ExportEposide;
     history: ExportHistory;
     key: ExportKey;
+    maccms: ExportMaccms;
     order: ExportOrder;
     post: ExportPost;
     relation: ExportRelation;
