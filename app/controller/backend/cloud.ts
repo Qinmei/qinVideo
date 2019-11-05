@@ -32,7 +32,7 @@ class CloudController extends Controller {
 
 		ctx.helper.validate('ids', { ids });
 
-		const result = await service.cloud.save(ids).catch(() => 28003);
+		const result = await service.cloud.save(ids).catch((err) => console.log(err));
 		ctx.helper.send(result);
 	}
 

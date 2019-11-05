@@ -8,15 +8,12 @@ class CloudService extends Service {
 		const query: any = {};
 		title && (query.title = { $regex: title, $options: '$i' });
 
-		const result = await this.ctx.model.Cloud.find(query)
+		let result = await this.ctx.model.Cloud.find(query)
 			.sort({ [sortBy]: sortOrder, _id: -1 })
 			.skip(skip)
 			.limit(limit);
 
-		result.map(async (item: any) => {
-			const isExist = await this.existLocal(item.slug, item.type);
-			item.exist = !!isExist;
-		});
+		result = JSON.parse(JSON.stringify(result));
 
 		for (let i = 0; i < result.length; i++) {
 			const isExist = await this.existLocal(result[i].slug, result[i].type);
@@ -62,9 +59,10 @@ class CloudService extends Service {
 		const result = await this.ctx.model[data.type].create(data);
 		const { eposide = [] } = data;
 
-		eposide.map((item) => {
+		eposide.map((item, index) => {
 			item.target = result._id;
 			item.onModel = data.type;
+			item.sort = index;
 		});
 
 		const eposideData = await this.ctx.service.eposide.create(eposide).catch(() => false);
@@ -103,25 +101,30 @@ class CloudService extends Service {
 		const result = {
 			total: data.length,
 			success: 0,
-			error: 0
+			fail: 0
 		};
 
 		for (let index = 0; index < data.length; index++) {
-			const ele = data[index];
+			const ele = JSON.parse(JSON.stringify(data[index]));
+			ele.area = [];
+			ele.year = [];
+			ele.kind = [];
+			ele.tag = [];
+
 			const exist = await this.existLocal(ele.slug, ele.type);
 
 			try {
-				if (exist) {
+				if (!exist) {
 					await this.saveToLocal(ele);
 				} else {
 					await this.updateToLocal(ele);
 				}
 				result.success++;
 			} catch (error) {
-				result.error++;
+				result.fail++;
 			}
 
-			await this.ctx.header.sleep(1000);
+			await this.ctx.helper.sleep(1000);
 		}
 
 		return result;

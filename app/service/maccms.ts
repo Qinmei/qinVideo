@@ -113,7 +113,7 @@ class CMSService extends Service {
 							.find('name')
 							.html()
 					),
-					slug: `${fixZero(total + num)}`,
+					slug: sourceList.slugPrefix + `${fixZero(total + num)}`,
 					status: 'draft',
 					type: 'Animate',
 					introduce: getXmlData(
