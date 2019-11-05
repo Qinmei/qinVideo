@@ -121,7 +121,7 @@ export default (app: Application) => {
 
 	// 资源库
 	router.get(`${api}/cloud/list`, auth(100), controller.backend.cloud.query);
-	router.get(`${api}/cloud/info`, auth(100), controller.backend.cloud.query);
+	router.get(`${api}/cloud/info`, auth(100), controller.backend.cloud.info);
 	router.post(`${api}/cloud/info`, auth(100), controller.backend.cloud.update);
 	router.post(`${api}/cloud/save`, auth(100), controller.backend.cloud.save);
 	router.post(`${api}/cloud/import`, auth(100), controller.backend.cloud.import);

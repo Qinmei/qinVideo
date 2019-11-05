@@ -86,7 +86,7 @@ class CMSService extends Service {
 
 	async list({ source, hour }) {
 		const sourceList = await this.service.cloud.settingInfo();
-		const select = sourceList.source.filter((item: any) => item.title === source)[0];
+		const select = sourceList.source.filter((item: any) => item.source === source)[0];
 
 		const { api, cat } = select;
 
@@ -97,7 +97,8 @@ class CMSService extends Service {
 		const result = {
 			total: 0,
 			success: 0,
-			fail: 0
+			fail: 0,
+			time: new Date()
 		};
 
 		for (let index = 1; index < end; index++) {
@@ -163,12 +164,12 @@ class CMSService extends Service {
 					)
 				};
 
-				const result = await this.exist(source, saveData.id);
+				const itemresult = await this.exist(source, saveData.id);
 
 				result.total++;
 
 				try {
-					if (result) {
+					if (itemresult) {
 						delete saveData.slug;
 						await this.update(source, saveData.id, saveData);
 					} else {
@@ -176,10 +177,8 @@ class CMSService extends Service {
 					}
 					result.success++;
 				} catch (error) {
-					result.error++;
+					result.fail++;
 				}
-
-				result.time = new Date();
 			});
 
 			await this.ctx.helper.sleep(3000);

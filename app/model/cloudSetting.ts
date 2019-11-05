@@ -12,7 +12,7 @@ export default (app) => {
 				}
 			],
 			update: { type: Boolean, default: false },
-			slugPrefix: { type: String, default: 'av000' },
+			slugPrefix: { type: String, default: 'av' },
 			process: { type: String, default: '' },
 			history: [{ type: String }],
 			addons: Schema.Types.Mixed
