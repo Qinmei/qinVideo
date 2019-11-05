@@ -108,7 +108,7 @@ class CloudService extends Service {
 
 		for (let index = 0; index < data.length; index++) {
 			const ele = data[index];
-			const exist = this.existLocal(ele.slug, ele.type);
+			const exist = await this.existLocal(ele.slug, ele.type);
 
 			try {
 				if (exist) {
@@ -128,7 +128,28 @@ class CloudService extends Service {
 	}
 
 	async settingInfo() {
-		const data = this.ctx.model.CloudSetting.findOne();
+		const data = await this.ctx.model.CloudSetting.findOne();
+		const { history } = data;
+
+		if (history && history.length > 100) {
+			history.length = 100;
+		}
+
+		if (data.process) {
+			const process = JSON.parse(data.process);
+
+			if (process.time) {
+				const time = new Date(process.time).getTime();
+				const now = new Date().getTime();
+
+				if (now - time > 1000 * 3600) {
+					history.unshift(data.process);
+					data.process = '';
+					await this.settingCreate(data);
+				}
+			}
+		}
+
 		return data;
 	}
 
