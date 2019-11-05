@@ -32,7 +32,7 @@ class CloudService extends Service {
 	}
 
 	async list(ids: Array<string>) {
-		const query = { _id: { $in: ids } };
+		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
 		const result = await this.ctx.model.Cloud.find(query);
 		return result;
 	}
@@ -129,6 +129,9 @@ class CloudService extends Service {
 
 	async settingInfo() {
 		const data = await this.ctx.model.CloudSetting.findOne();
+
+		if (!data) return null;
+
 		const { history } = data;
 
 		if (history && history.length > 100) {
@@ -137,9 +140,8 @@ class CloudService extends Service {
 
 		if (data.process) {
 			const process = JSON.parse(data.process);
-
 			if (process.time) {
-				const time = new Date(process.time).getTime();
+				const time = process.time;
 				const now = new Date().getTime();
 
 				if (now - time > 1000 * 3600) {
@@ -154,7 +156,7 @@ class CloudService extends Service {
 	}
 
 	async settingCreate(data: any) {
-		const exist = await this.settingInfo();
+		const exist = await this.ctx.model.CloudSetting.findOne();
 
 		let result;
 		if (exist) {

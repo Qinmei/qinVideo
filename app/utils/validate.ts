@@ -6,7 +6,7 @@ const ruleobj = {
 		},
 		size: {
 			type: 'number',
-			max: 30,
+			max: 100,
 			min: 1,
 			required: true
 		},

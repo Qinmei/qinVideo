@@ -98,7 +98,7 @@ class CMSService extends Service {
 			total: 0,
 			success: 0,
 			fail: 0,
-			time: new Date()
+			time: new Date().getTime()
 		};
 
 		for (let index = 1; index < end; index++) {
@@ -115,6 +115,7 @@ class CMSService extends Service {
 					),
 					slug: `${fixZero(total + num)}`,
 					status: 'draft',
+					type: 'Animate',
 					introduce: getXmlData(
 						$(ele)
 							.find('des')
