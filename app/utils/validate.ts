@@ -268,6 +268,7 @@ const ruleobj = {
 	eposide: {
 		title: { type: 'string', required: false },
 		cover: { type: 'string', required: false },
+		sort: { type: 'number', required: false },
 		target: { type: 'string', required: false },
 		onModel: { type: 'string', required: false },
 		link: { type: 'array', required: false },
