@@ -87,6 +87,7 @@ class CloudService extends Service {
 				if (!existEposide.list.some((ele: any) => ele.title === item.title)) {
 					item.target = result._id;
 					item.onModel = data.type;
+					item.sort = index;
 					await this.ctx.service.eposide.create(eposide);
 				}
 			}
