@@ -47,7 +47,8 @@ class AnimateService extends Service {
 			.populate('area')
 			.populate('kind')
 			.populate('year')
-			.populate('tag');
+			.populate('tag')
+			.populate({ path: 'seasons', select: 'slug season -_id' });
 		return data;
 	}
 

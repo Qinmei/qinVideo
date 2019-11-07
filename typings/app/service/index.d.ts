@@ -18,6 +18,7 @@ import ExportOrder from '../../../app/service/order';
 import ExportPost from '../../../app/service/post';
 import ExportRelation from '../../../app/service/relation';
 import ExportReport from '../../../app/service/report';
+import ExportSeason from '../../../app/service/season';
 import ExportShop from '../../../app/service/shop';
 import ExportTools from '../../../app/service/tools';
 import ExportUpload from '../../../app/service/upload';
@@ -42,6 +43,7 @@ declare module 'egg' {
     post: ExportPost;
     relation: ExportRelation;
     report: ExportReport;
+    season: ExportSeason;
     shop: ExportShop;
     tools: ExportTools;
     upload: ExportUpload;

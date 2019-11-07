@@ -44,8 +44,8 @@ export default (app) => {
 			linkPrefix: { type: String, default: '' },
 			downTitle: { type: String, default: '' },
 			downLink: { type: String, default: '' },
-			season: String,
-			relative: Schema.Types.ObjectId,
+			season: { type: String, default: '' },
+			seasonRelate: { type: Schema.Types.ObjectId, ref: 'Season' },
 			coverVertical: { type: String, default: '' },
 			coverHorizontal: { type: String, default: '' },
 			area: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 地区
@@ -93,6 +93,12 @@ export default (app) => {
 		localField: '_id',
 		foreignField: 'target',
 		options: { sort: { sort: -1 } }
+	});
+
+	ComicSchema.virtual('seasons', {
+		ref: 'Comic',
+		localField: 'seasonRelate',
+		foreignField: 'seasonRelate'
 	});
 
 	return mongoose.model('Comic', ComicSchema);

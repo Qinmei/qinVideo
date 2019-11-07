@@ -26,7 +26,8 @@ class ComicService extends Service {
 			.populate('area')
 			.populate('kind')
 			.populate('year')
-			.populate('tag');
+			.populate('tag')
+			.populate({ path: 'seasons', select: 'slug season -_id' });
 
 		const total = await this.ctx.model.Comic.find(query).countDocuments();
 
