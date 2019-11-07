@@ -23,6 +23,15 @@ export default (app: Application) => {
 	router.delete(`${api}/comics/:id`, auth(100), controller.backend.comic.destroy);
 	router.delete(`${api}/comics`, auth(100), controller.backend.comic.destroyMany);
 
+	// 剧集
+	router.get(`${api}/eposides`, auth(100), controller.backend.eposide.query);
+	router.get(`${api}/eposides/:id`, auth(100), controller.backend.eposide.info);
+	router.post(`${api}/eposides`, auth(100), controller.backend.eposide.create);
+	router.put(`${api}/eposides/:id`, auth(100), controller.backend.eposide.update);
+	router.put(`${api}/eposides`, auth(100), controller.backend.eposide.updateMany);
+	router.delete(`${api}/eposides/:id`, auth(100), controller.backend.eposide.destroy);
+	router.delete(`${api}/eposides`, auth(100), controller.backend.eposide.destroyMany);
+
 	// 文章
 	router.get(`${api}/posts`, auth(100), controller.backend.post.query);
 	router.get(`${api}/posts/:id`, auth(100), controller.backend.post.info);

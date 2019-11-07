@@ -4,7 +4,7 @@ class EposideService extends Service {
 	async query({ target }) {
 		const query = { target };
 
-		const result = await this.ctx.model.Eposide.find(query).sort({ _id: -1 });
+		const result = await this.ctx.model.Eposide.find(query).sort({ sort: 1, _id: -1 });
 		const total = await this.ctx.model.Eposide.find(query).countDocuments();
 
 		return {

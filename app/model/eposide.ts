@@ -10,7 +10,7 @@ export default (app) => {
 				index: true
 			},
 			sort: {
-				type: String,
+				type: Number,
 				required: true,
 				index: true
 			},
@@ -40,7 +40,6 @@ export default (app) => {
 				type: String
 			},
 			noSetPrefix: { type: Boolean, default: false },
-			noParentPrefix: { type: Boolean, default: false },
 			addons: Schema.Types.Mixed
 		},
 		{
