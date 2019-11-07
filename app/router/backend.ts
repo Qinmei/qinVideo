@@ -23,6 +23,15 @@ export default (app: Application) => {
 	router.delete(`${api}/comics/:id`, auth(100), controller.backend.comic.destroy);
 	router.delete(`${api}/comics`, auth(100), controller.backend.comic.destroyMany);
 
+	// 季数
+	router.get(`${api}/seasons`, auth(100), controller.backend.season.query);
+	router.get(`${api}/seasons/:id`, auth(100), controller.backend.season.info);
+	router.post(`${api}/seasons`, auth(100), controller.backend.season.create);
+	router.put(`${api}/seasons/:id`, auth(100), controller.backend.season.update);
+	router.put(`${api}/seasons`, auth(100), controller.backend.season.updateMany);
+	router.delete(`${api}/seasons/:id`, auth(100), controller.backend.season.destroy);
+	router.delete(`${api}/seasons`, auth(100), controller.backend.season.destroyMany);
+
 	// 剧集
 	router.get(`${api}/eposides`, auth(100), controller.backend.eposide.query);
 	router.get(`${api}/eposides/:id`, auth(100), controller.backend.eposide.info);

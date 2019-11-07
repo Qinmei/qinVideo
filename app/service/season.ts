@@ -1,10 +1,18 @@
 import { Service } from 'egg';
 
 class SeasonService extends Service {
-	async query({ target }) {
-		const query = { target };
+	async query({ page, size, sortBy, sortOrder, type, title }) {
+		const skip: number = (page - 1) * size;
+		const limit: number = size;
+		const query: any = {};
+		type && (query.type = type);
+		title && (query.name = { $regex: title, $options: '$i' });
 
-		const result = await this.ctx.model.Season.find(query).sort({ sort: 1, _id: -1 });
+		const result = await this.ctx.model.Season.find(query)
+			.sort({ [sortBy]: sortOrder, _id: -1 })
+			.skip(skip)
+			.limit(limit);
+
 		const total = await this.ctx.model.Season.find(query).countDocuments();
 
 		return {
@@ -23,19 +31,14 @@ class SeasonService extends Service {
 		return result;
 	}
 
-	async insertMany(data: Array<any>) {
-		const result = await this.ctx.model.Season.insertMany(data);
-		return result;
-	}
-
 	async update(ids: Array<string>, data: any) {
 		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
 		const result = await this.ctx.model.Season.updateMany(query, { $set: data });
 		return result;
 	}
 
-	async destroy(ids: Array<string>) {
-		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
+	async destroy(ids: Array<string>, type?: string) {
+		const query = ids.length > 0 ? { _id: { $in: ids } } : { type };
 		const result = await this.ctx.model.Season.deleteMany(query);
 		return result;
 	}

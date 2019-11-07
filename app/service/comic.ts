@@ -46,7 +46,9 @@ class ComicService extends Service {
 			.populate('area')
 			.populate('kind')
 			.populate('year')
-			.populate('tag');
+			.populate('tag')
+			.populate({ path: 'seasons', select: 'slug season -_id', match: { _id: { $ne: id }, status: 'publish' } })
+			.populate('seasonInfo');
 		return data;
 	}
 

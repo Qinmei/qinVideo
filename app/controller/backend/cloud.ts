@@ -40,7 +40,7 @@ class CloudController extends Controller {
 		const { ctx, service } = this;
 		const { source, hour } = ctx.request.body;
 
-		ctx.helper.validate('id', { id: source });
+		ctx.helper.validate('string', { string: source });
 
 		const result = await service.cloud.import(source, hour).catch(() => 28004);
 		ctx.helper.send(result);

@@ -15,8 +15,8 @@ class OrderController extends Controller {
 		const { ctx, service } = this;
 		const { user, shop } = ctx.request.body;
 
-		ctx.helper.validate('id', { id: user });
-		ctx.helper.validate('id', { id: shop });
+		ctx.helper.validate('string', { string: user });
+		ctx.helper.validate('string', { string: shop });
 
 		const result = await service.order.create({ user, shop }).catch(() => 20001);
 		ctx.helper.send(result);

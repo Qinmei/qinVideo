@@ -15,6 +15,7 @@ import ExportBackendKey from '../../../app/controller/backend/key';
 import ExportBackendOrder from '../../../app/controller/backend/order';
 import ExportBackendPost from '../../../app/controller/backend/post';
 import ExportBackendReport from '../../../app/controller/backend/report';
+import ExportBackendSeason from '../../../app/controller/backend/season';
 import ExportBackendShop from '../../../app/controller/backend/shop';
 import ExportBackendTest from '../../../app/controller/backend/test';
 import ExportBackendTools from '../../../app/controller/backend/tools';
@@ -39,6 +40,7 @@ declare module 'egg' {
       order: ExportBackendOrder;
       post: ExportBackendPost;
       report: ExportBackendReport;
+      season: ExportBackendSeason;
       shop: ExportBackendShop;
       test: ExportBackendTest;
       tools: ExportBackendTools;

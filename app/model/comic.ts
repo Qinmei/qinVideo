@@ -101,5 +101,12 @@ export default (app) => {
 		foreignField: 'seasonRelate'
 	});
 
+	ComicSchema.virtual('seasonInfo', {
+		ref: 'Season',
+		localField: 'seasonRelate',
+		foreignField: '_id',
+		justOne: true
+	});
+
 	return mongoose.model('Comic', ComicSchema);
 };

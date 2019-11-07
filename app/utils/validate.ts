@@ -108,7 +108,7 @@ const ruleobj = {
 		downTitle: { type: 'string', required: false },
 		downLink: { type: 'string', required: false },
 		season: { type: 'string', required: false },
-		relative: { type: 'string', required: false },
+		seasonRelate: { type: 'string', required: false },
 		eposide: { type: 'array', required: false },
 		coverVertical: { type: 'string', required: false },
 		coverHorizontal: { type: 'string', required: false },
@@ -139,7 +139,7 @@ const ruleobj = {
 		downTitle: { type: 'string', required: false },
 		downLink: { type: 'string', required: false },
 		season: { type: 'string', required: false },
-		relative: { type: 'string', required: false },
+		seasonRelate: { type: 'string', required: false },
 		eposide: { type: 'array', required: false },
 		coverVertical: { type: 'string', required: false },
 		coverHorizontal: { type: 'string', required: false },
@@ -228,6 +228,13 @@ const ruleobj = {
 		cover: { type: 'string', required: false },
 		introduce: { type: 'string', required: false }
 	}),
+	season: (force: boolean) => ({
+		name: { type: 'string', required: force },
+		type: { type: 'string', required: force },
+		cover: { type: 'string', required: false },
+		introduce: { type: 'string', required: false },
+		impress: { type: 'string', required: false }
+	}),
 	comment: (force: boolean) => ({
 		author: { type: 'string', required: force },
 		target: { type: 'string', required: false },
@@ -254,7 +261,9 @@ const ruleobj = {
 		tag: { type: 'array', required: false },
 		cover: { type: 'string', required: false },
 		introduce: { type: 'string', required: false },
-		content: { type: 'string', required: false }
+		content: { type: 'string', required: false },
+		season: { type: 'string', required: false },
+		seasonRelate: { type: 'string', required: false }
 	}),
 	login: {
 		name: { type: 'string' },

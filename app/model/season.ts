@@ -4,10 +4,28 @@ export default (app) => {
 
 	const SeasonSchema = new Schema(
 		{
-			title: {
+			name: {
 				type: String,
 				required: true,
-				index: true
+				index: true,
+				trim: true
+			},
+			cover: {
+				type: String,
+				default: ''
+			},
+			introduce: {
+				type: String,
+				default: ''
+			},
+			impress: {
+				type: String,
+				default: ''
+			},
+			type: {
+				type: String,
+				enum: ['animate', 'comic', 'post'],
+				required: true
 			},
 			addons: Schema.Types.Mixed
 		},

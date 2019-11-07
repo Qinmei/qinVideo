@@ -110,5 +110,12 @@ export default (app) => {
 		foreignField: 'seasonRelate'
 	});
 
+	AnimateSchema.virtual('seasonInfo', {
+		ref: 'Season',
+		localField: 'seasonRelate',
+		foreignField: '_id',
+		justOne: true
+	});
+
 	return mongoose.model('Animate', AnimateSchema);
 };

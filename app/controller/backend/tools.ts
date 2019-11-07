@@ -33,7 +33,7 @@ class ConfigController extends Controller {
 		const files = ctx.request.files;
 		const { type } = ctx.request.body;
 
-		ctx.helper.validate('id', { id: type });
+		ctx.helper.validate('string', { string: type });
 
 		const result = await service.tools.upload(files, type).catch(() => 27004);
 		ctx.helper.send(result);

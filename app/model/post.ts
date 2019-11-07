@@ -26,6 +26,8 @@ export default (app) => {
 			author: { type: Schema.Types.ObjectId, ref: 'User' }, // 用户名
 			kind: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 分类
 			tag: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 标签
+			season: { type: String, default: '' },
+			seasonRelate: { type: Schema.Types.ObjectId, ref: 'Season' },
 			cover: { type: String, default: '' }, // 封面图
 			introduce: { type: String, default: '' },
 			content: { type: String, default: '' }, // 内容
@@ -56,6 +58,19 @@ export default (app) => {
 		localField: '_id',
 		foreignField: 'target',
 		count: true
+	});
+
+	PostSchema.virtual('seasons', {
+		ref: 'Post',
+		localField: 'seasonRelate',
+		foreignField: 'seasonRelate'
+	});
+
+	PostSchema.virtual('seasonInfo', {
+		ref: 'Season',
+		localField: 'seasonRelate',
+		foreignField: '_id',
+		justOne: true
 	});
 
 	return mongoose.model('Post', PostSchema);
