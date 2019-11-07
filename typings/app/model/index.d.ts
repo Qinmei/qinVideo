@@ -18,6 +18,7 @@ import ExportOrder from '../../../app/model/order';
 import ExportPost from '../../../app/model/post';
 import ExportRelation from '../../../app/model/relation';
 import ExportReport from '../../../app/model/report';
+import ExportSeason from '../../../app/model/season';
 import ExportShop from '../../../app/model/shop';
 import ExportUser from '../../../app/model/user';
 
@@ -39,6 +40,7 @@ declare module 'egg' {
     Post: ReturnType<typeof ExportPost>;
     Relation: ReturnType<typeof ExportRelation>;
     Report: ReturnType<typeof ExportReport>;
+    Season: ReturnType<typeof ExportSeason>;
     Shop: ReturnType<typeof ExportShop>;
     User: ReturnType<typeof ExportUser>;
   }

@@ -47,7 +47,7 @@ export default (app) => {
 			downTitle: { type: String, default: '' }, // 下载标题
 			downLink: { type: String, default: '' }, // 下载链接
 			season: String,
-			relative: Schema.Types.ObjectId,
+			seasonRelate: { type: Schema.Types.ObjectId, ref: 'Season' },
 			coverVertical: { type: String, default: '' }, // 竖向大图
 			coverHorizontal: { type: String, default: '' }, // 横向大图
 			area: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 地区
@@ -102,6 +102,13 @@ export default (app) => {
 		localField: '_id',
 		foreignField: 'target',
 		options: { sort: { sort: -1 } }
+	});
+
+	AnimateSchema.virtual('seasonRelate', {
+		ref: 'Animate',
+		localField: 'seasonRelate',
+		foreignField: 'seasonRelate',
+		options: { sort: { season: 1 } }
 	});
 
 	return mongoose.model('Animate', AnimateSchema);
