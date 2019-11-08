@@ -7,7 +7,7 @@ export default (app: Application) => {
 
 	// 视频
 	router.get(`${api}/animates`, auth(100), controller.backend.animate.query);
-	router.get(`${api}/animates/:id`, auth(0), controller.backend.animate.info);
+	router.get(`${api}/animates/:id`, auth(100), controller.backend.animate.info);
 	router.post(`${api}/animates`, auth(100), controller.backend.animate.create);
 	router.put(`${api}/animates/:id`, auth(100), controller.backend.animate.update);
 	router.put(`${api}/animates`, auth(100), controller.backend.animate.updateMany);

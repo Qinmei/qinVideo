@@ -40,8 +40,8 @@ export default (appInfo: EggAppInfo) => {
 
 		mongoose: {
 			client: {
-				url: 'mongodb://test:testmongo@demo.qinvideo.org:27017/test',
-				//url: 'mongodb://localhost:27017/test',
+				// url: 'mongodb://test:testmongo@demo.qinvideo.org:27017/test',
+				url: 'mongodb://localhost:27017/test',
 				options: {}
 			}
 		},

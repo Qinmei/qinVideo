@@ -35,5 +35,47 @@ export default (app) => {
 		}
 	);
 
+	SeasonSchema.virtual('animate', {
+		ref: 'Animate',
+		localField: '_id',
+		foreignField: 'seasonRelate',
+		options: { sort: { season: -1 } }
+	});
+
+	SeasonSchema.virtual('comic', {
+		ref: 'Comic',
+		localField: '_id',
+		foreignField: 'seasonRelate',
+		options: { sort: { season: -1 } }
+	});
+
+	SeasonSchema.virtual('post', {
+		ref: 'Post',
+		localField: '_id',
+		foreignField: 'seasonRelate',
+		options: { sort: { season: -1 } }
+	});
+
+	SeasonSchema.virtual('animateCount', {
+		ref: 'Animate',
+		localField: '_id',
+		foreignField: 'seasonRelate',
+		count: true
+	});
+
+	SeasonSchema.virtual('comicCount', {
+		ref: 'Comic',
+		localField: '_id',
+		foreignField: 'seasonRelate',
+		count: true
+	});
+
+	SeasonSchema.virtual('postCount', {
+		ref: 'Post',
+		localField: '_id',
+		foreignField: 'seasonRelate',
+		count: true
+	});
+
 	return mongoose.model('Season', SeasonSchema);
 };

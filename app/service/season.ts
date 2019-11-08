@@ -11,7 +11,8 @@ class SeasonService extends Service {
 		const result = await this.ctx.model.Season.find(query)
 			.sort({ [sortBy]: sortOrder, _id: -1 })
 			.skip(skip)
-			.limit(limit);
+			.limit(limit)
+			.populate({ path: `${type}Count` });
 
 		const total = await this.ctx.model.Season.find(query).countDocuments();
 
@@ -22,7 +23,10 @@ class SeasonService extends Service {
 	}
 
 	async info(id: string) {
-		const data = this.ctx.model.Season.findById(id);
+		const data = this.ctx.model.Season.findById(id)
+			.populate({ path: 'animate', select: 'title season' })
+			.populate({ path: 'comic', select: 'title season' })
+			.populate({ path: 'post', select: 'title season' });
 		return data;
 	}
 

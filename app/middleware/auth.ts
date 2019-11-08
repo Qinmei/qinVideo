@@ -6,7 +6,7 @@ export default (level) => {
 
 		let level0 = {
 			name: null,
-			level: 0
+			level: 100
 		};
 
 		if (token) {
