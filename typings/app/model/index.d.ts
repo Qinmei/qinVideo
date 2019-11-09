@@ -3,6 +3,7 @@
 
 import 'egg';
 import ExportAnimate from '../../../app/model/animate';
+import ExportBlog from '../../../app/model/blog';
 import ExportCategory from '../../../app/model/category';
 import ExportCloud from '../../../app/model/cloud';
 import ExportCloudSetting from '../../../app/model/cloudSetting';
@@ -26,6 +27,7 @@ import ExportUser from '../../../app/model/user';
 declare module 'egg' {
   interface IModel {
     Animate: ReturnType<typeof ExportAnimate>;
+    Blog: ReturnType<typeof ExportBlog>;
     Category: ReturnType<typeof ExportCategory>;
     Cloud: ReturnType<typeof ExportCloud>;
     CloudSetting: ReturnType<typeof ExportCloudSetting>;

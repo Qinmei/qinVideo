@@ -59,6 +59,14 @@ const ruleobj = {
 		tag: {
 			type: 'string',
 			required: false
+		},
+		pin: {
+			type: 'string',
+			required: false
+		},
+		hot: {
+			type: 'string',
+			required: false
 		}
 	},
 	id: {
@@ -243,7 +251,6 @@ const ruleobj = {
 		parent: { type: 'string', required: false },
 		content: { type: 'string', required: force },
 		image: { type: 'array', required: false },
-		video: { type: 'string', required: false },
 		status: { type: 'string', required: force }
 	}),
 	key: (force: boolean) => ({
@@ -270,6 +277,19 @@ const ruleobj = {
 		content: { type: 'string', required: false },
 		season: { type: 'string', required: false },
 		seasonRelate: { type: 'string', required: false }
+	}),
+	blog: (force: boolean) => ({
+		content: { type: 'string', required: false },
+		target: { type: 'string', required: false },
+		onModel: { type: 'string', required: false },
+		status: { type: 'string', required: force },
+		author: { type: 'string', required: force },
+		tag: { type: 'array', required: false },
+		image: { type: 'array', required: false },
+		video: { type: 'string', required: false },
+		pin: { type: 'boolean', required: false },
+		hot: { type: 'boolean', required: false },
+		level: { type: 'number', required: false }
 	}),
 	login: {
 		name: { type: 'string' },

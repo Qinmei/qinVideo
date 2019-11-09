@@ -3,6 +3,7 @@
 
 import 'egg';
 import ExportBackendAnimate from '../../../app/controller/backend/animate';
+import ExportBackendBlog from '../../../app/controller/backend/blog';
 import ExportBackendCategory from '../../../app/controller/backend/category';
 import ExportBackendCloud from '../../../app/controller/backend/cloud';
 import ExportBackendComic from '../../../app/controller/backend/comic';
@@ -29,6 +30,7 @@ declare module 'egg' {
   interface IController {
     backend: {
       animate: ExportBackendAnimate;
+      blog: ExportBackendBlog;
       category: ExportBackendCategory;
       cloud: ExportBackendCloud;
       comic: ExportBackendComic;

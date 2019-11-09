@@ -50,6 +50,15 @@ export default (app: Application) => {
 	router.delete(`${api}/posts/:id`, auth(100), controller.backend.post.destroy);
 	router.delete(`${api}/posts`, auth(100), controller.backend.post.destroyMany);
 
+	// 轻博客
+	router.get(`${api}/blogs`, auth(100), controller.backend.blog.query);
+	router.get(`${api}/blogs/:id`, auth(100), controller.backend.blog.info);
+	router.post(`${api}/blogs`, auth(100), controller.backend.blog.create);
+	router.put(`${api}/blogs/:id`, auth(100), controller.backend.blog.update);
+	router.put(`${api}/blogs`, auth(100), controller.backend.blog.updateMany);
+	router.delete(`${api}/blogs/:id`, auth(100), controller.backend.blog.destroy);
+	router.delete(`${api}/blogs`, auth(100), controller.backend.blog.destroyMany);
+
 	// 分类
 	router.get(`${api}/category`, auth(100), controller.backend.category.query);
 	router.get(`${api}/category/:id`, auth(100), controller.backend.category.info);

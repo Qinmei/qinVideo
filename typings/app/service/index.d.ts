@@ -3,6 +3,7 @@
 
 import 'egg';
 import ExportAnimate from '../../../app/service/animate';
+import ExportBlog from '../../../app/service/blog';
 import ExportCategory from '../../../app/service/category';
 import ExportCloud from '../../../app/service/cloud';
 import ExportComic from '../../../app/service/comic';
@@ -29,6 +30,7 @@ import ExportUtils from '../../../app/service/utils';
 declare module 'egg' {
   interface IService {
     animate: ExportAnimate;
+    blog: ExportBlog;
     category: ExportCategory;
     cloud: ExportCloud;
     comic: ExportComic;

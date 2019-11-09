@@ -8,13 +8,12 @@ export default (app) => {
 			target: { type: Schema.Types.ObjectId, refPath: 'onModel' },
 			onModel: {
 				type: String,
-				enum: ['Comic', 'Animate', 'Eposide', 'Post']
+				enum: ['Comic', 'Animate', 'Eposide', 'Post', 'Blog']
 			},
 			replyTo: { type: Schema.Types.ObjectId, ref: 'User' }, // 回复人
 			parent: { type: Schema.Types.ObjectId, ref: 'Comment' }, // 父级
 			content: { type: String, required: true }, // 内容
 			image: [{ type: String }], // 图片
-			video: String, // 视频
 			status: {
 				type: String,
 				enum: ['draft', 'publish', 'reject'],
