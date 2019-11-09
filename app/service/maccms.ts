@@ -88,7 +88,7 @@ class CMSService extends Service {
 		const sourceList = await this.service.cloud.settingInfo();
 		const select = sourceList.source.filter((item: any) => item.source === source)[0];
 
-		const { api, cat } = select;
+		const { api, cat, type } = select;
 
 		const list: any = await agent(`${api}?t=${cat}`);
 		let $ = cheerio.load(list.text);
@@ -115,7 +115,7 @@ class CMSService extends Service {
 					),
 					slug: sourceList.slugPrefix + `${fixZero(total + num)}`,
 					status: 'draft',
-					type: 'Animate',
+					type: type,
 					introduce: getXmlData(
 						$(ele)
 							.find('des')

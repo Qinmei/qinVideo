@@ -8,7 +8,8 @@ export default (app) => {
 				{
 					source: { type: String },
 					api: { type: String },
-					cat: { type: Number }
+					cat: { type: Number },
+					type: { type: String, enum: ['Animate', 'Comic'] }
 				}
 			],
 			update: { type: Boolean, default: false },
