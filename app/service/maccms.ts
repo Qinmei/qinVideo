@@ -182,7 +182,7 @@ class CMSService extends Service {
 				}
 			});
 
-			await this.ctx.helper.sleep(3000);
+			await this.ctx.helper.sleep(10000);
 
 			await this.ctx.service.cloud.settingCreate({ process: JSON.stringify(result) });
 		}

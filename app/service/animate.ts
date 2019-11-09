@@ -1,4 +1,13 @@
 import { Service } from 'egg';
+import {
+	categoryLookup,
+	authorLookup,
+	countAll,
+	selectCount,
+	listAll,
+	rateLookup,
+	seasonLookup
+} from '../utils/aggregation';
 
 class AnimateService extends Service {
 	async query({ page, size, sortBy, sortOrder, title, status, update, area, kind, tag, year }) {
@@ -14,20 +23,46 @@ class AnimateService extends Service {
 		kind && (query.kind = kind);
 		tag && (query.tag = tag);
 
-		const result = await this.ctx.model.Animate.find(query)
-			.populate('countPlay')
-			.populate('countLike')
-			.populate('countComment')
-			.populate('countDanmu')
-			.populate('countEposide')
-			.sort({ [sortBy]: sortOrder, _id: -1 })
-			.skip(skip)
-			.limit(limit)
-			.populate({ path: 'author', select: 'name avatar level introduce background' })
-			.populate('area')
-			.populate('kind')
-			.populate('year')
-			.populate('tag');
+		// const result = await this.ctx.model.Animate.find(query)
+		// 	.populate('countPlay')
+		// 	.populate('countLike')
+		// 	.populate('countComment')
+		// 	.populate('countDanmu')
+		// 	.populate('countEposide')
+		// 	.sort({ [sortBy]: sortOrder, _id: -1 })
+		// 	.skip(skip)
+		// 	.limit(limit)
+		// 	.populate({ path: 'author', select: 'name avatar level introduce background' })
+		// 	.populate('area')
+		// 	.populate('kind')
+		// 	.populate('year')
+		// 	.populate('tag');
+
+		const result = await this.ctx.model.Animate.aggregate([
+			{ $match: query },
+			...selectCount(sortBy).select,
+			{
+				$sort: {
+					[sortBy]: sortOrder,
+					_id: 1
+				}
+			},
+			{ $skip: skip },
+			{ $limit: limit },
+			...categoryLookup,
+			...selectCount(sortBy).rest,
+			authorLookup,
+			countAll,
+			{
+				$project: {
+					listComment: 0,
+					listPlay: 0,
+					listDanmu: 0,
+					listEposide: 0,
+					listLike: 0
+				}
+			}
+		]);
 
 		const total = await this.ctx.model.Animate.find(query).countDocuments();
 
@@ -38,19 +73,43 @@ class AnimateService extends Service {
 	}
 
 	async info(id: string) {
-		const data = this.ctx.model.Animate.findById(id)
-			.populate('countPlay')
-			.populate('countLike')
-			.populate('countComment')
-			.populate('countDanmu')
-			.populate({ path: 'author', select: 'name avatar level introduce background' })
-			.populate('area')
-			.populate('kind')
-			.populate('year')
-			.populate('tag')
-			.populate({ path: 'seasons', select: 'slug season -_id', match: { _id: { $ne: id }, status: 'publish' } })
-			.populate('seasonInfo');
-		return data;
+		// const result = this.ctx.model.Animate.findById(id)
+		// 	.populate('countPlay')
+		// 	.populate('countLike')
+		// 	.populate('countComment')
+		// 	.populate('countDanmu')
+		// 	.populate({ path: 'author', select: 'name avatar level introduce background' })
+		// 	.populate('area')
+		// 	.populate('kind')
+		// 	.populate('year')
+		// 	.populate('tag')
+		// 	.populate({ path: 'seasons', select: 'slug season', match: { _id: { $ne: id }, status: 'publish' } })
+		// 	.populate('seasonInfo');
+		//  return result;
+		const mongoose = this.app.mongoose;
+		const result = await this.ctx.model.Animate.aggregate([
+			{
+				$match: {
+					_id: new mongoose.Types.ObjectId(id)
+				}
+			},
+			...categoryLookup,
+			...Object.values(listAll),
+			...rateLookup,
+			authorLookup,
+			seasonLookup('animate'),
+			countAll,
+			{
+				$project: {
+					listComment: 0,
+					listPlay: 0,
+					listDanmu: 0,
+					listEposide: 0,
+					listLike: 0
+				}
+			}
+		]);
+		return result.length > 0 ? result[0] : 12001;
 	}
 
 	async create(data: any) {

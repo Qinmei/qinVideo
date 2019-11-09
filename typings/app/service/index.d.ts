@@ -16,6 +16,7 @@ import ExportKey from '../../../app/service/key';
 import ExportMaccms from '../../../app/service/maccms';
 import ExportOrder from '../../../app/service/order';
 import ExportPost from '../../../app/service/post';
+import ExportRate from '../../../app/service/rate';
 import ExportRelation from '../../../app/service/relation';
 import ExportReport from '../../../app/service/report';
 import ExportSeason from '../../../app/service/season';
@@ -41,6 +42,7 @@ declare module 'egg' {
     maccms: ExportMaccms;
     order: ExportOrder;
     post: ExportPost;
+    rate: ExportRate;
     relation: ExportRelation;
     report: ExportReport;
     season: ExportSeason;

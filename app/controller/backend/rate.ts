@@ -1,13 +1,13 @@
 import { Controller } from 'egg';
 
-class AnimateController extends Controller {
+class RateController extends Controller {
 	async query() {
 		const { ctx, service } = this;
 		const { query } = ctx;
 
 		ctx.helper.validate('query', query);
 
-		const result = await service.animate.query(query).catch(() => 12000);
+		const result = await service.rate.query(query).catch(() => 29000);
 		ctx.helper.send(result);
 	}
 
@@ -17,7 +17,7 @@ class AnimateController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.animate.info(id).catch((err) => console.log(err));
+		const result = await service.rate.info(id).catch(() => 29001);
 		ctx.helper.send(result);
 	}
 
@@ -27,10 +27,9 @@ class AnimateController extends Controller {
 		const userId = ctx.state.user.id;
 
 		data.author = userId;
-		ctx.helper.validate('animate', data, true);
+		ctx.helper.validate('rate', data, true);
 
-		const result = await service.animate.create(data).catch(() => 12002);
-
+		const result = await service.rate.create(data).catch(() => 29002);
 		ctx.helper.send(result);
 	}
 
@@ -39,12 +38,10 @@ class AnimateController extends Controller {
 		const data = ctx.request.body;
 		const id = ctx.params.id;
 
-		if (!data.seasonRelate) data.seasonRelate = null;
-
 		ctx.helper.validate('id', { id });
-		ctx.helper.validate('animate', data);
+		ctx.helper.validate('rate', data);
 
-		const result = await service.animate.update([id], data).catch(() => 12003);
+		const result = await service.rate.update([id], data).catch(() => 29003);
 		ctx.helper.send(result);
 	}
 
@@ -54,9 +51,9 @@ class AnimateController extends Controller {
 		const { ids } = data;
 
 		ctx.helper.validate('ids', { ids });
-		ctx.helper.validate('animate', data);
+		ctx.helper.validate('rate', data);
 
-		const result = await service.animate.update(ids, data).catch(() => 12003);
+		const result = await service.rate.update(ids, data).catch(() => 29003);
 		ctx.helper.send(result);
 	}
 
@@ -66,7 +63,7 @@ class AnimateController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.animate.destroy([id]).catch(() => 12004);
+		const result = await service.rate.destroy([id]).catch(() => 29004);
 		ctx.helper.send(result);
 	}
 
@@ -76,9 +73,9 @@ class AnimateController extends Controller {
 
 		ctx.helper.validate('ids', { ids });
 
-		const result = await service.animate.destroy(ids).catch(() => 12004);
+		const result = await service.rate.destroy(ids).catch(() => 29004);
 		ctx.helper.send(result);
 	}
 }
 
-export default AnimateController;
+export default RateController;

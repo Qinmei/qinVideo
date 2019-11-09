@@ -31,8 +31,8 @@ export default (app) => {
 			firstPlay: { type: String, default: '20160606' },
 			isUpdate: { type: Boolean, default: false },
 			updateDay: { type: Number, default: 0 },
-			rateStar: { type: Number, default: 8 },
-			rateCount: { type: Number, default: 1000 },
+			rateStar: { type: Number, default: 0 },
+			rateCount: { type: Number, default: 0 },
 			impression: { type: String, default: '' },
 			playType: {
 				type: String,

@@ -251,6 +251,12 @@ const ruleobj = {
 		price: { type: 'number', required: force },
 		expired: { type: 'number', required: force }
 	}),
+	rate: (force: boolean) => ({
+		author: { type: 'string', required: force },
+		target: { type: 'string', required: force },
+		onModel: { type: 'string', required: force },
+		rate: { type: 'number', required: force }
+	}),
 	post: (force: boolean) => ({
 		title: { type: 'string', required: force },
 		slug: { type: 'string', required: force },

@@ -44,6 +44,25 @@ class SeasonService extends Service {
 	async destroy(ids: Array<string>, type?: string) {
 		const query = ids.length > 0 ? { _id: { $in: ids } } : { type };
 		const result = await this.ctx.model.Season.deleteMany(query);
+
+		if (type) {
+			let newType;
+			switch (type) {
+				case 'animate':
+					newType = 'Animate';
+					break;
+				case 'comic':
+					newType = 'Comic';
+					break;
+				case 'post':
+					newType = 'Post';
+					break;
+				default:
+					return;
+			}
+			await this.ctx.model[newType].updateMany({ seasonRelate: { $in: ids } }, { $set: { seasonRelate: null } });
+		}
+
 		return result;
 	}
 }

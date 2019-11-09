@@ -102,6 +102,15 @@ export default (app: Application) => {
 	router.delete(`${api}/comments/:id`, auth(100), controller.backend.comment.destroy);
 	router.delete(`${api}/comments`, auth(100), controller.backend.comment.destroyMany);
 
+	// 评分
+	router.get(`${api}/rates`, auth(100), controller.backend.rate.query);
+	router.get(`${api}/rates/:id`, auth(100), controller.backend.rate.info);
+	router.post(`${api}/rates`, auth(100), controller.backend.rate.create);
+	router.put(`${api}/rates/:id`, auth(100), controller.backend.rate.update);
+	router.put(`${api}/rates`, auth(100), controller.backend.rate.updateMany);
+	router.delete(`${api}/rates/:id`, auth(100), controller.backend.rate.destroy);
+	router.delete(`${api}/rates`, auth(100), controller.backend.rate.destroyMany);
+
 	// 弹幕
 	router.get(`${api}/danmus`, auth(100), controller.backend.danmu.query);
 	router.get(`${api}/danmus/:id`, auth(100), controller.backend.danmu.info);

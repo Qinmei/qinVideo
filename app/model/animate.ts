@@ -33,8 +33,8 @@ export default (app) => {
 			firstPlay: { type: String, default: '20160606' }, // 首播
 			isUpdate: { type: Boolean, default: false }, // 是否连载
 			updateDay: { type: Number, default: 0 }, // 周几播放
-			rateStar: { type: Number, default: 8 }, // 评分星级
-			rateCount: { type: Number, default: 1000 }, // 评分人数
+			rateStar: { type: Number, default: 0 }, // 评分星级
+			rateCount: { type: Number, default: 0 }, // 评分人数
 			impression: { type: String, default: '' }, // 印象
 			playType: {
 				type: String,
@@ -85,6 +85,13 @@ export default (app) => {
 
 	AnimateSchema.virtual('countDanmu', {
 		ref: 'Danmu',
+		localField: '_id',
+		foreignField: 'target',
+		count: true
+	});
+
+	AnimateSchema.virtual('countRating', {
+		ref: 'Rate',
 		localField: '_id',
 		foreignField: 'target',
 		count: true
