@@ -26,7 +26,7 @@ export default (app) => {
 		allAnimate: { type: String, default: '' }, // 所有番剧
 		allComic: { type: String, default: '' }, // 所有漫画
 		allPost: { type: String, default: '' }, // 所有文章
-		pcMenu: [{ type: String }], // web菜单
+		pcMenu: [{ title: String, link: String }], // web菜单
 		pcIndex: [{ type: String }], // web首页
 		h5Menu: [{ type: String }], // mobile菜单
 		h5Index: [{ type: String }], // mobile首页
