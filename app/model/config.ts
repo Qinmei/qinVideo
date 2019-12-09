@@ -28,6 +28,11 @@ export default app => {
 		allPost: { type: String, default: '' }, // 所有文章
 		pcMenu: [{ title: String, link: String }], // web菜单
 		pcIndex: [{ type: String }], // web首页
+		animeMenu:[{ type: String }], // 动漫菜单
+		animeIndex:[{ type: String }], // 动漫首页
+		comicMenu:[{ type: String }], // 漫画菜单
+		comicIndex:[{ type: String }], // 漫画首页
+		postIndex:[{ type: String }], // 文章菜单
 		h5Menu: [{ type: String }], // mobile菜单
 		h5Index: [{ type: String }], // mobile首页
 		postMenu: [{ type: String }], // 动态文章分类置顶
