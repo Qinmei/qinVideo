@@ -4,12 +4,12 @@ import { Service } from 'egg';
 
 class ConfigService extends Service {
 	async info() {
-		const data = this.ctx.model.Config.findOne({});
+		const data = await this.ctx.model.Config.findOne({});
 		return data;
 	}
 
 	async simpleInfo() {
-		const data = this.ctx.model.Config.findOne(
+		const data = await this.ctx.model.Config.findOne(
 			{},
 			{
 				favcion: 1, // ico
@@ -43,8 +43,9 @@ class ConfigService extends Service {
 				postTop: 1, // 动态文章置顶
 				message: 1, // 系统通知
 				aboutus: 1,
+				pcIndexs: 1,
 			},
-		);
+		).populate('postIndex');
 		return data;
 	}
 

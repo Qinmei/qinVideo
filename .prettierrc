@@ -1,6 +1,8 @@
 # .prettierrc
 useTabs: false
-semi: true,
+semi: true
+tabWidth: 4
+trailingComma: 'es5'
 singleQuote: true
 arrowParens: 'always'
 printWidth: 120

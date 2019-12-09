@@ -23,6 +23,9 @@ export default app => {
 			type: String,
 			default: '',
 		},
+	},{
+		timestamps: true,
+		toJSON: { virtuals: true },
 	});
 
 	return mongoose.model('Category', CategorySchema);

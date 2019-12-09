@@ -42,6 +42,11 @@ class CategoryService extends Service {
 		const result = await this.ctx.model.Category.deleteMany(query);
 		return result;
 	}
+
+	async list(list:[string]) {
+		const data = this.ctx.model.Category.find({ _id: { $in: list } });
+		return data;
+	}
 }
 
 export default CategoryService;
