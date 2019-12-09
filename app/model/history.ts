@@ -1,4 +1,4 @@
-export default (app) => {
+export default app => {
 	const mongoose = app.mongoose;
 	const Schema = mongoose.Schema;
 
@@ -8,14 +8,14 @@ export default (app) => {
 			onModel: {
 				type: String,
 				required: true,
-				enum: ['Comic', 'Animate', 'Eposide', 'Post', 'User']
+				enum: [ 'Comic', 'Animate', 'Eposide', 'Post', 'User' ],
 			},
 			author: { type: Schema.Types.ObjectId, ref: 'User' },
-			addons: Schema.Types.Mixed
+			addons: Schema.Types.Mixed,
 		},
 		{
-			timestamps: true
-		}
+			timestamps: true,
+		},
 	);
 
 	return mongoose.model('History', HistorySchema);

@@ -19,14 +19,14 @@ class CommentService extends Service {
 			.populate({ path: 'author', select: 'name avatar level introduce background' })
 			.populate({
 				path: 'replyTo',
-				select: 'name avatar level introduce background'
+				select: 'name avatar level introduce background',
 			});
 
 		const total = await this.ctx.model.Comment.find(query).countDocuments();
 
 		return {
 			list: result,
-			total
+			total,
 		};
 	}
 
@@ -35,7 +35,7 @@ class CommentService extends Service {
 		const limit: number = size;
 
 		const query: any = {
-			parent: null
+			parent: null,
 		};
 		title && (query.content = { $regex: title, $options: '$i' });
 		status && (query.status = status);
@@ -51,16 +51,16 @@ class CommentService extends Service {
 				populate: [
 					{
 						path: 'author',
-						select: 'name avatar level introduce background'
+						select: 'name avatar level introduce background',
 					},
 					{
-						path: 'countLike'
+						path: 'countLike',
 					},
 					{
 						path: 'replyTo',
-						select: 'name avatar level introduce background'
-					}
-				]
+						select: 'name avatar level introduce background',
+					},
+				],
 			})
 			.populate({ path: 'author', select: 'name avatar level introduce background' });
 
@@ -68,7 +68,7 @@ class CommentService extends Service {
 
 		return {
 			list: result,
-			total
+			total,
 		};
 	}
 
@@ -77,13 +77,13 @@ class CommentService extends Service {
 		return result;
 	}
 
-	async update(ids: Array<string>, data: any) {
+	async update(ids: string[], data: any) {
 		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
 		const result = await this.ctx.model.Comment.updateMany(query, { $set: data });
 		return result;
 	}
 
-	async destroy(ids: Array<string>) {
+	async destroy(ids: string[]) {
 		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
 		const result = await this.ctx.model.Comment.deleteMany(query);
 		return result;

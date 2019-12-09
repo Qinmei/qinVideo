@@ -59,7 +59,7 @@ class UserController extends Controller {
 		const token = jwt.sign(
 			{ id: _id, name, email, level, score, avatar, background, introduce },
 			ctx.app.config.tokenSecret,
-			{ expiresIn: '100d' }
+			{ expiresIn: '100d' },
 		);
 		return token;
 	}
@@ -128,14 +128,14 @@ class UserController extends Controller {
 
 		const { _id, name } = userInfo;
 		const token = jwt.sign({ id: _id }, ctx.app.config.tokenSecret, {
-			expiresIn: '2h'
+			expiresIn: '2h',
 		});
 
 		service.utils.sendMail({
 			to: email,
 			subject: '重置密码',
 			text: '',
-			html: `<h3>亲爱的${name}:<h3><p>您正在进行重置密码的操作,如果不是您本人所为请忽略此邮件,确认重置密码请复制点击下方验证码:</p><p style='margin-left:30px;font-size:20px'>${token}</p>`
+			html: `<h3>亲爱的${name}:<h3><p>您正在进行重置密码的操作,如果不是您本人所为请忽略此邮件,确认重置密码请复制点击下方验证码:</p><p style='margin-left:30px;font-size:20px'>${token}</p>`,
 		});
 
 		ctx.helper.success('send success');
@@ -150,7 +150,7 @@ class UserController extends Controller {
 			const { id } = await jwt.verify(token, ctx.app.config.tokenSecret);
 			const newPass = ctx.helper.MD5(ctx.app.config.salt + password);
 			const refreshToken = uuidv4();
-			result = await service.user.update([id], { password: newPass, refreshToken }).catch(() => 10011);
+			result = await service.user.update([ id ], { password: newPass, refreshToken }).catch(() => 10011);
 		} catch (err) {}
 
 		ctx.helper.send(result);

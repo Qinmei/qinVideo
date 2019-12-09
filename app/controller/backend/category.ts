@@ -39,7 +39,7 @@ class CategoryController extends Controller {
 		ctx.helper.validate('id', { id });
 		ctx.helper.validate('category', data);
 
-		const result = await service.category.update([id], data).catch(() => 16003);
+		const result = await service.category.update([ id ], data).catch(() => 16003);
 		ctx.helper.send(result);
 	}
 
@@ -61,7 +61,7 @@ class CategoryController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.category.destroy([id]).catch(() => 16004);
+		const result = await service.category.destroy([ id ]).catch(() => 16004);
 		ctx.helper.send(result);
 	}
 

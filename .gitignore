@@ -13,6 +13,10 @@ logs/
 
 test/**/*.js
 config/**/*.js
+app/**/*.js
+app/**/**/*.js
 app/**/*.map
 test/**/*.map
 config/**/*.map
+
+!/app/public

@@ -1,4 +1,4 @@
-export default (app) => {
+export default app => {
 	const mongoose = app.mongoose;
 	const Schema = mongoose.Schema;
 
@@ -9,19 +9,19 @@ export default (app) => {
 					source: { type: String },
 					api: { type: String },
 					cat: { type: Number },
-					type: { type: String, enum: ['Animate', 'Comic'] }
-				}
+					type: { type: String, enum: [ 'Animate', 'Comic' ] },
+				},
 			],
 			update: { type: Boolean, default: false },
 			slugPrefix: { type: String, default: 'av' },
 			process: { type: String, default: '' },
 			history: [{ type: String }],
-			addons: Schema.Types.Mixed
+			addons: Schema.Types.Mixed,
 		},
 		{
 			timestamps: true,
-			toJSON: { virtuals: true }
-		}
+			toJSON: { virtuals: true },
+		},
 	);
 
 	return mongoose.model('CloudSetting', CloudSettingSchema);

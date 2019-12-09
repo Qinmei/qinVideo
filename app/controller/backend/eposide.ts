@@ -29,7 +29,7 @@ class EposideController extends Controller {
 		data.author = userId;
 		ctx.helper.validate('eposide', data, true);
 
-		const result = await service.eposide.create(data).catch((err) => console.log(err));
+		const result = await service.eposide.create(data).catch(err => console.log(err));
 		ctx.helper.send(result);
 	}
 
@@ -41,7 +41,7 @@ class EposideController extends Controller {
 		ctx.helper.validate('id', { id });
 		ctx.helper.validate('eposide', data);
 
-		const result = await service.eposide.update([id], data).catch(() => 18003);
+		const result = await service.eposide.update([ id ], data).catch(() => 18003);
 		ctx.helper.send(result);
 	}
 
@@ -63,7 +63,7 @@ class EposideController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.eposide.destroy([id]).catch(() => 18004);
+		const result = await service.eposide.destroy([ id ]).catch(() => 18004);
 		ctx.helper.send(result);
 	}
 

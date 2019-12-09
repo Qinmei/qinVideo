@@ -1,4 +1,4 @@
-export default (app) => {
+export default app => {
 	const mongoose = app.mongoose;
 	const Schema = mongoose.Schema;
 
@@ -30,7 +30,7 @@ export default (app) => {
 		pcIndex: [{ type: String }], // web首页
 		h5Menu: [{ type: String }], // mobile菜单
 		h5Index: [{ type: String }], // mobile首页
-		postMenu: [{ type: String }], //动态文章分类置顶
+		postMenu: [{ type: String }], // 动态文章分类置顶
 		postTop: [{ type: String }], // 动态文章置顶
 		message: [{ type: String }], // 系统通知
 		aboutus: { type: String, default: '' },
@@ -40,20 +40,20 @@ export default (app) => {
 				level: Number,
 				prefix: String,
 				key: String,
-				expired: Number
-			}
+				expired: Number,
+			},
 		],
 		jiexi: [
 			{
 				// 解析
 				pattern: String,
-				prefix: String
-			}
+				prefix: String,
+			},
 		],
 		emailType: {
 			type: String,
-			enum: ['smtp', 'sendgrid'],
-			default: 'smtp'
+			enum: [ 'smtp', 'sendgrid' ],
+			default: 'smtp',
 		},
 		emailName: { type: String, default: '' },
 		emailSender: { type: String, default: '' },
@@ -63,7 +63,7 @@ export default (app) => {
 		smtpUser: { type: String, default: '' },
 		smtpPass: { type: String, default: '' },
 		sendgrid: { type: String, default: '' },
-		addons: Schema.Types.Mixed
+		addons: Schema.Types.Mixed,
 	});
 
 	return mongoose.model('Config', ConfigSchema);

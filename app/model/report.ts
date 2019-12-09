@@ -1,4 +1,4 @@
-export default (app) => {
+export default app => {
 	const mongoose = app.mongoose;
 	const Schema = mongoose.Schema;
 
@@ -12,18 +12,18 @@ export default (app) => {
 			onModel: {
 				type: String,
 				required: true,
-				enum: ['Comic', 'Animate', 'Comment', 'User', 'Post']
+				enum: [ 'Comic', 'Animate', 'Comment', 'User', 'Post' ],
 			},
 			status: {
 				type: String,
-				enum: ['draft', 'publish', 'reject'],
-				default: 'draft'
+				enum: [ 'draft', 'publish', 'reject' ],
+				default: 'draft',
 			},
-			addons: Schema.Types.Mixed
+			addons: Schema.Types.Mixed,
 		},
 		{
-			timestamps: true
-		}
+			timestamps: true,
+		},
 	);
 
 	return mongoose.model('Report', ReportSchema);

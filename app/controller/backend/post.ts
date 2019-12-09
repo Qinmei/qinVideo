@@ -41,7 +41,7 @@ class PostController extends Controller {
 		ctx.helper.validate('id', { id });
 		ctx.helper.validate('post', data);
 
-		const result = await service.post.update([id], data).catch(() => 14003);
+		const result = await service.post.update([ id ], data).catch(() => 14003);
 		ctx.helper.send(result);
 	}
 
@@ -63,7 +63,7 @@ class PostController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.post.destroy([id]).catch(() => 14004);
+		const result = await service.post.destroy([ id ]).catch(() => 14004);
 		ctx.helper.send(result);
 	}
 

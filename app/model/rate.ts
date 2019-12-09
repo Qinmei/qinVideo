@@ -1,4 +1,4 @@
-export default (app) => {
+export default app => {
 	const mongoose = app.mongoose;
 	const Schema = mongoose.Schema;
 
@@ -8,19 +8,19 @@ export default (app) => {
 			onModel: {
 				type: String,
 				required: true,
-				enum: ['Comic', 'Animate']
+				enum: [ 'Comic', 'Animate' ],
 			},
 			rate: {
 				type: Number,
 				required: true,
-				index: true
+				index: true,
 			},
 			author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-			addons: Schema.Types.Mixed
+			addons: Schema.Types.Mixed,
 		},
 		{
-			timestamps: true
-		}
+			timestamps: true,
+		},
 	);
 
 	return mongoose.model('Rate', RateSchema);

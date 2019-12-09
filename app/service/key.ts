@@ -19,7 +19,7 @@ class KeyService extends Service {
 
 		return {
 			list: result,
-			total
+			total,
 		};
 	}
 
@@ -36,7 +36,7 @@ class KeyService extends Service {
 				key: short.generate(),
 				price,
 				expired,
-				status: 'draft'
+				status: 'draft',
 			};
 			newData.push(item);
 		}
@@ -44,13 +44,13 @@ class KeyService extends Service {
 		return result;
 	}
 
-	async update(ids: Array<string>, data: any) {
+	async update(ids: string[], data: any) {
 		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
 		const result = await this.ctx.model.Key.updateMany(query, { $set: data });
 		return result;
 	}
 
-	async destroy(ids: Array<string>) {
+	async destroy(ids: string[]) {
 		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
 		const result = await this.ctx.model.Key.deleteMany(query);
 		return result;

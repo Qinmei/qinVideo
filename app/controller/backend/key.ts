@@ -41,7 +41,7 @@ class KeyController extends Controller {
 		ctx.helper.validate('id', { id });
 		ctx.helper.validate('key', data);
 
-		const result = await service.key.update([id], data).catch(() => 19003);
+		const result = await service.key.update([ id ], data).catch(() => 19003);
 		ctx.helper.send(result);
 	}
 
@@ -63,7 +63,7 @@ class KeyController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.key.destroy([id]).catch(() => 19004);
+		const result = await service.key.destroy([ id ]).catch(() => 19004);
 		ctx.helper.send(result);
 	}
 

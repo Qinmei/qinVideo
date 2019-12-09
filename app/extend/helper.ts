@@ -7,7 +7,7 @@ module.exports = {
 	success(data = null) {
 		this.ctx.body = {
 			code: 10000,
-			data
+			data,
 		};
 		throw 'code';
 	},
@@ -16,7 +16,7 @@ module.exports = {
 	error(code) {
 		this.ctx.body = {
 			code,
-			msg: codes[code]
+			msg: codes[code],
 		};
 		throw 'code';
 	},
@@ -40,10 +40,10 @@ module.exports = {
 		} catch (err) {
 			this.ctx.body = {
 				code: 10004,
-				msg: err
+				msg: err,
 			};
 			throw 'code';
 		}
 	},
-	...common
+	...common,
 };

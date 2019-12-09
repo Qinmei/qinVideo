@@ -1,4 +1,4 @@
-export default (app) => {
+export default app => {
 	const mongoose = app.mongoose;
 	const Schema = mongoose.Schema;
 
@@ -8,7 +8,7 @@ export default (app) => {
 			target: { type: Schema.Types.ObjectId, refPath: 'onModel' },
 			onModel: {
 				type: String,
-				enum: ['Comic', 'Animate', 'Eposide', 'Post', 'Blog']
+				enum: [ 'Comic', 'Animate', 'Eposide', 'Post', 'Blog' ],
 			},
 			replyTo: { type: Schema.Types.ObjectId, ref: 'User' }, // 回复人
 			parent: { type: Schema.Types.ObjectId, ref: 'Comment' }, // 父级
@@ -16,28 +16,28 @@ export default (app) => {
 			image: [{ type: String }], // 图片
 			status: {
 				type: String,
-				enum: ['draft', 'publish', 'reject'],
-				default: 'draft'
+				enum: [ 'draft', 'publish', 'reject' ],
+				default: 'draft',
 			},
-			addons: Schema.Types.Mixed
+			addons: Schema.Types.Mixed,
 		},
 		{
 			timestamps: true,
-			toJSON: { virtuals: true }
-		}
+			toJSON: { virtuals: true },
+		},
 	);
 
 	CommentSchema.virtual('countLike', {
 		ref: 'Relation',
 		localField: '_id',
 		foreignField: 'target',
-		count: true
+		count: true,
 	});
 
 	CommentSchema.virtual('children', {
 		ref: 'Comment',
 		localField: '_id',
-		foreignField: 'parent'
+		foreignField: 'parent',
 	});
 
 	return mongoose.model('Comment', CommentSchema);

@@ -28,7 +28,7 @@ class UploadsController extends Controller {
 		const { ctx, service } = this;
 		const { ids } = ctx.request.body;
 
-		ctx.helper.validate('ids', { ids: ids });
+		ctx.helper.validate('ids', { ids });
 
 		const result = await service.upload.deleteImg(ids).catch(() => 25002);
 		ctx.helper.send(result);

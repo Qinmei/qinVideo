@@ -1,4 +1,4 @@
-export default (app) => {
+export default app => {
 	const mongoose = app.mongoose;
 	const Schema = mongoose.Schema;
 
@@ -7,7 +7,7 @@ export default (app) => {
 			title: {
 				// 标题
 				type: String,
-				required: true
+				required: true,
 			},
 			slug: {
 				// 别名, 唯一标识符
@@ -15,12 +15,12 @@ export default (app) => {
 				required: true,
 				index: true,
 				unique: true,
-				trim: true
+				trim: true,
 			},
 			status: {
 				type: String,
-				enum: ['draft', 'publish', 'trash'],
-				default: 'draft'
+				enum: [ 'draft', 'publish', 'trash' ],
+				default: 'draft',
 			},
 			level: { type: Number, default: 0 }, // 等级限定
 			author: { type: Schema.Types.ObjectId, ref: 'User' }, // 用户名
@@ -31,46 +31,46 @@ export default (app) => {
 			cover: { type: String, default: '' }, // 封面图
 			introduce: { type: String, default: '' },
 			content: { type: String, default: '' }, // 内容
-			addons: Schema.Types.Mixed
+			addons: Schema.Types.Mixed,
 		},
 		{
 			timestamps: true,
-			toJSON: { virtuals: true }
-		}
+			toJSON: { virtuals: true },
+		},
 	);
 
 	PostSchema.virtual('countPlay', {
 		ref: 'History',
 		localField: '_id',
 		foreignField: 'target',
-		count: true
+		count: true,
 	});
 
 	PostSchema.virtual('countLike', {
 		ref: 'Relation',
 		localField: '_id',
 		foreignField: 'target',
-		count: true
+		count: true,
 	});
 
 	PostSchema.virtual('countComment', {
 		ref: 'Comment',
 		localField: '_id',
 		foreignField: 'target',
-		count: true
+		count: true,
 	});
 
 	PostSchema.virtual('seasons', {
 		ref: 'Post',
 		localField: 'seasonRelate',
-		foreignField: 'seasonRelate'
+		foreignField: 'seasonRelate',
 	});
 
 	PostSchema.virtual('seasonInfo', {
 		ref: 'Season',
 		localField: 'seasonRelate',
 		foreignField: '_id',
-		justOne: true
+		justOne: true,
 	});
 
 	return mongoose.model('Post', PostSchema);

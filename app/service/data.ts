@@ -6,31 +6,31 @@ class DataService extends Service {
 			const dataQuery: any = {
 				createdAt: {
 					$gte: new Date(startTime),
-					$lte: new Date(endTime)
-				}
+					$lte: new Date(endTime),
+				},
 			};
 
 			target && (dataQuery.target = { $regex: target, $options: '$i' });
 
 			const data = await this.ctx.model.Data.aggregate([
 				{
-					$match: dataQuery
+					$match: dataQuery,
 				},
 				{
 					$project: {
-						day: { $substr: [{ $add: ['$createdAt', 28800000] }, 0, 10] },
+						day: { $substr: [{ $add: [ '$createdAt', 28800000 ] }, 0, 10 ] },
 						target: 1,
-						type: 1
-					}
+						type: 1,
+					},
 				},
 				{
 					$group: {
 						_id: {
 							date: '$day',
-							type: '$type'
+							type: '$type',
 						},
-						count: { $sum: 1 }
-					}
+						count: { $sum: 1 },
+					},
 				},
 				{
 					$group: {
@@ -38,14 +38,14 @@ class DataService extends Service {
 						data: {
 							$push: {
 								type: '$_id.type',
-								count: '$count'
-							}
-						}
-					}
+								count: '$count',
+							},
+						},
+					},
 				},
 				{
-					$sort: { _id: 1 }
-				}
+					$sort: { _id: 1 },
+				},
 			]);
 
 			return data;
@@ -56,16 +56,16 @@ class DataService extends Service {
 						type: 'search',
 						createdAt: {
 							$gte: new Date(startTime),
-							$lte: new Date(endTime)
-						}
-					}
+							$lte: new Date(endTime),
+						},
+					},
 				},
 				{
 					$group: {
 						_id: '$target',
-						count: { $sum: 1 }
-					}
-				}
+						count: { $sum: 1 },
+					},
+				},
 			]);
 
 			return data;
@@ -75,24 +75,24 @@ class DataService extends Service {
 					$match: {
 						createdAt: {
 							$gte: new Date(startTime),
-							$lte: new Date(endTime)
-						}
-					}
+							$lte: new Date(endTime),
+						},
+					},
 				},
 				{
 					$project: {
-						hour: { $substr: [{ $add: ['$createdAt', 28800000] }, 0, 13] },
-						type: 1
-					}
+						hour: { $substr: [{ $add: [ '$createdAt', 28800000 ] }, 0, 13 ] },
+						type: 1,
+					},
 				},
 				{
 					$group: {
 						_id: {
 							date: '$hour',
-							type: '$type'
+							type: '$type',
 						},
-						count: { $sum: 1 }
-					}
+						count: { $sum: 1 },
+					},
 				},
 				{
 					$group: {
@@ -100,14 +100,14 @@ class DataService extends Service {
 						data: {
 							$push: {
 								type: '$_id.type',
-								count: '$count'
-							}
-						}
-					}
+								count: '$count',
+							},
+						},
+					},
 				},
 				{
-					$sort: { _id: 1 }
-				}
+					$sort: { _id: 1 },
+				},
 			]);
 
 			return data;
@@ -117,30 +117,30 @@ class DataService extends Service {
 					$match: {
 						createdAt: {
 							$gte: new Date(startTime),
-							$lte: new Date(endTime)
+							$lte: new Date(endTime),
 						},
 						target: {
-							$ne: null
-						}
-					}
+							$ne: null,
+						},
+					},
 				},
 				{
 					$group: {
 						_id: '$target',
-						count: { $sum: 1 }
-					}
+						count: { $sum: 1 },
+					},
 				},
 				{
-					$sort: { count: -1 }
+					$sort: { count: -1 },
 				},
-				{ $limit: 10 }
+				{ $limit: 10 },
 			]);
 
 			return data;
 		} else if (kind === 'allData') {
 			const animateAll = await this.ctx.model.Animate.countDocuments();
 			const animateDraft = await this.ctx.model.Animate.countDocuments({
-				status: 'draft'
+				status: 'draft',
 			});
 
 			const postAll = await this.ctx.model.Post.countDocuments();
@@ -148,7 +148,7 @@ class DataService extends Service {
 
 			const commentAll = await this.ctx.model.Comment.countDocuments();
 			const commentDraft = await this.ctx.model.Comment.countDocuments({
-				status: 'draft'
+				status: 'draft',
 			});
 
 			const comicAll = await this.ctx.model.Comic.countDocuments();
@@ -162,7 +162,7 @@ class DataService extends Service {
 				commentAll,
 				commentDraft,
 				comicAll,
-				comicDraft
+				comicDraft,
 			};
 
 			return data;

@@ -1,4 +1,4 @@
-export default (app) => {
+export default app => {
 	const mongoose = app.mongoose;
 	const Schema = mongoose.Schema;
 
@@ -8,21 +8,21 @@ export default (app) => {
 			type: String,
 			required: true,
 			index: true,
-			trim: true
+			trim: true,
 		},
 		type: {
 			type: String,
-			enum: ['aarea', 'ayear', 'akind', 'atag', 'carea', 'cyear', 'ckind', 'ctag', 'pkind', 'ptag', 'blog'],
-			required: true
+			enum: [ 'aarea', 'ayear', 'akind', 'atag', 'carea', 'cyear', 'ckind', 'ctag', 'pkind', 'ptag', 'blog' ],
+			required: true,
 		},
 		cover: {
 			type: String,
-			default: ''
+			default: '',
 		},
 		introduce: {
 			type: String,
-			default: ''
-		}
+			default: '',
+		},
 	});
 
 	return mongoose.model('Category', CategorySchema);

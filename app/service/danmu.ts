@@ -20,7 +20,7 @@ class DanmuService extends Service {
 
 		return {
 			list: result,
-			total
+			total,
 		};
 	}
 
@@ -34,13 +34,13 @@ class DanmuService extends Service {
 		return result;
 	}
 
-	async update(ids: Array<string>, data: any) {
+	async update(ids: string[], data: any) {
 		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
 		const result = await this.ctx.model.Danmu.updateMany(query, { $set: data });
 		return result;
 	}
 
-	async destroy(ids: Array<string>) {
+	async destroy(ids: string[]) {
 		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
 		const result = await this.ctx.model.Danmu.deleteMany(query);
 		return result;

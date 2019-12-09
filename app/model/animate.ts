@@ -1,4 +1,4 @@
-export default (app) => {
+export default app => {
 	const mongoose = app.mongoose;
 	const Schema = mongoose.Schema;
 
@@ -8,7 +8,7 @@ export default (app) => {
 				// 标题
 				type: String,
 				required: true,
-				index: true
+				index: true,
 			},
 			slug: {
 				// 别名, 唯一标识符
@@ -16,16 +16,16 @@ export default (app) => {
 				required: true,
 				index: true,
 				unique: true,
-				trim: true
+				trim: true,
 			},
 			author: {
 				type: Schema.Types.ObjectId,
-				ref: 'User'
+				ref: 'User',
 			},
 			status: {
 				type: String,
-				enum: ['draft', 'publish', 'reject'],
-				default: 'draft'
+				enum: [ 'draft', 'publish', 'reject' ],
+				default: 'draft',
 			},
 			introduce: { type: String, default: '' }, // 简介
 			staff: { type: String, default: '' }, // 工作人员
@@ -38,8 +38,8 @@ export default (app) => {
 			impression: { type: String, default: '' }, // 印象
 			playType: {
 				type: String,
-				enum: ['mp4', 'm3u8', 'php'],
-				default: 'mp4'
+				enum: [ 'mp4', 'm3u8', 'php' ],
+				default: 'mp4',
 			}, // 播放类型
 			noPrefix: { type: Boolean, default: false }, // 不使用设置的等级前缀
 			level: { type: Number, default: 0, index: true }, // 等级限定
@@ -54,74 +54,74 @@ export default (app) => {
 			kind: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 类型
 			year: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 年份
 			tag: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 标签
-			addons: Schema.Types.Mixed
+			addons: Schema.Types.Mixed,
 		},
 		{
 			timestamps: true,
-			toJSON: { virtuals: true }
-		}
+			toJSON: { virtuals: true },
+		},
 	);
 
 	AnimateSchema.virtual('countPlay', {
 		ref: 'History',
 		localField: '_id',
 		foreignField: 'target',
-		count: true
+		count: true,
 	});
 
 	AnimateSchema.virtual('countLike', {
 		ref: 'Relation',
 		localField: '_id',
 		foreignField: 'target',
-		count: true
+		count: true,
 	});
 
 	AnimateSchema.virtual('countComment', {
 		ref: 'Comment',
 		localField: '_id',
 		foreignField: 'target',
-		count: true
+		count: true,
 	});
 
 	AnimateSchema.virtual('countDanmu', {
 		ref: 'Danmu',
 		localField: '_id',
 		foreignField: 'target',
-		count: true
+		count: true,
 	});
 
 	AnimateSchema.virtual('countRating', {
 		ref: 'Rate',
 		localField: '_id',
 		foreignField: 'target',
-		count: true
+		count: true,
 	});
 
 	AnimateSchema.virtual('countEposide', {
 		ref: 'Eposide',
 		localField: '_id',
 		foreignField: 'target',
-		count: true
+		count: true,
 	});
 
 	AnimateSchema.virtual('eposide', {
 		ref: 'Eposide',
 		localField: '_id',
 		foreignField: 'target',
-		options: { sort: { sort: -1 } }
+		options: { sort: { sort: -1 } },
 	});
 
 	AnimateSchema.virtual('seasons', {
 		ref: 'Animate',
 		localField: 'seasonRelate',
-		foreignField: 'seasonRelate'
+		foreignField: 'seasonRelate',
 	});
 
 	AnimateSchema.virtual('seasonInfo', {
 		ref: 'Season',
 		localField: 'seasonRelate',
 		foreignField: '_id',
-		justOne: true
+		justOne: true,
 	});
 
 	return mongoose.model('Animate', AnimateSchema);

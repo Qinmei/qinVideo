@@ -6,7 +6,7 @@ class OrderService extends Service {
 		const limit: number = size;
 
 		const query: any = {};
-		title && (query._id = { $in: [title] });
+		title && (query._id = { $in: [ title ] });
 
 		const result = await this.ctx.model.Order.find(query)
 			.sort({ [sortBy]: sortOrder, _id: -1 })
@@ -19,7 +19,7 @@ class OrderService extends Service {
 
 		return {
 			list: result,
-			total
+			total,
 		};
 	}
 
@@ -41,24 +41,24 @@ class OrderService extends Service {
 
 		if (money < price) return 20005;
 
-		await this.ctx.service.user.update([_id], {
+		await this.ctx.service.user.update([ _id ], {
 			level: upLevel,
 			score: score + addScore,
 			expired: expired + addExpired,
-			money: money - price
+			money: money - price,
 		});
 
 		const result = await this.ctx.model.Order.create(data);
 		return result;
 	}
 
-	async update(ids: Array<string>, data: any) {
+	async update(ids: string[], data: any) {
 		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
 		const result = await this.ctx.model.Order.updateMany(query, { $set: data });
 		return result;
 	}
 
-	async destroy(ids: Array<string>) {
+	async destroy(ids: string[]) {
 		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
 		const result = await this.ctx.model.Order.deleteMany(query);
 		return result;

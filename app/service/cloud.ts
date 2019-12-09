@@ -24,11 +24,11 @@ class CloudService extends Service {
 
 		return {
 			list: result,
-			total
+			total,
 		};
 	}
 
-	async list(ids: Array<string>) {
+	async list(ids: string[]) {
 		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
 		const result = await this.ctx.model.Cloud.find(query);
 		return result;
@@ -39,7 +39,7 @@ class CloudService extends Service {
 		return result;
 	}
 
-	async destroy(ids: Array<string>) {
+	async destroy(ids: string[]) {
 		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
 		const result = await this.ctx.model.Cloud.deleteMany(query);
 		return result;
@@ -67,7 +67,7 @@ class CloudService extends Service {
 
 		const eposideData = await this.ctx.service.eposide.create(eposide).catch(() => false);
 		if (!eposideData) {
-			await this.destroy([result._id]);
+			await this.destroy([ result._id ]);
 		}
 
 		return eposideData;
@@ -96,13 +96,13 @@ class CloudService extends Service {
 		return result;
 	}
 
-	async save(ids: Array<string>) {
+	async save(ids: string[]) {
 		const data = await this.list(ids);
 
 		const result = {
 			total: data.length,
 			success: 0,
-			fail: 0
+			fail: 0,
 		};
 
 		for (let index = 0; index < data.length; index++) {

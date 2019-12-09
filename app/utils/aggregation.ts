@@ -1,11 +1,11 @@
-export const categoryLookup = ['area', 'year', 'kind', 'tag'].map((item) => {
+export const categoryLookup = [ 'area', 'year', 'kind', 'tag' ].map(item => {
 	return {
 		$lookup: {
 			from: 'categories',
 			localField: item,
 			foreignField: '_id',
-			as: item
-		}
+			as: item,
+		},
 	};
 });
 
@@ -17,9 +17,9 @@ export const authorLookup = {
 			{
 				$match: {
 					$expr: {
-						$eq: ['$_id', '$$value']
-					}
-				}
+						$eq: [ '$_id', '$$value' ],
+					},
+				},
 			},
 			{
 				$project: {
@@ -29,12 +29,12 @@ export const authorLookup = {
 					score: 1,
 					avatar: 1,
 					background: 1,
-					introduce: 1
-				}
-			}
+					introduce: 1,
+				},
+			},
 		],
-		as: 'author'
-	}
+		as: 'author',
+	},
 };
 
 export const seasonLookup = (type: string) => ({
@@ -45,20 +45,20 @@ export const seasonLookup = (type: string) => ({
 			{
 				$match: {
 					$expr: {
-						$eq: ['$seasonRelate', '$$value']
+						$eq: [ '$seasonRelate', '$$value' ],
 					},
-					status: 'publish'
-				}
+					status: 'publish',
+				},
 			},
 			{
 				$project: {
 					slug: 1,
-					season: 1
-				}
-			}
+					season: 1,
+				},
+			},
 		],
-		as: 'seasons'
-	}
+		as: 'seasons',
+	},
 });
 
 export const listAll = {
@@ -67,41 +67,41 @@ export const listAll = {
 			from: 'histories',
 			localField: '_id',
 			foreignField: 'target',
-			as: 'listPlay'
-		}
+			as: 'listPlay',
+		},
 	},
 	countLike: {
 		$lookup: {
 			from: 'relations',
 			localField: '_id',
 			foreignField: 'target',
-			as: 'listLike'
-		}
+			as: 'listLike',
+		},
 	},
 	countDanmu: {
 		$lookup: {
 			from: 'danmus',
 			localField: '_id',
 			foreignField: 'target',
-			as: 'listDanmu'
-		}
+			as: 'listDanmu',
+		},
 	},
 	countComment: {
 		$lookup: {
 			from: 'comments',
 			localField: '_id',
 			foreignField: 'target',
-			as: 'listComment'
-		}
+			as: 'listComment',
+		},
 	},
 	countEposide: {
 		$lookup: {
 			from: 'eposides',
 			localField: '_id',
 			foreignField: 'target',
-			as: 'listEposide'
-		}
-	}
+			as: 'listEposide',
+		},
+	},
 };
 
 export const countAll = {
@@ -109,30 +109,30 @@ export const countAll = {
 		id: '$_id',
 		countComment: {
 			$size: {
-				$ifNull: ['$listComment', []]
-			}
+				$ifNull: [ '$listComment', []],
+			},
 		},
 		countDanmu: {
 			$size: {
-				$ifNull: ['$listDanmu', []]
-			}
+				$ifNull: [ '$listDanmu', []],
+			},
 		},
 		countPlay: {
 			$size: {
-				$ifNull: ['$listPlay', []]
-			}
+				$ifNull: [ '$listPlay', []],
+			},
 		},
 		countLike: {
 			$size: {
-				$ifNull: ['$listLike', []]
-			}
+				$ifNull: [ '$listLike', []],
+			},
 		},
 		countEposide: {
 			$size: {
-				$ifNull: ['$listEposide', []]
-			}
-		}
-	}
+				$ifNull: [ '$listEposide', []],
+			},
+		},
+	},
 };
 
 export const rateLookup = [
@@ -144,38 +144,38 @@ export const rateLookup = [
 				{
 					$match: {
 						$expr: {
-							$eq: ['$target', '$$value']
-						}
-					}
+							$eq: [ '$target', '$$value' ],
+						},
+					},
 				},
 				{
 					$group: {
 						_id: null,
 						count: { $sum: 1 },
-						total: { $sum: '$rate' }
-					}
+						total: { $sum: '$rate' },
+					},
 				},
 				{
 					$addFields: {
 						star: {
-							$divide: ['$total', '$count']
-						}
-					}
-				}
+							$divide: [ '$total', '$count' ],
+						},
+					},
+				},
 			],
-			as: 'rates'
-		}
+			as: 'rates',
+		},
 	},
 	{
 		$unwind: {
 			path: '$rates',
-			preserveNullAndEmptyArrays: true
-		}
+			preserveNullAndEmptyArrays: true,
+		},
 	},
 	{
 		$addFields: {
 			countRate: {
-				$add: [{ $ifNull: ['$rates.count', 0] }, '$rateCount']
+				$add: [{ $ifNull: [ '$rates.count', 0 ] }, '$rateCount' ],
 			},
 			countStar: {
 				$divide: [
@@ -185,33 +185,33 @@ export const rateLookup = [
 								{
 									$divide: [
 										{
-											$add: [{ $ifNull: ['$rates.total', 0] }, { $multiply: ['$rateCount', '$rateStar'] }]
+											$add: [{ $ifNull: [ '$rates.total', 0 ] }, { $multiply: [ '$rateCount', '$rateStar' ] }],
 										},
 										{
 											$ifNull: [
 												{
-													$add: ['$rates.count', '$rateCount']
+													$add: [ '$rates.count', '$rateCount' ],
 												},
-												1
-											]
-										}
-									]
+												1,
+											],
+										},
+									],
 								},
-								10
-							]
-						}
+								10,
+							],
+						},
 					},
-					10
-				]
-			}
-		}
-	}
+					10,
+				],
+			},
+		},
+	},
 ];
 
 export const selectCount = (type: string) => {
-	let select: Array<any> = [];
-	let rest: Array<any> = [];
-	const countArr = ['countPlay', 'countLike', 'countComment', 'countDanmu', 'countEposide'];
+	let select: any[] = [];
+	let rest: any[] = [];
+	const countArr = [ 'countPlay', 'countLike', 'countComment', 'countDanmu', 'countEposide' ];
 	if (countArr.includes(type)) {
 		const kind = type.slice(5);
 		const sortField = {
@@ -219,19 +219,19 @@ export const selectCount = (type: string) => {
 				id: '$_id',
 				[`count${kind}`]: {
 					$size: {
-						$ifNull: [`$list${kind}`, []]
-					}
-				}
-			}
+						$ifNull: [ `$list${kind}`, []],
+					},
+				},
+			},
 		};
-		select = [listAll[type], sortField];
-		rest = countArr.filter((item) => item !== type).map((item) => listAll[item]);
+		select = [ listAll[type], sortField ];
+		rest = countArr.filter(item => item !== type).map(item => listAll[item]);
 		rest.push(...rateLookup);
 	} else if (type === 'countStar' || type === 'countRate') {
 		select = rateLookup;
-		rest = countArr.map((item) => listAll[item]);
+		rest = countArr.map(item => listAll[item]);
 	} else {
-		rest = countArr.map((item) => listAll[item]);
+		rest = countArr.map(item => listAll[item]);
 		rest.push(...rateLookup);
 	}
 

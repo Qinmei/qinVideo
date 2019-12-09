@@ -39,11 +39,11 @@ class ConfigService extends Service {
 				pcIndex: 1, // web首页
 				h5Menu: 1, // mobile菜单
 				h5Index: 1, // mobile首页
-				postMenu: 1, //动态文章分类置顶
+				postMenu: 1, // 动态文章分类置顶
 				postTop: 1, // 动态文章置顶
 				message: 1, // 系统通知
-				aboutus: 1
-			}
+				aboutus: 1,
+			},
 		);
 		return data;
 	}
@@ -67,13 +67,13 @@ class ConfigService extends Service {
 	}
 
 	async generate(result: any) {
-		['pc'].map((item) => {
+		[ 'pc' ].map(item => {
 			const configPath = path.join(__dirname, `../public/${item}/`);
 			fs.readdir(configPath, (error, files) => {
 				if (error) throw error;
 
-				const file = files.filter((name) => /config\.[^]*js/.test(name));
-				file.forEach((name) => fs.unlinkSync(configPath + name));
+				const file = files.filter(name => /config\.[^]*js/.test(name));
+				file.forEach(name => fs.unlinkSync(configPath + name));
 			});
 
 			const indexHtml = path.join(__dirname, `../public/${item}/index.html`);

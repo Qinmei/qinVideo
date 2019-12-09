@@ -9,7 +9,7 @@ class EposideService extends Service {
 
 		return {
 			list: result,
-			total
+			total,
 		};
 	}
 
@@ -27,19 +27,19 @@ class EposideService extends Service {
 		return result;
 	}
 
-	async insertMany(data: Array<any>) {
+	async insertMany(data: any[]) {
 		const result = await this.ctx.model.Eposide.insertMany(data);
 		return result;
 	}
 
-	async update(ids: Array<string>, data: any) {
+	async update(ids: string[], data: any) {
 		const result = await this.ctx.model.Eposide.updateMany({ _id: { $in: ids } }, { $set: data });
 		return result;
 	}
 
-	async destroy(ids: Array<string>) {
+	async destroy(ids: string[]) {
 		const result = await this.ctx.model.Eposide.deleteMany({
-			_id: { $in: ids }
+			_id: { $in: ids },
 		});
 		return result;
 	}

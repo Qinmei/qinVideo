@@ -38,7 +38,7 @@ class OrderController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.order.destroy([id]).catch(() => 20004);
+		const result = await service.order.destroy([ id ]).catch(() => 20004);
 		ctx.helper.send(result);
 	}
 

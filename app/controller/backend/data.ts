@@ -10,7 +10,7 @@ class DataController extends Controller {
 		ctx.helper.validate('string', { string: startTime });
 		ctx.helper.validate('string', { string: endTime });
 
-		const result = await service.data.query({ target, kind, startTime, endTime }).catch((err) => 26000);
+		const result = await service.data.query({ target, kind, startTime, endTime }).catch(err => 26000);
 		ctx.helper.send(result);
 	}
 }

@@ -17,7 +17,7 @@ class CategoryService extends Service {
 
 		return {
 			list: result,
-			total
+			total,
 		};
 	}
 
@@ -31,13 +31,13 @@ class CategoryService extends Service {
 		return result;
 	}
 
-	async update(ids: Array<string>, data: any) {
+	async update(ids: string[], data: any) {
 		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
 		const result = await this.ctx.model.Category.updateMany(query, { $set: data });
 		return result;
 	}
 
-	async destroy(ids: Array<string>, type?: string) {
+	async destroy(ids: string[], type?: string) {
 		const query = ids.length > 0 ? { _id: { $in: ids } } : { type };
 		const result = await this.ctx.model.Category.deleteMany(query);
 		return result;

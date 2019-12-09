@@ -6,9 +6,9 @@ class HistoryService extends Service {
 		return result;
 	}
 
-	async destroy(ids: Array<string>) {
+	async destroy(ids: string[]) {
 		const result = await this.ctx.model.History.deleteMany({
-			_id: { $in: ids }
+			_id: { $in: ids },
 		});
 		return result;
 	}

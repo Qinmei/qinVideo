@@ -1,4 +1,4 @@
-export default (app) => {
+export default app => {
 	const mongoose = app.mongoose;
 	const Schema = mongoose.Schema;
 
@@ -6,7 +6,7 @@ export default (app) => {
 		{
 			target: {
 				type: String,
-				index: true
+				index: true,
 			},
 			type: {
 				type: String,
@@ -30,21 +30,21 @@ export default (app) => {
 					'report',
 					'key',
 					'search',
-					'other'
+					'other',
 				],
 				time: Number,
 				default: 'other',
 				required: true,
-				index: true
+				index: true,
 			},
 			author: String,
 			ip: String,
 			referer: String,
-			addons: Schema.Types.Mixed
+			addons: Schema.Types.Mixed,
 		},
 		{
-			timestamps: true
-		}
+			timestamps: true,
+		},
 	);
 
 	return mongoose.model('Data', DataSchema);

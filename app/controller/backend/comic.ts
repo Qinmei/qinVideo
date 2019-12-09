@@ -41,7 +41,7 @@ class ComicController extends Controller {
 		ctx.helper.validate('id', { id });
 		ctx.helper.validate('comic', data);
 
-		const result = await service.comic.update([id], data).catch(() => 13003);
+		const result = await service.comic.update([ id ], data).catch(() => 13003);
 		ctx.helper.send(result);
 	}
 
@@ -63,7 +63,7 @@ class ComicController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.comic.destroy([id]).catch(() => 13004);
+		const result = await service.comic.destroy([ id ]).catch(() => 13004);
 		ctx.helper.send(result);
 	}
 

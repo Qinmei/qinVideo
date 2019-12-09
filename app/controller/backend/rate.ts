@@ -41,7 +41,7 @@ class RateController extends Controller {
 		ctx.helper.validate('id', { id });
 		ctx.helper.validate('rate', data);
 
-		const result = await service.rate.update([id], data).catch(() => 29003);
+		const result = await service.rate.update([ id ], data).catch(() => 29003);
 		ctx.helper.send(result);
 	}
 
@@ -63,7 +63,7 @@ class RateController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.rate.destroy([id]).catch(() => 29004);
+		const result = await service.rate.destroy([ id ]).catch(() => 29004);
 		ctx.helper.send(result);
 	}
 

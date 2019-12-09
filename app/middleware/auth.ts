@@ -1,12 +1,12 @@
 import * as jwt from 'jsonwebtoken';
 
-export default (level) => {
+export default level => {
 	return async (ctx, next) => {
 		const token = ctx.header.authorization;
 
-		let level0 = {
+		const level0 = {
 			name: null,
-			level: 0
+			level: 0,
 		};
 
 		if (token) {

@@ -14,7 +14,7 @@ class CommentController extends Controller {
 	async info() {
 		const { ctx, service } = this;
 		const target = ctx.params.id;
-		let query = ctx.query;
+		const query = ctx.query;
 
 		query.target = target;
 
@@ -44,7 +44,7 @@ class CommentController extends Controller {
 		ctx.helper.validate('id', { id });
 		ctx.helper.validate('comment', data);
 
-		const result = await service.comment.update([id], data).catch(() => 17003);
+		const result = await service.comment.update([ id ], data).catch(() => 17003);
 		ctx.helper.send(result);
 	}
 
@@ -66,7 +66,7 @@ class CommentController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.comment.destroy([id]).catch(() => 17004);
+		const result = await service.comment.destroy([ id ]).catch(() => 17004);
 		ctx.helper.send(result);
 	}
 

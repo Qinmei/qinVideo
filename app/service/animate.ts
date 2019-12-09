@@ -6,7 +6,7 @@ import {
 	selectCount,
 	listAll,
 	rateLookup,
-	seasonLookup
+	seasonLookup,
 } from '../utils/aggregation';
 
 class AnimateService extends Service {
@@ -44,8 +44,8 @@ class AnimateService extends Service {
 			{
 				$sort: {
 					[sortBy]: sortOrder,
-					_id: 1
-				}
+					_id: 1,
+				},
 			},
 			{ $skip: skip },
 			{ $limit: limit },
@@ -59,16 +59,16 @@ class AnimateService extends Service {
 					listPlay: 0,
 					listDanmu: 0,
 					listEposide: 0,
-					listLike: 0
-				}
-			}
+					listLike: 0,
+				},
+			},
 		]);
 
 		const total = await this.ctx.model.Animate.find(query).countDocuments();
 
 		return {
 			list: result,
-			total
+			total,
 		};
 	}
 
@@ -90,8 +90,8 @@ class AnimateService extends Service {
 		const result = await this.ctx.model.Animate.aggregate([
 			{
 				$match: {
-					_id: new mongoose.Types.ObjectId(id)
-				}
+					_id: new mongoose.Types.ObjectId(id),
+				},
 			},
 			...categoryLookup,
 			...Object.values(listAll),
@@ -105,9 +105,9 @@ class AnimateService extends Service {
 					listPlay: 0,
 					listDanmu: 0,
 					listEposide: 0,
-					listLike: 0
-				}
-			}
+					listLike: 0,
+				},
+			},
 		]);
 		return result.length > 0 ? result[0] : 12001;
 	}
@@ -122,7 +122,7 @@ class AnimateService extends Service {
 
 		const { eposide = [] } = data;
 
-		eposide.map((item) => {
+		eposide.map(item => {
 			item.target = result._id;
 			item.onModel = 'Animate';
 		});
@@ -130,19 +130,19 @@ class AnimateService extends Service {
 		const eposideData = await this.ctx.service.eposide.create(eposide).catch(() => false);
 
 		if (!eposideData) {
-			await this.destroy([result._id]);
+			await this.destroy([ result._id ]);
 		}
 
 		return eposideData;
 	}
 
-	async update(ids: Array<string>, data: any) {
+	async update(ids: string[], data: any) {
 		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
 		const result = await this.ctx.model.Animate.updateMany(query, { $set: data });
 		return result;
 	}
 
-	async destroy(ids: Array<string>) {
+	async destroy(ids: string[]) {
 		const query = ids.length > 0 ? { _id: { $in: ids } } : {};
 		const result = await this.ctx.model.Animate.deleteMany(query);
 		return result;

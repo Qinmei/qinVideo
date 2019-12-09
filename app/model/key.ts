@@ -1,4 +1,4 @@
-export default (app) => {
+export default app => {
 	const mongoose = app.mongoose;
 	const Schema = mongoose.Schema;
 
@@ -8,20 +8,20 @@ export default (app) => {
 				// 密钥
 				type: String,
 				required: true,
-				unique: true
+				unique: true,
 			},
 			status: {
 				type: String,
-				enum: ['draft', 'publish', 'reject'],
-				default: 'draft'
+				enum: [ 'draft', 'publish', 'reject' ],
+				default: 'draft',
 			},
 			price: { type: Number, required: true },
 			expired: { type: Number, required: true },
-			addons: Schema.Types.Mixed
+			addons: Schema.Types.Mixed,
 		},
 		{
-			timestamps: true
-		}
+			timestamps: true,
+		},
 	);
 
 	return mongoose.model('Key', KeySchema);

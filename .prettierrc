@@ -1,5 +1,5 @@
 # .prettierrc
-useTabs: true
+useTabs: false
 semi: true
 singleQuote: true
 arrowParens: 'always'

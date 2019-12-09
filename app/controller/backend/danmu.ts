@@ -41,7 +41,7 @@ class DanmuController extends Controller {
 		ctx.helper.validate('id', { id });
 		ctx.helper.validate('danmu', data);
 
-		const result = await service.danmu.update([id], data).catch(() => 15003);
+		const result = await service.danmu.update([ id ], data).catch(() => 15003);
 		ctx.helper.send(result);
 	}
 
@@ -63,7 +63,7 @@ class DanmuController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.danmu.destroy([id]).catch(() => 15004);
+		const result = await service.danmu.destroy([ id ]).catch(() => 15004);
 		ctx.helper.send(result);
 	}
 

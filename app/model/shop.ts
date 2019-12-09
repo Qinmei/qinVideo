@@ -7,12 +7,12 @@ export default app => {
       title: {
         // 标题
         type: String,
-        required: true
+        required: true,
       },
       status: {
         type: String,
-        enum: ["draft", "publish", "reject"],
-        default: "draft"
+        enum: [ 'draft', 'publish', 'reject' ],
+        default: 'draft',
       },
       price: { type: Number, required: true }, // 价格
       upLevel: { type: Number }, // 提升至等级
@@ -20,12 +20,12 @@ export default app => {
       addExpired: { type: Number },
       introduce: String,
       cover: String,
-      addons: Schema.Types.Mixed
+      addons: Schema.Types.Mixed,
     },
     {
-      timestamps: true
-    }
+      timestamps: true,
+    },
   );
 
-  return mongoose.model("Shop", ShopSchema);
+  return mongoose.model('Shop', ShopSchema);
 };

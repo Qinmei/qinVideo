@@ -41,7 +41,7 @@ class ShopController extends Controller {
 		ctx.helper.validate('id', { id });
 		ctx.helper.validate('shop', data);
 
-		const result = await service.shop.update([id], data).catch(() => 21003);
+		const result = await service.shop.update([ id ], data).catch(() => 21003);
 		ctx.helper.send(result);
 	}
 
@@ -63,7 +63,7 @@ class ShopController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.shop.destroy([id]).catch(() => 21004);
+		const result = await service.shop.destroy([ id ]).catch(() => 21004);
 		ctx.helper.send(result);
 	}
 

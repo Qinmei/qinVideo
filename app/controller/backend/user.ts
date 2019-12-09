@@ -28,7 +28,7 @@ class UserController extends Controller {
 		ctx.helper.validate('user', data, true);
 
 		data.password = ctx.helper.MD5(ctx.app.config.salt + data.password);
-		const result = await service.user.create(data).catch((err) => 11002);
+		const result = await service.user.create(data).catch(err => 11002);
 		ctx.helper.send(result);
 	}
 
@@ -40,7 +40,7 @@ class UserController extends Controller {
 		ctx.helper.validate('id', { id });
 		ctx.helper.validate('user', data);
 
-		const result = await service.user.update([id], data).catch(() => 11003);
+		const result = await service.user.update([ id ], data).catch(() => 11003);
 		ctx.helper.send(result);
 	}
 
@@ -62,7 +62,7 @@ class UserController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.user.destroy([id]).catch(() => 11004);
+		const result = await service.user.destroy([ id ]).catch(() => 11004);
 		ctx.helper.send(result);
 	}
 

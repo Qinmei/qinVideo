@@ -14,7 +14,7 @@ const getXmlData = (value = '') => {
 };
 
 const getM3u8Data = (value = '') => {
-	let arr: Array<any> = [];
+	let arr: any[] = [];
 	if (/\#/.test(value)) {
 		arr = value.split('#');
 	} else {
@@ -25,9 +25,9 @@ const getM3u8Data = (value = '') => {
 		link: [
 			{
 				name: 'm3u8',
-				value: item.split('$')[1]
-			}
-		]
+				value: item.split('$')[1],
+			},
+		],
 	}));
 };
 
@@ -44,7 +44,7 @@ const getM3u8Area = (value = '') => {
 	}
 };
 
-const fixZero = (num) => {
+const fixZero =num => {
 	if (num < 10) {
 		return `0000${num}`;
 	} else if (num < 100) {
@@ -98,7 +98,7 @@ class CMSService extends Service {
 			total: 0,
 			success: 0,
 			fail: 0,
-			time: new Date().getTime()
+			time: new Date().getTime(),
 		};
 
 		for (let index = 1; index < end; index++) {
@@ -111,15 +111,15 @@ class CMSService extends Service {
 					title: getXmlData(
 						$(ele)
 							.find('name')
-							.html()
+							.html(),
 					),
 					slug: sourceList.slugPrefix + `${fixZero(total + num)}`,
 					status: 'draft',
-					type: type,
+					type,
 					introduce: getXmlData(
 						$(ele)
 							.find('des')
-							.html()
+							.html(),
 					),
 					playType: 'm3u8',
 					level: 0,
@@ -127,42 +127,42 @@ class CMSService extends Service {
 					coverVertical: getXmlData(
 						$(ele)
 							.find('pic')
-							.html()
+							.html(),
 					),
 					coverHorizontal: getXmlData(
 						$(ele)
 							.find('pic')
-							.html()
+							.html(),
 					),
 					eposide: getM3u8Data(
 						getXmlData(
 							$(ele)
 								.find('dl dd')
-								.html()
-						)
+								.html(),
+						),
 					),
 					area: [
 						getM3u8Area(
 							$(ele)
 								.find('lang')
-								.text()
-						)
+								.text(),
+						),
 					],
 					kind: '',
 					year: [
 						getXmlData(
 							$(ele)
 								.find('year')
-								.html()
-						)
+								.html(),
+						),
 					],
 					tag: [],
 					source,
 					id: getXmlData(
 						$(ele)
 							.find('id')
-							.html()
-					)
+							.html(),
+					),
 				};
 
 				const itemresult = await this.exist(source, saveData.id);

@@ -1,4 +1,4 @@
-export default (app) => {
+export default app => {
 	const mongoose = app.mongoose;
 	const Schema = mongoose.Schema;
 
@@ -9,7 +9,7 @@ export default (app) => {
 				type: String,
 				index: true,
 				required: true,
-				trim: true
+				trim: true,
 			},
 			author: String,
 			time: { type: Number, default: 0, index: true },
@@ -18,11 +18,11 @@ export default (app) => {
 			type: { type: Number, default: 0 },
 			ip: String,
 			referer: String,
-			addons: Schema.Types.Mixed
+			addons: Schema.Types.Mixed,
 		},
 		{
-			timestamps: true
-		}
+			timestamps: true,
+		},
 	);
 
 	return mongoose.model('Danmu', DanmuSchema);

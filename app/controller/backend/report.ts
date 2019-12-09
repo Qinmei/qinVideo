@@ -41,7 +41,7 @@ class ReportController extends Controller {
 		ctx.helper.validate('id', { id });
 		ctx.helper.validate('report', data);
 
-		const result = await service.report.update([id], data).catch(() => 23003);
+		const result = await service.report.update([ id ], data).catch(() => 23003);
 		ctx.helper.send(result);
 	}
 
@@ -63,7 +63,7 @@ class ReportController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.report.destroy([id]).catch(() => 23004);
+		const result = await service.report.destroy([ id ]).catch(() => 23004);
 		ctx.helper.send(result);
 	}
 

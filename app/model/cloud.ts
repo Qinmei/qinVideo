@@ -1,4 +1,4 @@
-export default (app) => {
+export default app => {
 	const mongoose = app.mongoose;
 	const Schema = mongoose.Schema;
 
@@ -7,16 +7,16 @@ export default (app) => {
 			title: {
 				type: String,
 				required: true,
-				index: true
+				index: true,
 			},
 			slug: {
 				type: String,
 				required: true,
 				index: true,
 				unique: true,
-				trim: true
+				trim: true,
 			},
-			type: { type: String, enum: ['Animate', 'Comic'] },
+			type: { type: String, enum: [ 'Animate', 'Comic' ] },
 			introduce: { type: String, default: '' },
 			staff: { type: String, default: '' },
 			actor: { type: String, default: '' },
@@ -28,36 +28,36 @@ export default (app) => {
 			impression: { type: String, default: '' },
 			playType: {
 				type: String,
-				enum: ['mp4', 'm3u8', 'php', 'local', 'image', 'api']
+				enum: [ 'mp4', 'm3u8', 'php', 'local', 'image', 'api' ],
 			},
 			eposide: [
 				{
 					title: {
 						type: String,
-						required: true
+						required: true,
 					},
 					cover: {
-						type: String
+						type: String,
 					},
 					link: [
 						{
 							name: String,
-							value: String
-						}
+							value: String,
+						},
 					],
 					subtitle: [
 						{
 							name: String,
-							value: String
-						}
+							value: String,
+						},
 					],
 					preview: [{ type: String }],
 					bilibili: {
-						type: String
+						type: String,
 					},
 					noSetPrefix: { type: Boolean, default: false },
-					noParentPrefix: { type: Boolean, default: false }
-				}
+					noParentPrefix: { type: Boolean, default: false },
+				},
 			],
 			noPrefix: { type: Boolean, default: false },
 			level: { type: Number, default: 0, index: true },
@@ -74,12 +74,12 @@ export default (app) => {
 			tag: [{ type: String }],
 			source: String,
 			sourceId: String,
-			addons: Schema.Types.Mixed
+			addons: Schema.Types.Mixed,
 		},
 		{
 			timestamps: true,
-			toJSON: { virtuals: true }
-		}
+			toJSON: { virtuals: true },
+		},
 	);
 
 	return mongoose.model('Cloud', CloudSchema);

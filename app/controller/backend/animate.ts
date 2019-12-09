@@ -17,7 +17,7 @@ class AnimateController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.animate.info(id).catch((err) => console.log(err));
+		const result = await service.animate.info(id).catch(err => console.log(err));
 		ctx.helper.send(result);
 	}
 
@@ -44,7 +44,7 @@ class AnimateController extends Controller {
 		ctx.helper.validate('id', { id });
 		ctx.helper.validate('animate', data);
 
-		const result = await service.animate.update([id], data).catch(() => 12003);
+		const result = await service.animate.update([ id ], data).catch(() => 12003);
 		ctx.helper.send(result);
 	}
 
@@ -66,7 +66,7 @@ class AnimateController extends Controller {
 
 		ctx.helper.validate('id', { id });
 
-		const result = await service.animate.destroy([id]).catch(() => 12004);
+		const result = await service.animate.destroy([ id ]).catch(() => 12004);
 		ctx.helper.send(result);
 	}
 

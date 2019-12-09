@@ -1,4 +1,4 @@
-export default (app) => {
+export default app => {
 	const mongoose = app.mongoose;
 	const Schema = mongoose.Schema;
 
@@ -7,18 +7,18 @@ export default (app) => {
 			shop: {
 				type: Schema.Types.ObjectId,
 				ref: 'Shop',
-				required: true
+				required: true,
 			},
 			user: {
 				type: Schema.Types.ObjectId,
 				ref: 'User',
-				required: true
+				required: true,
 			},
-			addons: Schema.Types.Mixed
+			addons: Schema.Types.Mixed,
 		},
 		{
-			timestamps: true
-		}
+			timestamps: true,
+		},
 	);
 
 	return mongoose.model('Order', OrderSchema);
