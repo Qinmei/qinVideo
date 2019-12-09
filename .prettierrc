@@ -1,6 +1,6 @@
 # .prettierrc
 useTabs: false
-semi: true
+semi: true,
 singleQuote: true
 arrowParens: 'always'
 printWidth: 120
