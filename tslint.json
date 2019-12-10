@@ -1,5 +1,12 @@
 {
   "extends": [
     "tslint-config-egg"
-  ]
+  ],
+  "rules": {
+    "no-unused-expression": [
+      true,
+      "allow-fast-null-checks"
+    ],
+    "array-bracket-spacing": false
+  }
 }
