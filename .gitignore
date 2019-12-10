@@ -19,4 +19,4 @@ app/**/*.map
 test/**/*.map
 config/**/*.map
 
-!/app/public
+!/public

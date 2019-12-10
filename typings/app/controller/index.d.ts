@@ -23,6 +23,7 @@ import ExportBackendTest from '../../../app/controller/backend/test';
 import ExportBackendTools from '../../../app/controller/backend/tools';
 import ExportBackendUploads from '../../../app/controller/backend/uploads';
 import ExportBackendUser from '../../../app/controller/backend/user';
+import ExportFrontendAnimate from '../../../app/controller/frontend/animate';
 import ExportFrontendConfig from '../../../app/controller/frontend/config';
 import ExportFrontendData from '../../../app/controller/frontend/data';
 import ExportFrontendUser from '../../../app/controller/frontend/user';
@@ -53,6 +54,7 @@ declare module 'egg' {
       user: ExportBackendUser;
     }
     frontend: {
+      animate: ExportFrontendAnimate;
       config: ExportFrontendConfig;
       data: ExportFrontendData;
       user: ExportFrontendUser;
