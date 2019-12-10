@@ -1,10 +1,10 @@
 import { Controller } from 'egg';
 
 interface ConfigInfo {
-    pcIndex: any[];
-    animeIndex: any[];
-    comicIndex: any[];
-    h5Index: any[];
+    pcIndex: string[];
+    animeIndex: string[];
+    comicIndex: string[];
+    h5Index: string[];
 }
 
 class ConfigController extends Controller {
@@ -21,7 +21,7 @@ class ConfigController extends Controller {
                 if (!result[item]) result[item] = [];
                 result[item] = result[item].map((ele: string) => {
                     const filters = cates.filter((single: any) => single.id === ele);
-                    return filters.length > 0 ? filters[0] : ele;
+                    return filters.length > 0 ? JSON.stringify(filters[0]) : ele;
                 });
             });
         }
