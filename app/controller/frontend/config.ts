@@ -1,10 +1,10 @@
 import { Controller } from 'egg';
 
 interface ConfigInfo {
-    pcIndex: string[];
-    animeIndex: string[];
-    comicIndex: string[];
-    h5Index: string[];
+    pcIndex: any[];
+    animeIndex: any[];
+    comicIndex: any[];
+    h5Index: any[];
 }
 
 class ConfigController extends Controller {
