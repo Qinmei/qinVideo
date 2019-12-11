@@ -7,6 +7,7 @@ interface ConfigInfo {
     animeIndex: string[];
     comicIndex: string[];
     h5Index: string[];
+    _id: string;
 }
 
 class ConfigService extends Service {
