@@ -17,7 +17,7 @@ class AnimateController extends Controller {
 
         ctx.helper.validate('id', { id });
 
-        const result = await service.animate.info(id).catch(() => 12001);
+        const result = await service.animate.slug(id).catch(() => 12001);
         ctx.helper.send(result);
     }
 }

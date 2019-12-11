@@ -162,6 +162,46 @@ class AnimateService extends Service {
         const result = await this.ctx.model.Animate.deleteMany(query);
         return result;
     }
+
+    // frontend
+    async slug(slug: string) {
+        // const result = this.ctx.model.Animate.findById(id)
+        // 	.populate('countPlay')
+        // 	.populate('countLike')
+        // 	.populate('countComment')
+        // 	.populate('countDanmu')
+        // 	.populate({ path: 'author', select: 'name avatar level introduce background' })
+        // 	.populate('area')
+        // 	.populate('kind')
+        // 	.populate('year')
+        // 	.populate('tag')
+        // 	.populate({ path: 'seasons', select: 'slug season', match: { _id: { $ne: id }, status: 'publish' } })
+        // 	.populate('seasonInfo');
+        //  return result;
+        const result = await this.ctx.model.Animate.aggregate([
+            {
+                $match: {
+                    slug,
+                },
+            },
+            ...categoryLookup,
+            ...Object.values(listAll),
+            ...rateLookup,
+            authorLookup,
+            seasonLookup('animate'),
+            countAll,
+            {
+                $project: {
+                    listComment: 0,
+                    listPlay: 0,
+                    listDanmu: 0,
+                    listEposide: 0,
+                    listLike: 0,
+                },
+            },
+        ]);
+        return result.length > 0 ? result[0] : 12001;
+    }
 }
 
 export default AnimateService;
