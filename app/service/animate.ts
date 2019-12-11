@@ -219,6 +219,15 @@ class AnimateService extends Service {
         ]);
         return result.length > 0 ? result[0] : 12001;
     }
+
+    async relative(id: string) {
+        const data = await this.ctx.model.Animate.findById(id);
+        const { tag } = data;
+        const result = await this.ctx.model.Animate.find({
+            tag,
+        }).limit(20);
+        return result.filter((item) => item.id !== id);
+    }
 }
 
 export default AnimateService;

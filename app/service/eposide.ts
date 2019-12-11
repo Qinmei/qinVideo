@@ -15,6 +15,15 @@ class EposideService extends Service {
 
     async info(id: string) {
         const data = this.ctx.model.Eposide.findById(id)
+            .populate({ path: 'target', select: 'title slug coverVertical introduce' })
+            .populate('coutPlay')
+            .populate('coutComment')
+            .populate('coutDanmu');
+        return data;
+    }
+
+    async simpleInfo(id: string) {
+        const data = this.ctx.model.Eposide.findById(id)
             .populate('target')
             .populate('coutPlay')
             .populate('coutComment')

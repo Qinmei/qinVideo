@@ -40,7 +40,7 @@ class AnimateController extends Controller {
         const { ctx, service } = this;
         const id = ctx.params.id;
 
-        const result = await service.animate.slug(id).catch(() => 12001);
+        const result = await service.animate.relative(id).catch((err) => console.log(err));
         ctx.helper.send(result);
     }
 
