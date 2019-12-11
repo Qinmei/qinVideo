@@ -48,6 +48,7 @@ export const seasonLookup = (type: string) => ({
                         $eq: ['$seasonRelate', '$$value'],
                     },
                     status: 'publish',
+                    $and: [{ seasonRelate: { $ne: '' } }, { seasonRelate: { $ne: null } }],
                 },
             },
             {
@@ -60,6 +61,30 @@ export const seasonLookup = (type: string) => ({
         as: 'seasons',
     },
 });
+
+export const eposideLookup = {
+    $lookup: {
+        from: 'eposides',
+        let: { value: '$_id' },
+        pipeline: [
+            {
+                $match: {
+                    $expr: {
+                        $eq: ['$target', '$$value'],
+                    },
+                },
+            },
+            {
+                $project: {
+                    title: 1,
+                    sort: 1,
+                    cover: 1,
+                },
+            },
+        ],
+        as: 'eposides',
+    },
+};
 
 export const listAll = {
     countPlay: {

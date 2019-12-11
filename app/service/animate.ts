@@ -7,6 +7,7 @@ import {
     listAll,
     rateLookup,
     seasonLookup,
+    eposideLookup,
 } from '../utils/aggregation';
 
 interface Query {
@@ -189,6 +190,7 @@ class AnimateService extends Service {
             ...rateLookup,
             authorLookup,
             seasonLookup('animate'),
+            eposideLookup,
             countAll,
             {
                 $project: {
