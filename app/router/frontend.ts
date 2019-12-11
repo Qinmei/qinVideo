@@ -9,12 +9,16 @@ export default (app: Application) => {
     router.get(`${api}/config`, auth(0), controller.frontend.config.info);
     router.get(`${api}/search`, auth(0), controller.frontend.data.query);
 
+    // auth
+    router.get(`${api}/auth/info`, auth(1), controller.frontend.auth.info);
+    router.post(`${api}/auth/login`, auth(0), controller.frontend.auth.login);
+    router.post(`${api}/auth/register`, auth(0), controller.frontend.auth.register);
+    router.post(`${api}/auth/send`, auth(0), controller.frontend.auth.resetPasswordMail);
+    router.post(`${api}/auth/reset`, auth(0), controller.frontend.auth.resetPasswordAuth);
+
     // user
-    router.get(`${api}/user`, auth(0), controller.frontend.user.info);
-    router.post(`${api}/auth/login`, auth(0), controller.frontend.user.login);
-    router.post(`${api}/auth/register`, auth(0), controller.frontend.user.register);
-    router.post(`${api}/auth/send`, auth(0), controller.frontend.user.resetPasswordMail);
-    router.post(`${api}/auth/reset`, auth(0), controller.frontend.user.resetPasswordAuth);
+    router.get(`${api}/user/:id`, auth(0), controller.frontend.user.info);
+    router.post(`${api}/user/action`, auth(0), controller.frontend.user.relation);
 
     // animate
     router.get(`${api}/animates`, auth(0), controller.frontend.animate.query);

@@ -403,6 +403,11 @@ const ruleobj = {
         process: { type: 'string', required: false },
         history: { type: 'array', required: false },
     },
+    relation: {
+        onModel: { type: 'string' },
+        target: { type: 'string' },
+        author: { type: 'string' },
+    },
 };
 
 const rules = (rule: string, force: boolean) => {

@@ -18,6 +18,9 @@ class AnimateController extends Controller {
         ctx.helper.validate('id', { id });
 
         const result = await service.animate.slug(id).catch(() => 12001);
+        if (Array.isArray(result.eposides)) {
+            result.eposides.sort((a: any, b: any) => a.sort - b.sort);
+        }
         ctx.helper.send(result);
     }
 }

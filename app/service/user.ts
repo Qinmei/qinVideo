@@ -2,63 +2,69 @@ import { Service } from 'egg';
 import * as uuidv4 from 'uuid/v4';
 
 class UserService extends Service {
-	async query({ page, size, sortBy, sortOrder, title, email, status }) {
-		const skip = (page - 1) * size;
-		const limit = size;
+    async query({ page, size, sortBy, sortOrder, title, email, status }) {
+        const skip = (page - 1) * size;
+        const limit = size;
 
-		const query: any = {};
-		title && (query.name = { $regex: title, $options: '$i' });
-		email && (query.email = { $regex: email, $options: '$i' });
-		status && (query.status = status);
+        const query: any = {};
+        title && (query.name = { $regex: title, $options: '$i' });
+        email && (query.email = { $regex: email, $options: '$i' });
+        status && (query.status = status);
 
-		const result = await this.ctx.model.User.find(query)
-			.populate('countAnimate')
-			.populate('countComic')
-			.populate('countPost')
-			.populate('countComment')
-			.sort({ [sortBy]: sortOrder, _id: -1 })
-			.skip(skip)
-			.limit(limit)
-			.select('-refreshToken -password');
+        const result = await this.ctx.model.User.find(query)
+            .populate('countAnimate')
+            .populate('countComic')
+            .populate('countPost')
+            .populate('countComment')
+            .sort({ [sortBy]: sortOrder, _id: -1 })
+            .skip(skip)
+            .limit(limit)
+            .select('-refreshToken -password');
 
-		const total = await this.ctx.model.User.find(query).countDocuments();
+        const total = await this.ctx.model.User.find(query).countDocuments();
 
-		return {
-			list: result,
-			total
-		};
-	}
+        return {
+            list: result,
+            total,
+        };
+    }
 
-	async exist(data: any) {
-		const result = this.ctx.model.User.findOne(data);
-		return result;
-	}
+    async exist(data: any) {
+        const result = this.ctx.model.User.findOne(data);
+        return result;
+    }
 
-	async info(id: string) {
-		const result = this.ctx.model.User.findById(id).select('-refreshToken -password');
-		return result;
-	}
+    async info(id: string) {
+        const result = this.ctx.model.User.findById(id).select('-refreshToken -password');
+        return result;
+    }
 
-	async create(data: any) {
-		const uuid = uuidv4();
-		const result = await this.ctx.model.User.create({
-			...data,
-			refreshToken: uuid
-		});
-		return result;
-	}
+    async create(data: any) {
+        const uuid = uuidv4();
+        const result = await this.ctx.model.User.create({
+            ...data,
+            refreshToken: uuid,
+        });
+        return result;
+    }
 
-	async update(ids: Array<string>, data: any) {
-		const query = ids.length > 0 ? { _id: { $in: ids } } : { level: { $lte: 99 } };
-		const result = await this.ctx.model.User.updateMany(query, { $set: data });
-		return result;
-	}
+    async update(ids: Array<string>, data: any) {
+        const query = ids.length > 0 ? { _id: { $in: ids } } : { level: { $lte: 99 } };
+        const result = await this.ctx.model.User.updateMany(query, { $set: data });
+        return result;
+    }
 
-	async destroy(ids: Array<string>) {
-		const query = ids.length > 0 ? { _id: { $in: ids } } : { level: { $lte: 99 } };
-		const result = await this.ctx.model.User.deleteMany(query);
-		return result;
-	}
+    async destroy(ids: Array<string>) {
+        const query = ids.length > 0 ? { _id: { $in: ids } } : { level: { $lte: 99 } };
+        const result = await this.ctx.model.User.deleteMany(query);
+        return result;
+    }
+
+    // frontend
+    async slug(id: string) {
+        const result = this.ctx.model.User.findById(id).select('name email level score avatar background introduce');
+        return result;
+    }
 }
 
 export default UserService;
