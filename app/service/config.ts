@@ -2,6 +2,13 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { Service } from 'egg';
 
+interface ConfigInfo {
+    pcIndex: string[];
+    animeIndex: string[];
+    comicIndex: string[];
+    h5Index: string[];
+}
+
 class ConfigService extends Service {
     async info() {
         const data = await this.ctx.model.Config.findOne({});
@@ -9,44 +16,55 @@ class ConfigService extends Service {
     }
 
     async simpleInfo() {
-        const data = await this.ctx.model.Config.findOne(
+        const result: ConfigInfo = await this.ctx.model.Config.findOne(
             {},
             {
-                favcion: 1, // ico
-                name: 1, // 网站名
-                slogan: 1, // 标语
-                information: 1, // 简介
-                tongji: 1, // 百度统计代码
-                color: 1, // 主题色
-                qq: 1, // qq群链接
-                email: 1, // 邮箱
-                app: 1, // app
-                logo: 1, // 网站logo
-                headimg: 1, // 首页头图
-                mobleimg: 1, // 手机头图
-                loginimg: 1, // 登陆大图
-                avatar: 1, // 默认头像图
-                background: 1, // 默认背景图
-                dplayer: 1, // 默认dplayer的背景图
-                newAnimate: 1, // 新番
-                newComic: 1, // 新漫
-                newDiscuss: 1, // 讨论区
-                newShop: 1, // 商品
-                allAnimate: 1, // 所有番剧
-                allComic: 1, // 所有漫画
-                allPost: 1, // 所有文章
-                pcMenu: 1, // web菜单
-                pcIndex: 1, // web首页
-                h5Menu: 1, // mobile菜单
-                h5Index: 1, // mobile首页
-                postMenu: 1, // 动态文章分类置顶
-                postTop: 1, // 动态文章置顶
-                message: 1, // 系统通知
+                favcion: 1,
+                name: 1,
+                slogan: 1,
+                information: 1,
+                tongji: 1,
+                color: 1,
+                qq: 1,
+                email: 1,
+                app: 1,
+                logo: 1,
+                headimg: 1,
+                mobleimg: 1,
+                loginimg: 1,
+                avatar: 1,
+                background: 1,
+                dplayer: 1,
+                newAnimate: 1,
+                newComic: 1,
+                newDiscuss: 1,
+                newShop: 1,
+                allAnimate: 1,
+                allComic: 1,
+                allPost: 1,
+                pcMenu: 1,
+                pcIndex: 1,
+                h5Menu: 1,
+                h5Index: 1,
                 aboutus: 1,
-                pcIndexs: 1,
             }
         ).populate('postIndex');
-        return data;
+
+        const arr = ['pcIndex', 'animeIndex', 'comicIndex', 'h5Index'];
+        const list = [...result.pcIndex, ...result.animeIndex, ...result.comicIndex, ...result.h5Index].filter(
+            (item: string) => !/new/.test(item)
+        );
+
+        const cates = await this.service.category.list(list);
+
+        arr.map((item: any) => {
+            if (!result[item]) result[item] = [];
+            result[item] = result[item].map((ele: string) => {
+                const filters = cates.filter((single: any) => single.id === ele);
+                return filters.length > 0 ? JSON.stringify(filters[0]) : ele;
+            });
+        });
+        return result;
     }
 
     async create(data: any) {
@@ -57,7 +75,7 @@ class ConfigService extends Service {
 
         const result = await this.ctx.model.Config.create(data);
         if (result) {
-            this.generate(result);
+            this.generate();
         }
         return result;
     }
@@ -67,7 +85,8 @@ class ConfigService extends Service {
         return result;
     }
 
-    async generate(result: any) {
+    async generate() {
+        const result = await this.simpleInfo();
         ['pc'].map((item) => {
             const configPath = path.join(__dirname, `../../public/${item}/`);
             fs.readdir(configPath, (error, files) => {
