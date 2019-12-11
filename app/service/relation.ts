@@ -23,6 +23,11 @@ class RelationService extends Service {
         };
     }
 
+    async exist(data: any) {
+        const result = await this.ctx.model.Relation.findOne(data);
+        return !!result;
+    }
+
     async toggle(data: any) {
         const info = await this.ctx.model.Relation.findOne(data);
 

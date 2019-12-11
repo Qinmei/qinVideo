@@ -23,6 +23,8 @@ export default (app: Application) => {
     // animate
     router.get(`${api}/animates`, auth(0), controller.frontend.animate.query);
     router.get(`${api}/animates/:id`, auth(0), controller.frontend.animate.info);
+    router.get(`${api}/animates/relative/:id`, auth(0), controller.frontend.animate.relative);
+    router.get(`${api}/animates/play/:id`, auth(0), controller.frontend.animate.play);
 
     // comic
     router.get(`${api}/comics`, auth(0), controller.frontend.comic.query);
