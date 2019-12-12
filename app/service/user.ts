@@ -30,12 +30,12 @@ class UserService extends Service {
     }
 
     async exist(data: any) {
-        const result = this.ctx.model.User.findOne(data);
+        const result = await this.ctx.model.User.findOne(data);
         return result;
     }
 
     async info(id: string) {
-        const result = this.ctx.model.User.findById(id).select('-refreshToken -password');
+        const result = await this.ctx.model.User.findById(id).select('-refreshToken -password');
         return result;
     }
 
@@ -62,7 +62,9 @@ class UserService extends Service {
 
     // frontend
     async slug(id: string) {
-        const result = this.ctx.model.User.findById(id).select('name email level score avatar background introduce');
+        const result = await this.ctx.model.User.findById(id).select(
+            'name email level score avatar background introduce'
+        );
         return result;
     }
 }

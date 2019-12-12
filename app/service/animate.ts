@@ -226,7 +226,7 @@ class AnimateService extends Service {
         const result = await this.ctx.model.Animate.find({
             tag,
         }).limit(20);
-        return result.filter((item) => item.id !== id);
+        return result.filter((item: any) => item.id !== id);
     }
 }
 

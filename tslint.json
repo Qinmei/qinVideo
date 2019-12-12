@@ -7,6 +7,10 @@
       true,
       "allow-fast-null-checks"
     ],
-    "array-bracket-spacing": false
+    "array-bracket-spacing": false,
+    "linebreak-style": [
+      false,
+      "unix"
+    ]
   }
 }

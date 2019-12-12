@@ -22,7 +22,7 @@ class CategoryService extends Service {
     }
 
     async info(id: string) {
-        const data = this.ctx.model.Category.findById(id);
+        const data = await this.ctx.model.Category.findById(id);
         return data;
     }
 
@@ -44,7 +44,7 @@ class CategoryService extends Service {
     }
 
     async list(list: string[]) {
-        const data = this.ctx.model.Category.find({ _id: { $in: list } });
+        const data = await this.ctx.model.Category.find({ _id: { $in: list } });
         return data;
     }
 }

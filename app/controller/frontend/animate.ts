@@ -40,15 +40,21 @@ class AnimateController extends Controller {
         const { ctx, service } = this;
         const id = ctx.params.id;
 
-        const result = await service.animate.relative(id).catch((err) => console.log(err));
+        ctx.helper.validate('id', { id });
+
+        const result = await service.animate.relative(id).catch(() => 18001);
         ctx.helper.send(result);
     }
 
     async play() {
         const { ctx, service } = this;
         const id = ctx.params.id;
+        const level = ctx.state.user.level;
 
-        const result = await service.eposide.info(id).catch(() => 18001);
+        ctx.helper.validate('id', { id });
+
+        const result = await service.eposide.animateInfo(id, level).catch(() => 18001);
+
         ctx.helper.send(result);
     }
 }

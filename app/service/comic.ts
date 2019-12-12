@@ -60,7 +60,7 @@ class ComicService extends Service {
 
     async info(id: string) {
         const mongoose = this.app.mongoose;
-        const result = await this.ctx.model.Animate.aggregate([
+        const result = await this.ctx.model.Comic.aggregate([
             {
                 $match: {
                     _id: new mongoose.Types.ObjectId(id),
