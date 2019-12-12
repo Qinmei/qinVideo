@@ -52,7 +52,7 @@ class AnimateService extends Service {
         year && (query.year = { $in: [mongoose.Types.ObjectId(year)] });
         kind && (query.kind = { $in: [mongoose.Types.ObjectId(kind)] });
         tag && (query.tag = { $in: [mongoose.Types.ObjectId(tag)] });
-        level && (query.level = { $ngt: level });
+        level && (query.level = { $lte: level });
 
         // const result = await this.ctx.model.Animate.find(query)
         // 	.populate('countPlay')

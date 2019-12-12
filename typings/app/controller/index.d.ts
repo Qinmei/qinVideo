@@ -27,6 +27,7 @@ import ExportFrontendAnimate from '../../../app/controller/frontend/animate';
 import ExportFrontendAuth from '../../../app/controller/frontend/auth';
 import ExportFrontendComic from '../../../app/controller/frontend/comic';
 import ExportFrontendConfig from '../../../app/controller/frontend/config';
+import ExportFrontendDanmu from '../../../app/controller/frontend/danmu';
 import ExportFrontendData from '../../../app/controller/frontend/data';
 import ExportFrontendUser from '../../../app/controller/frontend/user';
 
@@ -60,6 +61,7 @@ declare module 'egg' {
       auth: ExportFrontendAuth;
       comic: ExportFrontendComic;
       config: ExportFrontendConfig;
+      danmu: ExportFrontendDanmu;
       data: ExportFrontendData;
       user: ExportFrontendUser;
     }

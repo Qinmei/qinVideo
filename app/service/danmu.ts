@@ -1,7 +1,17 @@
 import { Service } from 'egg';
 
+interface Query {
+    page: number;
+    size: number;
+    sortBy: string;
+    sortOrder?: number;
+    title?: string;
+    player?: string;
+    target?: string;
+}
+
 class DanmuService extends Service {
-    async query({ page, size, sortBy, sortOrder, title, player, target }) {
+    async query({ page, size, sortBy, sortOrder, title, player, target }: Query) {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 

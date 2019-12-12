@@ -38,3 +38,15 @@ export const generateSecurePathHash = (url, expires, secret) => {
         .replace(/\//g, '_');
     return `?st=${token}&e=${expired}`;
 };
+
+export const htmlEncode = (str: string) => {
+    return str
+        ? str
+              .replace(/&/g, '&amp;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;')
+              .replace(/"/g, '&quot;')
+              .replace(/'/g, '&#x27;')
+              .replace(/\//g, '&#x2f;')
+        : '';
+};

@@ -16,9 +16,9 @@ class EposideService extends Service {
     async info(id: string) {
         const data = await this.ctx.model.Eposide.findById(id)
             .populate('target')
-            .populate('coutPlay')
-            .populate('coutComment')
-            .populate('coutDanmu');
+            .populate('countPlay')
+            .populate('countComment')
+            .populate('countDanmu');
         return data;
     }
 
@@ -44,17 +44,29 @@ class EposideService extends Service {
         return result;
     }
 
+    async simpleQuery(target: string) {
+        const result = await this.ctx.model.Eposide.find({ target }, { title: 1, cover: 1, sort: 1 }).sort({
+            sort: 1,
+            _id: -1,
+        });
+        return result;
+    }
+
     async animateInfo(id: string, level: number) {
-        const data = await this.ctx.model.Eposide.findById(id)
+        const result = await this.ctx.model.Eposide.findById(id)
             .populate({
                 path: 'target',
                 select: 'title slug coverVertical introduce playType noPrefix level linkPrefix',
             })
-            .populate('coutPlay')
-            .populate('coutComment')
-            .populate('coutDanmu');
+            .populate('countPlay')
+            .populate('countComment')
+            .populate('countDanmu');
 
-        if (!data.target._id) return 18001;
+        if (!result.target._id) return 18001;
+
+        const data = JSON.parse(JSON.stringify(result));
+
+        data.eposides = await this.simpleQuery(data.target._id);
 
         const config = await this.ctx.service.config.info();
 
@@ -109,12 +121,9 @@ class EposideService extends Service {
             data.link.map((item: any) => (item.value = prefix + item.value));
         }
 
-        data.target = {
-            title: data.target.title,
-            slug: data.target.slug,
-            coverVertical: data.target.coverVertical,
-            introduce: data.target.introduce,
-        };
+        delete data.target.level;
+        delete data.target.noPrefix;
+        delete data.target.linkPrefix;
 
         return data;
     }

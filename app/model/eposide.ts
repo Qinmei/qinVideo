@@ -48,21 +48,21 @@ export default (app) => {
         }
     );
 
-    EposideSchema.virtual('coutPlay', {
+    EposideSchema.virtual('countPlay', {
         ref: 'History',
         localField: '_id',
         foreignField: 'target',
         count: true,
     });
 
-    EposideSchema.virtual('coutComment', {
+    EposideSchema.virtual('countComment', {
         ref: 'Comment',
         localField: '_id',
         foreignField: 'target',
         count: true,
     });
 
-    EposideSchema.virtual('coutDanmu', {
+    EposideSchema.virtual('countDanmu', {
         ref: 'Danmu',
         localField: '_id',
         foreignField: 'target',
