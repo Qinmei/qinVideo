@@ -229,10 +229,8 @@ const ruleobj = {
     report: (force: boolean) => ({
         author: { type: 'string', required: force },
         content: { type: 'string', required: force },
-        image: { type: 'array', required: false },
         target: { type: 'string', required: force },
         onModel: { type: 'string', required: force },
-        reply: { type: 'string', required: false },
         status: { type: 'string', required: force },
     }),
     category: (force: boolean) => ({
@@ -255,7 +253,6 @@ const ruleobj = {
         replyTo: { type: 'string', required: false },
         parent: { type: 'string', required: false },
         content: { type: 'string', required: force },
-        image: { type: 'array', required: false },
         status: { type: 'string', required: force },
     }),
     key: (force: boolean) => ({

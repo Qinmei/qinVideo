@@ -6,8 +6,6 @@ export default (app) => {
         {
             author: { type: Schema.Types.ObjectId, ref: 'User' },
             content: { type: String, required: true },
-            image: [{ type: String }],
-            reply: String,
             target: { type: Schema.Types.ObjectId, required: true, refPath: 'onModel' },
             onModel: {
                 type: String,

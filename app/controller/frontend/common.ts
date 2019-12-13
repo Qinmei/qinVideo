@@ -18,7 +18,13 @@ class CommonController extends Controller {
         const userId = ctx.state.user.id;
 
         data.author = userId;
+        data.status = 'draft';
         ctx.helper.validate('report', data, true);
+
+        const { author, target } = data;
+
+        const exist = await service.report.exist({ author, target });
+        if (exist) ctx.helper.error(23005);
 
         const result = await service.report.create(data).catch(() => 23002);
         ctx.helper.send(result);

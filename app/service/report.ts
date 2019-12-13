@@ -36,6 +36,11 @@ class ReportService extends Service {
         return result;
     }
 
+    async exist(data: any) {
+        const result = await this.ctx.model.Report.findOne(data);
+        return result;
+    }
+
     async update(ids: Array<string>, data: any) {
         const query = ids.length > 0 ? { _id: { $in: ids } } : {};
         const result = await this.ctx.model.Report.updateMany(query, { $set: data });
