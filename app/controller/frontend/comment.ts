@@ -30,6 +30,7 @@ class CommentController extends Controller {
         const userId = ctx.state.user.id;
 
         data.author = userId;
+        data.status = 'draft';
         ctx.helper.validate('comment', data, true);
 
         const result = await service.comment.create(data).catch(() => 17002);
