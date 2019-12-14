@@ -67,6 +67,14 @@ class UserService extends Service {
         );
         return result;
     }
+
+    async likeComment(list: any[], user: string) {
+        const result = await this.ctx.model.Relation.find({
+            target: { $in: list },
+            author: user,
+        });
+        return result;
+    }
 }
 
 export default UserService;

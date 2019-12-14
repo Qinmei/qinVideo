@@ -114,8 +114,17 @@ export const listAll = {
     countComment: {
         $lookup: {
             from: 'comments',
-            localField: '_id',
-            foreignField: 'target',
+            let: { value: '$_id' },
+            pipeline: [
+                {
+                    $match: {
+                        status: 'publish',
+                        $expr: {
+                            $eq: ['$target', '$$value'],
+                        },
+                    },
+                },
+            ],
             as: 'listComment',
         },
     },

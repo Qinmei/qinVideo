@@ -181,19 +181,6 @@ class AnimateService extends Service {
 
     // frontend
     async slug(slug: string) {
-        // const result = this.ctx.model.Animate.findById(id)
-        // 	.populate('countPlay')
-        // 	.populate('countLike')
-        // 	.populate('countComment')
-        // 	.populate('countDanmu')
-        // 	.populate({ path: 'author', select: 'name avatar level introduce background' })
-        // 	.populate('area')
-        // 	.populate('kind')
-        // 	.populate('year')
-        // 	.populate('tag')
-        // 	.populate({ path: 'seasons', select: 'slug season', match: { _id: { $ne: id }, status: 'publish' } })
-        // 	.populate('seasonInfo');
-        //  return result;
         const result = await this.ctx.model.Animate.aggregate([
             {
                 $match: {

@@ -39,5 +39,13 @@ export default (app) => {
         foreignField: 'parent',
     });
 
+    CommentSchema.virtual('childrenCount', {
+        ref: 'Comment',
+        localField: '_id',
+        foreignField: 'parent',
+        options: { match: { status: 'publish' } },
+        count: true,
+    });
+
     return mongoose.model('Comment', CommentSchema);
 };

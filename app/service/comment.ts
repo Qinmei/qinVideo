@@ -30,48 +30,6 @@ class CommentService extends Service {
         };
     }
 
-    async info({ page, size, sortBy, sortOrder, title, target, status }) {
-        const skip: number = (page - 1) * size;
-        const limit: number = size;
-
-        const query: any = {
-            parent: null,
-        };
-        title && (query.content = { $regex: title, $options: '$i' });
-        status && (query.status = status);
-        target && (query.target = target);
-
-        const result = await this.ctx.model.Comment.find(query)
-            .populate('countLike')
-            .sort({ [sortBy]: sortOrder, _id: -1 })
-            .skip(skip)
-            .limit(limit)
-            .populate({
-                path: 'children',
-                populate: [
-                    {
-                        path: 'author',
-                        select: 'name avatar level introduce background',
-                    },
-                    {
-                        path: 'countLike',
-                    },
-                    {
-                        path: 'replyTo',
-                        select: 'name avatar level introduce background',
-                    },
-                ],
-            })
-            .populate({ path: 'author', select: 'name avatar level introduce background' });
-
-        const total = await this.ctx.model.Comment.find(query).countDocuments();
-
-        return {
-            list: result,
-            total,
-        };
-    }
-
     async create(data: any) {
         const result = await this.ctx.model.Comment.create(data);
         return result;
@@ -90,26 +48,47 @@ class CommentService extends Service {
     }
 
     // frontend
-    async list({ page, size, sortBy, sortOrder, target, status }) {
+    async list({ page, size, target }) {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 
         const query: any = {
             target,
+            status: 'publish',
+            parent: null,
         };
-        status && (query.status = status);
 
         const result = await this.ctx.model.Comment.find(query)
             .populate('countLike')
-            .sort({ [sortBy]: sortOrder, _id: -1 })
+            .sort({ created: -1 })
             .skip(skip)
             .limit(limit)
-            .populate({ path: 'target', select: '_id title' })
             .populate({ path: 'author', select: 'name avatar level introduce background' })
             .populate({
                 path: 'replyTo',
                 select: 'name avatar level introduce background',
-            });
+            })
+            .populate({
+                path: 'children',
+                populate: [
+                    {
+                        path: 'author',
+                        select: 'name avatar level introduce background',
+                    },
+                    {
+                        path: 'countLike',
+                    },
+                    {
+                        path: 'replyTo',
+                        select: 'name avatar level introduce background',
+                    },
+                ],
+                options: { sort: { createdAt: 1 }, limit: 3 },
+                match: {
+                    status: 'publish',
+                },
+            })
+            .populate('childrenCount');
 
         const total = await this.ctx.model.Comment.find(query).countDocuments();
 
@@ -117,6 +96,65 @@ class CommentService extends Service {
             list: result,
             total,
         };
+    }
+
+    async info(id) {
+        const result = await this.ctx.model.Comment.findById(id)
+            .populate('countLike')
+            .populate({ path: 'author', select: 'name avatar level introduce background' })
+            .populate({
+                path: 'replyTo',
+                select: 'name avatar level introduce background',
+            })
+            .populate({
+                path: 'children',
+                populate: [
+                    {
+                        path: 'author',
+                        select: 'name avatar level introduce background',
+                    },
+                    {
+                        path: 'countLike',
+                    },
+                    {
+                        path: 'replyTo',
+                        select: 'name avatar level introduce background',
+                    },
+                ],
+                options: { sort: { createdAt: 1 } },
+                match: {
+                    status: 'publish',
+                },
+            })
+            .populate('childrenCount');
+        return result;
+    }
+
+    async addLike(list: any[], userId: string) {
+        let newList = JSON.parse(JSON.stringify(list));
+        const all: string[] = [];
+
+        newList.map((item: any) => {
+            all.push(item._id);
+            const child = item.children.map((ele: any) => ele._id);
+            all.push(...child);
+        });
+
+        if (all.length !== 0) {
+            const check = await this.ctx.service.user.likeComment(all, userId);
+            const likeArr = check.map((item: any) => item.target.toString());
+
+            newList = newList.map((item: any) => {
+                if (likeArr.includes(item._id.toString())) {
+                    item.isLiked = true;
+                }
+                item.children.map((ele: any) => {
+                    if (likeArr.includes(ele._id)) ele.isLiked = true;
+                });
+                return item;
+            });
+        }
+        return newList;
     }
 }
 
