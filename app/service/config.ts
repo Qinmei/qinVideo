@@ -94,7 +94,7 @@ class ConfigService extends Service {
 
     async generate() {
         const result = await this.simpleInfo();
-        ['pc'].map((item) => {
+        ['pc', 'animates'].map((item) => {
             const configPath = path.join(__dirname, `../../public/${item}/`);
             fs.readdir(configPath, (error, files) => {
                 if (error) throw error;
