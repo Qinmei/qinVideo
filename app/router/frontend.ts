@@ -10,6 +10,8 @@ export default (app: Application) => {
     router.get(`${api}/search`, auth(0), controller.frontend.data.query);
     router.post(`${api}/reports`, auth(1), controller.frontend.common.report);
     router.post(`${api}/uploads`, auth(1), controller.frontend.common.upload);
+    router.get(`${api}/category/type/:type`, auth(0), controller.frontend.common.category);
+    router.get(`${api}/category/id/:id`, auth(0), controller.frontend.common.cateInfo);
 
     // auth
     router.get(`${api}/auth/info`, auth(1), controller.frontend.auth.info);

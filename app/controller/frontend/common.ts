@@ -29,6 +29,26 @@ class CommonController extends Controller {
         const result = await service.report.create(data).catch(() => 23002);
         ctx.helper.send(result);
     }
+
+    async category() {
+        const { ctx, service } = this;
+        const type = ctx.params.type;
+
+        ctx.helper.validate('string', { string: type });
+
+        const result = await service.category.queryByType(type).catch(() => 16000);
+        ctx.helper.send(result);
+    }
+
+    async cateInfo() {
+        const { ctx, service } = this;
+        const id = ctx.params.id;
+
+        ctx.helper.validate('string', { string: id });
+
+        const result = await service.category.info(id).catch(() => 16001);
+        ctx.helper.send(result);
+    }
 }
 
 export default CommonController;

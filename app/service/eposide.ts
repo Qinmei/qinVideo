@@ -68,6 +68,18 @@ class EposideService extends Service {
 
         data.eposides = await this.simpleQuery(data.target._id);
 
+        if (level < data.target.level) {
+            delete data.link;
+            delete data.target.level;
+            delete data.target.noPrefix;
+            delete data.target.linkPrefix;
+            delete data.target.playType;
+            delete data.noSetPrefix;
+            delete data.onModel;
+            data.levelLimit = true;
+            return data;
+        }
+
         const config = await this.ctx.service.config.info();
 
         if (data.noSetPrefix) {
@@ -124,6 +136,9 @@ class EposideService extends Service {
         delete data.target.level;
         delete data.target.noPrefix;
         delete data.target.linkPrefix;
+        delete data.target.playType;
+        delete data.noSetPrefix;
+        delete data.onModel;
 
         return data;
     }

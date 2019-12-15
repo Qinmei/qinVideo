@@ -47,6 +47,26 @@ class CategoryService extends Service {
         const data = await this.ctx.model.Category.find({ _id: { $in: list } });
         return data;
     }
+
+    async queryByType(type: string) {
+        let list: string[] = [];
+        switch (type) {
+            case 'animate':
+                list = ['akind', 'ayear', 'atag', 'aarea'];
+                break;
+            case 'comic':
+                list = ['ckind', 'cyear', 'ctag', 'carea'];
+                break;
+            case 'post':
+                list = ['pkind', 'ptag'];
+                break;
+            default:
+                break;
+        }
+
+        const data = await this.ctx.model.Category.find({ type: { $in: list } });
+        return data;
+    }
 }
 
 export default CategoryService;

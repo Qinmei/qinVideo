@@ -4,11 +4,9 @@ class AnimateController extends Controller {
     async query() {
         const { ctx, service } = this;
         const { query } = ctx;
-        const level = ctx.state.user.level;
 
         ctx.helper.validate('query', query);
 
-        query.level = level;
         query.status = 'publish';
 
         const result = await service.animate.query(query).catch(() => 12000);

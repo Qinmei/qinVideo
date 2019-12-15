@@ -59,6 +59,7 @@ export default (app) => {
         ref: 'Comment',
         localField: '_id',
         foreignField: 'target',
+        options: { match: { status: 'publish' } },
         count: true,
     });
 
