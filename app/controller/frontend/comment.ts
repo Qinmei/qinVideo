@@ -24,7 +24,7 @@ class CommentController extends Controller {
 
         ctx.helper.validate('id', { id });
 
-        let result = await service.comment.info(id).catch(() => 17001);
+        let result = await service.comment.single(id).catch(() => 17001);
 
         if (userId && typeof result !== 'number') {
             const newList = await service.comment.addLike([result], userId);
