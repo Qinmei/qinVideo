@@ -39,6 +39,8 @@ export default (app: Application) => {
     // comic
     router.get(`${api}/comics`, auth(0), controller.frontend.comic.query);
     router.get(`${api}/comics/:id`, auth(0), controller.frontend.comic.info);
+    router.get(`${api}/comics/relative/:id`, auth(0), controller.frontend.comic.relative);
+    router.get(`${api}/comics/play/:id`, auth(0), controller.frontend.comic.play);
 
     // 评论
     router.get(`${api}/comments`, auth(1), controller.frontend.comment.query);

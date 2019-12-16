@@ -7,6 +7,7 @@ import {
     listAll,
     rateLookup,
     seasonLookup,
+    eposideLookup,
 } from '../utils/aggregation';
 
 class ComicService extends Service {
@@ -115,6 +116,43 @@ class ComicService extends Service {
         const query = ids.length > 0 ? { _id: { $in: ids } } : {};
         const result = await this.ctx.model.Comic.deleteMany(query);
         return result;
+    }
+
+    // frontend
+    async slug(slug: string) {
+        const result = await this.ctx.model.Comic.aggregate([
+            {
+                $match: {
+                    slug,
+                },
+            },
+            ...categoryLookup,
+            ...Object.values(listAll),
+            ...rateLookup,
+            authorLookup,
+            seasonLookup('comic'),
+            eposideLookup,
+            countAll,
+            {
+                $project: {
+                    listComment: 0,
+                    listPlay: 0,
+                    listDanmu: 0,
+                    listEposide: 0,
+                    listLike: 0,
+                },
+            },
+        ]);
+        return result.length > 0 ? result[0] : 13001;
+    }
+
+    async relative(id: string) {
+        const data = await this.ctx.model.Comic.findById(id);
+        const { tag } = data;
+        const result = await this.ctx.model.Comic.find({
+            tag,
+        }).limit(20);
+        return result.filter((item: any) => item.id !== id);
     }
 }
 

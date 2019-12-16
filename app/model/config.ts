@@ -28,8 +28,8 @@ export default (app) => {
         allPost: { type: String, default: '' }, // 所有文章
         pcMenu: [{ title: String, link: String }], // web菜单
         pcIndex: [{ type: String }], // web首页
-        animeMenu: [{ title: String, link: String }], // 动漫菜单
-        animeIndex: [{ type: String }], // 动漫首页
+        animateMenu: [{ title: String, link: String }], // 动漫菜单
+        animateIndex: [{ type: String }], // 动漫首页
         comicMenu: [{ title: String, link: String }], // 漫画菜单
         comicIndex: [{ type: String }], // 漫画首页
         postMenu: [{ title: String, link: String }], // 文章菜单
@@ -39,7 +39,7 @@ export default (app) => {
         aboutus: { type: String, default: '' },
         playLimit: [
             {
-                // 播放限制
+                // 播放等级限制
                 level: Number,
                 prefix: String,
                 key: String,
@@ -51,6 +51,15 @@ export default (app) => {
                 // 解析
                 pattern: String,
                 prefix: String,
+            },
+        ],
+        comicLimit: [
+            {
+                // 漫画等级限制
+                level: Number,
+                prefix: String,
+                key: String,
+                expired: Number,
             },
         ],
         emailType: {

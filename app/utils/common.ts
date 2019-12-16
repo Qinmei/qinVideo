@@ -23,8 +23,26 @@ export const readJSON = (path) => {
 
 export const generateSecurePathHash = (url, expires, secret) => {
     if (!expires || !secret) {
-        return '';
+        return url;
     }
+
+    let playLink = '/';
+    if (/http/.test(url)) {
+        playLink =
+            playLink +
+            url
+                .split('/')
+                .slice(3)
+                .join('/');
+    } else {
+        playLink =
+            playLink +
+            url
+                .split('/')
+                .slice(1)
+                .join('/');
+    }
+
     const expired = Math.ceil(Date.now() / 1000) + expires;
     const input = secret + url + expired;
     const binaryHash = crypto
@@ -36,7 +54,7 @@ export const generateSecurePathHash = (url, expires, secret) => {
         .replace(/=/g, '')
         .replace(/\+/g, '-')
         .replace(/\//g, '_');
-    return `?st=${token}&e=${expired}`;
+    return `${url}?st=${token}&e=${expired}`;
 };
 
 export const htmlEncode = (str: string) => {

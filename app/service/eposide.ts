@@ -1,4 +1,7 @@
 import { Service } from 'egg';
+import * as path from 'path';
+import * as fs from 'fs';
+import * as request from 'request-promise';
 
 class EposideService extends Service {
     async query({ target }) {
@@ -106,24 +109,7 @@ class EposideService extends Service {
                     const { prefix, key, expired } = configPrefix;
                     data.link.map((item: any) => {
                         const uri = configPrefix.prefix + prefix + item.value;
-                        let playLink = '/';
-                        if (/http/.test(uri)) {
-                            playLink =
-                                playLink +
-                                uri
-                                    .split('/')
-                                    .slice(3)
-                                    .join('/');
-                        } else {
-                            playLink =
-                                playLink +
-                                uri
-                                    .split('/')
-                                    .slice(1)
-                                    .join('/');
-                        }
-
-                        item.value = uri + this.ctx.helper.generateSecurePathHash(playLink, expired, key);
+                        item.value = this.ctx.helper.generateSecurePathHash(uri, expired, key);
                     });
                 } else {
                     data.link.map((item: any) => (item.value = prefix + item.value));
@@ -131,6 +117,113 @@ class EposideService extends Service {
             }
         } else {
             data.link.map((item: any) => (item.value = prefix + item.value));
+        }
+
+        delete data.target.level;
+        delete data.target.noPrefix;
+        delete data.target.linkPrefix;
+        delete data.target.playType;
+        delete data.noSetPrefix;
+        delete data.onModel;
+
+        return data;
+    }
+
+    async comicInfo(id: string, level: number) {
+        const result = await this.ctx.model.Eposide.findById(id)
+            .populate({
+                path: 'target',
+                select: 'title slug coverVertical introduce playType noPrefix level linkPrefix',
+            })
+            .populate('countPlay')
+            .populate('countComment')
+            .populate('countDanmu');
+
+        if (!result.target._id) return 18001;
+
+        const data = JSON.parse(JSON.stringify(result));
+
+        data.eposides = await this.simpleQuery(data.target._id);
+
+        if (level < data.target.level) {
+            delete data.link;
+            delete data.target.level;
+            delete data.target.noPrefix;
+            delete data.target.linkPrefix;
+            delete data.target.playType;
+            delete data.noSetPrefix;
+            delete data.onModel;
+            data.levelLimit = true;
+            return data;
+        }
+
+        const config = await this.ctx.service.config.info();
+
+        const dataConfig = {
+            prefix: '',
+            expired: '',
+            key: 3600,
+        };
+        if (!data.noSetPrefix) {
+            dataConfig.prefix = data.target.linkPrefix || '';
+        }
+
+        if (config && config.playLimit) {
+            const configPrefix = config.playLimit
+                .filter((item: any) => item.level <= level)
+                .sort((a, b) => b.level - a.level)[0];
+
+            if (configPrefix) {
+                dataConfig.prefix = configPrefix.prefix || '' + dataConfig.prefix;
+                dataConfig.expired = configPrefix.expired || 3600;
+                dataConfig.key = configPrefix.key || '';
+            }
+        }
+
+        if (data.target.playType === 'local') {
+            const folder = data.link[0];
+            if (!folder || !folder.value) return;
+
+            const dirPath = path.join(__dirname, `../../public/picture${dataConfig.prefix + folder.value}`);
+
+            let pictures: string[] = [];
+            if (fs.existsSync(dirPath)) {
+                pictures = fs
+                    .readdirSync(dirPath)
+                    .map((item: string) => `/picture${dataConfig.prefix + folder.value}/${item}`);
+            }
+
+            data.link = pictures.map((item: any, index) => {
+                const uri = dataConfig.prefix + item.value;
+
+                return {
+                    name: index + 1,
+                    value: item + this.ctx.helper.generateSecurePathHash(uri, dataConfig.expired, dataConfig.key),
+                };
+            });
+        } else if (data.target.playType === 'image') {
+            data.link = data.link.map((item: any) => ({
+                ...item,
+                value: this.ctx.helper.generateSecurePathHash(
+                    dataConfig.prefix + item.value,
+                    dataConfig.expired,
+                    dataConfig.key
+                ),
+            }));
+        } else if (data.target.playType === 'api') {
+            const folder = data.link[0];
+            if (!folder || !folder.value) return;
+
+            const url = dataConfig.prefix + folder.value;
+
+            const options = {
+                method: 'get',
+                uri: url,
+                json: true,
+            };
+            const result = await request(options);
+
+            data.link = result.data;
         }
 
         delete data.target.level;
