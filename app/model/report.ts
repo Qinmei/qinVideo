@@ -10,7 +10,7 @@ export default (app) => {
             onModel: {
                 type: String,
                 required: true,
-                enum: ['Comic', 'Animate', 'Comment', 'User', 'Post'],
+                enum: ['Comic', 'Animate', 'Comment', 'User', 'Post', 'Eposide'],
             },
             status: {
                 type: String,
