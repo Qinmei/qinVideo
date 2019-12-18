@@ -140,7 +140,7 @@ class CommentService extends Service {
         };
     }
 
-    async single(id, page, size) {
+    async single(id, page = 1, size = 20) {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 
