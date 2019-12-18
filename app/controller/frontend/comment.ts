@@ -20,11 +20,13 @@ class CommentController extends Controller {
     async info() {
         const { ctx, service } = this;
         const id = ctx.params.id;
+        const { page, size } = ctx.query;
         const userId = ctx.state.user.id;
 
         ctx.helper.validate('id', { id });
+        ctx.helper.validate('query', ctx.query);
 
-        let result = await service.comment.single(id).catch(() => 17001);
+        let result = await service.comment.single(id, page, size).catch(() => 17001);
 
         if (userId && typeof result !== 'number') {
             const newList = await service.comment.addLike([result], userId);

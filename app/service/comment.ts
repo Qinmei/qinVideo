@@ -140,7 +140,10 @@ class CommentService extends Service {
         };
     }
 
-    async single(id) {
+    async single(id, page, size) {
+        const skip: number = (page - 1) * size;
+        const limit: number = size;
+
         const result = await this.ctx.model.Comment.findById(id)
             .populate('countLike')
             .populate({ path: 'author', select: 'name avatar level introduce background' })
@@ -163,7 +166,7 @@ class CommentService extends Service {
                         select: 'name avatar level introduce background',
                     },
                 ],
-                options: { sort: { createdAt: 1 } },
+                options: { sort: { createdAt: 1 }, skip, limit },
                 match: {
                     status: 'publish',
                 },
