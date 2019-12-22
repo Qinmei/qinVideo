@@ -22,11 +22,11 @@ export default (app) => {
                 enum: ['draft', 'publish', 'reject'],
                 default: 'draft',
             },
+            ping: { type: Boolean, default: false },
             level: { type: Number, default: 0 }, // 等级限定
             author: { type: Schema.Types.ObjectId, ref: 'User' }, // 用户名
             kind: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 分类
             tag: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 标签
-            season: { type: String, default: '' },
             seasonRelate: { type: Schema.Types.ObjectId, ref: 'Season' },
             cover: { type: String, default: '' }, // 封面图
             introduce: { type: String, default: '' },

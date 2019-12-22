@@ -31,6 +31,7 @@ import ExportFrontendCommon from '../../../app/controller/frontend/common';
 import ExportFrontendConfig from '../../../app/controller/frontend/config';
 import ExportFrontendDanmu from '../../../app/controller/frontend/danmu';
 import ExportFrontendData from '../../../app/controller/frontend/data';
+import ExportFrontendPost from '../../../app/controller/frontend/post';
 import ExportFrontendUser from '../../../app/controller/frontend/user';
 
 declare module 'egg' {
@@ -67,6 +68,7 @@ declare module 'egg' {
       config: ExportFrontendConfig;
       danmu: ExportFrontendDanmu;
       data: ExportFrontendData;
+      post: ExportFrontendPost;
       user: ExportFrontendUser;
     }
   }

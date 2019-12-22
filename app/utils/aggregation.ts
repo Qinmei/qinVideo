@@ -9,6 +9,17 @@ export const categoryLookup = ['area', 'year', 'kind', 'tag'].map((item) => {
     };
 });
 
+export const postCategoryLookup = ['kind', 'tag'].map((item) => {
+    return {
+        $lookup: {
+            from: 'categories',
+            localField: item,
+            foreignField: '_id',
+            as: item,
+        },
+    };
+});
+
 export const authorLookup = {
     $lookup: {
         from: 'users',
@@ -169,6 +180,27 @@ export const countAll = {
     },
 };
 
+export const postCountAll = {
+    $addFields: {
+        id: '$_id',
+        countComment: {
+            $size: {
+                $ifNull: ['$listComment', []],
+            },
+        },
+        countPlay: {
+            $size: {
+                $ifNull: ['$listPlay', []],
+            },
+        },
+        countLike: {
+            $size: {
+                $ifNull: ['$listLike', []],
+            },
+        },
+    },
+};
+
 export const rateLookup = [
     {
         $lookup: {
@@ -270,6 +302,31 @@ export const selectCount = (type: string) => {
     } else {
         rest = countArr.map((item) => listAll[item]);
         rest.push(...rateLookup);
+    }
+
+    return { select, rest };
+};
+
+export const postSelectCount = (type: string) => {
+    let select: any[] = [];
+    let rest: any[] = [];
+    const countArr = ['countPlay', 'countLike', 'countComment'];
+    if (countArr.includes(type)) {
+        const kind = type.slice(5);
+        const sortField = {
+            $addFields: {
+                id: '$_id',
+                [`count${kind}`]: {
+                    $size: {
+                        $ifNull: [`$list${kind}`, []],
+                    },
+                },
+            },
+        };
+        select = [listAll[type], sortField];
+        rest = countArr.filter((item) => item !== type).map((item) => listAll[item]);
+    } else {
+        rest = countArr.map((item) => listAll[item]);
     }
 
     return { select, rest };

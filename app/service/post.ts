@@ -1,7 +1,8 @@
 import { Service } from 'egg';
+import { postCategoryLookup, authorLookup, postSelectCount, postCountAll } from '../utils/aggregation';
 
 class PostService extends Service {
-    async query({ page, size, sortBy, sortOrder, status, title, kind, tag }) {
+    async query({ page, size, sortBy, sortOrder, status, title, kind, tag, ping }) {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 
@@ -10,17 +11,37 @@ class PostService extends Service {
         status && (query.status = status);
         kind && (query.kind = kind);
         tag && (query.tag = tag);
+        ping && (query.ping = ping);
 
-        const result = await this.ctx.model.Post.find(query)
-            .populate('countPlay')
-            .populate('countLike')
-            .populate('countComment')
-            .sort({ [sortBy]: sortOrder, _id: -1 })
-            .skip(skip)
-            .limit(limit)
-            .populate({ path: 'author', select: 'name avatar level introduce background' })
-            .populate('kind')
-            .populate('tag');
+        const result = await this.ctx.model.Post.aggregate([
+            { $match: query },
+            ...postSelectCount(sortBy).select,
+            {
+                $sort: {
+                    [sortBy]: sortOrder,
+                    _id: 1,
+                },
+            },
+            { $skip: skip },
+            { $limit: limit },
+            ...postCategoryLookup,
+            ...postSelectCount(sortBy).rest,
+            authorLookup,
+            postCountAll,
+            {
+                $project: {
+                    listComment: 0,
+                    listPlay: 0,
+                    listDanmu: 0,
+                    listEposide: 0,
+                    listLike: 0,
+                    content: 0,
+                    level: 0,
+                    status: 0,
+                    seasonRelate: 0,
+                },
+            },
+        ]);
 
         const total = await this.ctx.model.Post.find(query).countDocuments();
 
@@ -58,6 +79,29 @@ class PostService extends Service {
         const query = ids.length > 0 ? { _id: { $in: ids } } : {};
         const result = await this.ctx.model.Post.deleteMany(query);
         return result;
+    }
+
+    // frontend
+    async slug(slug: string) {
+        const data = await this.ctx.model.Post.findOne({ slug })
+            .populate('countPlay')
+            .populate('countLike')
+            .populate('countComment')
+            .populate({ path: 'author', select: 'name avatar level introduce background' })
+            .populate('kind')
+            .populate('tag')
+            .populate({ path: 'seasons', select: 'slug season', match: { slug: { $ne: slug }, status: 'publish' } })
+            .populate('seasonInfo');
+        return data;
+    }
+
+    async relative(id: string) {
+        const data = await this.ctx.model.Animate.findById(id);
+        const { tag } = data;
+        const result = await this.ctx.model.Animate.find({
+            tag,
+        }).limit(20);
+        return result.filter((item: any) => item.id !== id);
     }
 }
 

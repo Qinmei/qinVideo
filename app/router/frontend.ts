@@ -42,9 +42,14 @@ export default (app: Application) => {
     router.get(`${api}/comics/relative/:id`, auth(0), controller.frontend.comic.relative);
     router.get(`${api}/comics/play/:id`, auth(0), controller.frontend.comic.play);
 
-    // 评论
+    // comment
     router.get(`${api}/comments`, auth(0), controller.frontend.comment.query);
     router.get(`${api}/comments/:id`, auth(0), controller.frontend.comment.info);
     router.post(`${api}/comments`, auth(1), controller.frontend.comment.create);
-    router.delete(`${api}/comments/:id`, auth(1), controller.frontend.comment.destroy);
+    router.delete(`${api}/comments/:id`, auth(0), controller.frontend.comment.destroy);
+
+    // post
+    router.get(`${api}/posts`, auth(0), controller.frontend.post.query);
+    router.get(`${api}/posts/:id`, auth(0), controller.frontend.post.info);
+    router.get(`${api}/posts/relative/:id`, auth(0), controller.frontend.post.relative);
 };

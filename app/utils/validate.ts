@@ -60,11 +60,7 @@ const ruleobj = {
             type: 'string',
             required: false,
         },
-        pin: {
-            type: 'string',
-            required: false,
-        },
-        hot: {
+        ping: {
             type: 'string',
             required: false,
         },
