@@ -3,14 +3,15 @@ import { postCategoryLookup, authorLookup, postSelectCount, postCountAll } from 
 
 class PostService extends Service {
     async query({ page, size, sortBy, sortOrder, status, title, kind, tag, ping }) {
+        const mongoose = this.app.mongoose;
         const skip: number = (page - 1) * size;
         const limit: number = size;
 
         const query: any = {};
         title && (query.title = { $regex: title, $options: '$i' });
         status && (query.status = status);
-        kind && (query.kind = kind);
-        tag && (query.tag = tag);
+        kind && (query.kind = { $in: [mongoose.Types.ObjectId(kind)] });
+        tag && (query.tag = { $in: [mongoose.Types.ObjectId(tag)] });
         ping && (query.ping = ping);
 
         const result = await this.ctx.model.Post.aggregate([
@@ -32,13 +33,17 @@ class PostService extends Service {
                 $project: {
                     listComment: 0,
                     listPlay: 0,
-                    listDanmu: 0,
-                    listEposide: 0,
                     listLike: 0,
                     content: 0,
                     level: 0,
                     status: 0,
                     seasonRelate: 0,
+                },
+            },
+            {
+                $unwind: {
+                    path: '$author',
+                    preserveNullAndEmptyArrays: true,
                 },
             },
         ]);
