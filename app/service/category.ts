@@ -61,6 +61,7 @@ class CategoryService extends Service {
                 list = ['pkind', 'ptag'];
                 break;
             default:
+                list = [type];
                 break;
         }
 
