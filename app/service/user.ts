@@ -48,13 +48,13 @@ class UserService extends Service {
         return result;
     }
 
-    async update(ids: Array<string>, data: any) {
+    async update(ids: string[], data: any) {
         const query = ids.length > 0 ? { _id: { $in: ids } } : { level: { $lte: 99 } };
         const result = await this.ctx.model.User.updateMany(query, { $set: data });
         return result;
     }
 
-    async destroy(ids: Array<string>) {
+    async destroy(ids: string[]) {
         const query = ids.length > 0 ? { _id: { $in: ids } } : { level: { $lte: 99 } };
         const result = await this.ctx.model.User.deleteMany(query);
         return result;
@@ -73,6 +73,13 @@ class UserService extends Service {
             target: { $in: list },
             author: user,
         });
+        return result;
+    }
+
+    async edit(id: string, data: any) {
+        const result = await this.ctx.model.User.findByIdAndUpdate(id, data, { new: true }).select(
+            '-refreshToken -password'
+        );
         return result;
     }
 }

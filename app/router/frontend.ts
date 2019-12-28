@@ -17,18 +17,20 @@ export default (app: Application) => {
     router.get(`${api}/auth/info`, auth(1), controller.frontend.auth.info);
     router.post(`${api}/auth/login`, auth(0), controller.frontend.auth.login);
     router.post(`${api}/auth/register`, auth(0), controller.frontend.auth.register);
+    router.post(`${api}/auth/refresh`, auth(0), controller.frontend.auth.refreshtoken);
     router.post(`${api}/auth/send`, auth(0), controller.frontend.auth.resetPasswordMail);
     router.post(`${api}/auth/reset`, auth(0), controller.frontend.auth.resetPasswordAuth);
 
     // user
     router.get(`${api}/user/:id`, auth(0), controller.frontend.user.info);
-    router.post(`${api}/user/action`, auth(0), controller.frontend.user.relation);
+    router.post(`${api}/user/action`, auth(1), controller.frontend.user.relation);
+    router.post(`${api}/user/edit`, auth(1), controller.frontend.user.edit);
 
     // animate
     router.get(`${api}/animates`, auth(0), controller.frontend.animate.query);
     router.get(`${api}/animates/:id`, auth(0), controller.frontend.animate.info);
-    router.get(`${api}/animates/relative/:id`, auth(0), controller.frontend.animate.relative);
-    router.get(`${api}/animates/play/:id`, auth(0), controller.frontend.animate.play);
+    router.get(`${api}/animates/:id/relative`, auth(0), controller.frontend.animate.relative);
+    router.get(`${api}/animates/:id/play`, auth(0), controller.frontend.animate.play);
 
     // danmu
     router.get(`${api}/danmus`, auth(0), controller.frontend.danmu.query);
@@ -39,8 +41,8 @@ export default (app: Application) => {
     // comic
     router.get(`${api}/comics`, auth(0), controller.frontend.comic.query);
     router.get(`${api}/comics/:id`, auth(0), controller.frontend.comic.info);
-    router.get(`${api}/comics/relative/:id`, auth(0), controller.frontend.comic.relative);
-    router.get(`${api}/comics/play/:id`, auth(0), controller.frontend.comic.play);
+    router.get(`${api}/comics/:id/relative`, auth(0), controller.frontend.comic.relative);
+    router.get(`${api}/comics/:id/play`, auth(0), controller.frontend.comic.play);
 
     // comment
     router.get(`${api}/comments`, auth(0), controller.frontend.comment.query);
@@ -51,5 +53,5 @@ export default (app: Application) => {
     // post
     router.get(`${api}/posts`, auth(0), controller.frontend.post.query);
     router.get(`${api}/posts/:id`, auth(0), controller.frontend.post.info);
-    router.get(`${api}/posts/relative/:id`, auth(0), controller.frontend.post.relative);
+    router.get(`${api}/posts/:id/relative`, auth(0), controller.frontend.post.relative);
 };

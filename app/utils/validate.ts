@@ -295,7 +295,7 @@ const ruleobj = {
         password: { type: 'string' },
     },
     register: {
-        name: { type: 'string', min: 6 },
+        name: { type: 'string', min: 4 },
         password: { type: 'string' },
         email: { type: 'string' },
     },
@@ -401,6 +401,12 @@ const ruleobj = {
         onModel: { type: 'string' },
         target: { type: 'string' },
         author: { type: 'string' },
+    },
+    userEdit: {
+        email: { type: 'string', required: true },
+        introduce: { type: 'string', required: false },
+        avatar: { type: 'string', required: false },
+        background: { type: 'string', required: false },
     },
 };
 
