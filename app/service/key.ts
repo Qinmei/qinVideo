@@ -55,6 +55,21 @@ class KeyService extends Service {
         const result = await this.ctx.model.Key.deleteMany(query);
         return result;
     }
+
+    async use(key: string, id: string) {
+        const keyInfo = await this.ctx.model.Key.findOne({ key });
+
+        if (!keyInfo) return 19001;
+        if (keyInfo.status === 'publish') return 19005;
+
+        const userInfo = await this.ctx.service.user.info(id);
+
+        keyInfo.status = 'publish';
+        userInfo.money += keyInfo.price;
+        await this.update([keyInfo._id], keyInfo);
+        const result = await this.ctx.service.user.update([id], userInfo);
+        return result;
+    }
 }
 
 export default KeyService;

@@ -22,10 +22,24 @@ interface Query {
     kind?: string;
     tag?: string;
     year?: string;
+    author?: string;
 }
 
 class AnimateService extends Service {
-    async query({ page, size, sortBy = '_id', sortOrder = -1, title, status, update, area, kind, tag, year }: Query) {
+    async query({
+        page,
+        size,
+        sortBy = '_id',
+        sortOrder = -1,
+        title,
+        status,
+        update,
+        area,
+        kind,
+        tag,
+        year,
+        author,
+    }: Query) {
         const mongoose = this.app.mongoose;
         const skip: number = (page - 1) * size;
         const limit: number = size;
@@ -38,6 +52,7 @@ class AnimateService extends Service {
         year && (query.year = { $in: [mongoose.Types.ObjectId(year)] });
         kind && (query.kind = { $in: [mongoose.Types.ObjectId(kind)] });
         tag && (query.tag = { $in: [mongoose.Types.ObjectId(tag)] });
+        author && (query.author = { $in: [mongoose.Types.ObjectId(author)] });
 
         // const result = await this.ctx.model.Animate.find(query)
         // 	.populate('countPlay')

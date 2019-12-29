@@ -11,7 +11,7 @@ import {
 } from '../utils/aggregation';
 
 class ComicService extends Service {
-    async query({ page, size, sortBy, sortOrder, title, status, update, area, year, kind, tag }) {
+    async query({ page, size, sortBy = '_id', sortOrder = -1, title, status, update, area, year, kind, tag, author }) {
         const mongoose = this.app.mongoose;
         const skip: number = (page - 1) * size;
         const limit: number = size;
@@ -24,6 +24,7 @@ class ComicService extends Service {
         year && (query.year = { $in: [mongoose.Types.ObjectId(year)] });
         kind && (query.kind = { $in: [mongoose.Types.ObjectId(kind)] });
         tag && (query.tag = { $in: [mongoose.Types.ObjectId(tag)] });
+        author && (query.author = { $in: [mongoose.Types.ObjectId(author)] });
 
         const result = await this.ctx.model.Comic.aggregate([
             { $match: query },

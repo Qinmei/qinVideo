@@ -2,7 +2,7 @@ import { Service } from 'egg';
 import { postCategoryLookup, authorLookup, postSelectCount, postCountAll } from '../utils/aggregation';
 
 class PostService extends Service {
-    async query({ page, size, sortBy, sortOrder, status, title, kind, tag, ping }) {
+    async query({ page, size, sortBy = '_id', sortOrder = -1, status, title, kind, tag, ping, author }) {
         const mongoose = this.app.mongoose;
         const skip: number = (page - 1) * size;
         const limit: number = size;
@@ -12,6 +12,7 @@ class PostService extends Service {
         status && (query.status = status);
         kind && (query.kind = { $in: [mongoose.Types.ObjectId(kind)] });
         tag && (query.tag = { $in: [mongoose.Types.ObjectId(tag)] });
+        author && (query.author = { $in: [mongoose.Types.ObjectId(author)] });
         ping && (query.ping = ping);
 
         const result = await this.ctx.model.Post.aggregate([
@@ -74,13 +75,13 @@ class PostService extends Service {
         return result;
     }
 
-    async update(ids: Array<string>, data: any) {
+    async update(ids: string[], data: any) {
         const query = ids.length > 0 ? { _id: { $in: ids } } : {};
         const result = await this.ctx.model.Post.updateMany(query, { $set: data });
         return result;
     }
 
-    async destroy(ids: Array<string>) {
+    async destroy(ids: string[]) {
         const query = ids.length > 0 ? { _id: { $in: ids } } : {};
         const result = await this.ctx.model.Post.deleteMany(query);
         return result;

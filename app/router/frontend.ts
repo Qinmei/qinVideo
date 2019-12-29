@@ -12,6 +12,7 @@ export default (app: Application) => {
     router.post(`${api}/uploads`, auth(1), controller.frontend.common.upload);
     router.get(`${api}/category/type/:type`, auth(0), controller.frontend.common.category);
     router.get(`${api}/category/id/:id`, auth(0), controller.frontend.common.cateInfo);
+    router.get(`${api}/shop`, auth(0), controller.frontend.common.shop);
 
     // auth
     router.get(`${api}/auth/info`, auth(1), controller.frontend.auth.info);
@@ -23,8 +24,13 @@ export default (app: Application) => {
 
     // user
     router.get(`${api}/user/:id`, auth(0), controller.frontend.user.info);
+    router.get(`${api}/user/:id/base`, auth(0), controller.frontend.user.baseInfo);
     router.post(`${api}/user/action`, auth(1), controller.frontend.user.relation);
     router.post(`${api}/user/edit`, auth(1), controller.frontend.user.edit);
+    router.post(`${api}/user/pay`, auth(1), controller.frontend.user.pay);
+    router.post(`${api}/user/order`, auth(1), controller.frontend.user.order);
+    router.get(`${api}/user/:id/like/:type`, auth(0), controller.frontend.user.like);
+    router.get(`${api}/user/:id/own/:type`, auth(0), controller.frontend.user.own);
 
     // animate
     router.get(`${api}/animates`, auth(0), controller.frontend.animate.query);

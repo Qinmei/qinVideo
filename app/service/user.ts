@@ -82,6 +82,29 @@ class UserService extends Service {
         );
         return result;
     }
+
+    async typeList(type: string, query: any) {
+        const result = await this.ctx.service[type].query(query);
+        return result;
+    }
+
+    async baseInfo(id: string) {
+        const query = {
+            page: 1,
+            size: 6,
+            status: 'publish',
+            author: id,
+        };
+        const animate = await this.typeList('animate', query);
+        const comic = await this.typeList('comic', query);
+        const post = await this.typeList('post', query);
+
+        return {
+            animate: animate.list,
+            comic: comic.list,
+            post: post.list,
+        };
+    }
 }
 
 export default UserService;
