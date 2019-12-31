@@ -16,6 +16,7 @@ import 'egg-jsonp';
 import 'egg-view';
 import 'egg-validate';
 import 'egg-mongoose';
+import 'egg-redis';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
@@ -33,5 +34,6 @@ declare module 'egg' {
     view?: EggPluginItem;
     validate?: EggPluginItem;
     mongoose?: EggPluginItem;
+    redis?: EggPluginItem;
   }
 }

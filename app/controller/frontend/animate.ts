@@ -9,8 +9,10 @@ class AnimateController extends Controller {
 
         query.status = 'publish';
 
-        const result = await service.animate.query(query).catch(() => 12000);
-        ctx.helper.send(result);
+        const key = JSON.stringify(query);
+        await service.utils.cacheInit(`animate${key}`, async () => {
+            return await service.animate.query(query).catch(() => 12000);
+        });
     }
 
     async info() {
@@ -40,8 +42,9 @@ class AnimateController extends Controller {
 
         ctx.helper.validate('id', { id });
 
-        const result = await service.animate.relative(id).catch(() => 18001);
-        ctx.helper.send(result);
+        await service.utils.cacheInit(`animateRelative${id}`, async () => {
+            return await service.animate.relative(id).catch(() => 18001);
+        });
     }
 
     async play() {

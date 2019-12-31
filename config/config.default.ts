@@ -38,6 +38,14 @@ export default (appInfo: EggAppInfo) => {
             // validateRoot: false,
         },
 
+        redis: {
+            client: {
+                port: 6379,
+                host: '127.0.0.1',
+                password: '',
+                db: 0,
+            },
+        },
         mongoose: {
             client: {
                 url: 'mongodb://test:testmongo@47.52.158.152:27017/test',
@@ -47,9 +55,9 @@ export default (appInfo: EggAppInfo) => {
         },
         salt: 'qinmei',
         tokenSecret: 'qinmei',
+        expired: 3600,
     };
 
-    // the return config will combines to EggAppConfig
     return {
         ...config,
         ...bizConfig,

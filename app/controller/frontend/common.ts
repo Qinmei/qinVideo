@@ -63,9 +63,11 @@ class CommonController extends Controller {
     }
 
     async home() {
-        const { ctx, service } = this;
-        const result = await service.config.home().catch((err) => console.log(err));
-        ctx.helper.send(result);
+        const { service } = this;
+
+        await service.utils.cacheInit('commonHome', async () => {
+            return await service.config.home().catch(() => 22003);
+        });
     }
 }
 

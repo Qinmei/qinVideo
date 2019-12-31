@@ -9,8 +9,10 @@ class ComicController extends Controller {
 
         query.status = 'publish';
 
-        const result = await service.comic.query(query).catch(() => 13000);
-        ctx.helper.send(result);
+        const key = JSON.stringify(query);
+        await service.utils.cacheInit(`comic${key}`, async () => {
+            return await service.comic.query(query).catch(() => 13000);
+        });
     }
 
     async info() {
@@ -40,8 +42,9 @@ class ComicController extends Controller {
 
         ctx.helper.validate('id', { id });
 
-        const result = await service.comic.relative(id).catch(() => 18001);
-        ctx.helper.send(result);
+        await service.utils.cacheInit(`comicRelative${id}`, async () => {
+            return await service.comic.relative(id).catch(() => 18001);
+        });
     }
 
     async play() {

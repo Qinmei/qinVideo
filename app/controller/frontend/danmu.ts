@@ -13,8 +13,9 @@ class DanmuController extends Controller {
             sortBy: 'time',
         };
 
-        const result = await service.danmu.query(query).catch(() => 15000);
-        ctx.helper.send(result);
+        await service.utils.cacheInit(`danmu${id}`, async () => {
+            return await service.danmu.query(query).catch(() => 15000);
+        });
     }
 
     async queryV3() {
@@ -29,7 +30,17 @@ class DanmuController extends Controller {
             sortBy: 'time',
         };
 
-        const result = await service.danmu.query(query).catch(() => 15000);
+        let result;
+        const cache = await service.utils.cacheGet(`danmu${id}`);
+        if (cache) {
+            result = cache;
+        } else {
+            const result = await service.danmu.query(query).catch(() => 15000);
+            if (typeof result !== 'number') {
+                await service.utils.cacheSet(`danmu${id}`, result);
+            }
+        }
+
         let danmu = typeof result === 'number' ? [] : result.list;
         danmu = danmu.map((item: any) => [
             item.time || 0,

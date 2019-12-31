@@ -9,8 +9,10 @@ class PostController extends Controller {
 
         query.status = 'publish';
 
-        const result = await service.post.query(query).catch(() => 14000);
-        ctx.helper.send(result);
+        const key = JSON.stringify(query);
+        await service.utils.cacheInit(`post${key}`, async () => {
+            return await service.post.query(query).catch(() => 14000);
+        });
     }
 
     async info() {
@@ -40,8 +42,9 @@ class PostController extends Controller {
 
         ctx.helper.validate('id', { id });
 
-        const result = await service.post.relative(id).catch(() => 18001);
-        ctx.helper.send(result);
+        await service.utils.cacheInit(`postRelative${id}`, async () => {
+            return await service.post.relative(id).catch(() => 18001);
+        });
     }
 }
 

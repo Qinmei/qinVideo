@@ -102,6 +102,32 @@ class UtilsService extends Service {
         sendgridgMail.setApiKey(sendgrid);
         sendgridgMail.send(mailContent);
     }
+
+    async cacheSet(key, value) {
+        const { app } = this;
+        const expired = app.config.expired || 3600;
+        await app.redis.set(key, JSON.stringify(value), 'EX', expired);
+    }
+
+    async cacheGet(key) {
+        const { app } = this;
+        const data = await app.redis.get(key);
+        return data && JSON.parse(data);
+    }
+
+    async cacheInit(key, fn) {
+        const { ctx } = this;
+        const cache = await this.cacheGet(key);
+        if (cache) {
+            ctx.helper.send(cache);
+        } else {
+            const result = await fn();
+            if (typeof result !== 'number') {
+                await this.cacheSet(key, result);
+            }
+            ctx.helper.send(result);
+        }
+    }
 }
 
 export default UtilsService;

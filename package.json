@@ -26,6 +26,7 @@
     "cheerio": "^1.0.0-rc.3",
     "egg": "^2.6.1",
     "egg-mongoose": "^3.2.0",
+    "egg-redis": "^2.4.0",
     "egg-scripts": "^2.6.0",
     "egg-validate": "^2.0.2",
     "jsonwebtoken": "^8.5.1",
