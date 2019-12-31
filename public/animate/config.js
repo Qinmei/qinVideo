@@ -34,7 +34,7 @@ window.config = {
     '{"cover":"","introduce":"","_id":"5def0777dc8b1c33689ab8cb","type":"akind","name":"搞笑","createdAt":"2019-12-10T02:48:23.541Z","updatedAt":"2019-12-10T02:48:23.541Z","__v":0,"id":"5def0777dc8b1c33689ab8cb"}',
     '{"cover":"","introduce":"","_id":"5def077fdc8b1c33689ab8cc","type":"akind","name":"异界","createdAt":"2019-12-10T02:48:31.073Z","updatedAt":"2019-12-10T02:48:31.073Z","__v":0,"id":"5def077fdc8b1c33689ab8cc"}',
   ],
-  animeIndex: [
+  animateIndex: [
     '{"cover":"","introduce":"","_id":"5dec886710c637436fa898d4","type":"akind","name":"轮播","__v":0,"updatedAt":"2019-12-10T02:47:39.806Z","id":"5dec886710c637436fa898d4"}',
     '{"cover":"","introduce":"","_id":"5def0753dc8b1c33689ab8c7","type":"akind","name":"置顶","createdAt":"2019-12-10T02:47:47.907Z","updatedAt":"2019-12-10T02:47:47.907Z","__v":0,"id":"5def0753dc8b1c33689ab8c7"}',
     'newIndexNewAnimate',
@@ -55,7 +55,7 @@ window.config = {
     {
       _id: '5dec8c8910c637436fa898d9',
       title: '动画',
-      link: '/anime',
+      link: '/animate',
     },
     {
       _id: '5dec8c8910c637436fa898d8',
@@ -65,7 +65,7 @@ window.config = {
     {
       _id: '5dedcc53d51c5e5e142e1e20',
       title: '新番',
-      link: '/new',
+      link: '/animate/new',
     },
     {
       _id: '5dedcc53d51c5e5e142e1e1f',
@@ -104,11 +104,11 @@ window.config = {
     },
   ],
   h5Menu: [],
-  animeMenu: [
+  animateMenu: [
     {
       _id: '5dec8c8910c637436fa898d9',
       title: '动画',
-      link: '/animate/new',
+      link: '/animate',
     },
     {
       _id: '5dec8c8910c637436fa898d8',
