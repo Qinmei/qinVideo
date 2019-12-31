@@ -29,7 +29,7 @@ export default (app) => {
             staff: { type: String, default: '' },
             actor: { type: String, default: '' },
             firstPlay: { type: String, default: '20160606' },
-            isUpdate: { type: Boolean, default: false },
+            isUpdate: { type: Boolean, default: false, index: true }, // 是否连载
             updateDay: { type: Number, default: 0 },
             rateStar: { type: Number, default: 0 },
             rateCount: { type: Number, default: 0 },

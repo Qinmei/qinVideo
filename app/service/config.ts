@@ -4,7 +4,7 @@ import { Service } from 'egg';
 
 interface ConfigInfo {
     pcIndex: string[];
-    animeIndex: string[];
+    animateIndex: string[];
     comicIndex: string[];
     h5Index: string[];
     _id: string;
@@ -45,8 +45,8 @@ class ConfigService extends Service {
                 allPost: 1,
                 pcMenu: 1,
                 pcIndex: 1,
-                animeIndex: 1,
-                animeMenu: 1,
+                animateIndex: 1,
+                animateMenu: 1,
                 comicIndex: 1,
                 comicMenu: 1,
                 postMenu: 1,
@@ -57,8 +57,8 @@ class ConfigService extends Service {
             }
         ).populate('postIndex');
 
-        const arr = ['pcIndex', 'animeIndex', 'comicIndex', 'h5Index'];
-        const list = [...result.pcIndex, ...result.animeIndex, ...result.comicIndex, ...result.h5Index].filter(
+        const arr = ['pcIndex', 'animateIndex', 'comicIndex', 'h5Index'];
+        const list = [...result.pcIndex, ...result.animateIndex, ...result.comicIndex, ...result.h5Index].filter(
             (item: string) => !/new/.test(item)
         );
 
@@ -94,7 +94,7 @@ class ConfigService extends Service {
 
     async generate() {
         const result = await this.simpleInfo();
-        ['animates'].map((item) => {
+        ['animate'].map((item) => {
             const configPath = path.join(__dirname, `../../public/${item}/`);
             fs.readdir(configPath, (error, files) => {
                 if (error) throw error;
@@ -120,6 +120,31 @@ class ConfigService extends Service {
                 if (err) console.log(err);
             });
         });
+    }
+
+    async home() {
+        const result: ConfigInfo = await this.ctx.model.Config.findOne({}, { pcIndex: 1 });
+
+        const list = result.pcIndex.filter((item: string) => !/new/.test(item));
+
+        const cates = await this.service.category.list(list);
+
+        const newResult = result.pcIndex.map((ele: string) => {
+            const filters = cates.filter((single: any) => single.id === ele);
+            return filters.length > 0 ? JSON.stringify(filters[0]) : ele;
+        });
+
+        const handlResult = this.ctx.helper.indexInit(newResult);
+
+        const final = {};
+
+        for (let index = 0; index < handlResult.length; index++) {
+            const { query, origin, type } = this.ctx.helper.indexTrans(handlResult[index]);
+            const data = await this.ctx.service[type].query(query);
+            final[origin] = data;
+        }
+
+        return final;
     }
 }
 

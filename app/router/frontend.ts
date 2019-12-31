@@ -13,6 +13,7 @@ export default (app: Application) => {
     router.get(`${api}/category/type/:type`, auth(0), controller.frontend.common.category);
     router.get(`${api}/category/id/:id`, auth(0), controller.frontend.common.cateInfo);
     router.get(`${api}/shop`, auth(0), controller.frontend.common.shop);
+    router.get(`${api}/home`, auth(0), controller.frontend.common.home);
 
     // auth
     router.get(`${api}/auth/info`, auth(1), controller.frontend.auth.info);

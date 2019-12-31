@@ -68,3 +68,80 @@ export const htmlEncode = (str: string) => {
               .replace(/\//g, '&#x2f;')
         : '';
 };
+
+export const indexTrans = (element: any) => {
+    const id = element._id;
+    let query = {
+        size: 20,
+        page: 1,
+        sortBy: 'updatedAt',
+        sortOrder: -1,
+        kind: null,
+    };
+    if (element.status === 'normal') {
+        query.kind = id;
+    } else if (element.status === 'custom') {
+        let newQuery = {};
+        if (/newIndexNew/.test(id)) {
+            newQuery = {
+                update: true,
+                size: 100,
+            };
+        } else if (/newIndexRandom/.test(id)) {
+            newQuery = {
+                sortBy: 'introduce',
+            };
+        } else if (/newIndexPlay/.test(id)) {
+            newQuery = {
+                sortBy: 'countPlay',
+            };
+        } else if (/newIndexRate/.test(id)) {
+            newQuery = {
+                sortBy: 'countStar',
+            };
+        }
+        query = {
+            ...query,
+            ...newQuery,
+        };
+    }
+
+    return { query, origin: element.origin, type: element.type };
+};
+
+export const indexInit = (arr: string[]) => {
+    const newArr = arr.map((item, key) => {
+        if (/new/.test(item)) {
+            const type = /Animate/.test(item) ? 'animate' : 'comic';
+            return {
+                _id: item,
+                status: 'custom',
+                type,
+                origin: item,
+            };
+        } else {
+            const newItem = JSON.parse(item);
+            newItem.kind = newItem.type;
+            switch (newItem.type) {
+                case 'akind':
+                    newItem.type = 'animate';
+                    break;
+                case 'ckind':
+                    newItem.type = 'comic';
+                    break;
+                case 'pkind':
+                    newItem.type = 'post';
+                    break;
+                default:
+                    break;
+            }
+            return {
+                ...newItem,
+                status: 'normal',
+                origin: item,
+            };
+        }
+    });
+
+    return newArr;
+};

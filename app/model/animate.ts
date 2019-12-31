@@ -31,7 +31,7 @@ export default (app) => {
             staff: { type: String, default: '' }, // 工作人员
             actor: { type: String, default: '' }, // 声优
             firstPlay: { type: String, default: '20160606' }, // 首播
-            isUpdate: { type: Boolean, default: false }, // 是否连载
+            isUpdate: { type: Boolean, default: false, index: true }, // 是否连载
             updateDay: { type: Number, default: 0 }, // 周几播放
             rateStar: { type: Number, default: 0 }, // 评分星级
             rateCount: { type: Number, default: 0 }, // 评分人数
