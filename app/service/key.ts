@@ -62,6 +62,7 @@ class KeyService extends Service {
 
         if (!keyInfo) return 19001;
         if (keyInfo.status === 'publish') return 19005;
+        if (keyInfo.status === 'reject') return 19006;
 
         const userInfo = await this.ctx.service.user.info(id);
 
