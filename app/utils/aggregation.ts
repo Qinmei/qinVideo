@@ -259,7 +259,7 @@ export const rateLookup = [
                                         {
                                             $ifNull: [
                                                 {
-                                                    $add: ['$rates.count', '$rateCount'],
+                                                    $add: [{ $ifNull: ['$rates.count', 0] }, '$rateCount'],
                                                 },
                                                 1,
                                             ],

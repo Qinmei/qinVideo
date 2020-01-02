@@ -91,6 +91,8 @@ class AnimateService extends Service {
                     listDanmu: 0,
                     listEposide: 0,
                     listLike: 0,
+                    rateStar: 0,
+                    rateCount: 0,
                 },
             },
         ]);

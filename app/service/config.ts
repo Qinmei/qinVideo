@@ -94,7 +94,7 @@ class ConfigService extends Service {
 
     async generate() {
         const result = await this.simpleInfo();
-        ['animate'].map((item) => {
+        ['animate', 'comic', 'post', 'search', 'user'].map((item) => {
             const configPath = path.join(__dirname, `../../public/${item}/`);
             fs.readdir(configPath, (error, files) => {
                 if (error) throw error;
@@ -110,13 +110,13 @@ class ConfigService extends Service {
 
             newHtml = html.replace(/config\.[^]{0,30}js/, `config.${result._id}.js`);
 
-            fs.writeFile(indexHtml, newHtml, 'utf8', function(err) {
+            fs.writeFile(indexHtml, newHtml, 'utf8', (err) => {
                 if (err) console.log(err);
             });
 
             const config = path.join(__dirname, `../../public/${item}/config.${result._id}.js`);
 
-            fs.writeFile(config, `window.config=${JSON.stringify(result)}`, 'utf8', function(err) {
+            fs.writeFile(config, `window.config=${JSON.stringify(result)}`, 'utf8', (err) => {
                 if (err) console.log(err);
             });
         });
@@ -140,6 +140,7 @@ class ConfigService extends Service {
 
         for (let index = 0; index < handlResult.length; index++) {
             const { query, origin, type } = this.ctx.helper.indexTrans(handlResult[index]);
+            console.log(query);
             const data = await this.ctx.service[type].query(query);
             final[origin] = data;
         }

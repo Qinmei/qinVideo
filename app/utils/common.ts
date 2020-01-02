@@ -76,7 +76,7 @@ export const indexTrans = (element: any) => {
         page: 1,
         sortBy: 'updatedAt',
         sortOrder: -1,
-        kind: null,
+        kind: undefined,
     };
     if (element.status === 'normal') {
         query.kind = id;
@@ -84,7 +84,7 @@ export const indexTrans = (element: any) => {
         let newQuery = {};
         if (/newIndexNew/.test(id)) {
             newQuery = {
-                update: true,
+                update: 'true',
                 size: 100,
             };
         } else if (/newIndexRandom/.test(id)) {
