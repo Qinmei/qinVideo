@@ -13,7 +13,8 @@ class KeyService extends Service {
         const result = await this.ctx.model.Key.find(query)
             .sort({ [sortBy]: sortOrder, _id: -1 })
             .skip(skip)
-            .limit(limit);
+            .limit(limit)
+            .populate('author');
 
         const total = await this.ctx.model.Key.find(query).countDocuments();
 
@@ -66,6 +67,7 @@ class KeyService extends Service {
 
         keyInfo.status = 'publish';
         userInfo.money += keyInfo.price;
+        keyInfo.author = userInfo.id;
         await this.update([keyInfo._id], keyInfo);
         const result = await this.ctx.service.user.update([id], userInfo);
         return result;

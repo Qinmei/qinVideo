@@ -17,6 +17,10 @@ export default (app) => {
             },
             price: { type: Number, required: true },
             expired: { type: Number, required: true },
+            author: {
+                type: Schema.Types.ObjectId,
+                ref: 'User',
+            },
             addons: Schema.Types.Mixed,
         },
         {
