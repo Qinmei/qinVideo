@@ -257,11 +257,19 @@ export const rateLookup = [
                                             ],
                                         },
                                         {
-                                            $ifNull: [
+                                            $cond: [
+                                                {
+                                                    $eq: [
+                                                        {
+                                                            $add: [{ $ifNull: ['$rates.count', 0] }, '$rateCount'],
+                                                        },
+                                                        0,
+                                                    ],
+                                                },
+                                                1,
                                                 {
                                                     $add: [{ $ifNull: ['$rates.count', 0] }, '$rateCount'],
                                                 },
-                                                1,
                                             ],
                                         },
                                     ],
