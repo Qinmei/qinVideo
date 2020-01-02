@@ -36,8 +36,6 @@ class PostService extends Service {
                     listPlay: 0,
                     listLike: 0,
                     content: 0,
-                    level: 0,
-                    status: 0,
                     seasonRelate: 0,
                 },
             },
