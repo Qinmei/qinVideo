@@ -48,9 +48,9 @@ class UserController extends Controller {
         const { id } = ctx.params;
         ctx.helper.validate('id', { id });
 
-        const result = await service.user.baseInfo(id).catch(() => 11001);
-
-        ctx.helper.send(result);
+        await service.utils.cacheInit(`userBaseInfo${id}`, async () => {
+            return await service.user.baseInfo(id).catch(() => 11001);
+        });
     }
 
     async like() {

@@ -7,6 +7,7 @@ class CommentController extends Controller {
         const userId = ctx.state.user.id;
 
         ctx.helper.validate('query', query);
+        ctx.helper.validate('id', { id: query.target });
 
         const result = await service.comment.list(query).catch(() => 17000);
         if (userId && typeof result !== 'number') {

@@ -5,8 +5,6 @@ class DanmuController extends Controller {
         const { ctx, service } = this;
         const { id } = ctx.query;
 
-        console.log(id);
-
         ctx.helper.validate('id', { id });
         const query = {
             page: 1,
