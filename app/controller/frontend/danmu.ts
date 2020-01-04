@@ -65,6 +65,9 @@ class DanmuController extends Controller {
         ctx.helper.validate('danmu', data, true);
 
         const result = await service.danmu.create(data).catch(() => 15002);
+
+        service.data.create('danmu');
+
         this.ctx.body = {
             code: typeof result === 'number' ? result : 0,
         };

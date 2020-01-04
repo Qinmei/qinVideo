@@ -47,6 +47,9 @@ class CommentController extends Controller {
         ctx.helper.validate('comment', data, true);
 
         const result = await service.comment.create(data).catch(() => 17002);
+
+        service.data.create('comment');
+
         ctx.helper.send(result);
     }
 

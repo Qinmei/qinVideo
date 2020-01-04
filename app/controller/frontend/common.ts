@@ -27,6 +27,9 @@ class CommonController extends Controller {
         if (exist) ctx.helper.error(23005);
 
         const result = await service.report.create(data).catch(() => 23002);
+
+        service.data.create('report');
+
         ctx.helper.send(result);
     }
 

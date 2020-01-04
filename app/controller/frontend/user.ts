@@ -101,6 +101,8 @@ class UserController extends Controller {
 
         const result = await service.key.use(key, userId).catch(() => 11006);
 
+        service.data.create('key');
+
         ctx.helper.send(result);
     }
 
@@ -112,6 +114,9 @@ class UserController extends Controller {
         ctx.helper.validate('id', { id: shop });
 
         const result = await service.order.create({ user: userId, shop }).catch(() => 20001);
+
+        service.data.create('order');
+
         ctx.helper.send(result);
     }
 }

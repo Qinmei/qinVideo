@@ -152,7 +152,7 @@ export default (app: Application) => {
     router.get(`${api}/data/today`, auth(100), controller.backend.data.todayData);
     router.get(`${api}/data/search`, auth(100), controller.backend.data.search);
     router.get(`${api}/data/work`, auth(100), controller.backend.data.workData);
-    router.get(`${api}/data/sort`, auth(0), controller.backend.data.activeSort);
+    router.get(`${api}/data/sort`, auth(100), controller.backend.data.activeSort);
 
     // 工具
     router.post(`${api}/tools/replace`, auth(100), controller.backend.tools.replace);
