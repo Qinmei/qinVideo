@@ -46,7 +46,7 @@ class UserController extends Controller {
     async baseInfo() {
         const { ctx, service } = this;
         const { id } = ctx.params;
-        ctx.helper.validate('string', { string: id });
+        ctx.helper.validate('id', { id });
 
         const result = await service.user.baseInfo(id).catch(() => 11001);
 
@@ -59,8 +59,8 @@ class UserController extends Controller {
         const { type, id } = params;
 
         ctx.helper.validate('query', query);
-        ctx.helper.validate('string', { string: id });
-        ctx.helper.validate('string', { string: type });
+        ctx.helper.validate('id', { id });
+        ctx.helper.validate('id', { id: type });
 
         query.status = 'publish';
 
@@ -75,8 +75,8 @@ class UserController extends Controller {
         const { type, id } = params;
 
         ctx.helper.validate('query', query);
-        ctx.helper.validate('string', { string: id });
-        ctx.helper.validate('string', { string: type });
+        ctx.helper.validate('id', { id });
+        ctx.helper.validate('id', { id: type });
 
         const userId = ctx.state.user.id;
 
@@ -95,7 +95,7 @@ class UserController extends Controller {
         const { key } = ctx.request.body;
         const userId = ctx.state.user.id;
 
-        ctx.helper.validate('string', { string: key });
+        ctx.helper.validate('id', { id: key });
 
         const result = await service.key.use(key, userId).catch(() => 11006);
 
@@ -107,7 +107,7 @@ class UserController extends Controller {
         const { shop } = ctx.request.body;
         const userId = ctx.state.user.id;
 
-        ctx.helper.validate('string', { string: shop });
+        ctx.helper.validate('id', { id: shop });
 
         const result = await service.order.create({ user: userId, shop }).catch(() => 20001);
         ctx.helper.send(result);

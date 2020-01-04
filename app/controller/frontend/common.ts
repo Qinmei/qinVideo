@@ -44,7 +44,7 @@ class CommonController extends Controller {
         const { ctx, service } = this;
         const id = ctx.params.id;
 
-        ctx.helper.validate('string', { string: id });
+        ctx.helper.validate('id', { id });
 
         const result = await service.category.info(id).catch(() => 16001);
         ctx.helper.send(result);

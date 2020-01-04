@@ -5,7 +5,9 @@ class DanmuController extends Controller {
         const { ctx, service } = this;
         const { id } = ctx.query;
 
-        ctx.helper.validate('string', { string: id });
+        console.log(id);
+
+        ctx.helper.validate('id', { id });
         const query = {
             page: 1,
             size: 10000,
@@ -22,7 +24,7 @@ class DanmuController extends Controller {
         const { ctx, service } = this;
         const { id } = ctx.query;
 
-        ctx.helper.validate('string', { string: id });
+        ctx.helper.validate('id', { id });
         const query = {
             page: 1,
             size: 10000,
