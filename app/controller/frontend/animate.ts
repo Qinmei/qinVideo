@@ -56,6 +56,8 @@ class AnimateController extends Controller {
 
         const result = await service.eposide.animateInfo(id, level).catch(() => 18001);
 
+        service.history.playCreate(result, 'Animate');
+
         ctx.helper.send(result);
     }
 }

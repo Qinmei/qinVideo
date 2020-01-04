@@ -78,6 +78,8 @@ class AuthController extends Controller {
 
         const token = await this.generateToken(result);
 
+        service.data.create('login');
+
         ctx.helper.success({ token, refreshToken });
     }
 
@@ -99,6 +101,8 @@ class AuthController extends Controller {
             result._doc.token = token;
         }
 
+        service.data.create('register');
+
         ctx.helper.send(result);
     }
 
@@ -108,6 +112,8 @@ class AuthController extends Controller {
         const userInfo = await service.user.exist({ refreshToken });
 
         if (userInfo) {
+            service.data.create('login');
+
             const token = await this.generateToken(userInfo);
 
             ctx.helper.success({ token });

@@ -55,6 +55,7 @@ class ComicController extends Controller {
         ctx.helper.validate('id', { id });
 
         const result = await service.eposide.comicInfo(id, level).catch(() => 18001);
+        service.history.playCreate(result, 'Comic');
 
         ctx.helper.send(result);
     }

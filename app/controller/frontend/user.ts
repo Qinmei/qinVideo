@@ -48,6 +48,8 @@ class UserController extends Controller {
         const { id } = ctx.params;
         ctx.helper.validate('id', { id });
 
+        service.history.create(id, 'User');
+
         await service.utils.cacheInit(`userBaseInfo${id}`, async () => {
             return await service.user.baseInfo(id).catch(() => 11001);
         });

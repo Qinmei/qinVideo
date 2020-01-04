@@ -29,7 +29,7 @@ class EposideController extends Controller {
         data.author = userId;
         ctx.helper.validate('eposide', data, true);
 
-        const result = await service.eposide.create(data).catch((err) => console.log(err));
+        const result = await service.eposide.create(data).catch(() => 18002);
         ctx.helper.send(result);
     }
 

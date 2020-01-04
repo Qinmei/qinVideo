@@ -33,6 +33,9 @@ class PostController extends Controller {
         if (Array.isArray(result.eposides)) {
             result.eposides.sort((a: any, b: any) => a.sort - b.sort);
         }
+
+        service.history.create(id, 'Post');
+
         ctx.helper.send(result);
     }
 

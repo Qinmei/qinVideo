@@ -102,7 +102,7 @@ export const listAll = {
         $lookup: {
             from: 'histories',
             localField: '_id',
-            foreignField: 'target',
+            foreignField: 'belong',
             as: 'listPlay',
         },
     },
