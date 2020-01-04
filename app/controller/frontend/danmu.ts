@@ -37,7 +37,8 @@ class DanmuController extends Controller {
         if (cache) {
             result = cache;
         } else {
-            const result = await service.danmu.query(query).catch(() => 15000);
+            result = await service.danmu.query(query).catch(() => 15000);
+
             if (typeof result !== 'number') {
                 await service.utils.cacheSet(`danmu${id}`, result);
             }
