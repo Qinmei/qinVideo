@@ -6,7 +6,7 @@ class UploadsService extends Service {
     async saveFile(file: any, dirPath: string, typePath: string) {
         const fileHash = await this.ctx.service.utils.md5(file.filepath);
 
-        let fileName = fileHash;
+        const fileName = fileHash;
         const fileExt = path.extname(file.filename);
         const name = `${fileName}${fileExt}`;
         const reader = await fs.createReadStream(file.filepath);
@@ -17,14 +17,16 @@ class UploadsService extends Service {
     }
 
     // 上传文件
-    async uploadImg(files: Array<any>, type: string) {
-        const typePath = ['animate', 'post', 'comment', 'avatar', 'background', 'config', 'others'].includes(type)
+    async uploadImg(files: any[], type: string) {
+        const typePath = ['animate', 'comic', 'post', 'comment', 'avatar', 'background', 'config', 'others'].includes(
+            type
+        )
             ? type
             : 'others';
         const dirPath = path.join(__dirname, '../../public/img') + `/${typePath}`;
         !fs.existsSync(dirPath) && (await fs.mkdirSync(dirPath));
 
-        const result: Array<any> = [];
+        const result: any[] = [];
         for (let index = 0; index < files.length; index++) {
             const item = files[index];
             const ele = await this.saveFile(item, dirPath, typePath);
@@ -70,7 +72,7 @@ class UploadsService extends Service {
     }
 
     // 删除图片
-    async deleteImg(ids: Array<string>) {
+    async deleteImg(ids: string[]) {
         ids.map((item) => {
             const filePath = path.join(__dirname, '../../public') + `${item}`;
             fs.exists(filePath, () => {
