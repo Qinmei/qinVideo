@@ -9,6 +9,8 @@ class PostController extends Controller {
 
         query.status = 'publish';
 
+        if (query.title) service.data.create('search', query.title);
+
         const key = JSON.stringify(query);
         await service.utils.cacheInit(`post${key}`, async () => {
             return await service.post.query(query).catch(() => 14000);
