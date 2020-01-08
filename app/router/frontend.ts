@@ -6,13 +6,14 @@ export default (app: Application) => {
     const api = '/api/v2';
 
     // base
-    router.get(`${api}/config`, auth(0), controller.frontend.config.info);
     router.post(`${api}/reports`, auth(1), controller.frontend.common.report);
     router.post(`${api}/uploads`, auth(1), controller.frontend.common.upload);
     router.get(`${api}/category/type/:type`, auth(0), controller.frontend.common.category);
     router.get(`${api}/category/id/:id`, auth(0), controller.frontend.common.cateInfo);
     router.get(`${api}/shop`, auth(0), controller.frontend.common.shop);
-    router.get(`${api}/home`, auth(0), controller.frontend.common.home);
+    router.get(`${api}/config`, auth(0), controller.frontend.config.info);
+    router.get(`${api}/home`, auth(0), controller.frontend.config.home);
+    router.get(`${api}/mobile`, auth(0), controller.frontend.config.mobile);
 
     // auth
     router.get(`${api}/auth/info`, auth(1), controller.frontend.auth.info);

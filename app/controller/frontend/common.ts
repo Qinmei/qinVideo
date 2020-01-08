@@ -64,14 +64,6 @@ class CommonController extends Controller {
         const result = await service.shop.query(query).catch(() => 21000);
         ctx.helper.send(result);
     }
-
-    async home() {
-        const { service } = this;
-
-        await service.utils.cacheInit('commonHome', async () => {
-            return await service.config.home().catch(() => 22003);
-        });
-    }
 }
 
 export default CommonController;

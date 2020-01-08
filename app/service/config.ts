@@ -138,14 +138,14 @@ class ConfigService extends Service {
         });
     }
 
-    async home() {
-        const result: ConfigInfo = await this.ctx.model.Config.findOne({}, { pcIndex: 1 });
+    async home(type: string) {
+        const result: ConfigInfo = await this.ctx.model.Config.findOne({}, { [type]: 1 });
 
-        const list = result.pcIndex.filter((item: string) => !/new/.test(item));
+        const list = result[type].filter((item: string) => !/new/.test(item));
 
         const cates = await this.service.category.list(list);
 
-        const newResult = result.pcIndex.map((ele: string) => {
+        const newResult = result[type].map((ele: string) => {
             const filters = cates.filter((single: any) => single.id === ele);
             return filters.length > 0 ? JSON.stringify(filters[0]) : ele;
         });
