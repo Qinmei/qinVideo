@@ -9,6 +9,8 @@ class ComicController extends Controller {
 
         query.status = 'publish';
 
+        if (query.title) service.data.create('search', query.title);
+
         const key = JSON.stringify(query);
         await service.utils.cacheInit(`comic${key}`, async () => {
             return await service.comic.query(query).catch(() => 13000);
