@@ -1,12 +1,13 @@
 import { Service } from 'egg';
 
 class OrderService extends Service {
-    async query({ page, size, sortBy, sortOrder, title }) {
+    async query({ page, size, sortBy, sortOrder, title, author }) {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 
         const query: any = {};
         title && (query._id = { $in: [title] });
+        author && (query.user = author);
 
         const result = await this.ctx.model.Order.find(query)
             .sort({ [sortBy]: sortOrder, _id: -1 })

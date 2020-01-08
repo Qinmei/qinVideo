@@ -129,6 +129,19 @@ class UserController extends Controller {
 
         ctx.helper.send(result);
     }
+
+    async orderList() {
+        const { ctx, service } = this;
+        const { query } = ctx;
+        const userId = ctx.state.user.id;
+
+        ctx.helper.validate('query', query);
+        query.author = userId;
+
+        const result = await service.order.query(query).catch(() => 20001);
+
+        ctx.helper.send(result);
+    }
 }
 
 export default UserController;
