@@ -28,6 +28,7 @@ export default (app: Application) => {
     router.get(`${api}/user/:id/base`, auth(0), controller.frontend.user.baseInfo);
     router.get(`${api}/user/:id/own/:type`, auth(0), controller.frontend.user.own);
     router.get(`${api}/user/like/:type`, auth(1), controller.frontend.user.like);
+    router.get(`${api}/user/order/list`, auth(1), controller.frontend.user.orderList);
     router.post(`${api}/user/action`, auth(1), controller.frontend.user.relation);
     router.post(`${api}/user/edit`, auth(1), controller.frontend.user.edit);
     router.post(`${api}/user/pay`, auth(1), controller.frontend.user.pay);
