@@ -75,6 +75,7 @@ export default (app) => {
         smtpUser: { type: String, default: '' },
         smtpPass: { type: String, default: '' },
         sendgrid: { type: String, default: '' },
+        commentVerify: { type: Boolean, default: false },
         addons: Schema.Types.Mixed,
     });
 

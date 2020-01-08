@@ -94,9 +94,11 @@ class CommentService extends Service {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 
+        const config = await this.ctx.service.config.cacheInfo();
+
         const query: any = {
             target,
-            status: 'publish',
+            status: config.commentVerify ? 'draft' : 'publish',
             parent: null,
         };
 

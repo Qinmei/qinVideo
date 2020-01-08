@@ -53,9 +53,9 @@ export default (appInfo: EggAppInfo) => {
                 options: {},
             },
         },
-        salt: 'qinmei',
-        tokenSecret: 'qinmei',
-        expired: 3600,
+        salt: 'qinmei', // 密码盐值
+        tokenSecret: 'qinmei', // 登录密钥
+        expired: 3600, // redis缓存有效期
     };
 
     return {

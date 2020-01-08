@@ -83,7 +83,7 @@ class EposideService extends Service {
             return data;
         }
 
-        const config = await this.ctx.service.config.info();
+        const config = await this.ctx.service.config.cacheInfo();
 
         if (data.noSetPrefix) {
             return data;
@@ -157,7 +157,7 @@ class EposideService extends Service {
             return data;
         }
 
-        const config = await this.ctx.service.config.info();
+        const config = await this.ctx.service.config.cacheInfo();
 
         const dataConfig = {
             prefix: '',

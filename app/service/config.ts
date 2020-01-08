@@ -16,6 +16,21 @@ class ConfigService extends Service {
         return data;
     }
 
+    async cacheInfo() {
+        const { service } = this.ctx;
+        const configCache = await service.utils.cacheGet('config');
+        if (configCache) return configCache;
+
+        const data = await this.info();
+        data && (await this.cacheSync(data));
+        return data;
+    }
+
+    async cacheSync(data) {
+        const { service } = this.ctx;
+        await service.utils.cacheSet('config', data);
+    }
+
     async simpleInfo() {
         const result: ConfigInfo = await this.ctx.model.Config.findOne(
             {},
@@ -83,6 +98,7 @@ class ConfigService extends Service {
         const result = await this.ctx.model.Config.create(data);
         if (result) {
             this.generate();
+            this.cacheSync(result);
         }
         return result;
     }
@@ -140,7 +156,6 @@ class ConfigService extends Service {
 
         for (let index = 0; index < handlResult.length; index++) {
             const { query, origin, type } = this.ctx.helper.indexTrans(handlResult[index]);
-            console.log(query);
             const data = await this.ctx.service[type].query(query);
             final[origin] = data;
         }
