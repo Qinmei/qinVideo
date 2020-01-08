@@ -201,6 +201,7 @@ const ruleobj = {
         smtpUser: { type: 'string', default: '', required: false },
         smtpPass: { type: 'string', default: '', required: false },
         sendgrid: { type: 'string', default: '', required: false },
+        commentVerify: { type: 'boolean', default: false, required: false },
     },
     danmu: (force: boolean) => ({
         target: { type: 'string', required: false },
