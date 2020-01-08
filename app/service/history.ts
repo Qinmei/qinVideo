@@ -2,9 +2,8 @@ import { Service } from 'egg';
 
 class HistoryService extends Service {
     async query(id: string) {
-        const result = await this.ctx.model.History.find({ author: id })
+        const result = await this.ctx.model.History.find({ author: id, onModel: { $in: ['Eposide', 'Post'] } })
             .sort({ createdAt: -1 })
-            .skip(0)
             .limit(20)
             .populate('target', 'title _id')
             .populate('belong', 'title _id');
@@ -44,9 +43,9 @@ class HistoryService extends Service {
     }
 
     async existOrCreate(data: any) {
-        const result = await this.ctx.model.History.findOne(data);
+        let result = await this.ctx.model.History.findOne(data);
         if (!result) {
-            await this.ctx.model.History.create(data);
+            result = await this.ctx.model.History.create(data);
         }
 
         const type = result.onModel.toLowerCase();
