@@ -32,7 +32,7 @@ export default (app: Application) => {
     router.post(`${api}/user/edit`, auth(1), controller.frontend.user.edit);
     router.post(`${api}/user/pay`, auth(1), controller.frontend.user.pay);
     router.post(`${api}/user/order`, auth(1), controller.frontend.user.order);
-    router.get(`${api}/user/history`, auth(1), controller.frontend.user.history);
+    router.post(`${api}/user/history`, auth(1), controller.frontend.user.history);
 
     // animate
     router.get(`${api}/animates`, auth(0), controller.frontend.animate.query);
