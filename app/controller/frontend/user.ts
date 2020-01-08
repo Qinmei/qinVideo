@@ -58,13 +58,14 @@ class UserController extends Controller {
     async like() {
         const { ctx, service } = this;
         const { query, params } = ctx;
-        const { type, id } = params;
+        const { type } = params;
+        const userId = ctx.state.user.id;
 
         ctx.helper.validate('query', query);
-        ctx.helper.validate('id', { id });
         ctx.helper.validate('id', { id: type });
 
         query.status = 'publish';
+        query.author = userId;
 
         const result = await service.user.typeList(type, query).catch(() => 11005);
 
