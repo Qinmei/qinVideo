@@ -72,6 +72,15 @@ class UserController extends Controller {
         ctx.helper.send(result);
     }
 
+    async history() {
+        const { ctx, service } = this;
+        const userId = ctx.state.user.id;
+
+        const result = await service.history.query(userId).catch(() => 11008);
+
+        ctx.helper.send(result);
+    }
+
     async own() {
         const { ctx, service } = this;
         const { query, params } = ctx;

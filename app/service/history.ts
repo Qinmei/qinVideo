@@ -1,6 +1,16 @@
 import { Service } from 'egg';
 
 class HistoryService extends Service {
+    async query(id: string) {
+        const result = await this.ctx.model.History.find({ author: id })
+            .sort({ createdAt: -1 })
+            .skip(0)
+            .limit(20)
+            .populate('target', 'title _id')
+            .populate('belong', 'title _id');
+        return result;
+    }
+
     async create(id: string, type: string) {
         try {
             const { state } = this.ctx;

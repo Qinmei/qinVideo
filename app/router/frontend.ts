@@ -27,11 +27,12 @@ export default (app: Application) => {
     router.get(`${api}/user/:id`, auth(0), controller.frontend.user.info);
     router.get(`${api}/user/:id/base`, auth(0), controller.frontend.user.baseInfo);
     router.get(`${api}/user/:id/own/:type`, auth(0), controller.frontend.user.own);
+    router.get(`${api}/user/like/:type`, auth(1), controller.frontend.user.like);
     router.post(`${api}/user/action`, auth(1), controller.frontend.user.relation);
     router.post(`${api}/user/edit`, auth(1), controller.frontend.user.edit);
     router.post(`${api}/user/pay`, auth(1), controller.frontend.user.pay);
     router.post(`${api}/user/order`, auth(1), controller.frontend.user.order);
-    router.get(`${api}/user/like/:type`, auth(1), controller.frontend.user.like);
+    router.get(`${api}/user/history`, auth(1), controller.frontend.user.history);
 
     // animate
     router.get(`${api}/animates`, auth(0), controller.frontend.animate.query);
