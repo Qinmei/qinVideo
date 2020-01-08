@@ -1,19 +1,25 @@
 import { Service } from 'egg';
 
 class RelationService extends Service {
-    async query({ page, size, sortBy, sortOrder, onModel }) {
+    async query({ page, size, sortBy, sortOrder, onModel, author }) {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 
         const query: any = {};
         onModel && (query.onModel = onModel);
+        author && (query.author = author);
 
         const result = await this.ctx.model.Relation.find(query)
             .sort({ [sortBy]: sortOrder, _id: -1 })
             .skip(skip)
             .limit(limit)
-            .populate({ path: 'author', select: 'name avatar level introduce background' })
-            .populate('target');
+            .populate({
+                path: 'target',
+                select: 'title slug coverVertical updatedAt',
+                populate: {
+                    path: 'countEposide',
+                },
+            });
 
         const total = await this.ctx.model.Relation.find(query).countDocuments();
 

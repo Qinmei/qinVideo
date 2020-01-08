@@ -64,10 +64,10 @@ class UserController extends Controller {
         ctx.helper.validate('query', query);
         ctx.helper.validate('id', { id: type });
 
-        query.status = 'publish';
         query.author = userId;
+        query.onModel = type.replace(/^\S/, (s: string) => s.toUpperCase());
 
-        const result = await service.user.typeList(type, query).catch(() => 11005);
+        const result = await service.relation.query(query).catch(() => 11005);
 
         ctx.helper.send(result);
     }
