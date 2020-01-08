@@ -6,7 +6,7 @@ class HistoryService extends Service {
             .sort({ createdAt: -1 })
             .limit(20)
             .populate('target', 'title _id')
-            .populate('belong', 'title _id');
+            .populate('belong', 'title slug _id');
         return result;
     }
 
