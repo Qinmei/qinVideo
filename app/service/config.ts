@@ -53,8 +53,6 @@ class ConfigService extends Service {
                 dplayer: 1,
                 newAnimate: 1,
                 newComic: 1,
-                newDiscuss: 1,
-                newShop: 1,
                 allAnimate: 1,
                 allComic: 1,
                 allPost: 1,
@@ -69,6 +67,8 @@ class ConfigService extends Service {
                 h5Menu: 1,
                 h5Index: 1,
                 aboutus: 1,
+                usePicInterface: 1,
+                picInterface: 1,
             }
         ).populate('postIndex');
 

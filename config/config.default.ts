@@ -31,6 +31,7 @@ export default (appInfo: EggAppInfo) => {
             cleanSchedule: {
                 cron: '0 30 4 * * *',
             },
+            fileExtensions: ['.ico'],
         },
 
         validate: {

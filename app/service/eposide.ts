@@ -182,25 +182,25 @@ class EposideService extends Service {
 
         if (data.target.playType === 'local') {
             const folder = data.link[0];
-            if (!folder || !folder.value) return;
+            if (folder && folder.value) {
+                const dirPath = path.join(__dirname, `../../public/picture${dataConfig.prefix + folder.value}`);
 
-            const dirPath = path.join(__dirname, `../../public/picture${dataConfig.prefix + folder.value}`);
+                let pictures: string[] = [];
+                if (fs.existsSync(dirPath)) {
+                    pictures = fs
+                        .readdirSync(dirPath)
+                        .map((item: string) => `/picture${dataConfig.prefix + folder.value}/${item}`);
+                }
 
-            let pictures: string[] = [];
-            if (fs.existsSync(dirPath)) {
-                pictures = fs
-                    .readdirSync(dirPath)
-                    .map((item: string) => `/picture${dataConfig.prefix + folder.value}/${item}`);
+                data.link = pictures.map((item: any, index) => {
+                    const uri = dataConfig.prefix + item.value;
+
+                    return {
+                        name: index + 1,
+                        value: item + this.ctx.helper.generateSecurePathHash(uri, dataConfig.expired, dataConfig.key),
+                    };
+                });
             }
-
-            data.link = pictures.map((item: any, index) => {
-                const uri = dataConfig.prefix + item.value;
-
-                return {
-                    name: index + 1,
-                    value: item + this.ctx.helper.generateSecurePathHash(uri, dataConfig.expired, dataConfig.key),
-                };
-            });
         } else if (data.target.playType === 'image') {
             data.link = data.link.map((item: any) => ({
                 ...item,
@@ -212,18 +212,18 @@ class EposideService extends Service {
             }));
         } else if (data.target.playType === 'api') {
             const folder = data.link[0];
-            if (!folder || !folder.value) return;
+            if (folder && folder.value) {
+                const url = dataConfig.prefix + folder.value;
 
-            const url = dataConfig.prefix + folder.value;
+                const options = {
+                    method: 'get',
+                    uri: url,
+                    json: true,
+                };
+                const result = await request(options);
 
-            const options = {
-                method: 'get',
-                uri: url,
-                json: true,
-            };
-            const result = await request(options);
-
-            data.link = result.data;
+                data.link = result.data;
+            }
         }
 
         delete data.target.level;

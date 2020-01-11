@@ -171,8 +171,6 @@ const ruleobj = {
         dplayer: { type: 'string', default: '', required: false },
         newAnimate: { type: 'string', default: '', required: false },
         newComic: { type: 'string', default: '', required: false },
-        newDiscuss: { type: 'string', default: '', required: false },
-        newShop: { type: 'string', default: '', required: false },
         allAnimate: { type: 'string', default: '', required: false },
         allComic: { type: 'string', default: '', required: false },
         allPost: { type: 'string', default: '', required: false },
@@ -202,6 +200,8 @@ const ruleobj = {
         smtpPass: { type: 'string', default: '', required: false },
         sendgrid: { type: 'string', default: '', required: false },
         commentVerify: { type: 'boolean', default: false, required: false },
+        usePicInterface: { type: 'boolean', default: false, required: false },
+        picInterface: { type: 'string', default: '', required: false },
     },
     danmu: (force: boolean) => ({
         target: { type: 'string', required: false },

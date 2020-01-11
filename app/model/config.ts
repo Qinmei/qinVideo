@@ -21,7 +21,6 @@ export default (app) => {
         dplayer: { type: String, default: '' }, // 默认dplayer的背景图
         newAnimate: { type: String, default: '' }, // 新番
         newComic: { type: String, default: '' }, // 新漫
-        newDiscuss: { type: String, default: '' }, // 讨论区
         newShop: { type: String, default: '' }, // 商品
         allAnimate: { type: String, default: '' }, // 所有番剧
         allComic: { type: String, default: '' }, // 所有漫画
@@ -30,6 +29,8 @@ export default (app) => {
         pcIndex: [{ type: String }], // web首页
         animateMenu: [{ title: String, link: String }], // 动漫菜单
         animateIndex: [{ type: String }], // 动漫首页
+        usePicInterface: { type: Boolean, default: false }, // 使用壁纸接口
+        picInterface: { type: String, default: '' }, // 壁纸接口地址
         comicMenu: [{ title: String, link: String }], // 漫画菜单
         comicIndex: [{ type: String }], // 漫画首页
         postMenu: [{ title: String, link: String }], // 文章菜单
