@@ -13,8 +13,7 @@ class OrderService extends Service {
             .sort({ [sortBy]: sortOrder, _id: -1 })
             .skip(skip)
             .limit(limit)
-            .populate('shop')
-            .populate('user');
+            .populate('shop');
 
         const total = await this.ctx.model.Order.find(query).countDocuments();
 
@@ -25,9 +24,7 @@ class OrderService extends Service {
     }
 
     async info(id: string) {
-        const data = await this.ctx.model.Order.findById(id)
-            .populate('shop')
-            .populate('user');
+        const data = await this.ctx.model.Order.findById(id).populate('shop');
         return data;
     }
 
