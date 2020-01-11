@@ -13,7 +13,7 @@ class ReportService extends Service {
             .sort({ [sortBy]: sortOrder, _id: -1 })
             .skip(skip)
             .limit(limit)
-            .populate('author')
+            .populate({ path: 'author', select: 'name avatar level introduce background' })
             .populate('target');
 
         const total = await this.ctx.model.Report.find(query).countDocuments();
@@ -26,7 +26,7 @@ class ReportService extends Service {
 
     async info(id: string) {
         const data = await this.ctx.model.Report.findById(id)
-            .populate('author')
+            .populate({ path: 'author', select: 'name avatar level introduce background' })
             .populate('target');
         return data;
     }

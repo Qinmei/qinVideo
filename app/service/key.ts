@@ -14,7 +14,7 @@ class KeyService extends Service {
             .sort({ [sortBy]: sortOrder, _id: -1 })
             .skip(skip)
             .limit(limit)
-            .populate('author');
+            .populate({ path: 'author', select: 'name avatar level introduce background' });
 
         const total = await this.ctx.model.Key.find(query).countDocuments();
 

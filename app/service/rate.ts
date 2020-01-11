@@ -11,7 +11,7 @@ class RateService extends Service {
             .sort({ [sortBy]: sortOrder, _id: -1 })
             .skip(skip)
             .limit(limit)
-            .populate('author')
+            .populate({ path: 'author', select: 'name avatar level introduce background' })
             .populate('target');
 
         const total = await this.ctx.model.Rate.find(query).countDocuments();
@@ -24,7 +24,7 @@ class RateService extends Service {
 
     async info(id: string) {
         const result = await this.ctx.model.Rate.findById(id)
-            .populate('author')
+            .populate({ path: 'author', select: 'name avatar level introduce background' })
             .populate('target');
         return result;
     }
