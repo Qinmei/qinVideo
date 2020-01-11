@@ -6,7 +6,9 @@ class UserService extends Service {
         const skip = (page - 1) * size;
         const limit = size;
 
-        const query: any = {};
+        const query: any = {
+            level: { $lte: 1000 },
+        };
         title && (query.name = { $regex: title, $options: '$i' });
         email && (query.email = { $regex: email, $options: '$i' });
         status && (query.status = status);
