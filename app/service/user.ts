@@ -43,10 +43,14 @@ class UserService extends Service {
 
     async create(data: any) {
         const uuid = uuidv4();
-        const result = await this.ctx.model.User.create({
+        let result = await this.ctx.model.User.create({
             ...data,
             refreshToken: uuid,
         });
+        result = result.toJSON();
+        delete result.refreshToken;
+        delete result.password;
+        delete result.status;
         return result;
     }
 

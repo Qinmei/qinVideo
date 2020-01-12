@@ -141,6 +141,8 @@ export default (app: Application) => {
     // 配置
     router.get(`${api}/config`, auth(100), controller.backend.config.query);
     router.post(`${api}/config`, auth(100), controller.backend.config.create);
+    router.get(`${api}/init`, auth(0), controller.backend.config.existAdmin);
+    router.post(`${api}/init`, auth(0), controller.backend.config.initAdmin);
 
     // 文件相关
     router.post(`${api}/upload/image`, auth(100), controller.backend.uploads.uploadImg);
