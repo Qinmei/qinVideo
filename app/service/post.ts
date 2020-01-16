@@ -62,9 +62,7 @@ class PostService extends Service {
             .populate('countComment')
             .populate({ path: 'author', select: 'name avatar level introduce background' })
             .populate('kind')
-            .populate('tag')
-            .populate({ path: 'seasons', select: 'slug season', match: { _id: { $ne: id }, status: 'publish' } })
-            .populate('seasonInfo');
+            .populate('tag');
         return data;
     }
 
@@ -94,7 +92,7 @@ class PostService extends Service {
             .populate({ path: 'author', select: 'name avatar level introduce background' })
             .populate('kind')
             .populate('tag')
-            .populate({ path: 'seasons', select: 'slug season', match: { slug: { $ne: slug }, status: 'publish' } })
+            .populate({ path: 'seasons', select: 'slug season title', match: { status: 'publish' } })
             .populate('seasonInfo');
         return data;
     }

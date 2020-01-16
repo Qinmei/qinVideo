@@ -1,19 +1,6 @@
 import { Service } from 'egg';
-import * as request from 'request-promise';
-
-const baseurl = 'https://qinvideo.org';
 
 class ToolService extends Service {
-    async message() {
-        const options = {
-            method: 'get',
-            uri: baseurl + '/message.json',
-            json: true,
-        };
-        const result = await request(options);
-        return result;
-    }
-
     async replace({ type, kind, before, after }) {
         const { model, helper } = this.ctx;
         const Model = type === 'link' ? model.Eposode : model[kind];
