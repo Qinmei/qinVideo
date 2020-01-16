@@ -53,7 +53,7 @@ class CloudService extends Service {
         eposide.map((item, index) => {
             item.target = result._id;
             item.onModel = data.type;
-            item.sort = index;
+            item.sort = index + 1;
         });
 
         const eposideData = await this.ctx.service.eposide.create(eposide).catch(() => false);
@@ -76,7 +76,7 @@ class CloudService extends Service {
                 if (!existEposide.list.some((ele: any) => ele._id.toString() === item._id)) {
                     item.target = result._id;
                     item.onModel = data.type;
-                    item.sort = index;
+                    item.sort = index + 1;
                     await this.ctx.service.eposide.create(item);
                 }
             }

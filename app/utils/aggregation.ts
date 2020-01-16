@@ -197,7 +197,6 @@ export const countAll = {
 export const eposideTitle = {
     $addFields: {
         lastEposide: { $arrayElemAt: ['$listEposide', 0] },
-        updateTitle: '$lastEposide.sort',
     },
 };
 
