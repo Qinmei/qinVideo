@@ -8,6 +8,7 @@ import {
     rateLookup,
     seasonLookup,
     eposideLookup,
+    eposideTitle,
 } from '../utils/aggregation';
 
 class ComicService extends Service {
@@ -41,6 +42,7 @@ class ComicService extends Service {
             ...selectCount(sortBy).rest,
             authorLookup,
             countAll,
+            eposideTitle,
             {
                 $project: {
                     listComment: 0,

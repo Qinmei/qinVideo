@@ -13,16 +13,11 @@ class CloudController extends Controller {
 
     async info() {
         const { ctx, service } = this;
+        const id = ctx.params.id;
 
-        const result = await service.cloud.settingInfo().catch(() => 28001);
-        ctx.helper.send(result);
-    }
+        ctx.helper.validate('id', { id });
 
-    async update() {
-        const { ctx, service } = this;
-        const data = ctx.request.body;
-
-        const result = await service.cloud.settingCreate(data).catch(() => 28002);
+        const result = await service.cloud.info(id).catch(() => 28001);
         ctx.helper.send(result);
     }
 
@@ -32,17 +27,32 @@ class CloudController extends Controller {
 
         ctx.helper.validate('ids', { ids });
 
-        const result = await service.cloud.save(ids).catch((err) => console.log(err));
+        if (ids.length > 0) {
+            const result = await service.cloud.save(ids).catch(() => 28003);
+            ctx.helper.send(result);
+        } else {
+            service.cloud.save(ids).catch(() => 28003);
+            ctx.helper.success('mission start');
+        }
+    }
+
+    async destroy() {
+        const { ctx, service } = this;
+        const id = ctx.params.id;
+
+        ctx.helper.validate('id', { id });
+
+        const result = await service.cloud.destroy([id]).catch(() => 28004);
         ctx.helper.send(result);
     }
 
-    async import() {
+    async destroyMany() {
         const { ctx, service } = this;
-        const { source, hour } = ctx.request.body;
+        const { ids } = ctx.request.body;
 
-        ctx.helper.validate('id', { id: source });
+        ctx.helper.validate('ids', { ids });
 
-        const result = await service.cloud.import(source, hour).catch(() => 28004);
+        const result = await service.cloud.destroy(ids).catch(() => 28004);
         ctx.helper.send(result);
     }
 }

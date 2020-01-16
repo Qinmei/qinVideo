@@ -31,6 +31,7 @@ export default (app) => {
             firstPlay: { type: String, default: '20160606' },
             isUpdate: { type: Boolean, default: false, index: true }, // 是否连载
             updateDay: { type: Number, default: 0 },
+            updateTime: { type: Number, default: 0 }, // 更新有效期
             rateStar: { type: Number, default: 0 },
             rateCount: { type: Number, default: 0 },
             impression: { type: String, default: '' },

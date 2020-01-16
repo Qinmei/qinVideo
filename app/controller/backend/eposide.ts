@@ -30,6 +30,12 @@ class EposideController extends Controller {
         ctx.helper.validate('eposide', data, true);
 
         const result = await service.eposide.create(data).catch(() => 18002);
+
+        const { target, onModel } = data;
+        const type = onModel.toLowerCase();
+
+        service[type].update([target], { updateTime: new Date().getTime() });
+
         ctx.helper.send(result);
     }
 

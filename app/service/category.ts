@@ -65,7 +65,7 @@ class CategoryService extends Service {
                 break;
         }
 
-        const data = await this.ctx.model.Category.find({ type: { $in: list } });
+        const data = await this.ctx.model.Category.find({ type: { $in: list }, show: true });
         return data;
     }
 }

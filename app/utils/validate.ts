@@ -64,6 +64,10 @@ const ruleobj = {
             type: 'string',
             required: false,
         },
+        source: {
+            type: 'string',
+            required: false,
+        },
     },
     id: {
         id: {
@@ -101,6 +105,7 @@ const ruleobj = {
         firstPlay: { type: 'string', required: false },
         isUpdate: { type: 'boolean', required: false },
         updateDay: { type: 'number', required: false },
+        updateTime: { type: 'number', required: false },
         rateStar: { type: 'number', required: false },
         rateCount: { type: 'number', required: false },
         impression: { type: 'string', required: false },
@@ -132,6 +137,7 @@ const ruleobj = {
         firstPlay: { type: 'string', required: false },
         isUpdate: { type: 'boolean', required: false },
         updateDay: { type: 'number', required: false },
+        updateTime: { type: 'number', required: false },
         rateStar: { type: 'number', required: false },
         rateCount: { type: 'number', required: false },
         impression: { type: 'string', required: false },
@@ -236,6 +242,7 @@ const ruleobj = {
         type: { type: 'string', required: force },
         cover: { type: 'string', required: false },
         introduce: { type: 'string', required: false },
+        show: { type: 'boolean', required: false },
     }),
     season: (force: boolean) => ({
         name: { type: 'string', required: force },
@@ -391,13 +398,15 @@ const ruleobj = {
             type: 'boolean',
         },
     },
-    cloudSetting: {
-        source: { type: 'array', required: false },
+    source: (force: boolean) => ({
+        source: { type: 'string', required: force },
+        api: { type: 'string', required: force },
+        cat: { type: 'number', required: force },
+        type: { type: 'string', required: force },
         update: { type: 'boolean', required: false },
         slugPrefix: { type: 'string', required: false },
-        process: { type: 'string', required: false },
-        history: { type: 'array', required: false },
-    },
+        mode: { type: 'string', required: force },
+    }),
     relation: {
         onModel: { type: 'string' },
         target: { type: 'string' },

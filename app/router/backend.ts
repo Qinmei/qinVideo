@@ -161,10 +161,25 @@ export default (app: Application) => {
     router.post(`${api}/tools/downimg`, auth(100), controller.backend.tools.downImg);
     router.post(`${api}/tools/upload`, auth(100), controller.backend.tools.upload);
 
-    // 资源库
-    router.get(`${api}/cloud/list`, auth(100), controller.backend.cloud.query);
-    router.get(`${api}/cloud/info`, auth(100), controller.backend.cloud.info);
-    router.post(`${api}/cloud/info`, auth(100), controller.backend.cloud.update);
-    router.post(`${api}/cloud/save`, auth(100), controller.backend.cloud.save);
-    router.post(`${api}/cloud/import`, auth(100), controller.backend.cloud.import);
+    // 资源列表
+    router.get(`${api}/clouds`, auth(100), controller.backend.cloud.query);
+    router.get(`${api}/clouds/:id`, auth(100), controller.backend.cloud.info);
+    router.post(`${api}/clouds/save`, auth(100), controller.backend.cloud.save);
+    router.delete(`${api}/clouds/:id`, auth(100), controller.backend.cloud.destroy);
+    router.delete(`${api}/clouds`, auth(100), controller.backend.cloud.destroyMany);
+
+    // 来源列表
+    router.get(`${api}/sources`, auth(100), controller.backend.source.query);
+    router.get(`${api}/sources/:id`, auth(100), controller.backend.source.info);
+    router.post(`${api}/sources`, auth(100), controller.backend.source.create);
+    router.post(`${api}/sources/import`, auth(100), controller.backend.source.import);
+    router.put(`${api}/sources/:id`, auth(100), controller.backend.source.update);
+    router.put(`${api}/sources`, auth(100), controller.backend.source.updateMany);
+    router.delete(`${api}/sources/:id`, auth(100), controller.backend.source.destroy);
+    router.delete(`${api}/sources`, auth(100), controller.backend.source.destroyMany);
+
+    // 操作记录列表
+    router.get(`${api}/records`, auth(100), controller.backend.record.query);
+    router.delete(`${api}/records/:id`, auth(100), controller.backend.record.destroy);
+    router.delete(`${api}/records`, auth(100), controller.backend.record.destroyMany);
 };

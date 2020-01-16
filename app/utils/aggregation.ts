@@ -142,9 +142,23 @@ export const listAll = {
     countEposide: {
         $lookup: {
             from: 'eposides',
-            localField: '_id',
-            foreignField: 'target',
             as: 'listEposide',
+            let: { id: '$_id' },
+            pipeline: [
+                {
+                    $match: {
+                        $expr: { $eq: ['$$id', '$target'] },
+                    },
+                },
+                { $sort: { sort: -1, _id: -1 } },
+                {
+                    $project: {
+                        title: 1,
+                        sort: 1,
+                        cover: 1,
+                    },
+                },
+            ],
         },
     },
 };
@@ -177,6 +191,13 @@ export const countAll = {
                 $ifNull: ['$listEposide', []],
             },
         },
+    },
+};
+
+export const eposideTitle = {
+    $addFields: {
+        lastEposide: { $arrayElemAt: ['$listEposide', 0] },
+        updateTitle: '$lastEposide.sort',
     },
 };
 

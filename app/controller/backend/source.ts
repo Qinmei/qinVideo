@@ -1,13 +1,13 @@
 import { Controller } from 'egg';
 
-class BlogController extends Controller {
+class SourceController extends Controller {
     async query() {
         const { ctx, service } = this;
         const { query } = ctx;
 
         ctx.helper.validate('query', query);
 
-        const result = await service.blog.query(query).catch(() => 14000);
+        const result = await service.source.query(query).catch(() => 30000);
         ctx.helper.send(result);
     }
 
@@ -17,19 +17,17 @@ class BlogController extends Controller {
 
         ctx.helper.validate('id', { id });
 
-        const result = await service.blog.info(id).catch(() => 14001);
+        const result = await service.source.info(id).catch(() => 30001);
         ctx.helper.send(result);
     }
 
     async create() {
         const { ctx, service } = this;
         const data = ctx.request.body;
-        const userId = ctx.state.user.id;
 
-        data.author = userId;
-        ctx.helper.validate('blog', data, true);
+        ctx.helper.validate('source', data, true);
 
-        const result = await service.blog.create(data).catch(() => 14002);
+        const result = await service.source.create(data).catch(() => 30002);
         ctx.helper.send(result);
     }
 
@@ -39,9 +37,9 @@ class BlogController extends Controller {
         const id = ctx.params.id;
 
         ctx.helper.validate('id', { id });
-        ctx.helper.validate('blog', data);
+        ctx.helper.validate('source', data);
 
-        const result = await service.blog.update([id], data).catch(() => 14003);
+        const result = await service.source.update([id], data).catch(() => 30003);
         ctx.helper.send(result);
     }
 
@@ -51,9 +49,9 @@ class BlogController extends Controller {
         const { ids } = data;
 
         ctx.helper.validate('ids', { ids });
-        ctx.helper.validate('blog', data);
+        ctx.helper.validate('source', data);
 
-        const result = await service.blog.update(ids, data).catch(() => 14003);
+        const result = await service.source.update(ids, data).catch(() => 30003);
         ctx.helper.send(result);
     }
 
@@ -63,7 +61,7 @@ class BlogController extends Controller {
 
         ctx.helper.validate('id', { id });
 
-        const result = await service.blog.destroy([id]).catch(() => 14004);
+        const result = await service.source.destroy([id]).catch(() => 30004);
         ctx.helper.send(result);
     }
 
@@ -73,9 +71,20 @@ class BlogController extends Controller {
 
         ctx.helper.validate('ids', { ids });
 
-        const result = await service.blog.destroy(ids).catch(() => 14004);
+        const result = await service.source.destroy(ids).catch(() => 30004);
+        ctx.helper.send(result);
+    }
+
+    async import() {
+        const { ctx, service } = this;
+        const { source, type } = ctx.request.body;
+
+        ctx.helper.validate('id', { id: source });
+        ctx.helper.validate('id', { id: type });
+
+        const result = await service.source.import(source, type).catch(() => 30005);
         ctx.helper.send(result);
     }
 }
 
-export default BlogController;
+export default SourceController;

@@ -20,6 +20,7 @@ export default (app) => {
                 type: String,
                 default: '',
             },
+            show: { type: Boolean, default: true },
             introduce: {
                 type: String,
                 default: '',

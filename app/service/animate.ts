@@ -8,6 +8,7 @@ import {
     rateLookup,
     seasonLookup,
     eposideLookup,
+    eposideTitle,
 } from '../utils/aggregation';
 
 interface Query {
@@ -84,6 +85,7 @@ class AnimateService extends Service {
             ...selectCount(sortBy).rest,
             authorLookup,
             countAll,
+            eposideTitle,
             {
                 $project: {
                     listComment: 0,
