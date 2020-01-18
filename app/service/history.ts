@@ -1,10 +1,10 @@
 import { Service } from 'egg';
 
 class HistoryService extends Service {
-    async query(id: string) {
-        const result = await this.ctx.model.History.find({ author: id, onModel: { $in: ['Eposide', 'Post'] } })
+    async query(query, size = 20) {
+        const result = await this.ctx.model.History.find(query)
             .sort({ createdAt: -1 })
-            .limit(20)
+            .limit(size)
             .populate('target', 'title _id')
             .populate('belong', 'title slug _id');
         return result;
