@@ -32,7 +32,7 @@ class CategoryService extends Service {
     }
 
     async update(ids: string[], data: any) {
-        const query = ids.length > 0 ? { _id: { $in: ids } } : {};
+        const query = ids.length > 0 ? { _id: { $in: ids } } : { type: data.type };
         const result = await this.ctx.model.Category.updateMany(query, { $set: data });
         return result;
     }
