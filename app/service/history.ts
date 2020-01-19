@@ -5,7 +5,7 @@ class HistoryService extends Service {
         const result = await this.ctx.model.History.find(query)
             .sort({ createdAt: -1 })
             .limit(size)
-            .populate('target', 'title _id cover sort')
+            .populate('target', 'title _id cover sort slug')
             .populate('belong', 'title slug _id coverVertical');
         return result;
     }
