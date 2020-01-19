@@ -74,9 +74,21 @@ class UserController extends Controller {
 
     async history() {
         const { ctx, service } = this;
+        const { type } = ctx.params;
         const userId = ctx.state.user.id;
 
-        const result = await service.history.query(userId).catch(() => 11008);
+        let query = {};
+        if (type === 'animate') {
+            query = { author: userId, onModel: 'Eposide', onModel2: 'Animate' };
+        } else if (type === 'comic') {
+            query = { author: userId, onModel: 'Eposide', onModel2: 'Comic' };
+        } else if (type === 'post') {
+            query = { author: userId, onModel: 'Post' };
+        } else if (type === 'user') {
+            query = { author: userId, onModel: 'User' };
+        }
+
+        const result = await service.history.query(query).catch(() => 11008);
 
         ctx.helper.send(result);
     }
