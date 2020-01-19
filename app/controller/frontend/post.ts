@@ -31,12 +31,11 @@ class PostController extends Controller {
                 author: userId,
             });
             result.isLiked = isLiked;
+            service.history.create(result._id, 'Post');
         }
         if (Array.isArray(result.eposides)) {
             result.eposides.sort((a: any, b: any) => a.sort - b.sort);
         }
-
-        service.history.create(id, 'Post');
 
         ctx.helper.send(result);
     }

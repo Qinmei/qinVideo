@@ -11,35 +11,34 @@ class HistoryService extends Service {
     }
 
     async create(id: string, type: string) {
-        try {
-            const { state } = this.ctx;
-            const author = state.user.id;
+        const { state } = this.ctx;
+        const author = state.user.id;
 
-            const data = {
-                author,
-                onModel: type,
-                target: id,
-            };
-            await this.existOrCreate(data);
-        } catch (error) {}
+        if (!author) return;
+
+        const data = {
+            author,
+            onModel: type,
+            target: id,
+        };
+        await this.existOrCreate(data);
     }
 
     async playCreate(content: any, type: string) {
-        try {
-            const { state } = this.ctx;
-            const author = state.user.id;
+        const { state } = this.ctx;
+        const author = state.user.id;
 
-            if (typeof content === 'number') return;
+        if (!author) return;
+        if (typeof content === 'number') return;
 
-            const data = {
-                author,
-                onModel2: type,
-                onModel: 'Eposide',
-                target: content._id,
-                belong: content.target._id,
-            };
-            await this.existOrCreate(data);
-        } catch (error) {}
+        const data = {
+            author,
+            onModel2: type,
+            onModel: 'Eposide',
+            target: content._id,
+            belong: content.target._id,
+        };
+        await this.playExistOrCreate(data);
     }
 
     async existOrCreate(data: any) {
@@ -49,9 +48,30 @@ class HistoryService extends Service {
         }
 
         const type = result.onModel.toLowerCase();
-        if (['animate', 'comic', 'post'].includes(type)) {
-            await this.ctx.service.data.create(type);
+        if (type === 'post') {
+            this.ctx.service.data.create(type);
         }
+
+        return result;
+    }
+
+    async playExistOrCreate(data: any) {
+        const { author, onModel, belong, onModel2 } = data;
+
+        let result = await this.ctx.model.History.findOne({
+            author,
+            onModel,
+            belong,
+            onModel2,
+        });
+        if (!result) {
+            result = await this.ctx.model.History.create(data);
+        } else {
+            result = await this.ctx.model.History.findByIdAndUpdate(result._id, data);
+        }
+
+        const type = result.onModel2.toLowerCase();
+        this.ctx.service.data.create(type);
 
         return result;
     }
