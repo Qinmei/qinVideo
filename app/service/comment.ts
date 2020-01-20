@@ -104,7 +104,7 @@ class CommentService extends Service {
 
         const result = await this.ctx.model.Comment.find(query)
             .populate('countLike')
-            .sort({ created: -1 })
+            .sort({ createdAt: -1 })
             .skip(skip)
             .limit(limit)
             .populate({ path: 'author', select: 'name avatar level introduce background' })
