@@ -1,0 +1,1 @@
+{"ast":null,"code":"var prefix = \"http://localhost:7001\";\nvar api = {\n  config: \"\".concat(prefix, \"/api/v2/config\"),\n  home: \"\".concat(prefix, \"/api/v2/home\")\n};\nexport default api;","map":null,"metadata":{},"sourceType":"module"}

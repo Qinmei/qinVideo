@@ -1,0 +1,1 @@
+{"ast":null,"code":"const prefix = \"http://localhost:7001\";\nconst api = {\n  config: `${prefix}/api/v2/config`,\n  home: `${prefix}/api/v2/home`\n};\nexport default api;","map":null,"metadata":{},"sourceType":"module"}
