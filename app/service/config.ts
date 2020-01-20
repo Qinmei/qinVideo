@@ -67,6 +67,7 @@ class ConfigService extends Service {
                 h5Menu: 1,
                 h5Index: 1,
                 aboutus: 1,
+                message: 1,
                 usePicInterface: 1,
                 picInterface: 1,
             }

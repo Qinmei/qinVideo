@@ -38,6 +38,7 @@ export default (app) => {
         h5Menu: [{ title: String, link: String }], // mobile菜单
         h5Index: [{ type: String }], // mobile首页
         aboutus: { type: String, default: '' },
+        message: { type: Schema.Types.ObjectId, ref: 'Category' }, // 消息通知
         playLimit: [
             {
                 // 播放等级限制
