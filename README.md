@@ -7,7 +7,3 @@
 ```js
 yarn start --ignore-stderr
 ```
-
-## 当前状态
-
-文档编写中,请等待
