@@ -19,7 +19,7 @@ class BlogService extends Service {
             .sort({ [sortBy]: sortOrder, _id: -1 })
             .skip(skip)
             .limit(limit)
-            .populate('target')
+            .populate({ path: 'target', select: 'title slug coverVertical' })
             .populate('tag')
             .populate({ path: 'author', select: 'name avatar level introduce background' });
 
@@ -36,7 +36,7 @@ class BlogService extends Service {
             .populate('countPlay')
             .populate('countLike')
             .populate('countComment')
-            .populate('target')
+            .populate({ path: 'target', select: 'title slug coverVertical' })
             .populate('tag')
             .populate({ path: 'author', select: 'name avatar level introduce background' });
         return result;

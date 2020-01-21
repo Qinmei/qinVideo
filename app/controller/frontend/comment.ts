@@ -52,16 +52,6 @@ class CommentController extends Controller {
 
         ctx.helper.send(result);
     }
-
-    async destroy() {
-        const { ctx, service } = this;
-        const id = ctx.params.id;
-
-        ctx.helper.validate('id', { id });
-
-        const result = await service.comment.destroy([id]).catch(() => 17004);
-        ctx.helper.send(result);
-    }
 }
 
 export default CommentController;
