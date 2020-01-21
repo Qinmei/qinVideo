@@ -57,7 +57,11 @@ export default (app: Application) => {
     router.get(`${api}/comments`, auth(0), controller.frontend.comment.query);
     router.get(`${api}/comments/:id`, auth(0), controller.frontend.comment.info);
     router.post(`${api}/comments`, auth(1), controller.frontend.comment.create);
-    router.delete(`${api}/comments/:id`, auth(0), controller.frontend.comment.destroy);
+
+    // blog
+    router.get(`${api}/blogs`, auth(0), controller.frontend.blog.query);
+    router.get(`${api}/blogs/:id`, auth(0), controller.frontend.blog.info);
+    router.post(`${api}/blogs`, auth(1), controller.frontend.blog.create);
 
     // post
     router.get(`${api}/posts`, auth(0), controller.frontend.post.query);
