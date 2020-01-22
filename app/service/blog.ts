@@ -62,8 +62,6 @@ class BlogService extends Service {
 
         newList.map((item: any) => {
             all.push(item._id);
-            const child = item.children.map((ele: any) => ele._id);
-            all.push(...child);
         });
 
         if (all.length !== 0) {
@@ -74,9 +72,6 @@ class BlogService extends Service {
                 if (likeArr.includes(item._id.toString())) {
                     item.isLiked = true;
                 }
-                item.children.map((ele: any) => {
-                    if (likeArr.includes(ele._id)) ele.isLiked = true;
-                });
                 return item;
             });
         }
