@@ -1,7 +1,7 @@
 import { Service } from 'egg';
 
 class CloudService extends Service {
-    async query({ page, size, sortBy, sortOrder, title, source, type }) {
+    async query({ page, size, sortBy = 'createdAt', sortOrder = -1, title, source, type }) {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 

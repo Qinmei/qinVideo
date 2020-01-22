@@ -1,7 +1,7 @@
 import { Service } from 'egg';
 
 class SourceService extends Service {
-    async query({ page, size, sortBy, sortOrder, title }) {
+    async query({ page, size, sortBy = 'createdAt', sortOrder = -1, title }) {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 

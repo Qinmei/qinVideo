@@ -2,7 +2,7 @@ import { Service } from 'egg';
 import * as uuidv4 from 'uuid/v4';
 
 class UserService extends Service {
-    async query({ page, size, sortBy, sortOrder, title, email, status }) {
+    async query({ page, size, sortBy = 'createdAt', sortOrder = -1, title, email, status }) {
         const skip = (page - 1) * size;
         const limit = size;
 
@@ -74,7 +74,7 @@ class UserService extends Service {
         return result;
     }
 
-    async likeComment(list: any[], user: string) {
+    async likeRelation(list: any[], user: string) {
         const result = await this.ctx.model.Relation.find({
             target: { $in: list },
             author: user,

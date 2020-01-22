@@ -13,6 +13,7 @@ export default (app) => {
                 enum: [
                     'register',
                     'login',
+                    'blog',
                     'comment',
                     'post',
                     'animate',
