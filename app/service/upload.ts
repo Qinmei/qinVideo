@@ -18,9 +18,7 @@ class UploadsService extends Service {
 
     // 上传文件
     async uploadImg(files: any[], type: string) {
-        const typePath = ['animate', 'comic', 'post', 'comment', 'avatar', 'background', 'config', 'others'].includes(
-            type
-        )
+        const typePath = ['animate', 'comic', 'post', 'blog', 'avatar', 'background', 'config', 'others'].includes(type)
             ? type
             : 'others';
         const dirPath = path.join(__dirname, '../../public/img') + `/${typePath}`;
