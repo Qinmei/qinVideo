@@ -286,7 +286,7 @@ const ruleobj = {
         seasonRelate: { type: 'string', required: false },
     }),
     blog: (force: boolean) => ({
-        content: { type: 'string', required: false },
+        content: { type: 'string', required: force },
         target: { type: 'string', required: false },
         onModel: { type: 'string', required: false },
         status: { type: 'string', required: force },

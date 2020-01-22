@@ -8,7 +8,7 @@ class BlogController extends Controller {
 
         ctx.helper.validate('query', query);
 
-        const result = await service.blog.query(query).catch(() => 14000);
+        const result = await service.blog.query(query).catch(() => 32000);
         if (userId && typeof result !== 'number') {
             const newList = await service.blog.addLike(result.list, userId);
             result.list = newList;
@@ -23,7 +23,7 @@ class BlogController extends Controller {
 
         ctx.helper.validate('id', { id });
 
-        let result = await service.blog.info(id).catch(() => 14001);
+        let result = await service.blog.info(id).catch(() => 32001);
 
         if (userId && typeof result !== 'number') {
             const newList = await service.comment.addLike([result], userId);
@@ -38,9 +38,10 @@ class BlogController extends Controller {
         const userId = ctx.state.user.id;
 
         data.author = userId;
+        data.status = 'publish';
         ctx.helper.validate('blog', data, true);
 
-        const result = await service.blog.create(data).catch(() => 14002);
+        const result = await service.blog.create(data).catch(() => 32002);
         service.data.create('blog');
         ctx.helper.send(result);
     }
