@@ -8,7 +8,7 @@ window.config = {
   qq: '',
   email: '',
   app: '',
-  logo: 'http://qinvideo.qinvz.cn/img/config/e74f2bae7513da793c611f030377b08f.png',
+  logo: 'https://demo.qinvideo.org/img/config/e45cadc8b7b3a37d099767ec48676110.png',
   headimg: '/img/config/9c007bab0896dd7042f5340c0d548756.jpg',
   mobleimg: '',
   loginimg: 'https://qinmei.video/img/config/ab99501bf70ac77f29c77cfc2005879e.jpg',
