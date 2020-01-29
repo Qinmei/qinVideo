@@ -14,6 +14,7 @@ export default (app: Application) => {
     router.get(`${api}/config`, auth(0), controller.frontend.config.info);
     router.get(`${api}/home`, auth(0), controller.frontend.config.home);
     router.get(`${api}/mobile`, auth(0), controller.frontend.config.mobile);
+    router.post(`${api}/rate`, auth(1), controller.frontend.common.rate);
 
     // auth
     router.get(`${api}/auth/info`, auth(1), controller.frontend.auth.info);

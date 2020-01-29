@@ -269,6 +269,7 @@ const ruleobj = {
         author: { type: 'string', required: force },
         target: { type: 'string', required: force },
         onModel: { type: 'string', required: force },
+        content: { type: 'string', required: false },
         rate: { type: 'number', required: force },
     }),
     post: (force: boolean) => ({

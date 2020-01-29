@@ -29,13 +29,13 @@ class RateService extends Service {
         return result;
     }
 
-    async exsit(author: string, target: string) {
+    async exist(author: string, target: string) {
         const result = await this.ctx.model.Rate.findOne({ author, target });
         return result;
     }
 
     async create(data: any) {
-        const exist = await this.exsit(data.author, data.target);
+        const exist = await this.exist(data.author, data.target);
         if (exist) return 29005;
 
         const result = await this.ctx.model.Rate.create(data);
