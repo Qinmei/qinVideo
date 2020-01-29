@@ -11,7 +11,7 @@ interface Query {
 }
 
 class DanmuService extends Service {
-    async query({ page, size, sortBy, sortOrder, title, player, target }: Query) {
+    async query({ page, size, sortBy = 'createdAt', sortOrder = -1, title, player, target }: Query) {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 

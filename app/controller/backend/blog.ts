@@ -7,7 +7,7 @@ class BlogController extends Controller {
 
         ctx.helper.validate('query', query);
 
-        const result = await service.blog.query(query).catch(() => 14000);
+        const result = await service.blog.query(query).catch(() => 32000);
         ctx.helper.send(result);
     }
 
@@ -17,7 +17,7 @@ class BlogController extends Controller {
 
         ctx.helper.validate('id', { id });
 
-        const result = await service.blog.info(id).catch(() => 14001);
+        const result = await service.blog.info(id).catch(() => 32001);
         ctx.helper.send(result);
     }
 
@@ -29,7 +29,7 @@ class BlogController extends Controller {
         data.author = userId;
         ctx.helper.validate('blog', data, true);
 
-        const result = await service.blog.create(data).catch(() => 14002);
+        const result = await service.blog.create(data).catch(() => 32002);
         ctx.helper.send(result);
     }
 
@@ -41,7 +41,7 @@ class BlogController extends Controller {
         ctx.helper.validate('id', { id });
         ctx.helper.validate('blog', data);
 
-        const result = await service.blog.update([id], data).catch(() => 14003);
+        const result = await service.blog.update([id], data).catch(() => 32003);
         ctx.helper.send(result);
     }
 
@@ -53,7 +53,7 @@ class BlogController extends Controller {
         ctx.helper.validate('ids', { ids });
         ctx.helper.validate('blog', data);
 
-        const result = await service.blog.update(ids, data).catch(() => 14003);
+        const result = await service.blog.update(ids, data).catch(() => 32003);
         ctx.helper.send(result);
     }
 
@@ -63,7 +63,7 @@ class BlogController extends Controller {
 
         ctx.helper.validate('id', { id });
 
-        const result = await service.blog.destroy([id]).catch(() => 14004);
+        const result = await service.blog.destroy([id]).catch(() => 32004);
         ctx.helper.send(result);
     }
 
@@ -73,7 +73,7 @@ class BlogController extends Controller {
 
         ctx.helper.validate('ids', { ids });
 
-        const result = await service.blog.destroy(ids).catch(() => 14004);
+        const result = await service.blog.destroy(ids).catch(() => 32004);
         ctx.helper.send(result);
     }
 }

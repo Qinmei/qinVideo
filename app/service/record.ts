@@ -1,7 +1,7 @@
 import { Service } from 'egg';
 
 class RecordService extends Service {
-    async query({ page, size, sortBy, sortOrder, type, title }) {
+    async query({ page, size, sortBy = 'createdAt', sortOrder = -1, type, title }) {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 

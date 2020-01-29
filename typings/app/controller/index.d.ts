@@ -27,6 +27,7 @@ import ExportBackendUploads from '../../../app/controller/backend/uploads';
 import ExportBackendUser from '../../../app/controller/backend/user';
 import ExportFrontendAnimate from '../../../app/controller/frontend/animate';
 import ExportFrontendAuth from '../../../app/controller/frontend/auth';
+import ExportFrontendBlog from '../../../app/controller/frontend/blog';
 import ExportFrontendComic from '../../../app/controller/frontend/comic';
 import ExportFrontendComment from '../../../app/controller/frontend/comment';
 import ExportFrontendCommon from '../../../app/controller/frontend/common';
@@ -65,6 +66,7 @@ declare module 'egg' {
     frontend: {
       animate: ExportFrontendAnimate;
       auth: ExportFrontendAuth;
+      blog: ExportFrontendBlog;
       comic: ExportFrontendComic;
       comment: ExportFrontendComment;
       common: ExportFrontendCommon;

@@ -1,7 +1,7 @@
 import { Service } from 'egg';
 
 class CommentService extends Service {
-    async query({ page, size, sortBy, sortOrder, title, target, status }) {
+    async query({ page, size, sortBy = 'createdAt', sortOrder = -1, title, target, status }) {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 
@@ -188,7 +188,7 @@ class CommentService extends Service {
         });
 
         if (all.length !== 0) {
-            const check = await this.ctx.service.user.likeComment(all, userId);
+            const check = await this.ctx.service.user.likeRelation(all, userId);
             const likeArr = check.map((item: any) => item.target.toString());
 
             newList = newList.map((item: any) => {

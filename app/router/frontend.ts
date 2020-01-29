@@ -14,6 +14,7 @@ export default (app: Application) => {
     router.get(`${api}/config`, auth(0), controller.frontend.config.info);
     router.get(`${api}/home`, auth(0), controller.frontend.config.home);
     router.get(`${api}/mobile`, auth(0), controller.frontend.config.mobile);
+    router.post(`${api}/rate`, auth(1), controller.frontend.common.rate);
 
     // auth
     router.get(`${api}/auth/info`, auth(1), controller.frontend.auth.info);
@@ -57,7 +58,11 @@ export default (app: Application) => {
     router.get(`${api}/comments`, auth(0), controller.frontend.comment.query);
     router.get(`${api}/comments/:id`, auth(0), controller.frontend.comment.info);
     router.post(`${api}/comments`, auth(1), controller.frontend.comment.create);
-    router.delete(`${api}/comments/:id`, auth(0), controller.frontend.comment.destroy);
+
+    // blog
+    router.get(`${api}/blogs`, auth(0), controller.frontend.blog.query);
+    router.get(`${api}/blogs/:id`, auth(0), controller.frontend.blog.info);
+    router.post(`${api}/blogs`, auth(1), controller.frontend.blog.create);
 
     // post
     router.get(`${api}/posts`, auth(0), controller.frontend.post.query);

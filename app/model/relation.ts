@@ -8,7 +8,7 @@ export default (app) => {
             onModel: {
                 type: String,
                 required: true,
-                enum: ['Comic', 'Animate', 'User', 'Post', 'Comment'],
+                enum: ['Comic', 'Animate', 'User', 'Post', 'Comment', 'Blog'],
             },
             author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
             addons: Schema.Types.Mixed,

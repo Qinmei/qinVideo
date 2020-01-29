@@ -1,7 +1,7 @@
 import { Service } from 'egg';
 
 class RelationService extends Service {
-    async query({ page, size, sortBy, sortOrder, onModel, author }) {
+    async query({ page, size, sortBy = 'createdAt', sortOrder = -1, onModel, author }) {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 

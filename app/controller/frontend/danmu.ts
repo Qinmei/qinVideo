@@ -70,6 +70,7 @@ class DanmuController extends Controller {
 
         this.ctx.body = {
             code: typeof result === 'number' ? result : 0,
+            data: result,
         };
     }
 }

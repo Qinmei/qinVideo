@@ -64,6 +64,20 @@ class CommonController extends Controller {
         const result = await service.shop.query(query).catch(() => 21000);
         ctx.helper.send(result);
     }
+
+    async rate() {
+        const { ctx, service } = this;
+        const data = ctx.request.body;
+        const userId = ctx.state.user.id;
+
+        data.author = userId;
+        ctx.helper.validate('rate', data, true);
+
+        const info = await service.rate.exist(userId, data.target);
+        if (info) ctx.helper.send(29005);
+        const result = await service.rate.create(data).catch(() => 29002);
+        ctx.helper.send(result);
+    }
 }
 
 export default CommonController;

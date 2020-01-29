@@ -269,6 +269,7 @@ const ruleobj = {
         author: { type: 'string', required: force },
         target: { type: 'string', required: force },
         onModel: { type: 'string', required: force },
+        content: { type: 'string', required: false },
         rate: { type: 'number', required: force },
     }),
     post: (force: boolean) => ({
@@ -286,7 +287,7 @@ const ruleobj = {
         seasonRelate: { type: 'string', required: false },
     }),
     blog: (force: boolean) => ({
-        content: { type: 'string', required: false },
+        content: { type: 'string', required: force },
         target: { type: 'string', required: false },
         onModel: { type: 'string', required: false },
         status: { type: 'string', required: force },
@@ -296,7 +297,6 @@ const ruleobj = {
         video: { type: 'string', required: false },
         pin: { type: 'boolean', required: false },
         hot: { type: 'boolean', required: false },
-        level: { type: 'number', required: false },
     }),
     login: {
         name: { type: 'string' },
