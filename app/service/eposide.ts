@@ -106,7 +106,7 @@ class EposideService extends Service {
                     .filter((item: any) => item.level <= level)
                     .sort((a, b) => b.level - a.level)[0];
                 if (configPrefix) {
-                    const { prefix, key, expired } = configPrefix;
+                    const { key, expired } = configPrefix;
                     data.link.map((item: any) => {
                         const uri = configPrefix.prefix + prefix + item.value;
                         item.value = this.ctx.helper.generateSecurePathHash(uri, expired, key);
