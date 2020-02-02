@@ -32,7 +32,7 @@ const Footer = props => {
           <span>官方</span>
           <p
             onClick={() => {
-              aboutus && Router.push(aboutus);
+              aboutus && goToPath(`/post/slug/${aboutus}`);
             }}
           >
             关于我们

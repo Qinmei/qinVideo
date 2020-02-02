@@ -50,7 +50,7 @@ const reactComponent = props => {
             goCategory(info);
           }}
         >
-          加载更多
+          查看更多
         </Button>
       </div>
       <List type={info.type} list={list.slice(0, number)} />
