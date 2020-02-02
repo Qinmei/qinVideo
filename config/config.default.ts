@@ -44,18 +44,18 @@ export default (appInfo: EggAppInfo) => {
                 port: 6379,
                 host: '127.0.0.1',
                 password: '',
-                db: 0,
+                db: 1,
             },
         },
         mongoose: {
             client: {
-                url: 'mongodb://qinvideo:Op6bg0PzQnVuTSjGuK0TkHJyUtGkTtQK@qinvideo.org:27017/qinvideo',
+                url: 'mongodb://qinwork:hJfGrrtJG3qm*RWceBJuRYbahjirgnFE@localhost:27017/qinwork',
                 //url: 'mongodb://localhost:27017/test',
                 options: {},
             },
         },
-        salt: 'qinmei', // 密码盐值
-        tokenSecret: 'qinmei', // 登录密钥
+        salt: 'qinmei5365', // 密码盐值
+        tokenSecret: 'qinmei5365', // 登录密钥
         expired: 3600, // redis缓存有效期
     };
 

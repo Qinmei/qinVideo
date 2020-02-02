@@ -1,4 +1,4 @@
-const prefix = "http://localhost:7001";
+const prefix = "http://localhost:7002";
 
 const api = {
   config: `${prefix}/api/v2/config`,

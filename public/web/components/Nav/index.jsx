@@ -27,7 +27,7 @@ const Header = props => {
     <div className={styles.nav} style={{ background: hexToRgb(color, 0.9) }}>
       <div className="container">
         <div className={styles.menu}>
-          <IconFont type="icon-zhuye" onClick={() => goToPath("/")} />
+          <IconFont type="icon-zhuye" />
 
           <div className={styles.main}>{headerMenu} </div>
           <IconFont type="icon-sousuo" onClick={() => goToPath("/search")} />
