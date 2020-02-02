@@ -58,7 +58,7 @@ class CloudService extends Service {
 
         const eposideData = await this.ctx.service.eposide.create(eposide).catch(() => false);
         if (!eposideData) {
-            await this.destroy([result._id]);
+            await this.ctx.service[data.type].destroy([result._id]);
         }
 
         return eposideData;
