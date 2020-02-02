@@ -18,5 +18,6 @@ app/**/**/*.js
 app/**/*.map
 test/**/*.map
 config/**/*.map
+public/img/*
 
 !/public
