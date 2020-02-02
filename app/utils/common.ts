@@ -44,7 +44,8 @@ export const generateSecurePathHash = (url, expires, secret) => {
     }
 
     const expired = Math.ceil(Date.now() / 1000) + expires;
-    const input = secret + url + expired;
+    const input = secret + playLink + expired;
+
     const binaryHash = crypto
         .createHash('md5')
         .update(input)
