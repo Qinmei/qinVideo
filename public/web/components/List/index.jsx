@@ -36,7 +36,7 @@ const reactComponent = props => {
                     inThisWeek(item.updatedAt) ? styles.update : ""
                   }`}
                 >
-                  {fixedZero(item.countEposide)}
+                  {fixedZero(item.lastEposide ? item.lastEposide.sort : 0)}
                 </div>
               )}
 
