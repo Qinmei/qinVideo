@@ -89,7 +89,7 @@ class EposideService extends Service {
             return data;
         }
         let prefix = '';
-        if (data.target.noPrefix) {
+        if (!data.target.noPrefix) {
             prefix = data.target.linkPrefix || '';
         }
         if (config) {
