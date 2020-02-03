@@ -1,1 +1,0 @@
-{"ast":null,"code":"import \"antd/lib/icon/style/css\";\nimport _Icon from \"antd/lib/icon\";\n\nvar IconFont = _Icon.createFromIconfontCN({\n  scriptUrl: '//at.alicdn.com/t/font_825484_vf682mobb.js'\n});\n\nexport default IconFont;","map":null,"metadata":{},"sourceType":"module"}
