@@ -138,7 +138,7 @@ class AuthController extends Controller {
         service.utils.sendMail({
             to: email,
             subject: '重置密码',
-            text: '',
+            text: '正文如下:',
             html: `<h3>亲爱的${name}:<h3><p>您正在进行重置密码的操作,如果不是您本人所为请忽略此邮件,确认重置密码请复制点击下方验证码:</p><p style='margin-left:30px;font-size:20px'>${token}</p>`,
         });
 
