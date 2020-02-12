@@ -74,6 +74,8 @@ class AuthController extends Controller {
 
         const result = await service.user.exist(data).catch(() => 10008);
 
+        if (!result) ctx.helper.error(10008);
+
         const { refreshToken } = result;
 
         const token = await this.generateToken(result);
