@@ -78,6 +78,7 @@ export default (app) => {
         smtpPass: { type: String, default: '' },
         sendgrid: { type: String, default: '' },
         commentVerify: { type: Boolean, default: false },
+        autoUpdate: { type: Boolean, default: false },
         addons: Schema.Types.Mixed,
     });
 

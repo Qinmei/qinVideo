@@ -206,6 +206,7 @@ const ruleobj = {
         smtpPass: { type: 'string', default: '', required: false },
         sendgrid: { type: 'string', default: '', required: false },
         commentVerify: { type: 'boolean', default: false, required: false },
+        autoUpdate: { type: 'boolean', default: false, required: false },
         usePicInterface: { type: 'boolean', default: false, required: false },
         picInterface: { type: 'string', default: '', required: false },
     },
