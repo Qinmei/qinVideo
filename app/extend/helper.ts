@@ -23,6 +23,9 @@ module.exports = {
 
     status(status) {
         this.ctx.status = status;
+        this.ctx.body = {
+            code: 10010,
+        };
         throw 'code';
     },
 

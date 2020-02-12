@@ -17,7 +17,7 @@ export default (app: Application) => {
     router.post(`${api}/rate`, auth(1), controller.frontend.common.rate);
 
     // auth
-    router.get(`${api}/auth/info`, auth(1), controller.frontend.auth.info);
+    router.get(`${api}/auth/info`, auth(0), controller.frontend.auth.info);
     router.post(`${api}/auth/login`, auth(0), controller.frontend.auth.login);
     router.post(`${api}/auth/register`, auth(0), controller.frontend.auth.register);
     router.post(`${api}/auth/refresh`, auth(0), controller.frontend.auth.refreshtoken);

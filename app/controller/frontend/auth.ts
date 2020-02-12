@@ -7,6 +7,10 @@ class AuthController extends Controller {
         const { ctx, service } = this;
         const userId = ctx.state.user.id;
 
+        console.log(ctx.state.user);
+
+        if (!userId) return ctx.helper.status(403);
+
         const result = await service.user.info(userId).catch(() => 11000);
         ctx.helper.send(result);
     }
