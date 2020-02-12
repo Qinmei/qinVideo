@@ -57,7 +57,7 @@ class AuthController extends Controller {
         const token = jwt.sign(
             { id: _id, name, email, level, score, avatar, background, introduce },
             ctx.app.config.tokenSecret,
-            { expiresIn: '100d' }
+            { expiresIn: '1d' }
         );
         return token;
     }
@@ -120,7 +120,7 @@ class AuthController extends Controller {
 
             ctx.helper.success({ token });
         } else {
-            ctx.helper.send(10010);
+            ctx.helper.status(403);
         }
     }
 

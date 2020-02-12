@@ -21,6 +21,11 @@ module.exports = {
         throw 'code';
     },
 
+    status(status) {
+        this.ctx.status = status;
+        throw 'code';
+    },
+
     // 自己判断
     send(data) {
         typeof data === 'number' ? this.error(data) : this.success(data);
