@@ -7,6 +7,10 @@ class AuthController extends Controller {
         const { ctx, service } = this;
         const userId = ctx.state.user.id;
 
+        console.log(ctx.state.user);
+
+        if (!userId) return ctx.helper.status(403);
+
         const result = await service.user.info(userId).catch(() => 11000);
         ctx.helper.send(result);
     }
@@ -57,7 +61,7 @@ class AuthController extends Controller {
         const token = jwt.sign(
             { id: _id, name, email, level, score, avatar, background, introduce },
             ctx.app.config.tokenSecret,
-            { expiresIn: '100d' }
+            { expiresIn: '1d' }
         );
         return token;
     }
@@ -73,6 +77,8 @@ class AuthController extends Controller {
         data.password = ctx.helper.MD5(ctx.app.config.salt + password);
 
         const result = await service.user.exist(data).catch(() => 10008);
+
+        if (!result) ctx.helper.error(10008);
 
         const { refreshToken } = result;
 
@@ -118,7 +124,7 @@ class AuthController extends Controller {
 
             ctx.helper.success({ token });
         } else {
-            ctx.helper.send(10010);
+            ctx.helper.status(403);
         }
     }
 
