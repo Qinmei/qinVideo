@@ -44,9 +44,7 @@ export default (app: Application) => {
 
     // danmu
     router.get(`${api}/danmus`, auth(0), controller.frontend.danmu.query);
-    router.get(`${api}/danmus/v3`, auth(0), controller.frontend.danmu.queryV3);
     router.post(`${api}/danmus`, auth(0), controller.frontend.danmu.create);
-    router.post(`${api}/danmus/v3`, auth(0), controller.frontend.danmu.create);
 
     // comic
     router.get(`${api}/comics`, auth(0), controller.frontend.comic.query);
