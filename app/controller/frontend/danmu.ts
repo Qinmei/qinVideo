@@ -13,46 +13,13 @@ class DanmuController extends Controller {
             sortBy: 'time',
         };
 
-        await service.utils.cacheInit(`danmu${id}`, async () => {
-            return await service.danmu.query(query).catch(() => 15000);
-        });
-    }
+        // await service.utils.cacheInit(`danmu${id}`, async () => {
+        //     return await service.danmu.query(query).catch(() => 15000);
+        // });
 
-    async queryV3() {
-        const { ctx, service } = this;
-        const { id } = ctx.query;
+        const result = await service.danmu.query(query).catch(() => 15000);
 
-        ctx.helper.validate('id', { id });
-        const query = {
-            page: 1,
-            size: 10000,
-            player: id,
-            sortBy: 'time',
-        };
-
-        let result;
-        const cache = await service.utils.cacheGet(`danmu${id}`);
-        if (cache) {
-            result = cache;
-        } else {
-            result = await service.danmu.query(query).catch(() => 15000);
-
-            if (typeof result !== 'number') {
-                await service.utils.cacheSet(`danmu${id}`, result);
-            }
-        }
-
-        let danmu = typeof result === 'number' ? [] : result.list;
-        danmu = danmu.map((item: any) => [
-            item.time || 0,
-            item.type || 0,
-            item.color || 16777215,
-            this.ctx.helper.htmlEncode(item.text) || '',
-        ]);
-        this.ctx.body = {
-            code: 0,
-            data: danmu,
-        };
+        ctx.helper.send(result);
     }
 
     async create() {
@@ -67,11 +34,7 @@ class DanmuController extends Controller {
         const result = await service.danmu.create(data).catch(() => 15002);
 
         service.data.create('danmu');
-
-        this.ctx.body = {
-            code: typeof result === 'number' ? result : 0,
-            data: result,
-        };
+        ctx.helper.send(result);
     }
 }
 
