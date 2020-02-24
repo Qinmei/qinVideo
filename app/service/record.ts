@@ -43,7 +43,7 @@ class RecordService extends Service {
 
     async simpleCreate(id, type, kind, total = 0) {
         const { state } = this.ctx;
-        const author = state.user.id;
+        const author = state && state.user && state.user.id;
 
         const result = await this.create({
             source: id,
