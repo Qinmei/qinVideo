@@ -1,6 +1,8 @@
 # 介绍
 
-有关开发方面的进度以及规划
+基于nodejs的后台管理系统, 如果不熟悉nodejs的话, 可以尝试Wordpress的旧版本:[qinPress](https://github.com/Qinmei/qinPress), wordpress是旧版本, 页面上没有太大的区别, 主要是功能上的差距;
+
+使用之前请反复查看[使用文档](https://qinvideo.org), 避免出现一些低级错误导致无法启动
 
 ## 功能
 
