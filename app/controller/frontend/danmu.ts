@@ -9,13 +9,16 @@ class DanmuController extends Controller {
         const query = {
             page: 1,
             size: 10000,
-            player: id,
+            target: id,
             sortBy: 'time',
         };
 
-        await service.utils.cacheInit(`danmu${id}`, async () => {
-            return await service.danmu.query(query).catch(() => 15000);
-        });
+        // await service.utils.cacheInit(`danmu${id}`, async () => {
+        //     return await service.danmu.query(query).catch(() => 15000);
+        // });
+
+        const result = await service.danmu.query(query).catch(() => 15000);
+        ctx.helper.send(result);
     }
 
     async create() {
@@ -23,7 +26,7 @@ class DanmuController extends Controller {
         const data = ctx.request.body;
         const userId = ctx.state.user.name;
 
-        data.player = data.id;
+        data.target = data.id;
         data.author = userId;
         ctx.helper.validate('danmu', data, true);
 

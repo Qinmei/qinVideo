@@ -211,8 +211,7 @@ const ruleobj = {
         picInterface: { type: 'string', default: '', required: false },
     },
     danmu: (force: boolean) => ({
-        target: { type: 'string', required: false },
-        player: { type: 'string', required: force },
+        target: { type: 'string', required: force },
         author: { type: 'string', required: false },
         time: { type: 'number', required: false },
         text: { type: 'string', required: force },
