@@ -13,12 +13,9 @@ class DanmuController extends Controller {
             sortBy: 'time',
         };
 
-        // await service.utils.cacheInit(`danmu${id}`, async () => {
-        //     return await service.danmu.query(query).catch(() => 15000);
-        // });
-
-        const result = await service.danmu.query(query).catch(() => 15000);
-        ctx.helper.send(result);
+        await service.utils.cacheInit(`danmu${id}`, async () => {
+            return await service.danmu.query(query).catch(() => 15000);
+        });
     }
 
     async create() {
