@@ -26,17 +26,22 @@ class EposideController extends Controller {
         const data = ctx.request.body;
         const userId = ctx.state.user.id;
 
-        data.author = userId;
-        ctx.helper.validate('eposide', data, true);
+        if (Array.isArray(data)) {
+            const result = await service.eposide.create(data).catch(() => 18002);
+            ctx.helper.send(result);
+        } else {
+            data.author = userId;
+            ctx.helper.validate('eposide', data, true);
 
-        const result = await service.eposide.create(data).catch(() => 18002);
+            const result = await service.eposide.create(data).catch(() => 18002);
 
-        const { target, onModel } = data;
-        const type = onModel.toLowerCase();
+            const { target, onModel } = data;
+            const type = onModel.toLowerCase();
 
-        service[type].update([target], { updateTime: new Date().getTime() });
+            service[type].update([target], { updateTime: new Date().getTime() });
 
-        ctx.helper.send(result);
+            ctx.helper.send(result);
+        }
     }
 
     async update() {
