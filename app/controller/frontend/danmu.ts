@@ -9,7 +9,7 @@ class DanmuController extends Controller {
         const query = {
             page: 1,
             size: 10000,
-            player: id,
+            target: id,
             sortBy: 'time',
         };
 
@@ -23,7 +23,7 @@ class DanmuController extends Controller {
         const data = ctx.request.body;
         const userId = ctx.state.user.name;
 
-        data.player = data.id;
+        data.target = data.id;
         data.author = userId;
         ctx.helper.validate('danmu', data, true);
 
