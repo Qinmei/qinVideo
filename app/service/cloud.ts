@@ -58,7 +58,7 @@ class CloudService extends Service {
 
         const eposideData = await this.ctx.service.eposide.create(eposide).catch(() => false);
         if (!eposideData) {
-            await this.ctx.service[data.type].destroy([result._id]);
+            await this.ctx.service[data.type.toLowerCase()].destroy([result._id]);
         }
 
         return eposideData;
@@ -138,6 +138,17 @@ class CloudService extends Service {
         }
 
         return result;
+    }
+
+    async autoUpdate() {
+        const data = await this.ctx.model.Animate.find({ isUpdate: true });
+        const dataArr = JSON.parse(JSON.stringify(data));
+        const targetArr = dataArr.map((item) => item.slug);
+
+        const handler = await this.ctx.model.Cloud.find({ slug: { $in: targetArr } });
+        const handlerArr = JSON.parse(JSON.stringify(handler));
+        const ids = handlerArr.map((item) => item._id);
+        await this.save(ids);
     }
 }
 

@@ -122,7 +122,6 @@ class EposideService extends Service {
         delete data.target.level;
         delete data.target.noPrefix;
         delete data.target.linkPrefix;
-        delete data.target.playType;
         delete data.noSetPrefix;
         delete data.onModel;
 
@@ -229,7 +228,6 @@ class EposideService extends Service {
         delete data.target.level;
         delete data.target.noPrefix;
         delete data.target.linkPrefix;
-        delete data.target.playType;
         delete data.noSetPrefix;
         delete data.onModel;
 

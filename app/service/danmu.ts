@@ -6,25 +6,32 @@ interface Query {
     sortBy: string;
     sortOrder?: number;
     title?: string;
-    player?: string;
     target?: string;
 }
 
 class DanmuService extends Service {
-    async query({ page, size, sortBy = 'createdAt', sortOrder = -1, title, player, target }: Query) {
+    async query({ page, size, sortBy = 'createdAt', sortOrder = -1, title, target }: Query) {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 
         const query: any = {};
         title && (query.text = { $regex: title, $options: '$i' });
-        player && (query.player = player);
         target && (query.target = target);
 
         const result = await this.ctx.model.Danmu.find(query)
             .sort({ [sortBy]: sortOrder, _id: -1 })
             .skip(skip)
             .limit(limit)
-            .populate('target', 'title _id');
+            .populate({
+                path: 'target',
+                populate: [
+                    {
+                        path: 'target',
+                        select: 'title slug',
+                    },
+                ],
+                select: 'title target onModel',
+            });
 
         const total = await this.ctx.model.Danmu.find(query).countDocuments();
 
