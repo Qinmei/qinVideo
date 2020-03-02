@@ -23,11 +23,11 @@ class EposideController extends Controller {
 
     async create() {
         const { ctx, service } = this;
-        const { data } = ctx.request.body;
+        const data = ctx.request.body;
         const userId = ctx.state.user.id;
 
         if (Array.isArray(data)) {
-            const result = await service.eposide.create(data).catch((err) => console.log(err));
+            const result = await service.eposide.create(data).catch(() => 18002);
             ctx.helper.send(result);
         } else {
             data.author = userId;
