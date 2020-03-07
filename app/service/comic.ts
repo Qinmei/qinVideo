@@ -129,6 +129,7 @@ class ComicService extends Service {
             {
                 $match: {
                     slug,
+                    status: 'publish',
                 },
             },
             ...categoryLookup,

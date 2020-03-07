@@ -189,6 +189,7 @@ class AnimateService extends Service {
             {
                 $match: {
                     slug,
+                    status: 'publish',
                 },
             },
             ...categoryLookup,
