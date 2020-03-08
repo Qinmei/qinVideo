@@ -55,7 +55,7 @@ class ToolService extends Service {
 
             const rename = type === 'cover' ? doc.target.title + '-' + doc.title : doc.slug + '-' + type;
 
-            const newTarget = await service.utils.download(target, rename);
+            const newTarget = await service.utils.download(target, rename).catch(() => false);
 
             if (newTarget && replace) {
                 Model.updateOne(
