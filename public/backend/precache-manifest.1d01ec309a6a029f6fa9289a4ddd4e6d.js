@@ -172,12 +172,12 @@ self.__precacheManifest = [
     "url": "/backend/p__Shop__Order.8618ec57.async.js"
   },
   {
-    "revision": "69ef652250c6068b1fcd",
+    "revision": "ad8bcf2c7e366beebc9b",
     "url": "/backend/p__Tools__index.de73b1a5.chunk.css"
   },
   {
-    "revision": "69ef652250c6068b1fcd",
-    "url": "/backend/p__Tools__index.5dd04e8c.async.js"
+    "revision": "ad8bcf2c7e366beebc9b",
+    "url": "/backend/p__Tools__index.04aa8b68.async.js"
   },
   {
     "revision": "de5ed1fa0cca484a2391",
@@ -192,12 +192,12 @@ self.__precacheManifest = [
     "url": "/backend/p__User__List.b6e76fd2.async.js"
   },
   {
-    "revision": "42e87d3db8f4ac1b0f09",
+    "revision": "c4dc39c377d29375d829",
     "url": "/backend/umi.b0c61fc2.css"
   },
   {
-    "revision": "42e87d3db8f4ac1b0f09",
-    "url": "/backend/umi.100af630.js"
+    "revision": "c4dc39c377d29375d829",
+    "url": "/backend/umi.f72b5857.js"
   },
   {
     "revision": "dd7daff95069c16c755f",
@@ -288,7 +288,7 @@ self.__precacheManifest = [
     "url": "/backend/53.135b3ae8.async.js"
   },
   {
-    "revision": "e449ea07316f6175a2cb35b63c079946",
+    "revision": "3e291f91e538fe61168043584c66d4c0",
     "url": "/backend/index.html"
   },
   {
