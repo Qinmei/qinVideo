@@ -7,8 +7,6 @@ class AuthController extends Controller {
         const { ctx, service } = this;
         const userId = ctx.state.user.id;
 
-        console.log(ctx.state.user);
-
         if (!userId) return ctx.helper.status(403);
 
         const result = await service.user.info(userId).catch(() => 11000);
@@ -99,6 +97,10 @@ class AuthController extends Controller {
         await this.noExistByName(name);
         await this.noExistByEmail(email);
         data.password = ctx.helper.MD5(ctx.app.config.salt + password);
+
+        const config = await service.config.cacheInfo();
+        data.avatar = config.avatar;
+        data.background = config.background;
 
         const result = await service.user.create(data).catch(() => 10009);
 

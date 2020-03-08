@@ -20,14 +20,18 @@ class UtilsService extends Service {
         const newname = name + '.' + exif;
         const savePath = path.join(__dirname, '../../public/img/download/');
 
+        if (!fs.existsSync(savePath)) {
+            await fs.mkdirSync(savePath);
+        }
+
         try {
-            fs.accessSync(savePath + newname);
+            await fs.accessSync(savePath + newname);
         } catch (error) {
             await request(url).pipe(fs.createWriteStream(savePath + newname));
         }
 
         if (fs.statSync(savePath + newname).size === 0) {
-            fs.unlinkSync(savePath + newname);
+            await fs.unlinkSync(savePath + newname);
             return null;
         }
 

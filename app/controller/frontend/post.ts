@@ -33,9 +33,6 @@ class PostController extends Controller {
             result.isLiked = isLiked;
             service.history.create(result._id, 'Post');
         }
-        if (Array.isArray(result.eposides)) {
-            result.eposides.sort((a: any, b: any) => a.sort - b.sort);
-        }
 
         ctx.helper.send(result);
     }
