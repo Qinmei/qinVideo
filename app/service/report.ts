@@ -14,7 +14,16 @@ class ReportService extends Service {
             .skip(skip)
             .limit(limit)
             .populate({ path: 'author', select: 'name avatar level introduce background' })
-            .populate('target');
+            .populate({
+                path: 'target',
+                populate: [
+                    {
+                        path: 'target',
+                        select: 'title slug',
+                    },
+                ],
+                select: 'title target onModel name content',
+            });
 
         const total = await this.ctx.model.Report.find(query).countDocuments();
 
