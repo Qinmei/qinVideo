@@ -107,7 +107,7 @@ class UtilsService extends Service {
         sendgridgMail.send(mailContent);
     }
 
-    async cacheSet(key, value, time) {
+    async cacheSet(key, value, time = this.app.config.expired) {
         const { app } = this;
         const expired = time || 3600;
         await app.redis.set(key, JSON.stringify(value), 'EX', expired);
