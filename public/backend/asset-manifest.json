@@ -1,6 +1,6 @@
 {
   "/vendors.css": "/backend/vendors.3ff16a55.chunk.css",
-  "/vendors.js": "/backend/vendors.9d4e4c09.async.js",
+  "/vendors.js": "/backend/vendors.a311a6a0.async.js",
   "/layouts__BasicLayout.css": "/backend/layouts__BasicLayout.da708105.chunk.css",
   "/layouts__BasicLayout.js": "/backend/layouts__BasicLayout.6cfd8106.async.js",
   "/layouts__UserLayout.css": "/backend/layouts__UserLayout.5c6c76cb.chunk.css",
@@ -48,7 +48,7 @@
   "/p__User__Info.js": "/backend/p__User__Info.0ca6b282.async.js",
   "/p__User__List.js": "/backend/p__User__List.b6e76fd2.async.js",
   "/umi.css": "/backend/umi.b0c61fc2.css",
-  "/umi.js": "/backend/umi.45b5ef4c.js",
+  "/umi.js": "/backend/umi.5f1e606e.js",
   "/39.0a4252d9.chunk.css": "/backend/39.0a4252d9.chunk.css",
   "/39.35ffdfc4.async.js": "/backend/39.35ffdfc4.async.js",
   "/40.001ea15d.chunk.css": "/backend/40.001ea15d.chunk.css",
@@ -77,7 +77,7 @@
   "/icons/icon-512x512.png": "/backend/icons/icon-512x512.png",
   "/index.html": "/backend/index.html",
   "/manifest.json": "/backend/manifest.json",
-  "/precache-manifest.bdd1028253af2d916117a9d6826ea3c5.js": "/backend/precache-manifest.bdd1028253af2d916117a9d6826ea3c5.js",
+  "/precache-manifest.ed2285a6b7d93f5badb861e72767b32f.js": "/backend/precache-manifest.ed2285a6b7d93f5badb861e72767b32f.js",
   "/pwacompat.min.js": "/backend/pwacompat.min.js",
   "/service-worker.js": "/backend/service-worker.js"
 }
