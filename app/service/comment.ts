@@ -15,7 +15,16 @@ class CommentService extends Service {
             .sort({ [sortBy]: sortOrder, _id: -1 })
             .skip(skip)
             .limit(limit)
-            .populate({ path: 'target', select: '_id title' })
+            .populate({
+                path: 'target',
+                populate: [
+                    {
+                        path: 'target',
+                        select: 'title slug',
+                    },
+                ],
+                select: 'title target onModel name content',
+            })
             .populate({ path: 'author', select: 'name avatar level introduce background' })
             .populate({
                 path: 'replyTo',

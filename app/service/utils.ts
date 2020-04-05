@@ -20,14 +20,18 @@ class UtilsService extends Service {
         const newname = name + '.' + exif;
         const savePath = path.join(__dirname, '../../public/img/download/');
 
+        if (!fs.existsSync(savePath)) {
+            await fs.mkdirSync(savePath);
+        }
+
         try {
-            fs.accessSync(savePath + newname);
+            await fs.accessSync(savePath + newname);
         } catch (error) {
             await request(url).pipe(fs.createWriteStream(savePath + newname));
         }
 
         if (fs.statSync(savePath + newname).size === 0) {
-            fs.unlinkSync(savePath + newname);
+            await fs.unlinkSync(savePath + newname);
             return null;
         }
 
@@ -103,9 +107,9 @@ class UtilsService extends Service {
         sendgridgMail.send(mailContent);
     }
 
-    async cacheSet(key, value) {
+    async cacheSet(key, value, time) {
         const { app } = this;
-        const expired = app.config.expired || 3600;
+        const expired = time || 3600;
         await app.redis.set(key, JSON.stringify(value), 'EX', expired);
     }
 
@@ -115,7 +119,7 @@ class UtilsService extends Service {
         return data && JSON.parse(data);
     }
 
-    async cacheInit(key, fn) {
+    async cacheInit(key, fn, time = this.app.config.expired) {
         const { ctx } = this;
         const cache = await this.cacheGet(key);
         if (cache) {
@@ -123,7 +127,7 @@ class UtilsService extends Service {
         } else {
             const result = await fn();
             if (typeof result !== 'number') {
-                await this.cacheSet(key, result);
+                await this.cacheSet(key, result, time);
             }
             ctx.helper.send(result);
         }

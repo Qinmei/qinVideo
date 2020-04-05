@@ -15,10 +15,16 @@ class RelationService extends Service {
             .limit(limit)
             .populate({
                 path: 'target',
-                select: 'title slug coverVertical updatedAt',
-                populate: {
-                    path: 'countEposide',
-                },
+                select: 'title slug coverVertical updatedAt author',
+                populate: [
+                    {
+                        path: 'countEposide',
+                    },
+                    {
+                        path: 'author',
+                    },
+                ],
+                match: { status: 'publish' },
             });
 
         const total = await this.ctx.model.Relation.find(query).countDocuments();

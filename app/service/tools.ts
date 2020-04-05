@@ -3,10 +3,10 @@ import { Service } from 'egg';
 class ToolService extends Service {
     async replace({ type, kind, before, after }) {
         const { model, helper } = this.ctx;
-        const Model = type === 'link' ? model.Eposode : model[kind];
+        const Model = type === 'link' ? model.Eposide : model[kind];
         const data =
             type === 'link'
-                ? await Model.find({ onModel: kind, link: { $regex: before, $options: 'i' } })
+                ? await Model.find({ onModel: kind, 'link.value': { $regex: before, $options: 'i' } })
                 : await Model.find({ [type]: { $regex: before, $options: 'i' } });
 
         const result = {
@@ -16,9 +16,23 @@ class ToolService extends Service {
         };
 
         for (let index = 0; index < data.length; index++) {
-            const doc = data[index];
-            const target = doc[type];
-            const newTarget = target.replace(before, after);
+            const doc = JSON.parse(JSON.stringify(data[index]));
+
+            let newTarget;
+            if (type !== 'link') {
+                const target = doc[type];
+                newTarget = target.replace(before, after);
+            } else {
+                const target = doc.link;
+                newTarget = target.map((item: any) => {
+                    const value = item.value;
+                    const newValue = value.replace(before, after);
+                    return {
+                        ...item,
+                        value: newValue,
+                    };
+                });
+            }
             const info = await Model.updateOne(
                 { _id: doc._id },
                 {
@@ -27,7 +41,7 @@ class ToolService extends Service {
                     },
                 }
             ).catch(() => false);
-            result[info ? 'suceess' : 'fail'] += 1;
+            result[info ? 'success' : 'fail'] += 1;
 
             await helper.sleep(1000);
         }
@@ -55,7 +69,7 @@ class ToolService extends Service {
 
             const rename = type === 'cover' ? doc.target.title + '-' + doc.title : doc.slug + '-' + type;
 
-            const newTarget = await service.utils.download(target, rename);
+            const newTarget = await service.utils.download(target, rename).catch(() => false);
 
             if (newTarget && replace) {
                 Model.updateOne(

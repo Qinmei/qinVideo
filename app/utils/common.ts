@@ -78,6 +78,7 @@ export const indexTrans = (element: any) => {
         sortBy: 'updatedAt',
         sortOrder: -1,
         kind: undefined,
+        status: 'publish',
     };
     if (element.status === 'normal') {
         query.kind = id;

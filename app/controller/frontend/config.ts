@@ -10,17 +10,25 @@ class ConfigController extends Controller {
     async home() {
         const { service } = this;
 
-        await service.utils.cacheInit('commonHome', async () => {
-            return await service.config.home('pcIndex').catch(() => 22003);
-        });
+        await service.utils.cacheInit(
+            'commonHome',
+            async () => {
+                return await service.config.home('pcIndex').catch(() => 22003);
+            },
+            3600 * 24
+        );
     }
 
     async mobile() {
         const { service } = this;
 
-        await service.utils.cacheInit('commonMobile', async () => {
-            return await service.config.home('h5Index').catch(() => 22003);
-        });
+        await service.utils.cacheInit(
+            'commonMobile',
+            async () => {
+                return await service.config.home('h5Index').catch(() => 22003);
+            },
+            3600 * 24
+        );
     }
 }
 

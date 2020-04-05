@@ -47,6 +47,14 @@ export default (appInfo: EggAppInfo) => {
                 db: 1,
             },
         },
+
+        logger: {
+            appLogName: `${appInfo.name}-web.log`,
+            coreLogName: 'egg-web.log',
+            agentLogName: 'egg-agent.log',
+            errorLogName: 'common-error.log',
+        },
+
         mongoose: {
             client: {
                 url: 'mongodb://qinwork:hJfGrrtJG3qm*RWceBJuRYbahjirgnFE@localhost:27017/qinwork',

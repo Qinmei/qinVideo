@@ -47,6 +47,36 @@ class CloudService extends Service {
     }
 
     async saveToLocal(data: any) {
+        const categories = await this.ctx.service.category.queryByType(data.type.toLowerCase());
+
+        const type = data.type.toLowerCase()[0];
+        for (const item of ['area', 'year', 'kind', 'tag']) {
+            const itemType = type + item;
+            const existType = categories.filter((item) => item.type === itemType);
+
+            const newType: any[] = [];
+            try {
+                for (const ele of data[item]) {
+                    if (ele) {
+                        const cateInfo = existType.find((item) => item.name === ele);
+                        if (cateInfo) {
+                            newType.push[ele.id];
+                        } else {
+                            const newCate = await this.ctx.service.category.create({
+                                name: ele,
+                                type: itemType,
+                            });
+                            newCate && newType.push(newCate.id);
+                        }
+                    }
+                }
+            } catch (error) {
+                console.log(error);
+            }
+
+            data[item] = newType;
+        }
+
         const result = await this.ctx.model[data.type].create(data);
         const { eposide = [] } = data;
 
@@ -111,11 +141,6 @@ class CloudService extends Service {
         }
 
         for (const ele of newData) {
-            ele.area = [];
-            ele.year = [];
-            ele.kind = [];
-            ele.tag = [];
-
             const exist = await this.existLocal(ele.slug, ele.type);
 
             try {
@@ -126,6 +151,7 @@ class CloudService extends Service {
                 }
                 result.success++;
             } catch (error) {
+                console.log(error);
                 result.fail++;
                 result.content.push(ele.slug);
             }

@@ -1,8 +1,10 @@
 # 介绍
 
-基于nodejs的后台管理系统, 如果不熟悉nodejs的话, 可以尝试Wordpress的旧版本:[qinPress](https://github.com/Qinmei/qinPress), wordpress是旧版本, 页面上没有太大的区别, 主要是功能上的差距;
+基于 nodejs 的后台管理系统, 如果不熟悉 nodejs 的话, 可以尝试 Wordpress 的旧版本:[qinPress](https://github.com/Qinmei/qinPress), wordpress 是旧版本, 页面上没有太大的区别, 主要是功能上的差距;
 
 使用之前请反复查看[使用文档](https://qinvideo.org), 避免出现一些低级错误导致无法启动
+
+视频安装教程:https://qinvideo.org/video/#%E5%AE%89%E8%A3%85
 
 ## 功能
 
@@ -24,6 +26,8 @@
 
 ## 更新记录
 
+-   2020.04.05: v2.0.8, 采集的番剧在保存时会自动创建分类, 提高某些耗时接口的缓存为1天;
+-   2020.03.08: v2.0.7, 一些使用 BUG 的修复;
 -   2020.02.28: v2.0.6, 批量新增剧集, 支持苹果 CMS 的格式;
 -   2020.02.20: v2.0.5, 字幕以及清晰度的切换;
 -   2020.02.04: v2.0.4, 用户删除之后的处理;

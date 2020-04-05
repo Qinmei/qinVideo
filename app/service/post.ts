@@ -85,7 +85,7 @@ class PostService extends Service {
 
     // frontend
     async slug(slug: string) {
-        const data = await this.ctx.model.Post.findOne({ slug })
+        const data = await this.ctx.model.Post.findOne({ slug, status: 'publish' })
             .populate('countPlay')
             .populate('countLike')
             .populate('countComment')
@@ -94,13 +94,14 @@ class PostService extends Service {
             .populate('tag')
             .populate({ path: 'seasons', select: 'slug season title', match: { status: 'publish' } })
             .populate('seasonInfo');
+        if (!data) throw 'error';
         return data;
     }
 
     async relative(id: string) {
-        const data = await this.ctx.model.Animate.findById(id);
+        const data = await this.ctx.model.Post.findById(id);
         const { tag } = data;
-        const result = await this.ctx.model.Animate.find({
+        const result = await this.ctx.model.Post.find({
             tag,
         }).limit(20);
         return result.filter((item: any) => item.id !== id);

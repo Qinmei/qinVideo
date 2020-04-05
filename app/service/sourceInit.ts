@@ -162,7 +162,7 @@ class CMSService extends Service {
                                 .text()
                         ),
                     ],
-                    kind: '',
+                    kind: [],
                     year: [
                         getXmlData(
                             $(ele)
