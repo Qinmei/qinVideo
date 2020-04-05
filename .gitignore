@@ -9,6 +9,7 @@ logs/
 .vscode
 *.swp
 *.lock
+*.log
 !.autod.conf.js
 
 test/**/*.js
