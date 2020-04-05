@@ -9,6 +9,7 @@ logs/
 .vscode
 *.swp
 *.lock
+*.log
 !.autod.conf.js
 
 test/**/*.js
@@ -19,4 +20,4 @@ app/**/*.map
 test/**/*.map
 config/**/*.map
 
-!/public
+/public/web/_next/

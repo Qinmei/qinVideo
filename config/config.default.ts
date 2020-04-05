@@ -47,10 +47,17 @@ export default (appInfo: EggAppInfo) => {
                 db: 0,
             },
         },
+
+        logger: {
+            appLogName: `${appInfo.name}-web.log`,
+            coreLogName: 'egg-web.log',
+            agentLogName: 'egg-agent.log',
+            errorLogName: 'common-error.log',
+        },
+
         mongoose: {
             client: {
-                url: 'mongodb://qinvideo:Op6bg0PzQnVuTSjGuK0TkHJyUtGkTtQK@demo.qinvideo.org:27017/qinvideo',
-                //url: 'mongodb://localhost:27017/test',
+                url: 'mongodb://localhost:27017/test',
                 options: {},
             },
         },
