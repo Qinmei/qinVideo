@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <script src="/default/config.js"></script>
+    <style>
+        html,
+        body,
+        #root {
+            height: auto;
+            user-select: none;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            margin: 0;
+            background-color: rgba(240, 242, 245, 1);
+        }
+
+        .container {
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .container {
+                max-width: 1240px;
+            }
+        }
+
+        @media (min-width: 1600px) {
+            .container {
+                max-width: 1320px;
+            }
+        }
+
+        @media (min-width: 1900px) {
+            .container {
+                max-width: 1400px;
+            }
+        }
+
+        @media (min-width: 2500px) {
+            .container {
+                max-width: 1600px;
+            }
+        }
+
+        .nav {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            z-index: 999;
+            background-color: #555555;
+        }
+
+        .nav .bg {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 100vw;
+            height: calc(100vh - 40px);
+            z-index: -1;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .menu {
+            width: 100%;
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .menu i {
+            height: 40px;
+            width: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu i svg {
+            fill: currentColor;
+        }
+
+        .menu i:nth-child(1) {
+            justify-content: flex-start;
+            font-size: 20px;
+        }
+
+        .menu i:nth-child(3) {
+            justify-content: center;
+            margin-right: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .menu i:nth-child(4) {
+            justify-content: flex-end;
+            font-size: 18px;
+        }
+
+        .main {
+            width: calc(100% - 100px);
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            user-select: none;
+
+        }
+
+        .main span {
+            padding: 0 15px;
+            cursor: pointer;
+        }
+
+        .content {
+            width: 100vw;
+            height: 100vh;
+            background-size: cover;
+            background-image: url('https://api.btstu.cn/sjbz/?lx=dongman');
+        }
+
+        .content .bg {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        #logo {
+            font-size: 56px;
+            margin-bottom: 10px;
+        }
+
+        .more {
+            margin-top: 30px;
+            border-radius: 4px;
+            border: solid 1px rgba(255, 255, 255, 0.8);
+            padding: 10px 30px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .more:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class='nav'>
+        <div class="container">
+            <div class='menu'>
+                <i> <svg t="1580794861135" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="3215" width="200" height="200">
+                        <path
+                            d="M900.745478 430.904767l-330.418307-308.008394c-16.679524-19.033077-40.82902-29.982212-66.411112-29.982212-25.172779 0-49.322274 10.846807-65.2855 28.8566L120.491656 430.802438c-15.860897 16.270211-20.465674 39.805736-11.665434 60.783052 8.80024 20.977316 29.163585 34.075347 51.880484 34.075347l28.651944 0 0 314.148096c0 48.708304 38.987109 88.309383 87.695413 88.309383l136.608374 0c17.702808 0 33.461377-14.325972 33.461377-32.02878L447.123813 687.032677c0-8.902568 5.832717-16.781853 14.735285-16.781853l96.393325 0c8.902568 0 15.656241 7.981613 15.656241 16.781853l0 208.954532c0 17.805136 14.837614 32.02878 32.540422 32.02878l136.608374 0c48.708304 0 88.616369-39.498751 88.616369-88.309383l0-314.148096 28.549615 0c22.61457 0 42.977915-13.098031 51.778155-33.973019C921.006495 470.812831 916.504047 447.174978 900.745478 430.904767L900.745478 430.904767 900.745478 430.904767M900.745478 430.904767 900.745478 430.904767z"
+                            p-id="3216"></path>
+                    </svg></i>
+
+                <div class='main' id='main'></div>
+                <i onclick="goPath('/search')"><svg t="1580795109349" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="3352" width="200" height="200">
+                        <path
+                            d="M809.246403 771.926938 777.737782 803.458071 924.965961 950.667831 956.476629 919.157163Z"
+                            p-id="3353"></path>
+                        <path
+                            d="M454.878536 70.285786C239.51556 70.285786 64.93236 244.847497 64.93236 460.231963c0 215.341486 174.583201 389.945153 389.945153 389.945153 215.362976 0 389.9472-174.603667 389.9472-389.945153C844.825736 244.847497 670.241512 70.285786 454.878536 70.285786zM454.878536 805.611108c-190.750415 0-345.381192-154.626683-345.381192-345.379145 0-190.751439 154.629753-345.380168 345.381192-345.380168 190.752462 0 345.382215 154.62873 345.382215 345.380168C800.259728 650.983401 645.630998 805.611108 454.878536 805.611108z"
+                            p-id="3354"></path>
+                    </svg></i>
+                <i onclick="goPath('/user')"><svg t="1580795127945" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="3490" width="200" height="200">
+                        <path
+                            d="M815.424 405.152l-350.848-220.576 52.576-86.272 488.576 0zM231.424 556.576l-105.152-66.272 0-490.272 676 424.576zM813.728 479.424l84 54.272 0 490.272-304-191.424zM792.576 467.424l-285.728 458.272-488.576 0 203.424-326.272z"
+                            p-id="3491"></path>
+                    </svg></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="content" id='content'>
+        <div class="bg">
+            <div id="logo"></div>
+            <div id="slogan"></div>
+            <div class="more" onclick="goPath('/animate')">进入网站</div>
+        </div>
+    </div>
+</body>
+<script>
+    function goPath(path) {
+        window.location.href = path;
+    };
+
+    window.config.pcMenu.map(item => {
+        var title = document.createElement('span');
+        title.appendChild(document.createTextNode(item.title));
+        title.onclick = function () {
+            goPath(item.link)
+        }
+        document.getElementById('main').appendChild(title)
+    });
+
+    document.title = window.config.name + ' - 首页';
+
+    document.getElementById('logo').appendChild(document.createTextNode(window.config.name));
+    document.getElementById('slogan').appendChild(document.createTextNode(window.config.slogan));
+
+
+
+</script>
+
+</html>
