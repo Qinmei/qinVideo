@@ -30,7 +30,7 @@ class BlogService extends Service {
     }
 
     async info(id: string) {
-        const result = await this.ctx.app.model.Blog.findById(id)
+        const result = await this.ctx.model.Blog.findById(id)
             .populate('countLike')
             .populate('countComment')
             .populate({ path: 'target', select: 'title slug coverVertical' })
