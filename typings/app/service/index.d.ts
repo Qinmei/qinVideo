@@ -1,7 +1,11 @@
-// This file is created by egg-ts-helper@1.25.6
+// This file is created by egg-ts-helper@1.25.7
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
+type AnyClass = new (...args: any[]) => any;
+type AnyFunc<T = any> = (...args: any[]) => T;
+type CanExportFunc = AnyFunc<Promise<any>> | AnyFunc<IterableIterator<any>>;
+type AutoInstanceType<T, U = T extends CanExportFunc ? T : T extends AnyFunc ? ReturnType<T> : T> = U extends AnyClass ? InstanceType<U> : U;
 import ExportAnimate from '../../../app/service/animate';
 import ExportBlog from '../../../app/service/blog';
 import ExportCategory from '../../../app/service/category';
@@ -31,31 +35,31 @@ import ExportUtils from '../../../app/service/utils';
 
 declare module 'egg' {
   interface IService {
-    animate: ExportAnimate;
-    blog: ExportBlog;
-    category: ExportCategory;
-    cloud: ExportCloud;
-    comic: ExportComic;
-    comment: ExportComment;
-    config: ExportConfig;
-    danmu: ExportDanmu;
-    data: ExportData;
-    eposide: ExportEposide;
-    history: ExportHistory;
-    key: ExportKey;
-    order: ExportOrder;
-    post: ExportPost;
-    rate: ExportRate;
-    record: ExportRecord;
-    relation: ExportRelation;
-    report: ExportReport;
-    season: ExportSeason;
-    shop: ExportShop;
-    source: ExportSource;
-    sourceInit: ExportSourceInit;
-    tools: ExportTools;
-    upload: ExportUpload;
-    user: ExportUser;
-    utils: ExportUtils;
+    animate: AutoInstanceType<typeof ExportAnimate>;
+    blog: AutoInstanceType<typeof ExportBlog>;
+    category: AutoInstanceType<typeof ExportCategory>;
+    cloud: AutoInstanceType<typeof ExportCloud>;
+    comic: AutoInstanceType<typeof ExportComic>;
+    comment: AutoInstanceType<typeof ExportComment>;
+    config: AutoInstanceType<typeof ExportConfig>;
+    danmu: AutoInstanceType<typeof ExportDanmu>;
+    data: AutoInstanceType<typeof ExportData>;
+    eposide: AutoInstanceType<typeof ExportEposide>;
+    history: AutoInstanceType<typeof ExportHistory>;
+    key: AutoInstanceType<typeof ExportKey>;
+    order: AutoInstanceType<typeof ExportOrder>;
+    post: AutoInstanceType<typeof ExportPost>;
+    rate: AutoInstanceType<typeof ExportRate>;
+    record: AutoInstanceType<typeof ExportRecord>;
+    relation: AutoInstanceType<typeof ExportRelation>;
+    report: AutoInstanceType<typeof ExportReport>;
+    season: AutoInstanceType<typeof ExportSeason>;
+    shop: AutoInstanceType<typeof ExportShop>;
+    source: AutoInstanceType<typeof ExportSource>;
+    sourceInit: AutoInstanceType<typeof ExportSourceInit>;
+    tools: AutoInstanceType<typeof ExportTools>;
+    upload: AutoInstanceType<typeof ExportUpload>;
+    user: AutoInstanceType<typeof ExportUser>;
+    utils: AutoInstanceType<typeof ExportUtils>;
   }
 }

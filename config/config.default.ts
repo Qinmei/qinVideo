@@ -57,14 +57,14 @@ export default (appInfo: EggAppInfo) => {
 
         mongoose: {
             client: {
-                url: 'mongodb://qinwork:hJfGrrtJG3qm*RWceBJuRYbahjirgnFE@localhost:27017/qinwork',
+                url: 'mongodb://qinwork:GOT5#R#b5#ny8l$&0fWdy%r1v6UyKd&o@localhost:27017/qinwork',
                 //url: 'mongodb://localhost:27017/test',
                 options: {},
             },
         },
         salt: 'qinmei5365', // 密码盐值
         tokenSecret: 'qinmei5365', // 登录密钥
-        expired: 3600, // redis缓存有效期
+        expired: 7200, // redis缓存有效期
     };
 
     return {

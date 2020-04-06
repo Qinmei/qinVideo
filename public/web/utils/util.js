@@ -1,5 +1,3 @@
-import moment from "moment";
-
 export const hexToRgb = (hex, opacity) => {
   const rgb = [];
 
@@ -142,22 +140,4 @@ export const weekGroup = list => {
     week[`day${day}`].push(item);
   });
   return week;
-};
-
-export const inThisWeek = time => {
-  const update = moment(time);
-  const now = new Date();
-  let day = now.getDay();
-  now.setHours(0);
-  now.setMinutes(0);
-  now.setSeconds(0);
-
-  if (day === 0) {
-    day = 6;
-  } else {
-    day -= 1;
-  }
-
-  const beginTime = now.getTime() - day * 1000 * 3600 * 24;
-  return update.valueOf() > beginTime;
 };
