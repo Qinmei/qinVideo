@@ -5,6 +5,7 @@ coverage/
 .idea/
 run/
 logs/
+typings/
 .DS_Store
 .vscode
 *.swp
@@ -20,4 +21,3 @@ test/**/*.map
 config/**/*.map
 
 /public/web/_next/
-typings/
