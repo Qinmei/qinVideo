@@ -234,8 +234,15 @@ class DataService extends Service {
             author,
             target,
         };
-        const result = await this.ctx.model.Data.create(data);
-        return result;
+
+        let dataTemp = (await this.ctx.service.utils.cacheGet('dataTemp')) || [];
+        dataTemp.push(data);
+
+        if (dataTemp.length > this.ctx.app.config.maxProxyCount) {
+            await this.ctx.model.Data.create(dataTemp);
+            dataTemp = [];
+        }
+        await this.ctx.service.utils.cacheSet('dataTemp', dataTemp);
     }
 
     async destroy(start: string, end: string) {

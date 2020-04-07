@@ -220,6 +220,40 @@ class AnimateService extends Service {
         }).limit(20);
         return result.filter((item: any) => item.id !== id);
     }
+
+    async search({ page, size, title, status }: Query) {
+        const skip: number = (page - 1) * size;
+        const limit: number = size;
+
+        const query: any = {};
+        title && (query.title = { $regex: title, $options: '$i' });
+        status && (query.status = status);
+
+        const result = await this.ctx.model.Animate.aggregate([
+            { $match: query },
+            {
+                $sort: {
+                    _id: 1,
+                },
+            },
+            { $skip: skip },
+            { $limit: limit },
+            ...rateLookup,
+            {
+                $project: {
+                    rateStar: 0,
+                    rateCount: 0,
+                },
+            },
+        ]);
+
+        const total = await this.ctx.model.Animate.find(query).countDocuments();
+
+        return {
+            list: result,
+            total,
+        };
+    }
 }
 
 export default AnimateService;

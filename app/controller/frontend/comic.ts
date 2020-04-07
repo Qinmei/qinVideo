@@ -13,7 +13,7 @@ class ComicController extends Controller {
 
         const key = JSON.stringify(query);
         await service.utils.cacheInit(`comic${key}`, async () => {
-            return await service.comic.query(query).catch(() => 13000);
+            return await service.comic.search(query).catch(() => 13000);
         });
     }
 

@@ -1,11 +1,7 @@
 import * as crypto from 'crypto';
 import * as fs from 'fs';
 
-export const MD5 = (text: string) =>
-    crypto
-        .createHash('md5')
-        .update(text)
-        .digest('hex');
+export const MD5 = (text: string) => crypto.createHash('md5').update(text).digest('hex');
 
 export const sleep = (time = 5000) => {
     return new Promise((resolve, reject) => {
@@ -28,33 +24,17 @@ export const generateSecurePathHash = (url, expires, secret) => {
 
     let playLink = '/';
     if (/http/.test(url)) {
-        playLink =
-            playLink +
-            url
-                .split('/')
-                .slice(3)
-                .join('/');
+        playLink = playLink + url.split('/').slice(3).join('/');
     } else {
-        playLink =
-            playLink +
-            url
-                .split('/')
-                .slice(1)
-                .join('/');
+        playLink = playLink + url.split('/').slice(1).join('/');
     }
 
     const expired = Math.ceil(Date.now() / 1000) + expires;
     const input = secret + playLink + expired;
 
-    const binaryHash = crypto
-        .createHash('md5')
-        .update(input)
-        .digest();
+    const binaryHash = crypto.createHash('md5').update(input).digest();
     const base64Value = new Buffer(binaryHash).toString('base64');
-    const token = base64Value
-        .replace(/=/g, '')
-        .replace(/\+/g, '-')
-        .replace(/\//g, '_');
+    const token = base64Value.replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
     return `${url}?st=${token}&e=${expired}`;
 };
 
@@ -75,7 +55,7 @@ export const indexTrans = (element: any) => {
     let query = {
         size: 20,
         page: 1,
-        sortBy: 'updatedAt',
+        sortBy: 'createdAt',
         sortOrder: -1,
         kind: undefined,
         status: 'publish',

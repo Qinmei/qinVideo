@@ -49,7 +49,7 @@ export default (appInfo: EggAppInfo) => {
         },
 
         logger: {
-          	dir: '/work/qinVideo/logs',
+            // dir: '/work/qinVideo/logs',
             appLogName: `${appInfo.name}-web.log`,
             coreLogName: 'egg-web.log',
             agentLogName: 'egg-agent.log',
@@ -58,7 +58,7 @@ export default (appInfo: EggAppInfo) => {
 
         mongoose: {
             client: {
-                url: 'mongodb://qinwork:l&g#^k5$yW1z9ONHTUTvc71J^TAYAgdE@localhost:27017/qinwork',
+                url: 'mongodb://qinwork:l&g#^k5$yW1z9ONHTUTvc71J^TAYAgdE@qinvideo.org:27017/qinwork',
                 //url: 'mongodb://localhost:27017/test',
                 options: {},
             },
@@ -66,6 +66,8 @@ export default (appInfo: EggAppInfo) => {
         salt: 'qinmei5365', // 密码盐值
         tokenSecret: 'qinmei5365', // 登录密钥
         expired: 7200, // redis缓存有效期
+        longExpired: 3600 * 12, // 首页等长时间接口的缓存时间
+        expiredCount: 100, // 接口缓存写入数据库的数量
     };
 
     return {
