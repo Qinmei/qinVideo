@@ -30,7 +30,7 @@ class RelationService extends Service {
         const total = await this.ctx.model.Relation.find(query).countDocuments();
 
         return {
-            list: result,
+            list: result.filter((item) => item.target),
             total,
         };
     }
