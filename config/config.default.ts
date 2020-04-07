@@ -49,6 +49,7 @@ export default (appInfo: EggAppInfo) => {
         },
 
         logger: {
+          	dir: '/work/qinVideo/logs',
             appLogName: `${appInfo.name}-web.log`,
             coreLogName: 'egg-web.log',
             agentLogName: 'egg-agent.log',
@@ -57,7 +58,7 @@ export default (appInfo: EggAppInfo) => {
 
         mongoose: {
             client: {
-                url: 'mongodb://qinwork:GOT5#R#b5#ny8l$&0fWdy%r1v6UyKd&o@localhost:27017/qinwork',
+                url: 'mongodb://qinwork:l&g#^k5$yW1z9ONHTUTvc71J^TAYAgdE@localhost:27017/qinwork',
                 //url: 'mongodb://localhost:27017/test',
                 options: {},
             },
