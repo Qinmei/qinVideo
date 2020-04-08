@@ -157,7 +157,7 @@ class ConfigService extends Service {
 
         for (const item of handlResult) {
             const { query, origin, type } = this.ctx.helper.indexTrans(item);
-            const data = await this.ctx.service[type][/new/.test(item._id) ? 'query' : 'search'](query);
+            const data = await this.ctx.service[type].query(query);
             final[origin] = data;
         }
 
