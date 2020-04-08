@@ -109,7 +109,7 @@ class UtilsService extends Service {
 
     async cacheSet(key, value, time = this.app.config.expired) {
         const { app } = this;
-        const expired = time || 3600;
+        const expired = time + Math.floor(Math.random() * time);
         await app.redis.set(key, JSON.stringify(value), 'EX', expired);
     }
 
