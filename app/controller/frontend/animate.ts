@@ -13,7 +13,7 @@ class AnimateController extends Controller {
 
         const key = JSON.stringify(query);
         await service.utils.cacheInit(`animate${key}`, async () => {
-            return await service.animate.search(query).catch(() => 12000);
+            return await service.animate[query.title ? 'search' : 'query' ](query).catch(() => 12000);
         });
     }
 
