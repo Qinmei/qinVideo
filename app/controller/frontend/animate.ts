@@ -62,12 +62,7 @@ class AnimateController extends Controller {
 
         ctx.helper.validate('id', { id });
 
-        let result = await service.utils.cacheGet(`animatePlay${id}`);
-
-        if (!result) {
-            result = await service.eposide.animateInfo(id, level).catch(() => 18001);
-            typeof result !== 'number' && service.utils.cacheSet(`animatePlay${id}`, result, 60);
-        }
+        const result = await service.eposide.animateInfo(id, level).catch(() => 18001);
 
         service.history.playCreate(result, 'Animate');
 
