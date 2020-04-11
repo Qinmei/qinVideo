@@ -24,7 +24,13 @@ class PostController extends Controller {
 
         ctx.helper.validate('id', { id });
 
-        const result = await service.post.slug(id).catch(() => 14001);
+        let result = await service.utils.cacheGet(`postSlug${id}`);
+
+        if (!result) {
+            result = await service.post.slug(id).catch(() => 14001);
+            typeof result !== 'number' && service.utils.cacheSet(`postSlug${id}`, result);
+        }
+
         if (typeof result !== 'number' && userId) {
             const isLiked = await service.relation.exist({
                 target: result._id,
