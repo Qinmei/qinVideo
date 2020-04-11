@@ -301,8 +301,7 @@ const ruleobj = {
         tag: { type: 'array', required: false },
         image: { type: 'array', required: false },
         video: { type: 'string', required: false },
-        pin: { type: 'boolean', required: false },
-        hot: { type: 'boolean', required: false },
+        hot: { type: 'number', required: false },
     }),
     login: {
         name: { type: 'string' },

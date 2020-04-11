@@ -40,6 +40,7 @@ class BlogController extends Controller {
 
         data.author = userId;
         data.status = 'publish';
+        data.hot = 0;
         ctx.helper.validate('blog', data, true);
 
         const result = await service.blog.create(data).catch(() => 32002);
