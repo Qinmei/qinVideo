@@ -209,6 +209,12 @@ const ruleobj = {
         autoUpdate: { type: 'boolean', default: false, required: false },
         usePicInterface: { type: 'boolean', default: false, required: false },
         picInterface: { type: 'string', default: '', required: false },
+        appversion: { type: 'string', default: '', required: false },
+        updateLogs: { type: 'string', default: '', required: false },
+        downLink: { type: 'string', default: '', required: false },
+        qqAppLink: { type: 'string', default: '', required: false },
+        qqWebLink: { type: 'string', default: '', required: false },
+        qqNumber: { type: 'string', default: '', required: false },
     },
     danmu: (force: boolean) => ({
         target: { type: 'string', required: force },

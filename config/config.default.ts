@@ -49,7 +49,7 @@ export default (appInfo: EggAppInfo) => {
         },
 
         logger: {
-            // dir: '/work/qinVideo/logs',
+            dir: '/work/qinVideo/logs',
             appLogName: `${appInfo.name}-web.log`,
             coreLogName: 'egg-web.log',
             agentLogName: 'egg-agent.log',
