@@ -30,6 +30,18 @@ class ConfigController extends Controller {
             this.ctx.app.config.longExpired
         );
     }
+
+    async appInfo() {
+        const { service } = this;
+
+        await service.utils.cacheInit(
+            'commonApp',
+            async () => {
+                return await service.config.appInfo().catch(() => 22007);
+            },
+            this.ctx.app.config.longExpired
+        );
+    }
 }
 
 export default ConfigController;

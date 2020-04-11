@@ -91,11 +91,6 @@ class ConfigService extends Service {
     }
 
     async create(data: any) {
-        const config = await this.info();
-        if (config) {
-            await this.destroy();
-        }
-
         const result = await this.ctx.model.Config.create(data);
         if (result) {
             this.generate();
@@ -162,6 +157,21 @@ class ConfigService extends Service {
         }
 
         return final;
+    }
+
+    async appInfo() {
+        const result: ConfigInfo = await this.ctx.model.Config.findOne(
+            {},
+            {
+                appversion: 1,
+                updateLogs: 1,
+                downLink: 1,
+                qqAppLink: 1,
+                qqWebLink: 1,
+                qqNumber: 1,
+            }
+        );
+        return result;
     }
 }
 
