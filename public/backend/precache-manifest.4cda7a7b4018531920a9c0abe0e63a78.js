@@ -104,8 +104,8 @@ self.__precacheManifest = [
     "url": "/backend/p__Comment__List.9a529058.async.js"
   },
   {
-    "revision": "5790bee783d30a8681a8",
-    "url": "/backend/p__Config__index.f531f70b.async.js"
+    "revision": "a541184213c33cdce605",
+    "url": "/backend/p__Config__index.e963831f.async.js"
   },
   {
     "revision": "f0986477a09b4b5dddd6",
@@ -192,12 +192,12 @@ self.__precacheManifest = [
     "url": "/backend/p__User__List.b6e76fd2.async.js"
   },
   {
-    "revision": "4d5fb114edf8b8d1686b",
+    "revision": "f421f85481ce62da55e7",
     "url": "/backend/umi.b0c61fc2.css"
   },
   {
-    "revision": "4d5fb114edf8b8d1686b",
-    "url": "/backend/umi.5f1e606e.js"
+    "revision": "f421f85481ce62da55e7",
+    "url": "/backend/umi.4f11f0ee.js"
   },
   {
     "revision": "dd7daff95069c16c755f",
@@ -288,8 +288,12 @@ self.__precacheManifest = [
     "url": "/backend/53.135b3ae8.async.js"
   },
   {
-    "revision": "1419a485b5be76234291564342a81006",
+    "revision": "1c8c722930c9f17115e5137adbe6f4b2",
     "url": "/backend/index.html"
+  },
+  {
+    "revision": "4f38ae784c9e5f8b5135fd0b2ec19a9d",
+    "url": "/backend/icons/icon-128x128.png"
   },
   {
     "revision": "d26b6882c10242e359b3502e77c14779",
@@ -302,10 +306,6 @@ self.__precacheManifest = [
   {
     "revision": "c1074efc2372bf52c481a8ba0909be63",
     "url": "/backend/icons/icon-192x192.png"
-  },
-  {
-    "revision": "4f38ae784c9e5f8b5135fd0b2ec19a9d",
-    "url": "/backend/icons/icon-128x128.png"
   },
   {
     "revision": "e3d9473ff8f1a41892af7bdbbf262404",
