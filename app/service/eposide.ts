@@ -102,10 +102,16 @@ class EposideService extends Service {
                     ele.value = configPrefix ? configPrefix.prefix : '' + prefix + ele.value;
                 });
             } else {
-                const configPrefix = config.playLimit
+                const configPrefixArray = config.playLimit
                     .filter((item: any) => item.level <= level)
-                    .sort((a, b) => b.level - a.level)[0];
-                if (configPrefix) {
+                    .sort((a, b) => b.level - a.level);
+
+                if (configPrefixArray.length > 0) {
+                    const newConfigPrefixArr = configPrefixArray.filter(
+                        (item) => item.level === configPrefixArray[0].level
+                    );
+                    const configPrefix = newConfigPrefixArr[Math.floor(Math.random() * newConfigPrefixArr.length)];
+
                     const { key, expired } = configPrefix;
                     data.link.map((item: any) => {
                         const uri = configPrefix.prefix + prefix + item.value;

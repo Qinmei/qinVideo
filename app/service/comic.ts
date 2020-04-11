@@ -146,6 +146,9 @@ class ComicService extends Service {
                     listDanmu: 0,
                     listEposide: 0,
                     listLike: 0,
+                    linkPrefix: 0,
+                    level: 0,
+                    noPrefix: 0,
                 },
             },
         ]);
