@@ -56,14 +56,22 @@ class EposideService extends Service {
     }
 
     async animateInfo(id: string, level: number) {
-        const result = await this.ctx.model.Eposide.findById(id)
-            .populate({
-                path: 'target',
-                select: 'title slug coverVertical introduce playType noPrefix level linkPrefix',
-            })
-            .populate('countPlay')
-            .populate('countComment')
-            .populate('countDanmu');
+        let result = await this.service.utils.cacheGet(`animatePlay${id}`);
+
+        if (!result) {
+            result = await this.ctx.model.Eposide.findById(id)
+                .populate({
+                    path: 'target',
+                    select: 'title slug coverVertical introduce playType noPrefix level linkPrefix',
+                })
+                .populate('countPlay')
+                .populate('countComment')
+                .populate('countDanmu');
+
+            if (result.target._id) {
+                this.service.utils.cacheSet(`animatePlay${id}`, result);
+            }
+        }
 
         if (!result.target._id) return 18001;
 
