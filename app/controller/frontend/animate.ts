@@ -66,7 +66,7 @@ class AnimateController extends Controller {
 
         if (!result) {
             result = await service.eposide.animateInfo(id, level).catch(() => 18001);
-            typeof result !== 'number' && service.utils.cacheSet(`animatePlay${id}`, result);
+            typeof result !== 'number' && service.utils.cacheSet(`animatePlay${id}`, result, 60);
         }
 
         service.history.playCreate(result, 'Animate');
