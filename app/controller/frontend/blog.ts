@@ -43,7 +43,7 @@ class BlogController extends Controller {
         data.hot = 0;
         ctx.helper.validate('blog', data, true);
 
-        const sensitive = await service.utils.isSensitiveWord(data.text);
+        const sensitive = await service.utils.isSensitiveWord(data.content);
 
         if (sensitive) {
             ctx.helper.error(10019);
