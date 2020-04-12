@@ -13,9 +13,28 @@ class AuthController extends Controller {
         ctx.helper.send(result);
     }
 
-    async existByName(oldName: string) {
+    async existByName(name: string) {
         const { ctx, service } = this;
+        const nameResult = await service.user.exist({ name });
 
+        if (!nameResult) {
+            ctx.helper.error(10006);
+        }
+        return nameResult;
+    }
+
+    async existByEmail(email: string) {
+        const { ctx, service } = this;
+        const emailResult = await service.user.exist({ email });
+
+        if (!emailResult) {
+            ctx.helper.error(10012);
+        }
+        return emailResult;
+    }
+
+    async noExistByName(oldName: string) {
+        const { ctx, service } = this;
         const name = oldName.replace(/\s/g, '');
 
         if (name.replace(/[\u4e00-\u9fa5]/g, 'aa').length <= 6) {
@@ -32,27 +51,6 @@ class AuthController extends Controller {
 
         if (sensitive) {
             ctx.helper.error(10019);
-        }
-
-        return nameResult;
-    }
-
-    async existByEmail(email: string) {
-        const { ctx, service } = this;
-        const emailResult = await service.user.exist({ email });
-
-        if (!emailResult) {
-            ctx.helper.error(10012);
-        }
-        return emailResult;
-    }
-
-    async noExistByName(name: string) {
-        const { ctx, service } = this;
-        const nameResult = await service.user.exist({ name });
-
-        if (nameResult) {
-            ctx.helper.error(10005);
         }
         return nameResult;
     }
