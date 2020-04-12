@@ -206,7 +206,10 @@ const ruleobj = {
         smtpPass: { type: 'string', default: '', required: false },
         sendgrid: { type: 'string', default: '', required: false },
         commentVerify: { type: 'boolean', default: false, required: false },
-        autoUpdate: { type: 'boolean', default: false, required: false },
+        autoUpdate: { type: 'boolean', default: false },
+        danmuAuth: { type: 'boolean', default: false, required: false },
+        danmuVerify: { type: 'boolean', default: false, required: false },
+        userVerify: { type: 'boolean', default: false, required: false },
         usePicInterface: { type: 'boolean', default: false, required: false },
         picInterface: { type: 'string', default: '', required: false },
         appversion: { type: 'string', default: '', required: false },
@@ -264,7 +267,6 @@ const ruleobj = {
         replyTo: { type: 'string', required: false },
         parent: { type: 'string', required: false },
         content: { type: 'string', required: force },
-        status: { type: 'string', required: force },
     }),
     key: (force: boolean) => ({
         count: { type: 'number', required: force },
@@ -418,7 +420,7 @@ const ruleobj = {
         author: { type: 'string' },
     },
     userEdit: {
-        email: { type: 'string', required: true },
+        name: { type: 'string', required: true },
         introduce: { type: 'string', required: false },
         avatar: { type: 'string', required: false },
         background: { type: 'string', required: false },

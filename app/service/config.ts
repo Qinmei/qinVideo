@@ -70,6 +70,7 @@ class ConfigService extends Service {
                 message: 1,
                 usePicInterface: 1,
                 picInterface: 1,
+                danmuAuth: 1,
             }
         ).populate('postIndex');
 

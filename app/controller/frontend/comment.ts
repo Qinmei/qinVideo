@@ -9,6 +9,8 @@ class CommentController extends Controller {
         ctx.helper.validate('query', query);
         ctx.helper.validate('id', { id: query.target });
 
+        query.status = 'publish';
+
         const result = await service.comment.list(query).catch(() => 17000);
         if (userId && typeof result !== 'number') {
             const newList = await service.comment.addLike(result.list, userId);
@@ -43,8 +45,20 @@ class CommentController extends Controller {
         const userId = ctx.state.user.id;
 
         data.author = userId;
-        data.status = 'publish';
         ctx.helper.validate('comment', data, true);
+
+        const sensitive = await service.utils.isSensitiveWord(data.content);
+
+        if (sensitive) {
+            ctx.helper.error(10019);
+        }
+
+        const configInfo = await service.config.cacheInfo();
+
+        data.status = 'publish';
+        if (configInfo.commentVerify) {
+            data.status = 'draft';
+        }
 
         const result = await service.comment.create(data).catch(() => 17002);
 

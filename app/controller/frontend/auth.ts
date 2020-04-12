@@ -13,13 +13,27 @@ class AuthController extends Controller {
         ctx.helper.send(result);
     }
 
-    async existByName(name: string) {
+    async existByName(oldName: string) {
         const { ctx, service } = this;
+
+        const name = oldName.replace(/\s/g, '');
+
+        if (name.replace(/[\u4e00-\u9fa5]/g, 'aa').length <= 6) {
+            ctx.helper.error(11009);
+        }
+
         const nameResult = await service.user.exist({ name });
 
         if (!nameResult) {
             ctx.helper.error(10006);
         }
+
+        const sensitive = await service.utils.isSensitiveWord(name);
+
+        if (sensitive) {
+            ctx.helper.error(10019);
+        }
+
         return nameResult;
     }
 
@@ -139,9 +153,8 @@ class AuthController extends Controller {
         const userInfo = await service.user.exist({ email });
 
         const { _id, name } = userInfo;
-        const token = jwt.sign({ id: _id }, ctx.app.config.tokenSecret, {
-            expiresIn: '2h',
-        });
+
+        const token = await service.utils.generateCode(_id, 7200);
 
         service.utils.sendMail({
             to: email,
@@ -159,13 +172,46 @@ class AuthController extends Controller {
 
         let result = 10011;
         try {
-            const { id } = await jwt.verify(token, ctx.app.config.tokenSecret);
+            const id = await service.utils.authCode(token);
+            if (!id) return ctx.helper.error(10016);
+
             const newPass = ctx.helper.MD5(ctx.app.config.salt + password);
             const refreshToken = uuidv4();
             result = await service.user.update([id], { password: newPass, refreshToken }).catch(() => 10011);
         } catch (err) {}
 
         ctx.helper.send(result);
+    }
+
+    async sendVerifyCode() {
+        const { ctx, service } = this;
+        const { id, email, status, name } = ctx.state.user;
+
+        if (status === 'publish') return ctx.helper.error(10018);
+
+        const token = await service.utils.generateCode(id, 7200);
+        const link = `${this.app.config.authUrl}?token=${token}`;
+
+        service.utils.sendMail({
+            to: email,
+            subject: '账户验证',
+            text: '正文如下:',
+            html: `<h3>亲爱的${name}:<h3><p>请点击下方链接进行账户验证:</p><p style='margin-left:30px;font-size:20px'>${link}</p>`,
+        });
+
+        ctx.helper.success('send success');
+    }
+
+    async authVerifyCode() {
+        const { ctx, service } = this;
+        const { token } = ctx.request.body;
+
+        const id = await service.utils.authCode(token);
+        if (!id) return ctx.helper.error(10016);
+
+        service.user.update([id], { status: 'publish' });
+
+        ctx.helper.success('auth success');
     }
 }
 

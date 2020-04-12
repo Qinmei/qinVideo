@@ -132,6 +132,43 @@ class UtilsService extends Service {
             ctx.helper.send(result);
         }
     }
+
+    async generateCode(id, time) {
+        const code = Math.random().toString().slice(-6);
+        const cache = await this.app.redis.get(code);
+
+        if (cache) {
+            return this.generateCode(id, time);
+        } else {
+            await this.app.redis.set(code, id, 'EX', time);
+            return code;
+        }
+    }
+
+    async authCode(code) {
+        const cache = await this.app.redis.get(code);
+        if (cache) {
+            await this.app.redis.del(code);
+        }
+        return cache;
+    }
+
+    async isSensitiveWord(word) {
+        let cache = await this.app.redis.get('sensitiveWord');
+        if (!cache) {
+            cache = await this.ctx.helper.getWordFilter();
+            cache && this.app.redis.set('sensitiveWord', cache, 'EX', 3600 * 24);
+        }
+
+        if (!cache) return false;
+
+        const wordArr = cache.split('\n').filter((item) => item);
+        const result = wordArr.some((item) => {
+            const regexp = new RegExp(item);
+            return regexp.test(word);
+        });
+        return result;
+    }
 }
 
 export default UtilsService;

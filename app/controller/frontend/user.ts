@@ -38,6 +38,12 @@ class UserController extends Controller {
 
         ctx.helper.validate('userEdit', data);
 
+        const sensitive = await service.utils.isSensitiveWord(data.name);
+
+        if (sensitive) {
+            ctx.helper.error(10019);
+        }
+
         const result = await service.user.edit(userId, data).catch(() => 11003);
 
         ctx.helper.send(result);

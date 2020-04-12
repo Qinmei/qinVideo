@@ -1,5 +1,6 @@
 import * as crypto from 'crypto';
 import * as fs from 'fs';
+import * as path from 'path';
 
 export const MD5 = (text: string) => crypto.createHash('md5').update(text).digest('hex');
 
@@ -15,6 +16,20 @@ export const readJSON = (path) => {
     const data = fs.readFileSync(path);
     const result = JSON.parse(data.toString());
     return result;
+};
+
+export const getWordFilter = () => {
+    const wordPath = path.join(__dirname, '../data/sensitive');
+    const file = fs.readdirSync(wordPath);
+
+    let data = '';
+
+    for (const item of file) {
+        const content = fs.readFileSync(path.join(wordPath, item)).toString();
+        data = data + '\n' + content;
+    }
+
+    return data;
 };
 
 export const generateSecurePathHash = (url, expires, secret) => {

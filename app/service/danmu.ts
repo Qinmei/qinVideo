@@ -31,7 +31,8 @@ class DanmuService extends Service {
                     },
                 ],
                 select: 'title target onModel',
-            });
+            })
+            .populate({ path: 'author', select: 'name avatar level introduce background' });
 
         const total = await this.ctx.model.Danmu.find(query).countDocuments();
 
