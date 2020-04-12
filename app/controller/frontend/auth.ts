@@ -158,7 +158,7 @@ class AuthController extends Controller {
             to: email,
             subject: '重置密码',
             text: '正文如下:',
-            html: `<h3>亲爱的${name}:<h3><p>您正在进行重置密码的操作,如果不是您本人所为请忽略此邮件,确认重置密码请复制点击下方验证码:</p><p style='margin-left:30px;font-size:20px'>${token}</p>`,
+            html: `<h3>亲爱的${name}:<h3><p>您正在进行重置密码的操作,如果不是您本人所为请忽略此邮件,确认重置密码请复制点击下方验证码,有效期两小时:</p><p style='margin-left:30px;font-size:20px'>${token}</p>`,
         });
 
         ctx.helper.success('send success');
@@ -187,14 +187,14 @@ class AuthController extends Controller {
 
         if (status === 'publish') return ctx.helper.error(10018);
 
-        const token = await service.utils.generateCode(id, 7200);
+        const token = await service.utils.generateCode(id, 7200, 12);
         const link = `${this.app.config.authUrl}?token=${token}`;
 
         service.utils.sendMail({
             to: email,
             subject: '账户验证',
             text: '正文如下:',
-            html: `<h3>亲爱的${name}:<h3><p>请点击下方链接进行账户验证:</p><p style='margin-left:30px;font-size:20px'>${link}</p>`,
+            html: `<h3>亲爱的${name}:<h3><p>请点击下方链接进行账户验证, 有效期为两小时:</p><p style='margin-left:30px;font-size:20px'>${link}</p>`,
         });
 
         ctx.helper.success('send success');
