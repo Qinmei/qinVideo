@@ -43,8 +43,8 @@ class AuthController extends Controller {
 
         const nameResult = await service.user.exist({ name });
 
-        if (!nameResult) {
-            ctx.helper.error(10006);
+        if (nameResult) {
+            ctx.helper.error(10005);
         }
 
         const sensitive = await service.utils.isSensitiveWord(name);
