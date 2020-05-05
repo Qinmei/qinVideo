@@ -3,6 +3,7 @@ import { Application } from 'egg';
 export default (app: Application) => {
     const { router, controller, middleware } = app;
     const auth = middleware.auth;
+    const verify = middleware.verify;
     const api = '/api/v2';
 
     // base
@@ -14,6 +15,7 @@ export default (app: Application) => {
     router.get(`${api}/config`, auth(0), controller.frontend.config.info);
     router.get(`${api}/home`, auth(0), controller.frontend.config.home);
     router.get(`${api}/mobile`, auth(0), controller.frontend.config.mobile);
+    router.get(`${api}/appinfo`, auth(0), controller.frontend.config.appInfo);
     router.post(`${api}/rate`, auth(1), controller.frontend.common.rate);
 
     // auth
@@ -23,6 +25,8 @@ export default (app: Application) => {
     router.post(`${api}/auth/refresh`, auth(0), controller.frontend.auth.refreshtoken);
     router.post(`${api}/auth/send`, auth(0), controller.frontend.auth.resetPasswordMail);
     router.post(`${api}/auth/reset`, auth(0), controller.frontend.auth.resetPasswordAuth);
+    router.get(`${api}/auth/verify`, auth(1), controller.frontend.auth.sendVerifyCode);
+    router.post(`${api}/auth/verify`, auth(0), controller.frontend.auth.authVerifyCode);
 
     // user
     router.get(`${api}/user/:id`, auth(0), controller.frontend.user.info);
@@ -44,7 +48,7 @@ export default (app: Application) => {
 
     // danmu
     router.get(`${api}/danmus`, auth(0), controller.frontend.danmu.query);
-    router.post(`${api}/danmus`, auth(0), controller.frontend.danmu.create);
+    router.post(`${api}/danmus`, auth(0), verify(), controller.frontend.danmu.create);
 
     // comic
     router.get(`${api}/comics`, auth(0), controller.frontend.comic.query);
@@ -55,12 +59,12 @@ export default (app: Application) => {
     // comment
     router.get(`${api}/comments`, auth(0), controller.frontend.comment.query);
     router.get(`${api}/comments/:id`, auth(0), controller.frontend.comment.info);
-    router.post(`${api}/comments`, auth(1), controller.frontend.comment.create);
+    router.post(`${api}/comments`, auth(1), verify(), controller.frontend.comment.create);
 
     // blog
     router.get(`${api}/blogs`, auth(0), controller.frontend.blog.query);
     router.get(`${api}/blogs/:id`, auth(0), controller.frontend.blog.info);
-    router.post(`${api}/blogs`, auth(1), controller.frontend.blog.create);
+    router.post(`${api}/blogs`, auth(1), verify(), controller.frontend.blog.create);
 
     // post
     router.get(`${api}/posts`, auth(0), controller.frontend.post.query);

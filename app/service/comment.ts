@@ -192,7 +192,7 @@ class CommentService extends Service {
 
         newList.map((item: any) => {
             all.push(item._id);
-            const child = item.children.map((ele: any) => ele._id);
+            const child = item.children ? item.children.map((ele: any) => ele._id) : [];
             all.push(...child);
         });
 
@@ -204,7 +204,7 @@ class CommentService extends Service {
                 if (likeArr.includes(item._id.toString())) {
                     item.isLiked = true;
                 }
-                item.children.map((ele: any) => {
+                item.children && item.children.map((ele: any) => {
                     if (likeArr.includes(ele._id)) ele.isLiked = true;
                 });
                 return item;

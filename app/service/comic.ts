@@ -146,6 +146,9 @@ class ComicService extends Service {
                     listDanmu: 0,
                     listEposide: 0,
                     listLike: 0,
+                    linkPrefix: 0,
+                    level: 0,
+                    noPrefix: 0,
                 },
             },
         ]);
@@ -159,6 +162,40 @@ class ComicService extends Service {
             tag,
         }).limit(20);
         return result.filter((item: any) => item.id !== id);
+    }
+
+    async search({ page, size, title, status }) {
+        const skip: number = (page - 1) * size;
+        const limit: number = size;
+
+        const query: any = {};
+        title && (query.title = { $regex: title, $options: '$i' });
+        status && (query.status = status);
+
+        const result = await this.ctx.model.Comic.aggregate([
+            { $match: query },
+            {
+                $sort: {
+                    _id: 1,
+                },
+            },
+            { $skip: skip },
+            { $limit: limit },
+            ...rateLookup,
+            {
+                $project: {
+                    rateStar: 0,
+                    rateCount: 0,
+                },
+            },
+        ]);
+
+        const total = await this.ctx.model.Comic.find(query).countDocuments();
+
+        return {
+            list: result,
+            total,
+        };
     }
 }
 

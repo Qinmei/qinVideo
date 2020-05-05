@@ -15,7 +15,7 @@ class ConfigController extends Controller {
             async () => {
                 return await service.config.home('pcIndex').catch(() => 22003);
             },
-            3600 * 24
+            this.ctx.app.config.longExpired
         );
     }
 
@@ -27,7 +27,19 @@ class ConfigController extends Controller {
             async () => {
                 return await service.config.home('h5Index').catch(() => 22003);
             },
-            3600 * 24
+            this.ctx.app.config.longExpired
+        );
+    }
+
+    async appInfo() {
+        const { service } = this;
+
+        await service.utils.cacheInit(
+            'commonApp',
+            async () => {
+                return await service.config.appInfo().catch(() => 22007);
+            },
+            this.ctx.app.config.longExpired
         );
     }
 }

@@ -1,7 +1,7 @@
 import { Service } from 'egg';
 
 class RelationService extends Service {
-    async query({ page, size, sortBy = 'createdAt', sortOrder = -1, onModel, author }) {
+    async query({ page, size, sortBy = 'createdAt', sortOrder = -1, onModel, author, update }) {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 
@@ -24,13 +24,13 @@ class RelationService extends Service {
                         path: 'author',
                     },
                 ],
-                match: { status: 'publish' },
+                match: { status: 'publish', isUpdate: !!update },
             });
 
         const total = await this.ctx.model.Relation.find(query).countDocuments();
 
         return {
-            list: result,
+            list: result.filter((item) => item.target),
             total,
         };
     }
