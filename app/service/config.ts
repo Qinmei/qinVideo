@@ -70,6 +70,7 @@ class ConfigService extends Service {
                 message: 1,
                 usePicInterface: 1,
                 picInterface: 1,
+                danmuAuth: 1,
             }
         ).populate('postIndex');
 
@@ -155,13 +156,28 @@ class ConfigService extends Service {
 
         const final = {};
 
-        for (let index = 0; index < handlResult.length; index++) {
-            const { query, origin, type } = this.ctx.helper.indexTrans(handlResult[index]);
+        for (const item of handlResult) {
+            const { query, origin, type } = this.ctx.helper.indexTrans(item);
             const data = await this.ctx.service[type].query(query);
             final[origin] = data;
         }
 
         return final;
+    }
+
+    async appInfo() {
+        const result: ConfigInfo = await this.ctx.model.Config.findOne(
+            {},
+            {
+                appversion: 1,
+                updateLogs: 1,
+                downLink: 1,
+                qqAppLink: 1,
+                qqWebLink: 1,
+                qqNumber: 1,
+            }
+        );
+        return result;
     }
 }
 

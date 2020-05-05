@@ -11,6 +11,7 @@ class DanmuController extends Controller {
             size: 10000,
             target: id,
             sortBy: 'time',
+            status: 'publish',
         };
 
         await service.utils.cacheInit(`danmu${id}`, async () => {
@@ -21,11 +22,29 @@ class DanmuController extends Controller {
     async create() {
         const { ctx, service } = this;
         const data = ctx.request.body;
-        const userId = ctx.state.user.name;
+        const userId = ctx.state.user.id;
+        const level = ctx.state.user.level;
 
         data.target = data.id;
         data.author = userId;
         ctx.helper.validate('danmu', data, true);
+
+        const sensitive = await service.utils.isSensitiveWord(data.text);
+
+        if (sensitive) {
+            ctx.helper.error(10019);
+        }
+
+        const configInfo = await service.config.cacheInfo();
+
+        if (configInfo.danmuAuth && level === 0) {
+            ctx.helper.send(10014);
+        }
+
+        data.status = 'publish';
+        if (configInfo.danmuVerify) {
+            data.status = 'draft';
+        }
 
         const result = await service.danmu.create(data).catch(() => 15002);
 

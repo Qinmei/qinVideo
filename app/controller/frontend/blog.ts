@@ -40,7 +40,14 @@ class BlogController extends Controller {
 
         data.author = userId;
         data.status = 'publish';
+        data.hot = 0;
         ctx.helper.validate('blog', data, true);
+
+        const sensitive = await service.utils.isSensitiveWord(data.content);
+
+        if (sensitive) {
+            ctx.helper.error(10019);
+        }
 
         const result = await service.blog.create(data).catch(() => 32002);
         service.data.create('blog');

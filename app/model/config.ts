@@ -79,6 +79,15 @@ export default (app) => {
         sendgrid: { type: String, default: '' },
         commentVerify: { type: Boolean, default: false },
         autoUpdate: { type: Boolean, default: false },
+        danmuAuth: { type: Boolean, default: false },
+        danmuVerify: { type: Boolean, default: false },
+        userVerify: { type: Boolean, default: false },
+        appversion: { type: String, default: '' },
+        updateLogs: { type: String, default: '' },
+        downLink: { type: String, default: '' },
+        qqAppLink: { type: String, default: '' },
+        qqWebLink: { type: String, default: '' },
+        qqNumber: { type: String, default: '' },
         addons: Schema.Types.Mixed,
     });
 

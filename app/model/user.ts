@@ -26,6 +26,7 @@ export default (app) => {
             },
             money: { type: Number, default: 0 }, // 金钱
             expired: { type: Number, default: 0 }, // 会员过期时间
+            error: { type: Number, default: 0 }, // 违规行为统计
             addons: Schema.Types.Mixed,
         },
         {

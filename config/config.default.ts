@@ -44,11 +44,12 @@ export default (appInfo: EggAppInfo) => {
                 port: 6379,
                 host: '127.0.0.1',
                 password: '',
-                db: 0,
+                db: 1,
             },
         },
 
         logger: {
+            dir: '/work/qinVideo/logs',
             appLogName: `${appInfo.name}-web.log`,
             coreLogName: 'egg-web.log',
             agentLogName: 'egg-agent.log',
@@ -62,9 +63,12 @@ export default (appInfo: EggAppInfo) => {
                 options: {},
             },
         },
+
+        authUrl: 'https://m.qinmei.video/auth/verify', // 邮件验证账户的地址
         salt: 'qinmei', // 密码盐值
         tokenSecret: 'qinmei', // 登录密钥
-        expired: 3600, // redis缓存有效期
+        expired: 3600, // redis缓存有效期, 是个随机数, 如果是3600, 那么会在3600~7200之间, 即一到两倍之间
+        expiredCount: 100, // 接口缓存写入数据库的数量
     };
 
     return {

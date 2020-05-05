@@ -56,14 +56,22 @@ class EposideService extends Service {
     }
 
     async animateInfo(id: string, level: number) {
-        const result = await this.ctx.model.Eposide.findById(id)
-            .populate({
-                path: 'target',
-                select: 'title slug coverVertical introduce playType noPrefix level linkPrefix',
-            })
-            .populate('countPlay')
-            .populate('countComment')
-            .populate('countDanmu');
+        let result = await this.service.utils.cacheGet(`animatePlay${id}`);
+
+        if (!result) {
+            result = await this.ctx.model.Eposide.findById(id)
+                .populate({
+                    path: 'target',
+                    select: 'title slug coverVertical introduce playType noPrefix level linkPrefix',
+                })
+                .populate('countPlay')
+                .populate('countComment')
+                .populate('countDanmu');
+
+            if (result.target._id) {
+                this.service.utils.cacheSet(`animatePlay${id}`, result);
+            }
+        }
 
         if (!result.target._id) return 18001;
 
@@ -102,10 +110,16 @@ class EposideService extends Service {
                     ele.value = configPrefix ? configPrefix.prefix : '' + prefix + ele.value;
                 });
             } else {
-                const configPrefix = config.playLimit
+                const configPrefixArray = config.playLimit
                     .filter((item: any) => item.level <= level)
-                    .sort((a, b) => b.level - a.level)[0];
-                if (configPrefix) {
+                    .sort((a, b) => b.level - a.level);
+
+                if (configPrefixArray.length > 0) {
+                    const newConfigPrefixArr = configPrefixArray.filter(
+                        (item) => item.level === configPrefixArray[0].level
+                    );
+                    const configPrefix = newConfigPrefixArr[Math.floor(Math.random() * newConfigPrefixArr.length)];
+
                     const { key, expired } = configPrefix;
                     data.link.map((item: any) => {
                         const uri = configPrefix.prefix + prefix + item.value;

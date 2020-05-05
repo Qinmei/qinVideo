@@ -13,7 +13,7 @@ class ComicController extends Controller {
 
         const key = JSON.stringify(query);
         await service.utils.cacheInit(`comic${key}`, async () => {
-            return await service.comic.query(query).catch(() => 13000);
+            return await service.comic[query.title ? 'search' : 'query'](query).catch(() => 13000);
         });
     }
 
@@ -24,7 +24,13 @@ class ComicController extends Controller {
 
         ctx.helper.validate('id', { id });
 
-        const result = await service.comic.slug(id).catch(() => 13001);
+        let result = await service.utils.cacheGet(`comicSlug${id}`);
+
+        if (!result) {
+            result = await service.comic.slug(id).catch(() => 13001);
+            typeof result !== 'number' && service.utils.cacheSet(`comicSlug${id}`, result);
+        }
+
         if (typeof result !== 'number' && userId) {
             const isLiked = await service.relation.exist({
                 target: result._id,
@@ -56,7 +62,13 @@ class ComicController extends Controller {
 
         ctx.helper.validate('id', { id });
 
-        const result = await service.eposide.comicInfo(id, level).catch(() => 18001);
+        let result = await service.utils.cacheGet(`comicPlay${id}`);
+
+        if (!result) {
+            result = await service.eposide.comicInfo(id, level).catch(() => 18001);
+            typeof result !== 'number' && service.utils.cacheSet(`comicPlay${id}`, result);
+        }
+
         service.history.playCreate(result, 'Comic');
 
         ctx.helper.send(result);

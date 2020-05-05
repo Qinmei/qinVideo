@@ -41,6 +41,16 @@ class UserService extends Service {
         return result;
     }
 
+    async cacheInfo(id: string) {
+        const { service } = this.ctx;
+        const userCache = await service.utils.cacheGet('user' + id);
+        if (userCache) return userCache;
+
+        const result = await this.ctx.model.User.findById(id).select('-refreshToken -password');
+        result && (await service.utils.cacheSet('user' + id, result));
+        return result;
+    }
+
     async create(data: any) {
         const uuid = uuidv4();
         let result = await this.ctx.model.User.create({

@@ -21,7 +21,7 @@ export default (level) => {
                     ctx.state.user = level0;
                 }
             } catch (error) {
-                ctx.state.user = level0;
+                return ctx.helper.status(401);
             }
         } else {
             ctx.state.user = level0;

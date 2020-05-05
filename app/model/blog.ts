@@ -23,13 +23,9 @@ export default (app) => {
             },
             image: [{ type: String }],
             video: { type: String },
-            pin: {
-                type: Boolean,
-                default: false,
-            },
             hot: {
-                type: Boolean,
-                default: false,
+                type: Number,
+                default: 0,
             },
             tag: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
             addons: Schema.Types.Mixed,
