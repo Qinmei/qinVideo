@@ -48,14 +48,6 @@ export default (appInfo: EggAppInfo) => {
             },
         },
 
-        logger: {
-            dir: '/work/qinVideo/logs',
-            appLogName: `${appInfo.name}-web.log`,
-            coreLogName: 'egg-web.log',
-            agentLogName: 'egg-agent.log',
-            errorLogName: 'common-error.log',
-        },
-
         mongoose: {
             client: {
                 url: 'mongodb://qinvideo:Op6bg0PzQnVuTSjGuK0TkHJyUtGkTtQK@qinvideo.org:27017/qinvideo',
