@@ -79,7 +79,7 @@ class UserService extends Service {
     // frontend
     async slug(id: string) {
         const result = await this.ctx.model.User.findById(id).select(
-            'name email level score avatar background introduce'
+            'name email level score avatar background introduce status'
         );
         return result;
     }

@@ -53,6 +53,16 @@ export const generateSecurePathHash = (url, expires, secret) => {
     return `${url}?st=${token}&e=${expired}`;
 };
 
+export const validateEmail = (email) => {
+    const reg = /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/;
+    return reg.test(email);
+};
+
+export const getQueryOrder = (query: any) => {
+    const { page, size, sortBy, sortOrder, title, status, update, area, kind, tag, year, author } = query;
+    return `${page}-${size}-${sortBy}-${sortOrder}-${title}-${status}-${update}-${area}-${kind}-${tag}-${year}-${author}`;
+};
+
 export const htmlEncode = (str: string) => {
     return str
         ? str
