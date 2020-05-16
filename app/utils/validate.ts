@@ -303,6 +303,7 @@ const ruleobj = {
         tag: { type: 'array', required: false },
         image: { type: 'array', required: false },
         video: { type: 'string', required: false },
+        link: { type: 'string', required: false },
         hot: { type: 'number', required: false },
     }),
     login: {
@@ -310,7 +311,7 @@ const ruleobj = {
         password: { type: 'string' },
     },
     register: {
-        name: { type: 'string', min: 4 },
+        name: { type: 'string' },
         password: { type: 'string' },
         email: { type: 'string' },
     },

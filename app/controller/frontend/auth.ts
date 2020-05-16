@@ -37,8 +37,12 @@ class AuthController extends Controller {
         const { ctx, service } = this;
         const name = oldName.replace(/\s/g, '');
 
-        if (name.replace(/[\u4e00-\u9fa5]/g, 'aa').length <= 6) {
-            ctx.helper.error(11009);
+        if (name.replace(/[\u4e00-\u9fa5]/g, 'aa').length < 6) {
+            ctx.helper.error(11020);
+        }
+
+        if (name.replace(/[\u4e00-\u9fa5]/g, 'aa').length > 30) {
+            ctx.helper.error(11021);
         }
 
         const nameResult = await service.user.exist({ name });
@@ -52,11 +56,20 @@ class AuthController extends Controller {
         if (sensitive) {
             ctx.helper.error(10019);
         }
-        return nameResult;
+        return true;
     }
 
     async noExistByEmail(email: string) {
         const { ctx, service } = this;
+
+        if (email.length > 30) {
+            ctx.helper.error(10022);
+        }
+
+        if (!ctx.helper.validateEmail(email)) {
+            ctx.helper.error(10023);
+        }
+
         const emailResult = await service.user.exist({ email });
 
         if (emailResult) {
@@ -94,8 +107,6 @@ class AuthController extends Controller {
 
         const token = await this.generateToken(result);
 
-        service.data.create('login');
-
         ctx.helper.success({ token, refreshToken });
     }
 
@@ -116,13 +127,6 @@ class AuthController extends Controller {
 
         const result = await service.user.create(data).catch(() => 10009);
 
-        if (typeof result !== 'number') {
-            const token = await this.generateToken(result);
-            result._doc.token = token;
-        }
-
-        service.data.create('register');
-
         ctx.helper.send(result);
     }
 
@@ -132,8 +136,6 @@ class AuthController extends Controller {
         const userInfo = await service.user.exist({ refreshToken });
 
         if (userInfo) {
-            service.data.create('login');
-
             const token = await this.generateToken(userInfo);
 
             ctx.helper.success({ token });
@@ -158,7 +160,7 @@ class AuthController extends Controller {
             to: email,
             subject: '重置密码',
             text: '正文如下:',
-            html: `<h3>亲爱的${name}:<h3><p>您正在进行重置密码的操作,如果不是您本人所为请忽略此邮件,确认重置密码请复制点击下方验证码,有效期两小时:</p><p style='margin-left:30px;font-size:20px'>${token}</p>`,
+            html: `<h3>亲爱的${name}:<h3><p>您正在进行重置密码的操作,如果不是您本人所为请忽略此邮件,确认重置密码请复制点击下方验证码, 有效期两小时:</p><p style='margin-left:30px;font-size:20px'>${token}</p>`,
         });
 
         ctx.helper.success('send success');
@@ -194,7 +196,7 @@ class AuthController extends Controller {
             to: email,
             subject: '账户验证',
             text: '正文如下:',
-            html: `<h3>亲爱的${name}:<h3><p>请点击下方链接进行账户验证, 有效期为两小时:</p><p style='margin-left:30px;font-size:20px'>${link}</p>`,
+            html: `<h3>亲爱的${name}:<h3><p>请点击下方链接进行账户验证, 有效期两小时:</p><p style='margin-left:30px;font-size:20px'>${link}</p>`,
         });
 
         ctx.helper.success('send success');
