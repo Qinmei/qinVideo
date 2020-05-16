@@ -83,7 +83,7 @@ class AnimateService extends Service {
             { $limit: limit },
             ...categoryLookup,
             ...selectCount(sortBy).rest,
-            authorLookup,
+            // authorLookup,
             countAll,
             eposideTitle,
             {
