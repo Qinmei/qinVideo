@@ -6,11 +6,11 @@ export default (app) => {
         {
             author: { type: Schema.Types.ObjectId, ref: 'User' },
             content: { type: String, required: true },
-            target: { type: Schema.Types.ObjectId, required: true, refPath: 'onModel' },
+            target: { type: Schema.Types.ObjectId, required: true, refPath: 'onModel', index: true },
             onModel: {
                 type: String,
                 required: true,
-                enum: ['Comic', 'Animate', 'Comment', 'User', 'Post', 'Eposide'],
+                enum: ['Comic', 'Animate', 'Comment', 'User', 'Post', 'Eposide', 'Blog'],
             },
             status: {
                 type: String,
@@ -21,6 +21,7 @@ export default (app) => {
         },
         {
             timestamps: true,
+            toJSON: { virtuals: true },
         }
     );
 

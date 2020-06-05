@@ -15,7 +15,7 @@ class BlogService extends Service {
             .limit(limit)
             .populate('countLike')
             .populate('countComment')
-            .populate({ path: 'target', select: 'title slug coverVertical' })
+            .populate({ path: 'target', select: 'title slug coverVertical coverHorizontal cover' })
             .populate('tag')
             .populate({ path: 'author', select: 'name avatar level introduce background' });
 
@@ -34,6 +34,14 @@ class BlogService extends Service {
             .populate({ path: 'target', select: 'title slug coverVertical' })
             .populate('tag')
             .populate({ path: 'author', select: 'name avatar level introduce background' });
+        return result;
+    }
+
+    async exist(id: string, userId: string) {
+        const result = await this.ctx.model.Blog.findOne({
+            author: userId,
+            _id: { $in: [id] },
+        });
         return result;
     }
 

@@ -81,6 +81,14 @@ class CommentService extends Service {
         };
     }
 
+    async exist(id: string, userId: string) {
+        const result = await this.ctx.model.Comment.findOne({
+            author: userId,
+            _id: { $in: [id] },
+        });
+        return result;
+    }
+
     async create(data: any) {
         const result = await this.ctx.model.Comment.create(data);
         return result;
@@ -103,11 +111,9 @@ class CommentService extends Service {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 
-        const config = await this.ctx.service.config.cacheInfo();
-
         const query: any = {
             target,
-            status: config.commentVerify ? 'draft' : 'publish',
+            status: 'publish',
             parent: null,
         };
 
@@ -204,9 +210,10 @@ class CommentService extends Service {
                 if (likeArr.includes(item._id.toString())) {
                     item.isLiked = true;
                 }
-                item.children && item.children.map((ele: any) => {
-                    if (likeArr.includes(ele._id)) ele.isLiked = true;
-                });
+                item.children &&
+                    item.children.map((ele: any) => {
+                        if (likeArr.includes(ele._id)) ele.isLiked = true;
+                    });
                 return item;
             });
         }

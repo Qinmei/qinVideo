@@ -4,22 +4,18 @@ export default (app) => {
 
     const HistorySchema = new mongoose.Schema(
         {
-            target: { type: Schema.Types.ObjectId, required: true, refPath: 'onModel' },
+            target: { type: Schema.Types.ObjectId, required: true, refPath: 'onModel', index: true },
             onModel: {
                 type: String,
                 required: true,
                 enum: ['Eposide', 'Post', 'User'],
-            },
-            belong: { type: Schema.Types.ObjectId, refPath: 'onModel2' },
-            onModel2: {
-                type: String,
-                enum: ['Comic', 'Animate'],
             },
             author: { type: Schema.Types.ObjectId, ref: 'User' },
             addons: Schema.Types.Mixed,
         },
         {
             timestamps: true,
+            toJSON: { virtuals: true },
         }
     );
 

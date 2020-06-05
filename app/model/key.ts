@@ -25,6 +25,7 @@ export default (app) => {
         },
         {
             timestamps: true,
+            toJSON: { virtuals: true },
         }
     );
 

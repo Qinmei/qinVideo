@@ -13,7 +13,7 @@ export default (app) => {
                 enum: ['draft', 'publish', 'reject'],
                 default: 'draft',
             },
-            target: { type: Schema.Types.ObjectId, refPath: 'onModel' },
+            target: { type: Schema.Types.ObjectId, refPath: 'onModel', index: true },
             onModel: {
                 type: String,
                 enum: ['Comic', 'Animate', 'Eposide', 'Post', 'Blog'],
@@ -23,6 +23,7 @@ export default (app) => {
             },
             image: [{ type: String }],
             video: { type: String },
+            link: { type: String },
             hot: {
                 type: Number,
                 default: 0,
@@ -54,6 +55,7 @@ export default (app) => {
         ref: 'Comment',
         localField: '_id',
         foreignField: 'target',
+        options: { match: { status: 'publish' } },
         count: true,
     });
 

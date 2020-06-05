@@ -85,16 +85,16 @@ class UserController extends Controller {
 
         let query = {};
         if (type === 'animate') {
-            query = { author: userId, onModel: 'Eposide', onModel2: 'Animate' };
+            query = { author: userId, onModel: 'Eposide' };
         } else if (type === 'comic') {
-            query = { author: userId, onModel: 'Eposide', onModel2: 'Comic' };
+            query = { author: userId, onModel: 'Eposide' };
         } else if (type === 'post') {
             query = { author: userId, onModel: 'Post' };
         } else if (type === 'user') {
             query = { author: userId, onModel: 'User' };
         }
 
-        const result = await service.history.query(query).catch(() => 11008);
+        const result = await service.history.query(query, type).catch(() => 11008);
 
         ctx.helper.send(result);
     }
@@ -129,8 +129,6 @@ class UserController extends Controller {
 
         const result = await service.key.use(key, userId).catch(() => 11006);
 
-        service.data.create('key');
-
         ctx.helper.send(result);
     }
 
@@ -142,8 +140,6 @@ class UserController extends Controller {
         ctx.helper.validate('id', { id: shop });
 
         const result = await service.order.create({ user: userId, shop }).catch(() => 20001);
-
-        service.data.create('order');
 
         ctx.helper.send(result);
     }

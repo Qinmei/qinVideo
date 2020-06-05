@@ -9,11 +9,9 @@ class PostController extends Controller {
 
         query.status = 'publish';
 
-        if (query.title) service.data.create('search', query.title);
-
-        const key = JSON.stringify(query);
+        const key = ctx.helper.getQueryOrder(query);
         await service.utils.cacheInit(`post${key}`, async () => {
-            return await service.post[query.title ? 'search' : 'query'](query).catch(() => 14000);
+            return await service.post.query(query).catch(() => 14000);
         });
     }
 
@@ -37,8 +35,9 @@ class PostController extends Controller {
                 author: userId,
             });
             result.isLiked = isLiked;
-            service.history.create(result._id, 'Post');
         }
+
+        service.history.playCreate(result, 'Post');
 
         ctx.helper.send(result);
     }

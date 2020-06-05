@@ -4,7 +4,7 @@ export default (app) => {
 
     const RateSchema = new Schema(
         {
-            target: { type: Schema.Types.ObjectId, required: true, refPath: 'onModel' },
+            target: { type: Schema.Types.ObjectId, required: true, refPath: 'onModel', index: true },
             onModel: {
                 type: String,
                 required: true,
@@ -24,6 +24,7 @@ export default (app) => {
         },
         {
             timestamps: true,
+            toJSON: { virtuals: true },
         }
     );
 

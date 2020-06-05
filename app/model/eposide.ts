@@ -17,7 +17,7 @@ export default (app) => {
             cover: {
                 type: String,
             },
-            target: { type: Schema.Types.ObjectId, required: true, refPath: 'onModel' },
+            target: { type: Schema.Types.ObjectId, required: true, refPath: 'onModel', index: true },
             onModel: {
                 type: String,
                 required: true,
@@ -48,10 +48,26 @@ export default (app) => {
         }
     );
 
+    EposideSchema.virtual('count', {
+        ref: 'Count',
+        localField: '_id',
+        foreignField: 'target',
+        justOne: true,
+    });
+
     EposideSchema.virtual('countPlay', {
         ref: 'History',
         localField: '_id',
         foreignField: 'target',
+        options: { match: { author: { $ne: null } } },
+        count: true,
+    });
+
+    EposideSchema.virtual('countView', {
+        ref: 'History',
+        localField: '_id',
+        foreignField: 'target',
+        options: { match: { author: { $eq: null } } },
         count: true,
     });
 

@@ -62,9 +62,26 @@ class CommentController extends Controller {
 
         const result = await service.comment.create(data).catch(() => 17002);
 
-        service.data.create('comment');
+        service.count.init(result, 'comment');
 
         ctx.helper.send(result);
+    }
+
+    async destroy() {
+        const { ctx, service } = this;
+        const id = ctx.params.id;
+        const userId = ctx.state.user.id;
+
+        ctx.helper.validate('id', { id });
+
+        const data = await service.comment.exist(id, userId).catch(() => 17001);
+
+        if (typeof data !== 'number') {
+            const result = await service.comment.destroy([id]).catch(() => 17004);
+            ctx.helper.send(result);
+        }
+
+        ctx.helper.send(data);
     }
 }
 

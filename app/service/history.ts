@@ -1,78 +1,63 @@
 import { Service } from 'egg';
 
 class HistoryService extends Service {
-    async query(query, size = 20) {
-        const result = await this.ctx.model.History.find(query)
+    async query(query, type) {
+        let result = await this.ctx.model.History.find(query)
             .sort({ createdAt: -1 })
-            .limit(size)
-            .populate('target', 'title _id cover sort slug introduce')
-            .populate('belong', 'title slug _id coverVertical');
-        return result;
-    }
+            .limit(100)
+            .populate({
+                path: 'target',
+                populate: [
+                    {
+                        path: 'target',
+                        select: 'title slug _id coverVertical',
+                    },
+                ],
+                select: 'title _id sort target onModel',
+            });
 
-    async create(id: string, type: string) {
-        const { state } = this.ctx;
-        const author = state.user.id;
-
-        if (!author) return;
-
-        const data = {
-            author,
-            onModel: type,
-            target: id,
-        };
-        await this.existOrCreate(data);
-    }
-
-    async playCreate(content: any, type: string) {
-        const { state } = this.ctx;
-        const author = state.user.id;
-
-        if (!author) return;
-        if (typeof content === 'number') return;
-
-        const data = {
-            author,
-            onModel2: type,
-            onModel: 'Eposide',
-            target: content._id,
-            belong: content.target._id,
-        };
-        await this.playExistOrCreate(data);
-    }
-
-    async existOrCreate(data: any) {
-        let result = await this.ctx.model.History.findOne(data);
-        if (!result) {
-            result = await this.ctx.model.History.create(data);
-        }
-
-        const type = result.onModel.toLowerCase();
-        if (type === 'post') {
-            this.ctx.service.data.create(type);
-        }
+        result = JSON.parse(JSON.stringify(result))
+            .filter((item) =>
+                ['animate', 'comic'].includes(type) ? item?.target?.onModel.toLowerCase() === type : true
+            )
+            .slice(0, 20)
+            .map((item) => ({
+                ...item,
+                belong: item?.target?.target,
+            }));
 
         return result;
     }
 
-    async playExistOrCreate(data: any) {
-        const { author, onModel, belong, onModel2 } = data;
+    async playCreate(result: any, type: string) {
+        if (typeof result === 'number') return;
+        const { _id } = result;
 
-        let result = await this.ctx.model.History.findOne({
+        this.create(_id, type);
+    }
+
+    async create(target: string, onModel: string) {
+        const { state, service } = this.ctx;
+        const author = state.user.id;
+
+        const data = {
             author,
+            target,
             onModel,
-            belong,
-            onModel2,
-        });
-        if (!result) {
-            result = await this.ctx.model.History.create(data);
-        } else {
-            result = await this.ctx.model.History.findByIdAndUpdate(result._id, data);
+        };
+
+        if (author) {
+            this.update(data);
         }
 
-        const type = result.onModel2.toLowerCase();
-        this.ctx.service.data.create(type);
+        const type = author ? 'play' : 'view';
+        service.count.create(author, target, onModel, type);
+    }
 
+    async update(data: any) {
+        let update = { updatedAt: new Date() };
+        let options = { upsert: true, new: true, setDefaultsOnInsert: true };
+        const result = await this.ctx.model.History.findOneAndUpdate(data, update, options);
         return result;
     }
 

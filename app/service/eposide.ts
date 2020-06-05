@@ -17,11 +17,13 @@ class EposideService extends Service {
     }
 
     async info(id: string) {
-        const data = await this.ctx.model.Eposide.findById(id)
-            .populate('target')
-            .populate('countPlay')
-            .populate('countComment')
-            .populate('countDanmu');
+        const data = await this.ctx.model.Eposide.findById(id).populate('target').populate('count');
+
+        const { play = 0, view = 0, comment = 0, danmu = 0 } = data.count || {};
+        data.countPlay = play + view;
+        data.countDanmu = danmu;
+        data.countComment = comment;
+        delete data.count;
         return data;
     }
 
@@ -64,9 +66,7 @@ class EposideService extends Service {
                     path: 'target',
                     select: 'title slug coverVertical introduce playType noPrefix level linkPrefix',
                 })
-                .populate('countPlay')
-                .populate('countComment')
-                .populate('countDanmu');
+                .populate('count');
 
             if (result.target._id) {
                 this.service.utils.cacheSet(`animatePlay${id}`, result);
@@ -86,7 +86,6 @@ class EposideService extends Service {
             delete data.target.linkPrefix;
             delete data.target.playType;
             delete data.noSetPrefix;
-            delete data.onModel;
             data.levelLimit = true;
             return data;
         }
@@ -133,11 +132,16 @@ class EposideService extends Service {
             data.link.map((item: any) => (item.value = prefix + item.value));
         }
 
+        const { play = 0, view = 0, comment = 0, danmu = 0 } = data.count || {};
+        data.countPlay = play + view;
+        data.countDanmu = danmu;
+        data.countComment = comment;
+
+        delete data.count;
         delete data.target.level;
         delete data.target.noPrefix;
         delete data.target.linkPrefix;
         delete data.noSetPrefix;
-        delete data.onModel;
 
         return data;
     }
@@ -148,9 +152,7 @@ class EposideService extends Service {
                 path: 'target',
                 select: 'title slug coverVertical introduce playType noPrefix level linkPrefix',
             })
-            .populate('countPlay')
-            .populate('countComment')
-            .populate('countDanmu');
+            .populate('count');
 
         if (!result.target._id) return 18001;
 
@@ -239,6 +241,12 @@ class EposideService extends Service {
             }
         }
 
+        const { play = 0, view = 0, comment = 0, danmu = 0 } = data.count || {};
+        data.countPlay = play + view;
+        data.countDanmu = danmu;
+        data.countComment = comment;
+
+        delete data.count;
         delete data.target.level;
         delete data.target.noPrefix;
         delete data.target.linkPrefix;

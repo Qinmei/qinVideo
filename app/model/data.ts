@@ -17,13 +17,19 @@ export default (app) => {
                     'comment',
                     'post',
                     'animate',
+                    'play',
                     'comic',
+                    'read',
                     'danmu',
                     'order',
                     'report',
                     'key',
                     'search',
                     'other',
+                    'request',
+                    'email',
+                    'reset',
+                    'verify',
                 ],
                 default: 'other',
                 required: true,
@@ -36,6 +42,7 @@ export default (app) => {
         },
         {
             timestamps: true,
+            toJSON: { virtuals: true },
         }
     );
 

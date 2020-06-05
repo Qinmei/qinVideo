@@ -22,7 +22,6 @@ export default (app) => {
                 enum: ['draft', 'publish', 'reject'],
                 default: 'draft',
             },
-            ping: { type: Boolean, default: false },
             level: { type: Number, default: 0 }, // 等级限定
             author: { type: Schema.Types.ObjectId, ref: 'User' }, // 用户名
             kind: [{ type: Schema.Types.ObjectId, ref: 'Category' }], // 分类

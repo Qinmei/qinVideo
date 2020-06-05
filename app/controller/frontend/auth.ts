@@ -60,26 +60,22 @@ class AuthController extends Controller {
     }
 
     async noExistByEmail(email: string) {
-        try {
-            const { ctx, service } = this;
+        const { ctx, service } = this;
 
-            if (email.length > 30) {
-                ctx.helper.error(10022);
-            }
-
-            if (!ctx.helper.validateEmail(email)) {
-                ctx.helper.error(10023);
-            }
-
-            const emailResult = await service.user.exist({ email });
-
-            if (emailResult) {
-                ctx.helper.error(10007);
-            }
-            return emailResult;
-        } catch (error) {
-            console.log(error);
+        if (email.length > 30) {
+            ctx.helper.error(10022);
         }
+
+        if (!ctx.helper.validateEmail(email)) {
+            ctx.helper.error(10023);
+        }
+
+        const emailResult = await service.user.exist({ email });
+
+        if (emailResult) {
+            ctx.helper.error(10007);
+        }
+        return emailResult;
     }
 
     async generateToken(userInfo: any) {

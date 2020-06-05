@@ -100,6 +100,7 @@ class DataService extends Service {
             {
                 $match: {
                     type: 'search',
+                    target: { $ne: null },
                     createdAt: {
                         $gte: new Date(startTime),
                         $lte: new Date(endTime),
@@ -151,7 +152,6 @@ class DataService extends Service {
     async activeSort({ startTime, endTime, type }) {
         const model = type === 'history' ? 'History' : 'Relation';
         const target = type === 'history' ? '$belong' : '$target';
-        const onModel = type === 'history' ? 'onModel2' : 'onModel';
         const result = this.ctx.model[model].aggregate([
             {
                 $match: {
@@ -159,7 +159,7 @@ class DataService extends Service {
                         $gte: new Date(startTime),
                         $lte: new Date(endTime),
                     },
-                    [onModel]: {
+                    onModel: {
                         $in: ['Animate', 'Comic', 'Post'],
                     },
                 },
@@ -225,7 +225,7 @@ class DataService extends Service {
 
     async create(type: string, target?: string) {
         const { host, ip, state } = this.ctx;
-        const author = state.user.name;
+        const author = state?.user?.name;
 
         const data = {
             type,
@@ -238,11 +238,11 @@ class DataService extends Service {
         let dataTemp = (await this.ctx.service.utils.cacheGet('dataTemp')) || [];
         dataTemp.push(data);
 
-        if (dataTemp.length > this.ctx.app.config.maxProxyCount) {
+        if (dataTemp.length > this.ctx.app.config.expiredCount) {
             await this.ctx.model.Data.create(dataTemp);
             dataTemp = [];
         }
-        await this.ctx.service.utils.cacheSet('dataTemp', dataTemp);
+        await this.ctx.service.utils.cacheSet('dataTemp', dataTemp, 3600 * 24 * 7);
     }
 
     async destroy(start: string, end: string) {

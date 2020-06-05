@@ -50,17 +50,18 @@ export default (appInfo: EggAppInfo) => {
 
         mongoose: {
             client: {
-                url: 'mongodb://qinvideo:Op6bg0PzQnVuTSjGuK0TkHJyUtGkTtQK@qinvideo.org:27017/qinvideo',
-                // url: 'mongodb://localhost:27017/test',
+                // url: 'mongodb://localhost:27017/qinwork',
+                url: 'mongodb://qinvideo:Op6bg0PzQnVuTSjGuK0TkHJyUtGkTtQK@localhost:27017/qinvideo',
                 options: {},
             },
         },
 
         authUrl: 'https://m.qinmei.video/auth/verify', // 邮件验证账户的地址
-        salt: 'qinmei', // 密码盐值
+        salt: 'qinme', // 密码盐值
         tokenSecret: 'qinmei', // 登录密钥
-        expired: 3600, // redis缓存有效期, 是个随机数, 如果是3600, 那么会在3600~7200之间, 即一到两倍之间
+        expired: 600, // redis缓存有效期, 是个随机数, 如果是3600, 那么会在3600~7200之间, 即一到两倍之间
         expiredCount: 100, // 接口缓存写入数据库的数量
+        caculateCount: 100, // 评论播放等统计接口的计算缓存量
     };
 
     return {

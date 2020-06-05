@@ -10,37 +10,25 @@ class ConfigController extends Controller {
     async home() {
         const { service } = this;
 
-        await service.utils.cacheInit(
-            'commonHome',
-            async () => {
-                return await service.config.home('pcIndex').catch(() => 22003);
-            },
-            this.ctx.app.config.longExpired
-        );
+        await service.utils.cacheInit('commonHome', async () => {
+            return await service.config.home('pcIndex').catch(() => 22003);
+        });
     }
 
     async mobile() {
         const { service } = this;
 
-        await service.utils.cacheInit(
-            'commonMobile',
-            async () => {
-                return await service.config.home('h5Index').catch(() => 22003);
-            },
-            this.ctx.app.config.longExpired
-        );
+        await service.utils.cacheInit('commonMobile', async () => {
+            return await service.config.home('h5Index').catch(() => 22003);
+        });
     }
 
     async appInfo() {
         const { service } = this;
 
-        await service.utils.cacheInit(
-            'commonApp',
-            async () => {
-                return await service.config.appInfo().catch(() => 22007);
-            },
-            this.ctx.app.config.longExpired
-        );
+        await service.utils.cacheInit('commonApp', async () => {
+            return await service.config.appInfo().catch(() => 22007);
+        });
     }
 }
 

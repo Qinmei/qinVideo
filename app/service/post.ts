@@ -1,8 +1,8 @@
 import { Service } from 'egg';
-import { postCategoryLookup, authorLookup, postSelectCount, postCountAll } from '../utils/aggregation';
+import { postCategoryLookup, authorLookup, countLookup, seasonLookup, filterProject } from '../utils/aggregation';
 
 class PostService extends Service {
-    async query({ page, size, sortBy = '_id', sortOrder = -1, status, title, kind, tag, ping, author }) {
+    async query({ page, size, sortBy = '_id', sortOrder = -1, status, title, kind, tag, author }) {
         const mongoose = this.app.mongoose;
         const skip: number = (page - 1) * size;
         const limit: number = size;
@@ -13,11 +13,10 @@ class PostService extends Service {
         kind && (query.kind = { $in: [mongoose.Types.ObjectId(kind)] });
         tag && (query.tag = { $in: [mongoose.Types.ObjectId(tag)] });
         author && (query.author = { $in: [mongoose.Types.ObjectId(author)] });
-        ping && (query.ping = ping);
 
         const result = await this.ctx.model.Post.aggregate([
             { $match: query },
-            ...postSelectCount(sortBy).select,
+            ...countLookup,
             {
                 $sort: {
                     [sortBy]: sortOrder,
@@ -27,24 +26,8 @@ class PostService extends Service {
             { $skip: skip },
             { $limit: limit },
             ...postCategoryLookup,
-            ...postSelectCount(sortBy).rest,
-            authorLookup,
-            postCountAll,
-            {
-                $project: {
-                    listComment: 0,
-                    listPlay: 0,
-                    listLike: 0,
-                    content: 0,
-                    seasonRelate: 0,
-                },
-            },
-            {
-                $unwind: {
-                    path: '$author',
-                    preserveNullAndEmptyArrays: true,
-                },
-            },
+            ...authorLookup,
+            ...filterProject,
         ]);
 
         const total = await this.ctx.model.Post.find(query).countDocuments();
@@ -56,13 +39,7 @@ class PostService extends Service {
     }
 
     async info(id: string) {
-        const data = await this.ctx.model.Post.findById(id)
-            .populate('countPlay')
-            .populate('countLike')
-            .populate('countComment')
-            .populate({ path: 'author', select: 'name avatar level introduce background' })
-            .populate('kind')
-            .populate('tag');
+        const data = await this.ctx.model.Post.findById(id);
         return data;
     }
 
@@ -85,17 +62,20 @@ class PostService extends Service {
 
     // frontend
     async slug(slug: string) {
-        const data = await this.ctx.model.Post.findOne({ slug, status: 'publish' })
-            .populate('countPlay')
-            .populate('countLike')
-            .populate('countComment')
-            .populate({ path: 'author', select: 'name avatar level introduce background' })
-            .populate('kind')
-            .populate('tag')
-            .populate({ path: 'seasons', select: 'slug season title', match: { status: 'publish' } })
-            .populate('seasonInfo');
-        if (!data) throw 'error';
-        return data;
+        const result = await this.ctx.model.Post.aggregate([
+            {
+                $match: {
+                    slug,
+                    status: 'publish',
+                },
+            },
+            seasonLookup('post'),
+            ...countLookup,
+            ...postCategoryLookup,
+            ...authorLookup,
+        ]);
+        if (!result[0]) throw 'no data';
+        return result[0];
     }
 
     async relative(id: string) {
@@ -105,33 +85,6 @@ class PostService extends Service {
             tag,
         }).limit(20);
         return result.filter((item: any) => item.id !== id);
-    }
-
-    async search({ page, size, title, status }) {
-        const skip: number = (page - 1) * size;
-        const limit: number = size;
-
-        const query: any = {};
-        title && (query.title = { $regex: title, $options: '$i' });
-        status && (query.status = status);
-
-        const result = await this.ctx.model.Post.aggregate([
-            { $match: query },
-            {
-                $sort: {
-                    _id: 1,
-                },
-            },
-            { $skip: skip },
-            { $limit: limit },
-        ]);
-
-        const total = await this.ctx.model.Post.find(query).countDocuments();
-
-        return {
-            list: result,
-            total,
-        };
     }
 }
 

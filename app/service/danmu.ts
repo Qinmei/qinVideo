@@ -4,19 +4,21 @@ interface Query {
     page: number;
     size: number;
     sortBy: string;
+    status: string;
     sortOrder?: number;
     title?: string;
     target?: string;
 }
 
 class DanmuService extends Service {
-    async query({ page, size, sortBy = 'createdAt', sortOrder = -1, title, target }: Query) {
+    async query({ page, size, sortBy = 'createdAt', sortOrder = -1, title, target, status }: Query) {
         const skip: number = (page - 1) * size;
         const limit: number = size;
 
         const query: any = {};
         title && (query.text = { $regex: title, $options: '$i' });
         target && (query.target = target);
+        status && (query.status = status);
 
         const result = await this.ctx.model.Danmu.find(query)
             .sort({ [sortBy]: sortOrder, _id: -1 })

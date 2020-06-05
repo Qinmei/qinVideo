@@ -9,11 +9,9 @@ class AnimateController extends Controller {
 
         query.status = 'publish';
 
-        if (query.title) service.data.create('search', query.title);
-
-        const key = JSON.stringify(query);
+        const key = ctx.helper.getQueryOrder(query);
         await service.utils.cacheInit(`animate${key}`, async () => {
-            return await service.animate[query.title ? 'search' : 'query'](query).catch(() => 12000);
+            return await service.animate.query(query).catch(() => 12000);
         });
     }
 
@@ -64,7 +62,7 @@ class AnimateController extends Controller {
 
         const result = await service.eposide.animateInfo(id, level).catch(() => 18001);
 
-        service.history.playCreate(result, 'Animate');
+        service.history.playCreate(result, 'Eposide');
 
         ctx.helper.send(result);
     }

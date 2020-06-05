@@ -5,7 +5,7 @@ export default (app) => {
     const CommentSchema = new Schema(
         {
             author: { type: Schema.Types.ObjectId, ref: 'User' }, // 用户名
-            target: { type: Schema.Types.ObjectId, refPath: 'onModel' },
+            target: { type: Schema.Types.ObjectId, refPath: 'onModel', index: true },
             onModel: {
                 type: String,
                 enum: ['Comic', 'Animate', 'Eposide', 'Post', 'Blog'],

@@ -228,6 +228,7 @@ const ruleobj = {
         type: { type: 'number', required: false },
         ip: { type: 'string', required: false },
         referer: { type: 'string', required: false },
+        status: { type: 'string', required: force },
     }),
     shop: (force: boolean) => ({
         title: { type: 'string', required: force },
@@ -267,6 +268,7 @@ const ruleobj = {
         replyTo: { type: 'string', required: false },
         parent: { type: 'string', required: false },
         content: { type: 'string', required: force },
+        status: { type: 'string', required: force },
     }),
     key: (force: boolean) => ({
         count: { type: 'number', required: force },

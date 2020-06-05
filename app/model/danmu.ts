@@ -4,7 +4,7 @@ export default (app) => {
 
     const DanmuSchema = new mongoose.Schema(
         {
-            target: { type: Schema.Types.ObjectId, ref: 'Eposide' },
+            target: { type: Schema.Types.ObjectId, ref: 'Eposide', index: true },
             author: { type: Schema.Types.ObjectId, ref: 'User' },
             time: { type: Number, default: 0, index: true },
             text: { type: String, required: true },
@@ -21,6 +21,7 @@ export default (app) => {
         },
         {
             timestamps: true,
+            toJSON: { virtuals: true },
         }
     );
 

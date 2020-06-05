@@ -9,11 +9,9 @@ class ComicController extends Controller {
 
         query.status = 'publish';
 
-        if (query.title) service.data.create('search', query.title);
-
-        const key = JSON.stringify(query);
+        const key = ctx.helper.getQueryOrder(query);
         await service.utils.cacheInit(`comic${key}`, async () => {
-            return await service.comic[query.title ? 'search' : 'query'](query).catch(() => 13000);
+            return await service.comic.query(query).catch(() => 13000);
         });
     }
 
@@ -62,14 +60,9 @@ class ComicController extends Controller {
 
         ctx.helper.validate('id', { id });
 
-        let result = await service.utils.cacheGet(`comicPlay${id}`);
+        let result = await service.eposide.comicInfo(id, level).catch(() => 18001);
 
-        if (!result) {
-            result = await service.eposide.comicInfo(id, level).catch(() => 18001);
-            typeof result !== 'number' && service.utils.cacheSet(`comicPlay${id}`, result);
-        }
-
-        service.history.playCreate(result, 'Comic');
+        service.history.playCreate(result, 'Eposide');
 
         ctx.helper.send(result);
     }

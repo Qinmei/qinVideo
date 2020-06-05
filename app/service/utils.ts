@@ -133,7 +133,7 @@ class UtilsService extends Service {
         }
     }
 
-    async generateCode(id, time, length = 6) {
+    async generateCode(id, time, length=6) {
         const code = Math.random().toString().slice(-length);
         const cache = await this.app.redis.get(code);
 

@@ -43,15 +43,31 @@ class BlogController extends Controller {
         data.hot = 0;
         ctx.helper.validate('blog', data, true);
 
-        const sensitive = await service.utils.isSensitiveWord(data.content);
+        const sensitive = await service.utils.isSensitiveWord(data.text);
 
         if (sensitive) {
             ctx.helper.error(10019);
         }
 
         const result = await service.blog.create(data).catch(() => 32002);
-        service.data.create('blog');
         ctx.helper.send(result);
+    }
+
+    async destroy() {
+        const { ctx, service } = this;
+        const id = ctx.params.id;
+        const userId = ctx.state.user.id;
+
+        ctx.helper.validate('id', { id });
+
+        const data = await service.blog.exist(id, userId).catch(() => 32001);
+
+        if (typeof data !== 'number') {
+            const result = await service.blog.destroy([id]).catch(() => 32004);
+            ctx.helper.send(result);
+        }
+
+        ctx.helper.send(data);
     }
 }
 

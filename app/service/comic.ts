@@ -2,13 +2,11 @@ import { Service } from 'egg';
 import {
     categoryLookup,
     authorLookup,
-    countAll,
-    selectCount,
-    listAll,
-    rateLookup,
-    seasonLookup,
+    countLookup,
     eposideLookup,
-    eposideTitle,
+    slugEposideLookup,
+    seasonLookup,
+    filterProject,
 } from '../utils/aggregation';
 
 class ComicService extends Service {
@@ -27,9 +25,9 @@ class ComicService extends Service {
         tag && (query.tag = { $in: [mongoose.Types.ObjectId(tag)] });
         author && (query.author = { $in: [mongoose.Types.ObjectId(author)] });
 
-        const result = await this.ctx.model.Comic.aggregate([
+        const result = await this.ctx.model.Animate.aggregate([
             { $match: query },
-            ...selectCount(sortBy).select,
+            ...countLookup,
             {
                 $sort: {
                     [sortBy]: sortOrder,
@@ -39,21 +37,9 @@ class ComicService extends Service {
             { $skip: skip },
             { $limit: limit },
             ...categoryLookup,
-            ...selectCount(sortBy).rest,
-            authorLookup,
-            countAll,
-            eposideTitle,
-            {
-                $project: {
-                    listComment: 0,
-                    listPlay: 0,
-                    listDanmu: 0,
-                    listEposide: 0,
-                    listLike: 0,
-                    rateStar: 0,
-                    rateCount: 0,
-                },
-            },
+            ...authorLookup,
+            ...eposideLookup,
+            ...filterProject,
         ]);
 
         const total = await this.ctx.model.Comic.find(query).countDocuments();
@@ -65,30 +51,12 @@ class ComicService extends Service {
     }
 
     async info(id: string) {
-        const mongoose = this.app.mongoose;
-        const result = await this.ctx.model.Comic.aggregate([
-            {
-                $match: {
-                    _id: new mongoose.Types.ObjectId(id),
-                },
-            },
-            ...categoryLookup,
-            ...Object.values(listAll),
-            ...rateLookup,
-            authorLookup,
-            seasonLookup('comic'),
-            countAll,
-            {
-                $project: {
-                    listComment: 0,
-                    listPlay: 0,
-                    listDanmu: 0,
-                    listEposide: 0,
-                    listLike: 0,
-                },
-            },
-        ]);
-        return result.length > 0 ? result[0] : 13001;
+        const data = await this.ctx.model.Animate.findById(id)
+            .populate('area')
+            .populate('year')
+            .populate('kind')
+            .populate('tag');
+        return data;
     }
 
     async create(data: any) {
@@ -125,34 +93,22 @@ class ComicService extends Service {
 
     // frontend
     async slug(slug: string) {
-        const result = await this.ctx.model.Comic.aggregate([
+        const result = await this.ctx.model.Animate.aggregate([
             {
                 $match: {
                     slug,
                     status: 'publish',
                 },
             },
-            ...categoryLookup,
-            ...Object.values(listAll),
-            ...rateLookup,
-            authorLookup,
             seasonLookup('comic'),
-            eposideLookup,
-            countAll,
-            {
-                $project: {
-                    listComment: 0,
-                    listPlay: 0,
-                    listDanmu: 0,
-                    listEposide: 0,
-                    listLike: 0,
-                    linkPrefix: 0,
-                    level: 0,
-                    noPrefix: 0,
-                },
-            },
+            ...countLookup,
+            ...categoryLookup,
+            ...authorLookup,
+            ...slugEposideLookup,
+            ...filterProject,
         ]);
-        return result.length > 0 ? result[0] : 13001;
+        if (!result[0]) throw 'no data';
+        return result[0];
     }
 
     async relative(id: string) {
@@ -162,40 +118,6 @@ class ComicService extends Service {
             tag,
         }).limit(20);
         return result.filter((item: any) => item.id !== id);
-    }
-
-    async search({ page, size, title, status }) {
-        const skip: number = (page - 1) * size;
-        const limit: number = size;
-
-        const query: any = {};
-        title && (query.title = { $regex: title, $options: '$i' });
-        status && (query.status = status);
-
-        const result = await this.ctx.model.Comic.aggregate([
-            { $match: query },
-            {
-                $sort: {
-                    _id: 1,
-                },
-            },
-            { $skip: skip },
-            { $limit: limit },
-            ...rateLookup,
-            {
-                $project: {
-                    rateStar: 0,
-                    rateCount: 0,
-                },
-            },
-        ]);
-
-        const total = await this.ctx.model.Comic.find(query).countDocuments();
-
-        return {
-            list: result,
-            total,
-        };
     }
 }
 

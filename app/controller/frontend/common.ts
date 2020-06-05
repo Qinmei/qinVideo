@@ -28,8 +28,6 @@ class CommonController extends Controller {
 
         const result = await service.report.create(data).catch(() => 23002);
 
-        service.data.create('report');
-
         ctx.helper.send(result);
     }
 
@@ -76,7 +74,19 @@ class CommonController extends Controller {
         const info = await service.rate.exist(userId, data.target);
         if (info) ctx.helper.send(29005);
         const result = await service.rate.create(data).catch(() => 29002);
+
+        service.count.init(result, 'rateCount');
+        service.count.init(result, 'rateStar');
+
         ctx.helper.send(result);
+    }
+
+    async test() {
+        // this.ctx.service.count.syncEposide();
+        // this.ctx.service.count.syncAnimate();
+        // this.ctx.service.count.syncComic();
+        // this.ctx.service.count.syncPost();
+        this.ctx.helper.send('start');
     }
 }
 

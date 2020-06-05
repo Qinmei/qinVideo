@@ -141,6 +141,7 @@ class ConfigService extends Service {
     }
 
     async home(type: string) {
+        console.time('config');
         const result: ConfigInfo = await this.ctx.model.Config.findOne({}, { [type]: 1 });
 
         const list = result[type].filter((item: string) => !/new/.test(item));
@@ -158,9 +159,17 @@ class ConfigService extends Service {
 
         for (const item of handlResult) {
             const { query, origin, type } = this.ctx.helper.indexTrans(item);
-            const data = await this.ctx.service[type].query(query);
+            const key = type + this.ctx.helper.getQueryOrder(query);
+            let data = await this.ctx.service.utils.cacheGet(key);
+            console.log((data ? 'cache' : 'nocache') + key);
+            if (!data) {
+                data = await this.ctx.service[type].query(query);
+                this.ctx.service.utils.cacheSet(key, data);
+            }
+
             final[origin] = data;
         }
+        console.timeEnd('config');
 
         return final;
     }

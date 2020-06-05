@@ -21,6 +21,7 @@ export default (app) => {
             author: {
                 type: Schema.Types.ObjectId,
                 ref: 'User',
+                index: true,
             },
             status: {
                 type: String,
@@ -63,10 +64,17 @@ export default (app) => {
         }
     );
 
+    AnimateSchema.virtual('count', {
+        ref: 'Count',
+        localField: '_id',
+        foreignField: 'target',
+        justOne: true,
+    });
+
     AnimateSchema.virtual('countPlay', {
         ref: 'History',
         localField: '_id',
-        foreignField: 'target',
+        foreignField: 'belong',
         count: true,
     });
 

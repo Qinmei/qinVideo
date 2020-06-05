@@ -48,7 +48,8 @@ class DanmuController extends Controller {
 
         const result = await service.danmu.create(data).catch(() => 15002);
 
-        service.data.create('danmu');
+        service.count.init(result, 'danmu');
+
         ctx.helper.send(result);
     }
 }
