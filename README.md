@@ -44,4 +44,4 @@
 
 ## 赞赏
 
-![weixin](https://qinvidoe.org/assets/img/pay.jpeg)
+![weixin](https://qinvideo.org/assets/img/pay.jpeg)
