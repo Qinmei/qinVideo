@@ -43,5 +43,6 @@
 -   2020.01.01: v2.0.0, 基本功能 OK;
 
 ## 赞赏
-
-![weixin](https://qinvideo.org/assets/img/pay.jpeg)
+<div align=center>
+<img src="https://qinvideo.org/assets/img/pay.jpeg" width="200" height="200" alt="weixin"/>
+</div>
