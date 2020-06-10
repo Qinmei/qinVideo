@@ -44,5 +44,5 @@
 
 ## 赞赏
 <div align=center>
-<img src="https://qinvideo.org/assets/img/pay.jpeg" width="400" alt="weixin"/>
+<img src="https://qinvideo.org/assets/img/pay.jpeg" width="450" alt="weixin"/>
 </div>
