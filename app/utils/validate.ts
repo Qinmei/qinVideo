@@ -228,7 +228,7 @@ const ruleobj = {
         type: { type: 'number', required: false },
         ip: { type: 'string', required: false },
         referer: { type: 'string', required: false },
-        status: { type: 'string', required: force },
+        status: { type: 'string', required: false },
     }),
     shop: (force: boolean) => ({
         title: { type: 'string', required: force },
