@@ -39,7 +39,7 @@ class PostService extends Service {
     }
 
     async info(id: string) {
-        const data = await this.ctx.model.Post.findById(id);
+        const data = await this.ctx.model.Post.findById(id).populate('kind').populate('tag');
         return data;
     }
 
