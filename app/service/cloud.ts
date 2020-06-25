@@ -76,7 +76,6 @@ class CloudService extends Service {
 
             data[item] = newType;
         }
-
         const result = await this.ctx.model[data.type].create(data);
         const { eposide = [] } = data;
 
@@ -84,9 +83,12 @@ class CloudService extends Service {
             item.target = result._id;
             item.onModel = data.type;
             item.sort = index + 1;
+            delete item._id;
         });
 
-        const eposideData = await this.ctx.service.eposide.create(eposide).catch(() => false);
+        const eposideData = await this.ctx.service.eposide.create(eposide).catch((err) => {
+            return false;
+        });
         if (!eposideData) {
             await this.ctx.service[data.type.toLowerCase()].destroy([result._id]);
         }
