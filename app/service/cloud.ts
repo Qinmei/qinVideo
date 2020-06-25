@@ -55,18 +55,19 @@ class CloudService extends Service {
             const existType = categories.filter((item) => item.type === itemType);
 
             const newType: any[] = [];
+
             try {
                 for (const ele of data[item]) {
                     if (ele) {
                         const cateInfo = existType.find((item) => item.name === ele);
                         if (cateInfo) {
-                            newType.push[ele.id];
+                            newType.push(cateInfo._id);
                         } else {
                             const newCate = await this.ctx.service.category.create({
                                 name: ele,
                                 type: itemType,
                             });
-                            newCate && newType.push(newCate.id);
+                            newCate && newType.push(newCate._id);
                         }
                     }
                 }
@@ -76,6 +77,12 @@ class CloudService extends Service {
 
             data[item] = newType;
         }
+
+        if (data.year.length > 0) {
+            const year = categories.find((item) => item._id === data.year[0]);
+            data.firstPlay = year.name.slice(0, 4) + '0101';
+        }
+
         const result = await this.ctx.model[data.type].create(data);
         const { eposide = [] } = data;
 
