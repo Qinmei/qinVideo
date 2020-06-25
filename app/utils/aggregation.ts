@@ -188,6 +188,16 @@ export const slugEposideLookup = [
             as: 'eposides',
         },
     },
+    {
+        $addFields: {
+            id: '$_id',
+            countEposide: {
+                $size: {
+                    $ifNull: ['$eposides', []],
+                },
+            },
+        },
+    },
 ];
 
 export const countLookup = [

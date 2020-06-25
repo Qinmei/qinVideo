@@ -25,7 +25,7 @@ class ComicService extends Service {
         tag && (query.tag = { $in: [mongoose.Types.ObjectId(tag)] });
         author && (query.author = { $in: [mongoose.Types.ObjectId(author)] });
 
-        const result = await this.ctx.model.Animate.aggregate([
+        const result = await this.ctx.model.Comic.aggregate([
             { $match: query },
             ...countLookup,
             {
@@ -51,7 +51,7 @@ class ComicService extends Service {
     }
 
     async info(id: string) {
-        const data = await this.ctx.model.Animate.findById(id)
+        const data = await this.ctx.model.Comic.findById(id)
             .populate('area')
             .populate('year')
             .populate('kind')
@@ -93,7 +93,7 @@ class ComicService extends Service {
 
     // frontend
     async slug(slug: string) {
-        const result = await this.ctx.model.Animate.aggregate([
+        const result = await this.ctx.model.Comic.aggregate([
             {
                 $match: {
                     slug,
