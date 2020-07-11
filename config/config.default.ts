@@ -50,8 +50,8 @@ export default (appInfo: EggAppInfo) => {
 
         mongoose: {
             client: {
-                url: 'mongodb://qinvideo:Op6bg0PzQnVuTSjGuK0TkHJyUtGkTtQK@localhost:27017/qinvideo',
-                // url: 'mongodb://localhost:27017/test',
+                // url: 'mongodb://qinvideo:Op6bg0PzQnVuTSjGuK0TkHJyUtGkTtQK@localhost:27017/qinvideo',
+                url: 'mongodb://localhost:27017/qinvideo',
                 options: {},
             },
         },
