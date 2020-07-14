@@ -55,7 +55,7 @@ class CountService extends Service {
         const { model } = this.ctx;
 
         const data = { target, onModel };
-        const update = { $inc: { [type]: count } };
+        const update:any = { $inc: { [type]: count } };
         const options = { upsert: true };
         await model.Count.update(data, update, options);
     }
