@@ -148,8 +148,8 @@ self.__precacheManifest = [
     "url": "/backend/p__Post__Info.01c25e37.async.js"
   },
   {
-    "revision": "30ee7faae1c137860e6f",
-    "url": "/backend/p__Post__List.1253a7bb.async.js"
+    "revision": "1d8188038a1ead243129",
+    "url": "/backend/p__Post__List.2c1105ee.async.js"
   },
   {
     "revision": "382f870318b181555139",
@@ -192,12 +192,12 @@ self.__precacheManifest = [
     "url": "/backend/p__User__List.1a9dba4b.async.js"
   },
   {
-    "revision": "b1370d02bc31bb7cc9c2",
+    "revision": "b5563d927ac77a435c10",
     "url": "/backend/umi.b0c61fc2.css"
   },
   {
-    "revision": "b1370d02bc31bb7cc9c2",
-    "url": "/backend/umi.6efa73a9.js"
+    "revision": "b5563d927ac77a435c10",
+    "url": "/backend/umi.30bd8095.js"
   },
   {
     "revision": "dd7daff95069c16c755f",
@@ -288,7 +288,7 @@ self.__precacheManifest = [
     "url": "/backend/53.5cf5ac90.async.js"
   },
   {
-    "revision": "e65b9bb75270cc284522a0a004905172",
+    "revision": "f20f1c374d6e6a9a9c67a8852b302f30",
     "url": "/backend/index.html"
   },
   {
@@ -300,12 +300,12 @@ self.__precacheManifest = [
     "url": "/backend/icons/icon-128x128.png"
   },
   {
-    "revision": "c1074efc2372bf52c481a8ba0909be63",
-    "url": "/backend/icons/icon-192x192.png"
-  },
-  {
     "revision": "d26b6882c10242e359b3502e77c14779",
     "url": "/backend/icons/icon-512x512.png"
+  },
+  {
+    "revision": "c1074efc2372bf52c481a8ba0909be63",
+    "url": "/backend/icons/icon-192x192.png"
   },
   {
     "revision": "e3d9473ff8f1a41892af7bdbbf262404",
