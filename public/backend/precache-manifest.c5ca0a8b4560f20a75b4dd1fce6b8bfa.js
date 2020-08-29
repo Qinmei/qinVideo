@@ -148,8 +148,8 @@ self.__precacheManifest = [
     "url": "/backend/p__Post__Info.01c25e37.async.js"
   },
   {
-    "revision": "dcb3b3824d511afb6a0c",
-    "url": "/backend/p__Post__List.fc54c1d0.async.js"
+    "revision": "30ee7faae1c137860e6f",
+    "url": "/backend/p__Post__List.1253a7bb.async.js"
   },
   {
     "revision": "382f870318b181555139",
@@ -192,12 +192,12 @@ self.__precacheManifest = [
     "url": "/backend/p__User__List.1a9dba4b.async.js"
   },
   {
-    "revision": "73e799c0fcc0435ffef7",
+    "revision": "b1370d02bc31bb7cc9c2",
     "url": "/backend/umi.b0c61fc2.css"
   },
   {
-    "revision": "73e799c0fcc0435ffef7",
-    "url": "/backend/umi.66c2ee9d.js"
+    "revision": "b1370d02bc31bb7cc9c2",
+    "url": "/backend/umi.6efa73a9.js"
   },
   {
     "revision": "dd7daff95069c16c755f",
@@ -288,16 +288,8 @@ self.__precacheManifest = [
     "url": "/backend/53.5cf5ac90.async.js"
   },
   {
-    "revision": "b956cd17e4dd46194251d09d57341129",
+    "revision": "e65b9bb75270cc284522a0a004905172",
     "url": "/backend/index.html"
-  },
-  {
-    "revision": "c1074efc2372bf52c481a8ba0909be63",
-    "url": "/backend/icons/icon-192x192.png"
-  },
-  {
-    "revision": "d26b6882c10242e359b3502e77c14779",
-    "url": "/backend/icons/icon-512x512.png"
   },
   {
     "revision": "6455a54d5369cf16e4fe22af82fea3e3",
@@ -306,6 +298,14 @@ self.__precacheManifest = [
   {
     "revision": "4f38ae784c9e5f8b5135fd0b2ec19a9d",
     "url": "/backend/icons/icon-128x128.png"
+  },
+  {
+    "revision": "c1074efc2372bf52c481a8ba0909be63",
+    "url": "/backend/icons/icon-192x192.png"
+  },
+  {
+    "revision": "d26b6882c10242e359b3502e77c14779",
+    "url": "/backend/icons/icon-512x512.png"
   },
   {
     "revision": "e3d9473ff8f1a41892af7bdbbf262404",
