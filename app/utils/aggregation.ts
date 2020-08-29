@@ -144,7 +144,6 @@ export const eposideLookup = [
     },
     {
         $addFields: {
-            id: '$_id',
             countEposide: {
                 $size: {
                     $ifNull: ['$listEposide', []],
@@ -190,7 +189,6 @@ export const slugEposideLookup = [
     },
     {
         $addFields: {
-            id: '$_id',
             countEposide: {
                 $size: {
                     $ifNull: ['$eposides', []],
@@ -217,6 +215,7 @@ export const countLookup = [
     },
     {
         $addFields: {
+            id: '$_id',
             countPlay: {
                 $add: [{ $ifNull: ['$count.play', 0] }, { $ifNull: ['$count.view', 0] }],
             },
