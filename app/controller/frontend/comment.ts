@@ -45,6 +45,7 @@ class CommentController extends Controller {
         const userId = ctx.state.user.id;
 
         data.author = userId;
+        data.status = 'publish';
         ctx.helper.validate('comment', data, true);
 
         const sensitive = await service.utils.isSensitiveWord(data.content);
@@ -55,7 +56,6 @@ class CommentController extends Controller {
 
         const configInfo = await service.config.cacheInfo();
 
-        data.status = 'publish';
         if (configInfo.commentVerify) {
             data.status = 'draft';
         }
