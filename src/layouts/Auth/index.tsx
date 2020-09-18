@@ -1,7 +1,7 @@
 import React from "react";
 import intl from "react-intl-universal";
 import { Link, useHistory } from "react-router-dom";
-import styles from "./index.module.less";
+import styles from "./index.less";
 
 interface propTypes {}
 

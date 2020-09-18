@@ -7,7 +7,7 @@ const Home = React.lazy(() => import("@/pages/Home"));
 
 type PropsType = {};
 
-export const Pages: FC<PropsType> = (props) => {
+export const Pages: FC<PropsType> = props => {
   return (
     <Switch>
       <Route path="/auth" component={Auth} />

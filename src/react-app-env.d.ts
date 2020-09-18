@@ -4,7 +4,7 @@ declare module "*.png";
 declare module "*.jpg";
 declare module "*.swf";
 
-declare module "*.module.less" {
+declare module "*.less" {
   const classes: { [className: string]: string };
   export default classes;
 }
