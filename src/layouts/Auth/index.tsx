@@ -5,7 +5,7 @@ import styles from "./index.module.less";
 
 interface propTypes {}
 
-export const AuthLayout: React.FC<propTypes> = (props) => {
+export const AuthLayout: React.FC<propTypes> = props => {
   const { children } = props;
 
   const history = useHistory();
@@ -35,7 +35,7 @@ export const AuthLayout: React.FC<propTypes> = (props) => {
 
         <div className={styles.footer}>
           {typeAll
-            .filter((item) => {
+            .filter(item => {
               let regxp = new RegExp(item.link);
               return !regxp.test(type);
             })

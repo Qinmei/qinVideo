@@ -1,14 +1,14 @@
 import React, { FC, createContext, useReducer } from "react";
-import { Language } from "@/locales";
+import { LanguageType } from "@/locales";
 
 interface PropsType {}
 
 interface DataType {
-  language: Language;
+  language: LanguageType;
 }
 
 interface MethodsType {
-  setLanguage: (language: Language) => void;
+  setLanguage: (language: LanguageType) => void;
 }
 
 interface ContextProps {
@@ -18,7 +18,7 @@ interface ContextProps {
 
 const ConfigContext = createContext({} as ContextProps);
 
-const ConfigProvider: FC<PropsType> = (props) => {
+const ConfigProvider: FC<PropsType> = props => {
   const { children } = props;
 
   const reducer = (state: DataType, action: any) => {
@@ -29,13 +29,13 @@ const ConfigProvider: FC<PropsType> = (props) => {
   };
 
   const data: DataType = {
-    language: "zh-CN",
+    language: "zh_CN",
   };
 
   const [state, dispatch] = useReducer(reducer, data);
 
   const methods: MethodsType = {
-    setLanguage: (language: Language) => dispatch({ language }),
+    setLanguage: (language: LanguageType) => dispatch({ language }),
   };
 
   const contextValue: ContextProps = {

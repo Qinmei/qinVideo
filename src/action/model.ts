@@ -23,9 +23,9 @@ class Model<T> {
     url: RequestUrls,
     data: Options,
     success = this.success,
-    err = this.error
+    err = this.error,
   ): Promise<[boolean, any] | void> {
-    return Request.init(method, url, data).then(async res => {
+    return Request.init(method, url, data).then(async (res) => {
       if (res && res.code === 10000000) {
         return await success(res, store.dispatch);
       } else {
@@ -35,13 +35,8 @@ class Model<T> {
     });
   }
 
-<<<<<<< HEAD
-  initDispatch(payload: any): void {
-    store.dispatch<{ type: string; payload: any }>({
-=======
   initDispatch(payload: Partial<T>): void {
     store.dispatch<{ type: string; payload: Partial<T> }>({
->>>>>>> b984e05fde68938a09c0b4160d2cc0c03ecbb75b
       type: this.namespace,
       payload,
     });
@@ -49,7 +44,7 @@ class Model<T> {
 
   handler = (
     state = this.initialState,
-    action: { type: string; payload: Partial<T> }
+    action: { type: string; payload: Partial<T> },
   ): T => {
     if (action && action.type === this.namespace) {
       return {
