@@ -1,13 +1,14 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { AuthLayout } from "@/layouts";
-import Login from "./Login";
-import Register from "./Register";
-import Forget from "./Forget";
+import { Login } from "./Login";
+import { Register } from "./Register";
+import { Forget } from "./Forget";
 
 interface propTypes {}
 
-const Auth: React.FC<propTypes> = (props) => {
+const Auth: React.FC<propTypes> = props => {
+  console.log("pages render");
   return (
     <AuthLayout>
       <Switch>

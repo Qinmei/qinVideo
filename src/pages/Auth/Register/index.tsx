@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 
 interface propTypes {}
 
-const RegisterComponent: FC<propTypes> = (props) => {
+export const Register: FC<propTypes> = props => {
   const [form] = Form.useForm();
   const history = useHistory();
 
@@ -35,5 +35,3 @@ const RegisterComponent: FC<propTypes> = (props) => {
     </Form>
   );
 };
-
-export default RegisterComponent;

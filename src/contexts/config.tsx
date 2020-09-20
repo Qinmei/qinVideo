@@ -21,7 +21,7 @@ const ConfigContext = createContext({} as ContextProps);
 const ConfigProvider: FC<PropsType> = props => {
   const { children } = props;
 
-  const reducer = (state: DataType, action: any) => {
+  const reducer = (state: DataType, action: Partial<DataType>) => {
     return {
       ...state,
       ...action,
@@ -35,7 +35,8 @@ const ConfigProvider: FC<PropsType> = props => {
   const [state, dispatch] = useReducer(reducer, data);
 
   const methods: MethodsType = {
-    setLanguage: (language: LanguageType) => dispatch({ language }),
+    setLanguage: (language: LanguageType) =>
+      language !== state.language && dispatch({ language }),
   };
 
   const contextValue: ContextProps = {

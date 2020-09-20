@@ -1,37 +1,49 @@
-import React, { FC } from "react";
-import { Input, Button, Form } from "antd";
+import React, { FC, useContext } from "react";
+import { Input, Button, Form, DatePicker } from "antd";
 import intl from "react-intl-universal";
 import { useHistory } from "react-router-dom";
+import { ConfigContext } from "@/contexts";
 
 interface propTypes {}
 
-const LoginComponent: FC<propTypes> = (props) => {
+export const Login: FC<propTypes> = props => {
   const [form] = Form.useForm();
   const history = useHistory();
 
+  const { state, methods } = useContext(ConfigContext);
+
   const onFinish = (values: any) => {};
+
+  console.log("login render");
 
   return (
     <Form form={form} name="login" onFinish={onFinish}>
-      <Form.Item
-        name="userName"
-        rules={[
-          {
-            required: true,
-            message: intl.get("PHONE_EMAIL_TIP"),
-          },
-        ]}
-      >
-        <Input placeholder={intl.get("PHONE_EMAIL")} size="large" />
+      <Form.Item name="userName">
+        <Input size="large" />
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit" size="large" block>
-          {intl.get("LOGIN")}
+        <Button
+          type="primary"
+          size="large"
+          block
+          onClick={() => methods.setLanguage("zh_CN")}
+        >
+          {intl.get("common.message1")}
+          中文
+        </Button>
+
+        <Button
+          type="primary"
+          size="large"
+          block
+          onClick={() => methods.setLanguage("en_US")}
+        >
+          {intl.get("common.message1")}
+          英文
         </Button>
       </Form.Item>
+      <DatePicker></DatePicker>
     </Form>
   );
 };
-
-export default LoginComponent;

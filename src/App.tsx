@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ErrorLayout } from "@/layouts";
 import { ConfigProvider } from "@/contexts";
 import { Pages } from "@/pages";
-import { Language } from "@/locales";
+import { Language } from "@/layouts";
 
 type PropsType = {};
 
