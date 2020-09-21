@@ -1,6 +1,5 @@
-import React, { FC, useContext, useEffect, useState, useMemo } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { ConfigProvider } from "antd";
-import { ConfigContext } from "@/contexts";
 import { setLanguage, LanguageType } from "@/locales";
 import zh_CN from "antd/es/locale/zh_CN";
 import en_US from "antd/es/locale/en_US";
@@ -17,8 +16,6 @@ export const Language: FC<PropsType> = props => {
 
   const language: LanguageType =
     (localStorage.getItem("locale") as LanguageType) || "zh_CN";
-
-  const { state } = useContext(ConfigContext);
 
   const [init, setInit] = useState(false);
 
