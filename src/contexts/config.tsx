@@ -1,15 +1,10 @@
 import React, { FC, createContext, useReducer } from "react";
-import { LanguageType } from "@/locales";
 
 interface PropsType {}
 
-interface DataType {
-  language: LanguageType;
-}
+interface DataType {}
 
-interface MethodsType {
-  setLanguage: (language: LanguageType) => void;
-}
+interface MethodsType {}
 
 interface ContextProps {
   state: DataType;
@@ -28,16 +23,11 @@ const ConfigProvider: FC<PropsType> = props => {
     };
   };
 
-  const data: DataType = {
-    language: "zh_CN",
-  };
+  const data: DataType = {};
 
   const [state, dispatch] = useReducer(reducer, data);
 
-  const methods: MethodsType = {
-    setLanguage: (language: LanguageType) =>
-      language !== state.language && dispatch({ language }),
-  };
+  const methods: MethodsType = {};
 
   const contextValue: ContextProps = {
     state,

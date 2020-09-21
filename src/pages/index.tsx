@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import intl from "react-intl-universal";
-import "@/assets/style/base.less";
+import "@/themes/global.less";
 
 const Auth = React.lazy(() => import("@/pages/Auth"));
 const Home = React.lazy(() => import("@/pages/Home"));

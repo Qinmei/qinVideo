@@ -1,7 +1,7 @@
 import React, { FC, useContext, useEffect, useState, useMemo } from "react";
 import { ConfigProvider } from "antd";
 import { ConfigContext } from "@/contexts";
-import { setLanguage } from "@/locales";
+import { setLanguage, LanguageType } from "@/locales";
 import zh_CN from "antd/es/locale/zh_CN";
 import en_US from "antd/es/locale/en_US";
 
@@ -15,8 +15,10 @@ type PropsType = {};
 export const Language: FC<PropsType> = props => {
   const { children } = props;
 
+  const language: LanguageType =
+    (localStorage.getItem("locale") as LanguageType) || "zh_CN";
+
   const { state } = useContext(ConfigContext);
-  const { language } = state;
 
   const [init, setInit] = useState(false);
 
@@ -27,9 +29,7 @@ export const Language: FC<PropsType> = props => {
 
   useEffect(() => {
     initLanguage();
-  }, [language]);
-
-  console.log("language render");
+  }, []);
 
   return (
     <ConfigProvider locale={languages[language]}>

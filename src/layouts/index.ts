@@ -1,3 +1,3 @@
-export * from "./Auth";
-export * from "./Error";
+export * from "./AuthLayout";
+export * from "./ErrorLayout";
 export * from "./Language";
