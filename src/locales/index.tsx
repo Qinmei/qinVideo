@@ -1,27 +1,22 @@
 import intl from "react-intl-universal";
-import { common } from "./common";
-import { auth } from "./auth";
+import { Language } from "./base";
+import { zh_CN, en_US } from "./lang";
 
 export type LanguageType = "zh_CN" | "en_US";
 
-const sections = [common, auth];
-
-const data = {
-  common: common.type,
-  auth: auth.type,
-};
-
-export const setLanguage = async (language: LanguageType) => {
-  let result: any = {};
-  for (const item of sections) {
-    try {
-      Object.keys(res.default).forEach(ele => {
-        result[`${item}.${ele}`] = res.default[ele];
-      });
-    } catch (e) {
-      console.log("no language type");
-    }
+class Lang extends Language<Lang["zh_CN"]> {
+  constructor() {
+    super(zh_CN, en_US);
   }
+  zh_CN = zh_CN;
+}
+
+const languages = new Lang();
+
+const lang = languages.type;
+
+const setLanguage = async (language: LanguageType = "zh_CN") => {
+  let result = languages[language] || {};
   await intl.init({
     currentLocale: language,
     locales: {
@@ -29,3 +24,5 @@ export const setLanguage = async (language: LanguageType) => {
     },
   });
 };
+
+export { lang, intl, setLanguage };

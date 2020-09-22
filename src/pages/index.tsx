@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
-import intl from "react-intl-universal";
+import { lang, intl } from "@/locales";
 import "@/themes/global.less";
 
 const Auth = React.lazy(() => import("@/pages/Auth"));
@@ -11,7 +11,7 @@ type PropsType = {};
 export const Pages: FC<PropsType> = props => {
   return (
     <>
-      <h1>{intl.get("common.message1")}</h1>
+      <h1>{intl.get(lang.message1)}</h1>
 
       <Switch>
         <Route path="/auth" component={Auth} />
