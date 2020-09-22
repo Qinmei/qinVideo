@@ -50,5 +50,3 @@ export const AuthLayout: React.FC<propTypes> = props => {
     </div>
   );
 };
-
-export default AuthLayout;
