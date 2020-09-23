@@ -5,13 +5,9 @@ import { Options, ResponseData } from "@/types/request";
 import { RequestMethods, RequestUrls } from "@/constants/service";
 
 export class Request {
-  static readonly apiPrefix: string = "/api/v1";
+  static readonly apiPrefix: string = "/api/v2";
 
-  static async init(
-    methods: RequestMethods,
-    url: RequestUrls,
-    options: Options
-  ) {
+  static async init(methods: RequestMethods, url: RequestUrls, options: Options) {
     const { params, query, data, formData, ...props } = options;
 
     let defaultHeader: any = {
@@ -19,12 +15,9 @@ export class Request {
       "Content-Type": "application/json; charset=utf-8",
     };
 
-    let link: string = url;
+    let link: string = this.apiPrefix + url;
     if (params) {
-      link = link.replace(
-        /\/:(\w+)/gm,
-        index => `/${params[`${index.replace(/\/:/g, "")}`]}`
-      );
+      link = link.replace(/\/:(\w+)/gm, index => `/${params[`${index.replace(/\/:/g, "")}`]}`);
     }
 
     if (query) {

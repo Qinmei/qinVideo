@@ -2,12 +2,15 @@ import React, { FC } from "react";
 import { Input, Button, Form } from "antd";
 import { intl, lang } from "@/locales";
 import { useHistory } from "react-router-dom";
+import { useModel } from "@/action";
 
 interface propTypes {}
 
 export const Login: FC<propTypes> = props => {
   const [form] = Form.useForm();
   const history = useHistory();
+
+  const [actions, reducers] = useModel(["auth"]);
 
   const onFinish = (values: any) => {};
 

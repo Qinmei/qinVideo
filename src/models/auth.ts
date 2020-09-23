@@ -1,13 +1,11 @@
 import { RequestUrls, RequestMethods } from "@/constants";
 import { Model } from "@/action/model";
 
-type InitialState = {
-  loadingKeys: string[];
-};
+type InitialState = {};
 
-export class Loading extends Model<InitialState> {
+export class Auth extends Model<InitialState> {
   constructor() {
-    super("loading", { loadingKeys: [] });
+    super("auth", {});
   }
 
   methods = {

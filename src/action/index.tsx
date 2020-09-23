@@ -1,5 +1,5 @@
 import store from "./store";
-import Model from "./model";
 import Middleware from "./middleware";
+export * from "./hooks";
 
-export { store, Model, Middleware };
+export { store, Middleware };

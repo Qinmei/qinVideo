@@ -7,7 +7,7 @@ import { RequestMethods, RequestUrls } from "@/constants/service";
 import { Options, ResponseData } from "@/types/request";
 import { Modules } from "@/models/index";
 
-class Model<T> {
+export class Model<T> {
   constructor(public namespace: Modules, public initialState: T) {}
 
   success(res: ResponseData, dispatch: Dispatch): [boolean, any] {
@@ -23,9 +23,9 @@ class Model<T> {
     url: RequestUrls,
     data: Options,
     success = this.success,
-    err = this.error,
+    err = this.error
   ): Promise<[boolean, any] | void> {
-    return Request.init(method, url, data).then(async (res) => {
+    return Request.init(method, url, data).then(async res => {
       if (res && res.code === 10000000) {
         return await success(res, store.dispatch);
       } else {
@@ -42,10 +42,7 @@ class Model<T> {
     });
   }
 
-  handler = (
-    state = this.initialState,
-    action: { type: string; payload: Partial<T> },
-  ): T => {
+  handler = (state = this.initialState, action: { type: string; payload: Partial<T> }): T => {
     if (action && action.type === this.namespace) {
       return {
         ...state,
@@ -56,5 +53,3 @@ class Model<T> {
     }
   };
 }
-
-export default Model;
