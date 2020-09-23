@@ -32,7 +32,6 @@ export const AuthLayout: React.FC<propTypes> = props => {
       <div className={styles.form}>
         <p className={styles.title}>{intl.get("WELCOME_SYSTEM")}</p>
         {children}
-
         <div className={styles.footer}>
           {typeAll
             .filter(item => {

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { Input, Button, Form, DatePicker } from "antd";
-import intl from "react-intl-universal";
+import { Input, Button, Form } from "antd";
+import { intl, lang } from "@/locales";
 import { useHistory } from "react-router-dom";
 
 interface propTypes {}
@@ -21,16 +21,13 @@ export const Login: FC<propTypes> = props => {
 
       <Form.Item>
         <Button type="primary" size="large">
-          {intl.get("common.message1")}
-          中文
+          {intl.get(lang.message1)}
         </Button>
 
         <Button type="primary" size="large">
-          {intl.get("common.message1")}
-          英文
+          {intl.get(lang.message1)}
         </Button>
       </Form.Item>
-      <DatePicker></DatePicker>
     </Form>
   );
 };
