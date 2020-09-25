@@ -8,7 +8,6 @@ import { Forget } from "./Forget";
 interface propTypes {}
 
 const Auth: React.FC<propTypes> = props => {
-  console.log("pages render");
   return (
     <AuthLayout>
       <Switch>
