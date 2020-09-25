@@ -1,20 +1,29 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Tabs } from "antd";
 import { AuthLayout } from "@/layouts";
+import { intl, lang } from "@/locales";
+import { useAction } from "@/action";
 import { Login } from "./Login";
-import { Register } from "./Register";
-import { Forget } from "./Forget";
+import { Init } from "./Init";
+import { useAdminInit } from "@/hooks";
 
 interface propTypes {}
 
 const Auth: React.FC<propTypes> = props => {
+  const [init] = useAdminInit();
+
   return (
     <AuthLayout>
-      <Switch>
-        <Route exact path="/auth/login" component={Login} />
-        <Route exact path="/auth/register" component={Register} />
-        <Route exact path="/auth/forget" component={Forget} />
-      </Switch>
+      <Tabs defaultActiveKey="login" centered>
+        <Tabs.TabPane tab={intl.get(lang["auth.login.title"])} key="login">
+          <Login></Login>
+        </Tabs.TabPane>
+        {init && (
+          <Tabs.TabPane tab={intl.get(lang["auth.init.title"])} key="init">
+            <Init></Init>
+          </Tabs.TabPane>
+        )}
+      </Tabs>
     </AuthLayout>
   );
 };

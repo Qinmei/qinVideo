@@ -1,13 +1,17 @@
 import { message } from "antd";
-import intl from "react-intl-universal";
 import { stringify } from "qs";
-import { Options, ResponseData } from "@/types/request";
+import { RequestOptions, RequestResponse } from "@/types";
 import { RequestMethods, RequestUrls } from "@/constants/service";
+import { intl, lang } from "@/locales";
 
 export class Request {
-  static readonly apiPrefix: string = "/api/v2";
+  static readonly apiPrefix: string = "";
 
-  static async init(methods: RequestMethods, url: RequestUrls, options: Options) {
+  static async init<T>(
+    methods: RequestMethods,
+    url: RequestUrls,
+    options: RequestOptions
+  ): Promise<RequestResponse<T>> {
     const { params, query, data, formData, ...props } = options;
 
     let defaultHeader: any = {
@@ -32,37 +36,27 @@ export class Request {
       defaultHeader = {};
     }
 
-    return fetch(this.apiPrefix + link, {
+    return fetch(link, {
       body: formData ? formData : data ? JSON.stringify(data) : null,
       headers: {
         ...defaultHeader,
-        Authorization: localStorage.getItem("token") || null,
+        Authorization: localStorage.getItem("token") || "",
       },
       method: methods,
       ...props,
     })
       .then(this.statusCheck)
-      .then(res => res.json())
-      .then(this.codeCheck);
+      .then(res => res.json());
   }
 
   static statusCheck(res: Response) {
     if (res.status === 200 || res.status === 201) {
     } else if (res.status === 401) {
       localStorage.clear();
-      message.error(intl.get("request.error.401"));
-      window.location.href = "/login";
+      message.error(intl.get(lang["common.error.401"]));
     } else {
-      message.error(intl.get("request.error.unknown"));
+      message.error(intl.get(lang["common.error.unknown"]));
     }
     return res;
-  }
-
-  static codeCheck(res: ResponseData) {
-    if (res.code) {
-      message.error(res.msg);
-    } else {
-      return res.data;
-    }
   }
 }

@@ -36,7 +36,12 @@ module.exports = {
   },
   devServer: {
     proxy: {
-      "/api": "http://localhost:7000/api",
+      "/api": {
+        target: "https://demo.qinvideo.org",
+        secure: false,
+        changeOrigin: true,
+      },
     },
+    port: 2333,
   },
 };

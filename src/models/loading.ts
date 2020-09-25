@@ -10,7 +10,5 @@ export class Loading extends Model<InitialState> {
     super("loading", { loadingKeys: [] });
   }
 
-  methods = {
-    login: (data: any) => super.init(RequestMethods.POST, RequestUrls.login, data),
-  };
+  methods = {};
 }

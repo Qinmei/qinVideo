@@ -4,32 +4,46 @@ import intl from "react-intl-universal";
 import { store } from "@/action";
 import { Request } from "@/utils/request";
 import { RequestMethods, RequestUrls } from "@/constants/service";
-import { Options, ResponseData } from "@/types/request";
+import { RequestOptions, RequestResponse } from "@/types/request";
 import { Modules } from "@/models/index";
+
+type SuccessCallback<T> = (res: RequestResponse<T>, dispatch: Dispatch) => [boolean, T];
+type ErrorCallback<T> = (res: RequestResponse<T>) => [boolean, T];
+type InitCallback<T> = (
+  method: RequestMethods,
+  url: RequestUrls,
+  data: RequestOptions,
+  success: SuccessCallback<T>,
+  error: ErrorCallback<T>
+) => Promise<[boolean, T]>;
+
+interface ModelType {
+  success<K>: (res: RequestResponse<K>, dispatch: Dispatch) => [boolean, K];
+}
 
 export class Model<T> {
   constructor(public namespace: Modules, public initialState: T) {}
 
-  success(res: ResponseData, dispatch: Dispatch): [boolean, any] {
+  success: SuccessCallback<K> = (res, dispatch) => {
     return [true, res.data];
-  }
+  };
 
-  error(res: ResponseData): [boolean, any] {
+  error: ErrorCallback<K> = res => {
     return [false, res.data];
-  }
+  };
 
-  async init(
+  async init<K>(
     method: RequestMethods,
     url: RequestUrls,
-    data: Options,
-    success = this.success,
-    err = this.error
-  ): Promise<[boolean, any] | void> {
-    return Request.init(method, url, data).then(async res => {
-      if (res && res.code === 10000000) {
+    data: RequestOptions,
+    success: SuccessCallback<K>,
+    err: ErrorCallback<K>
+  ) {
+    return Request.init<K>(method, url, data).then(async res => {
+      if (res && res.code === 10000) {
         return await success(res, store.dispatch);
       } else {
-        res.code && message.error(intl.get(res.code));
+        res.code && message.error(intl.get(res.code.toString()));
         return await err(res);
       }
     });

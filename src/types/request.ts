@@ -1,4 +1,4 @@
-export type Options = {
+export type RequestOptions = {
   params?: {
     [key: string]: string | number;
   };
@@ -12,8 +12,8 @@ export type Options = {
   [key: string]: any;
 };
 
-export type ResponseData = {
+export type RequestResponse<T> = {
   code: number;
   msg: string | null;
-  data: any;
+  data: T;
 };
