@@ -1,0 +1,4 @@
+{
+  "typescript.tsdk": "/Users/houtaosun/code/qinmei/qinVideo-backend/node_modules/typescript/lib",
+  "eslint.validate": ["javascript", "javascriptreact"]
+}

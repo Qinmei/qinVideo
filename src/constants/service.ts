@@ -1,11 +1,11 @@
-export enum RequestMethods {
+export enum Methods {
   GET = "GET",
   POST = "POST",
   PUT = "PUT",
   DELETE = "DELETE",
 }
 
-export enum RequestUrls {
+export enum Urls {
   queryAuthLogin = "/api/v2/auth/login",
   queryAuthToken = "/api/v2/auth/refreshtoken",
 

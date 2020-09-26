@@ -1,6 +1,6 @@
-import { RequestUrls, RequestMethods } from "@/constants";
+import { Service } from "@/constants";
 import { Model } from "@/action/model";
-import { RequestResponse, LoginResponse, LoginRequest } from "@/types";
+import { RequestType, AuthType } from "@/types";
 
 type InitialState = {
   active: boolean;
@@ -14,13 +14,13 @@ export class Auth extends Model<InitialState> {
   }
 
   dispatch = {
-    login: (res: RequestResponse<LoginResponse>) => super.initDispatch({}),
+    login: (res: RequestType.Response<AuthType.LoginResponse>) => super.initDispatch({}),
   };
 
   methods = {
-    login: (data: LoginRequest) =>
-      super.init<LoginResponse>(RequestMethods.POST, RequestUrls.queryAuthLogin, data),
-    initAdmin: (data: {}): Promise<[boolean, string]> =>
-      super.init(RequestMethods.GET, RequestUrls.queryBaseInit, data),
+    login: (data: AuthType.LoginRequest) =>
+      super.init<AuthType.LoginResponse>(Service.Methods.POST, Service.Urls.queryAuthLogin, data),
+    initAdmin: (data: Record<string, unknown>) =>
+      super.init<"already" | "init">(Service.Methods.GET, Service.Urls.queryBaseInit, data),
   };
 }

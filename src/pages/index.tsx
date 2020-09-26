@@ -5,7 +5,7 @@ import "@/themes/global.less";
 const Auth = React.lazy(() => import("@/pages/Auth"));
 const Home = React.lazy(() => import("@/pages/Home"));
 
-type PropsType = {};
+interface PropsType {}
 
 export const Pages: FC<PropsType> = props => {
   return (

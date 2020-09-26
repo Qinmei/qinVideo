@@ -7,7 +7,7 @@ import { Pages } from "@/pages";
 import { Language } from "@/layouts";
 import { store } from "@/action";
 
-type PropsType = {};
+interface PropsType {}
 
 export const App: FC<PropsType> = props => {
   return (

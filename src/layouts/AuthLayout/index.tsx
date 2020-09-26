@@ -1,5 +1,5 @@
 import React from "react";
-import { intl, lang } from "@/locales";
+import { intl } from "@/locales";
 import styles from "./index.less";
 
 interface propTypes {}
@@ -11,7 +11,7 @@ export const AuthLayout: React.FC<propTypes> = props => {
     <div className={styles.wrapper}>
       <div className={styles.form}>
         <h1>Qin Video</h1>
-        <p className={styles.title}>{intl.get(lang["auth.layout.title"])}</p>
+        <p className={styles.title}>{intl.get("auth.title")}</p>
         {children}
       </div>
     </div>

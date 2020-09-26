@@ -14,8 +14,8 @@ export type Reducers = { [k in Modules]: ModulesAll[k]["initialState"] };
 
 const models = [Loading, Auth];
 
-let actions: any = {};
-let reducers: any = {};
+const actions: any = {};
+const reducers: any = {};
 
 models.forEach(Model => {
   const model = new Model();
@@ -25,6 +25,7 @@ models.forEach(Model => {
   actions[name] = {};
 
   for (const key in model.methods) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     actions[name][key] = (data: any) => Middleware.compose(model.methods[key])(data, key);
   }

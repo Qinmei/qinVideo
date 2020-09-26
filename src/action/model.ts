@@ -1,50 +1,36 @@
 import { message } from "antd";
 import { Dispatch } from "redux";
-import intl from "react-intl-universal";
+import { intl, LanguageKeys } from "@/locales";
 import { store } from "@/action";
-import { Request } from "@/utils/request";
-import { RequestMethods, RequestUrls } from "@/constants/service";
-import { RequestOptions, RequestResponse } from "@/types/request";
-import { Modules } from "@/models/index";
-
-type SuccessCallback<T> = (res: RequestResponse<T>, dispatch: Dispatch) => [boolean, T];
-type ErrorCallback<T> = (res: RequestResponse<T>) => [boolean, T];
-type InitCallback<T> = (
-  method: RequestMethods,
-  url: RequestUrls,
-  data: RequestOptions,
-  success: SuccessCallback<T>,
-  error: ErrorCallback<T>
-) => Promise<[boolean, T]>;
-
-interface ModelType {
-  success<K>: (res: RequestResponse<K>, dispatch: Dispatch) => [boolean, K];
-}
+import { Request } from "@/utils";
+import { Service } from "@/constants";
+import { RequestType } from "@/types";
+import { Modules } from "@/models";
 
 export class Model<T> {
   constructor(public namespace: Modules, public initialState: T) {}
 
-  success: SuccessCallback<K> = (res, dispatch) => {
+  success<T>(res: RequestType.Response<T>, dispatch: Dispatch): [boolean, T] {
     return [true, res.data];
-  };
+  }
 
-  error: ErrorCallback<K> = res => {
+  error<T>(res: RequestType.Response<T>): [boolean, T] {
     return [false, res.data];
-  };
+  }
 
-  async init<K>(
-    method: RequestMethods,
-    url: RequestUrls,
-    data: RequestOptions,
-    success: SuccessCallback<K>,
-    err: ErrorCallback<K>
-  ) {
-    return Request.init<K>(method, url, data).then(async res => {
-      if (res && res.code === 10000) {
-        return await success(res, store.dispatch);
+  async init<T>(
+    method: Service.Methods,
+    url: Service.Urls,
+    data: RequestType.Options,
+    success = this.success,
+    err = this.error
+  ): Promise<[boolean, T]> {
+    return Request.init<T>(method, url, data).then(async res => {
+      if (res && res.code === 10000000) {
+        return await success<T>(res, store.dispatch);
       } else {
-        res.code && message.error(intl.get(res.code.toString()));
-        return await err(res);
+        res.code && message.error(intl.get(res.code.toString() as LanguageKeys));
+        return await err<T>(res);
       }
     });
   }

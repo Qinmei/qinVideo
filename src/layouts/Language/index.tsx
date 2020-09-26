@@ -9,13 +9,12 @@ const languages = {
   en_US: en_US,
 };
 
-type PropsType = {};
+interface PropsType {}
 
 export const Language: FC<PropsType> = props => {
   const { children } = props;
 
-  const language: LanguageType =
-    (localStorage.getItem("locale") as LanguageType) || "zh_CN";
+  const language: LanguageType = (localStorage.getItem("locale") as LanguageType) || "zh_CN";
 
   const [init, setInit] = useState(false);
 
@@ -28,9 +27,5 @@ export const Language: FC<PropsType> = props => {
     initLanguage();
   }, []);
 
-  return (
-    <ConfigProvider locale={languages[language]}>
-      {init && children}
-    </ConfigProvider>
-  );
+  return <ConfigProvider locale={languages[language]}>{init && children}</ConfigProvider>;
 };

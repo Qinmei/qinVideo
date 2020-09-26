@@ -34,11 +34,7 @@ const ConfigProvider: FC<PropsType> = props => {
     methods,
   };
 
-  return (
-    <ConfigContext.Provider value={contextValue}>
-      {children}
-    </ConfigContext.Provider>
-  );
+  return <ConfigContext.Provider value={contextValue}>{children}</ConfigContext.Provider>;
 };
 
 export { ConfigContext, ConfigProvider };

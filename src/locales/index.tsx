@@ -1,23 +1,25 @@
-import intl from "react-intl-universal";
-import { Language } from "./base";
+import intlDefault from "react-intl-universal";
 import { zh_CN, en_US } from "./lang";
+import { CustomType } from "@/types";
+import { Methods } from "@/utils";
 
 export type LanguageType = "zh_CN" | "en_US";
 
-class Lang extends Language<Lang["zh_CN"]> {
-  constructor() {
-    super(zh_CN, en_US);
-  }
-  zh_CN = zh_CN;
-}
+const languages = {
+  zh_CN: Methods.languageFlat(zh_CN),
+  en_US: Methods.languageFlat(en_US),
+};
 
-const languages = new Lang();
+export type LanguageKeys = CustomType.Paths<typeof zh_CN>;
 
-const lang = languages.type;
+const intl = {
+  get: (key: LanguageKeys) => intlDefault.get(key),
+  getHTML: (key: LanguageKeys, addon: { [key: string]: string | number }) => intlDefault.getHTML(key, addon),
+};
 
-const setLanguage = async (language: LanguageType = "zh_CN") => {
-  let result = languages[language] || {};
-  await intl.init({
+const setLanguage = async (language: LanguageType = "zh_CN"): Promise<void> => {
+  const result = languages[language] || {};
+  await intlDefault.init({
     currentLocale: language,
     locales: {
       [language]: result,
@@ -25,4 +27,4 @@ const setLanguage = async (language: LanguageType = "zh_CN") => {
   });
 };
 
-export { lang, intl, setLanguage };
+export { intl, setLanguage };

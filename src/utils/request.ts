@@ -1,17 +1,17 @@
 import { message } from "antd";
 import { stringify } from "qs";
-import { RequestOptions, RequestResponse } from "@/types";
-import { RequestMethods, RequestUrls } from "@/constants/service";
-import { intl, lang } from "@/locales";
+import { RequestType } from "@/types";
+import { Service } from "@/constants";
+import { intl } from "@/locales";
 
 export class Request {
   static readonly apiPrefix: string = "";
 
   static async init<T>(
-    methods: RequestMethods,
-    url: RequestUrls,
-    options: RequestOptions
-  ): Promise<RequestResponse<T>> {
+    methods: Service.Methods,
+    url: Service.Urls,
+    options: RequestType.Options
+  ): Promise<RequestType.Response<T>> {
     const { params, query, data, formData, ...props } = options;
 
     let defaultHeader: any = {
@@ -46,17 +46,18 @@ export class Request {
       ...props,
     })
       .then(this.statusCheck)
-      .then(res => res.json());
+      .then(res => res && res.json());
   }
 
-  static statusCheck(res: Response) {
+  static statusCheck(res: Response): Response | void {
     if (res.status === 200 || res.status === 201) {
-    } else if (res.status === 401) {
-      localStorage.clear();
-      message.error(intl.get(lang["common.error.401"]));
-    } else {
-      message.error(intl.get(lang["common.error.unknown"]));
+      return res;
     }
-    return res;
+    if (res.status === 401) {
+      localStorage.clear();
+      message.error(intl.get("common.error.needAuth"));
+    } else {
+      message.error(intl.get("common.error.unknown"));
+    }
   }
 }

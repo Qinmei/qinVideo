@@ -1,4 +1,3 @@
-import { RequestUrls, RequestMethods } from "@/constants";
 import { Model } from "@/action/model";
 
 type InitialState = {
