@@ -2,15 +2,11 @@ import { Service } from "@/constants";
 import { Model } from "@/action/model";
 import { AuthType } from "@/types";
 
-type InitialState = {
-  active: boolean;
-};
+type InitialState = {};
 
 export class Auth extends Model<InitialState> {
   constructor() {
-    super("auth", {
-      active: false,
-    });
+    super("auth", {});
   }
 
   methods = {

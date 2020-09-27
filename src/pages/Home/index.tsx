@@ -7,7 +7,7 @@ import Footer from "./Footer";
 
 interface PropsType {}
 
-const Home: React.FC<PropsType> = (props) => {
+const Home: React.FC<PropsType> = props => {
   return (
     <Layout>
       <SiderBar />

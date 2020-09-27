@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState, useCallback } from "react";
 import { ConfigProvider } from "antd";
 import { setLanguage, LanguageType } from "@/locales";
 import zh_CN from "antd/es/locale/zh_CN";
@@ -18,10 +18,10 @@ export const Language: FC<PropsType> = props => {
 
   const [init, setInit] = useState(false);
 
-  const initLanguage = async () => {
+  const initLanguage = useCallback(async () => {
     await setLanguage(language);
     !init && setInit(true);
-  };
+  }, [init, language]);
 
   useEffect(() => {
     initLanguage();

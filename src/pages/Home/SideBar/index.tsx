@@ -3,7 +3,7 @@ import { Layout } from "antd";
 
 interface PropsType {}
 
-const SideBar: FC<PropsType> = (props) => {
+const SideBar: FC<PropsType> = props => {
   return (
     <Layout.Sider
       width={240}

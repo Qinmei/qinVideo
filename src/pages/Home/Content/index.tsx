@@ -1,10 +1,10 @@
-import React, { FC, Suspense } from "react";
+import React, { FC } from "react";
 import { Layout } from "antd";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { ErrorLayout } from "@/layouts";
 
 interface PropsType {}
-const Content: FC<PropsType> = (props) => {
+const Content: FC<PropsType> = props => {
   return (
     <Layout.Content>
       <ErrorLayout>

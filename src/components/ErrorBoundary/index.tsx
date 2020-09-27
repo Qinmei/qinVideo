@@ -19,9 +19,7 @@ export class ErrorBoundary extends Component<PropsType, StateType> {
     const { children } = this.props;
 
     return hasError ? (
-      <div
-        style={{ textAlign: "center", marginTop: "200px", fontSize: "20px" }}
-      >
+      <div style={{ textAlign: "center", marginTop: "200px", fontSize: "20px" }}>
         {intl.get("ERROR_PAGE_TIPS")}
       </div>
     ) : (
