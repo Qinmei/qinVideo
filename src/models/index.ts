@@ -25,7 +25,7 @@ models.forEach(Model => {
   actions[name] = {};
 
   for (const key in model.methods) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     actions[name][key] = (data: any) => Middleware.compose(model.methods[key])(data, key);
   }

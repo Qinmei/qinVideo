@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { Input, Button, Form } from "antd";
 import md5 from "md5";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
@@ -16,26 +16,15 @@ export const Login: FC<propTypes> = props => {
   const actions = useAction("auth");
   const [loading] = useLoading(["login"]);
 
-  const [state, setState] = useState(0);
-
-  const init = () => {
-    console.log(state);
-  };
-
-  useEffect(() => {
-    init();
-    console.log(state);
-  }, []);
-
-  const onFinish = async (values: AuthType.LoginRequest) => {
-    // const [status, res] = await actions.login({
-    //   data: {
-    //     name: values.name,
-    //     password: md5(values.password),
-    //   },
-    // });
-    // if (!status) return;
-    // history.push("/home");
+  const onFinish = async (values: AuthType.LoginRequestData) => {
+    const [status, res] = await actions.login({
+      data: {
+        name: values.name,
+        password: md5(values.password),
+      },
+    });
+    if (!status) return;
+    history.push("/home");
   };
 
   return (

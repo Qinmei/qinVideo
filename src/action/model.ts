@@ -26,7 +26,7 @@ export class Model<T> {
     err = this.error
   ): Promise<[boolean, T]> {
     return Request.init<T>(method, url, data).then(async res => {
-      if (res && res.code === 10000000) {
+      if (res && res.code === 10000) {
         return await success<T>(res, store.dispatch);
       } else {
         res.code && message.error(intl.get(res.code.toString() as LanguageKeys));
@@ -35,7 +35,7 @@ export class Model<T> {
     });
   }
 
-  initDispatch(payload: Partial<T>): void {
+  dispatch(payload: Partial<T>): void {
     store.dispatch<{ type: string; payload: Partial<T> }>({
       type: this.namespace,
       payload,

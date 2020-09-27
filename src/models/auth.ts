@@ -1,6 +1,6 @@
 import { Service } from "@/constants";
 import { Model } from "@/action/model";
-import { RequestType, AuthType } from "@/types";
+import { AuthType } from "@/types";
 
 type InitialState = {
   active: boolean;
@@ -12,10 +12,6 @@ export class Auth extends Model<InitialState> {
       active: false,
     });
   }
-
-  dispatch = {
-    login: (res: RequestType.Response<AuthType.LoginResponse>) => super.initDispatch({}),
-  };
 
   methods = {
     login: (data: AuthType.LoginRequest) =>

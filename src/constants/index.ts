@@ -1,1 +1,3 @@
-export * as Service from "./service";
+import * as Service from "./service";
+
+export { Service };

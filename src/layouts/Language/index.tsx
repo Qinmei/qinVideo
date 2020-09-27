@@ -25,7 +25,7 @@ export const Language: FC<PropsType> = props => {
 
   useEffect(() => {
     initLanguage();
-  }, []);
+  }, [initLanguage]);
 
   return <ConfigProvider locale={languages[language]}>{init && children}</ConfigProvider>;
 };
