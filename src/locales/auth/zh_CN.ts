@@ -9,8 +9,13 @@ export default {
     password: {
       tips: "请输入密码",
     },
+    email: {
+      tips: "请输入邮箱",
+    },
   },
   init: {
-    title: "初始化密码",
+    title: "初始化用户",
+    submit: "初始化",
+    success: "初始化用户成功，请登录",
   },
 };

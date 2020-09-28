@@ -6,12 +6,14 @@ import { intl } from "@/locales";
 import { useHistory } from "react-router-dom";
 import { useAction, useLoading } from "@/action";
 import { AuthType } from "@/types";
+import { useUserToken } from "@/hooks";
 
 interface propTypes {}
 
 export const Login: FC<propTypes> = props => {
   const [form] = Form.useForm();
   const history = useHistory();
+  const { saveTokenCall } = useUserToken();
 
   const actions = useAction("auth");
   const [loading] = useLoading(["login"]);
@@ -24,6 +26,7 @@ export const Login: FC<propTypes> = props => {
       },
     });
     if (!status) return;
+    saveTokenCall(res);
     history.push("/home");
   };
 

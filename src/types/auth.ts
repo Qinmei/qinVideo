@@ -1,5 +1,6 @@
 export type LoginRequestData = {
   name: string;
+  email?: string;
   password: string;
 };
 

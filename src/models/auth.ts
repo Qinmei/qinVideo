@@ -12,7 +12,9 @@ export class Auth extends Model<InitialState> {
   methods = {
     login: (data: AuthType.LoginRequest) =>
       super.init<AuthType.LoginResponse>(Service.Methods.POST, Service.Urls.queryAuthLogin, data),
-    initAdmin: (data: Record<string, unknown>) =>
+    exist: (data: Record<string, unknown>) =>
       super.init<"already" | "init">(Service.Methods.GET, Service.Urls.queryBaseInit, data),
+    init: (data: AuthType.LoginRequest) =>
+      super.init<null>(Service.Methods.POST, Service.Urls.queryBaseInit, data),
   };
 }
