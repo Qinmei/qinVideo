@@ -14,7 +14,8 @@ export type LanguageKeys = CustomType.Paths<typeof zh_CN>;
 
 const intl = {
   get: (key: LanguageKeys) => intlDefault.get(key),
-  getHTML: (key: LanguageKeys, addon: { [key: string]: string | number }) => intlDefault.getHTML(key, addon),
+  getHTML: (key: LanguageKeys, addon?: { [key: string]: string | number }) =>
+    intlDefault.getHTML(key, addon),
 };
 
 const setLanguage = async (language: LanguageType = "zh_CN"): Promise<void> => {

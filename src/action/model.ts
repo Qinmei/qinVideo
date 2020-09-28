@@ -29,7 +29,7 @@ export class Model<T> {
       if (res && res.code === 10000) {
         return await success<T>(res, store.dispatch);
       } else {
-        res.code && message.error(intl.get(res.code.toString() as LanguageKeys));
+        message.error(res.msg || "unknown error");
         return await err<T>(res);
       }
     });

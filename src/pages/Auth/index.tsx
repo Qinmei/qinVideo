@@ -17,7 +17,7 @@ const Auth: React.FC<propTypes> = props => {
         <Tabs.TabPane tab={intl.get("auth.login.title")} key="login">
           <Login></Login>
         </Tabs.TabPane>
-        {!init && (
+        {init && (
           <Tabs.TabPane tab={intl.get("auth.init.title")} key="init">
             <Init></Init>
           </Tabs.TabPane>

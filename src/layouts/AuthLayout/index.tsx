@@ -14,6 +14,7 @@ export const AuthLayout: React.FC<propTypes> = props => {
         <p className={styles.title}>{intl.get("auth.title")}</p>
         {children}
       </div>
+      <div className={styles.footer}>{intl.getHTML("auth.footer")}</div>
     </div>
   );
 };

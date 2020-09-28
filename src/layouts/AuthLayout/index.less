@@ -3,8 +3,10 @@
 .wrapper {
   height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f0f2f5;
 
   .form {
     margin-top: 100px;
@@ -24,5 +26,11 @@
       font-size: 14px;
       margin-bottom: 30px;
     }
+  }
+
+  .footer {
+    height: 100px;
+    line-height: 100px;
+    opacity: 0.8;
   }
 }

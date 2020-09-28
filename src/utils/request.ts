@@ -1,4 +1,4 @@
-import { message } from "antd";
+import { notification } from "antd";
 import { stringify } from "qs";
 import { RequestType } from "@/types";
 import { Service } from "@/constants";
@@ -55,9 +55,13 @@ export class Request {
     }
     if (res.status === 401) {
       localStorage.clear();
-      message.error(intl.get("common.error.needAuth"));
+      notification.error({
+        message: intl.get("common.error.needAuth"),
+      });
     } else {
-      message.error(intl.get("common.error.unknown"));
+      notification.error({
+        message: intl.get("common.error.unknown"),
+      });
     }
   }
 }

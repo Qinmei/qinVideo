@@ -1,5 +1,7 @@
 export default {
   title: "qinVideo 后台管理面板",
+  footer:
+    "Copyright ©2020 <a href='https://github.com/qinmei/qinvideo' target='_blank'>QinVideo</a>提供技术支持",
   login: {
     title: "账户密码登录",
     submit: "登录",
