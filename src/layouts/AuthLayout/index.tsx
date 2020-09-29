@@ -1,5 +1,6 @@
 import React from "react";
 import { intl } from "@/locales";
+import { Copyright } from "@/components";
 import styles from "./index.less";
 
 interface propTypes {}
@@ -14,7 +15,7 @@ export const AuthLayout: React.FC<propTypes> = props => {
         <p className={styles.title}>{intl.get("auth.title")}</p>
         {children}
       </div>
-      <div className={styles.footer}>{intl.getHTML("auth.footer")}</div>
+      <Copyright></Copyright>
     </div>
   );
 };

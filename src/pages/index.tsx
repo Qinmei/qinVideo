@@ -12,7 +12,7 @@ export const Pages: FC<PropsType> = props => {
     <Switch>
       <Route path="/auth" component={Auth} />
       <Route path={"/home"} component={Home} />
-      <Route render={() => <Redirect to="/auth/login" />} />
+      <Redirect to="/auth/login" />
     </Switch>
   );
 };

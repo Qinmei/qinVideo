@@ -15,7 +15,10 @@ export const useModel = <T extends Modules>(arr: T[]): [Pick<Actions, T>, Pick<R
 
 export const useAction = <T extends Modules>(module: T): Actions[T] => models[module];
 
-export const useRedux = <T extends Modules>(module: T): Reducers[T] => useSelector((state: Reducers) => state[module]);
+export const useRedux = <T extends Modules>(module: T): Reducers[T] =>
+  useSelector((state: Reducers) => state[module]);
 
 export const useLoading = (loadingKeys: string[]): boolean[] =>
-  loadingKeys.map(item => useSelector((state: Reducers) => state.loading.loadingKeys.includes(item)));
+  loadingKeys.map(item =>
+    useSelector((state: Reducers) => state.loading.loadingKeys.includes(item))
+  );

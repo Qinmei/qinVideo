@@ -27,7 +27,7 @@ export const Login: FC<propTypes> = props => {
     });
     if (!status) return;
     saveTokenCall(res);
-    history.push("/home");
+    history.push("/home/dashboard/overview");
   };
 
   return (

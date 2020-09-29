@@ -1,0 +1,66 @@
+@import "../../themes/common.less";
+
+.wrapper {
+  height: 100vh;
+  min-width: 1200px;
+
+  .sideCon {
+    .logo {
+      height: 64px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      font-weight: 600;
+
+      &.dark {
+        background-color: #002140;
+        color: white;
+      }
+
+      &.light {
+        background-color: white;
+        color: #002140;
+      }
+
+      img {
+        width: 40px;
+      }
+      span {
+        margin-left: 15px;
+      }
+    }
+    .sider {
+      overflow: auto;
+      height: calc(100% - 64px);
+      left: 0;
+
+      &.dark::-webkit-scrollbar-thumb {
+        background-color: rgba(66, 37, 37, 0.3);
+      }
+    }
+  }
+
+  .main {
+    height: 100%;
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      height: 64px;
+      min-height: 64px;
+      width: 100%;
+      background-color: white;
+      box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+    }
+
+    .content {
+      padding: 24px;
+    }
+
+    .footer {
+      width: 100%;
+      padding: 20px 0;
+    }
+  }
+}

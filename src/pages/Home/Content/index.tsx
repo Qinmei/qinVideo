@@ -1,18 +1,21 @@
 import React, { FC } from "react";
-import { Layout } from "antd";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 import { ErrorLayout } from "@/layouts";
+
+const Dashboard = React.lazy(() => import("./Dashboard"));
+const Status = React.lazy(() => import("./Status"));
 
 interface PropsType {}
 const Content: FC<PropsType> = props => {
+  const { path } = useRouteMatch();
   return (
-    <Layout.Content>
-      <ErrorLayout>
-        <Switch>
-          <Route render={() => <Redirect to="/404" />} />
-        </Switch>
-      </ErrorLayout>
-    </Layout.Content>
+    <ErrorLayout>
+      <Switch>
+        <Route path={`${path}/dashboard`} component={Dashboard} />
+        <Route path={`${path}/status`} component={Status} />
+        <Redirect to={`${path}/status/404`} />
+      </Switch>
+    </ErrorLayout>
   );
 };
 export default Content;

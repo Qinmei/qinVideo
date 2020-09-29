@@ -1,10 +1,21 @@
 import React from "react";
-import { Layout } from "antd";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import styles from "./index.less";
 
-interface PropsType {}
+interface PropsType {
+  setCollapse: (collapse: boolean) => void;
+  collapse: boolean;
+}
 
 const Header: React.FC<PropsType> = props => {
-  return <Layout.Header></Layout.Header>;
+  const { collapse, setCollapse } = props;
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.list} onClick={() => setCollapse(!collapse)}>
+        {collapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+      </div>
+    </div>
+  );
 };
 
 export default Header;

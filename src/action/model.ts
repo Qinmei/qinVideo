@@ -1,6 +1,5 @@
 import { message } from "antd";
 import { Dispatch } from "redux";
-import { intl, LanguageKeys } from "@/locales";
 import { store } from "@/action";
 import { Request } from "@/utils";
 import { Service } from "@/constants";
@@ -11,11 +10,11 @@ export class Model<T> {
   constructor(public namespace: Modules, public initialState: T) {}
 
   success<T>(res: RequestType.Response<T>, dispatch: Dispatch): [boolean, T] {
-    return [true, res.data];
+    return [true, res?.data];
   }
 
   error<T>(res: RequestType.Response<T>): [boolean, T] {
-    return [false, res.data];
+    return [false, res?.data];
   }
 
   async init<T>(
@@ -29,7 +28,7 @@ export class Model<T> {
       if (res && res.code === 10000) {
         return await success<T>(res, store.dispatch);
       } else {
-        message.error(res.msg || "unknown error");
+        res?.msg && message.error(res.msg || "unknown error");
         return await err<T>(res);
       }
     });

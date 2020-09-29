@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import intl from "react-intl-universal";
+import { intl } from "@/locales";
 
 interface StateType {
   hasError: boolean;
@@ -20,7 +20,7 @@ export class ErrorBoundary extends Component<PropsType, StateType> {
 
     return hasError ? (
       <div style={{ textAlign: "center", marginTop: "200px", fontSize: "20px" }}>
-        {intl.get("ERROR_PAGE_TIPS")}
+        {intl.get("common.error.errorboundry")}
       </div>
     ) : (
       children

@@ -1,22 +1,23 @@
-import React from "react";
-import { Layout } from "antd";
-import SiderBar from "./SideBar";
-import Header from "./Header";
+import React, { useState } from "react";
+import { PageLayout } from "@/layouts";
 import Content from "./Content";
-import Footer from "./Footer";
+import Header from "./Header";
+import Sidebar from "./SideBar";
+import { Copyright } from "@/components";
 
 interface PropsType {}
 
 const Home: React.FC<PropsType> = props => {
+  const [collapse, setCollapse] = useState(false);
   return (
-    <Layout>
-      <SiderBar />
-      <Layout>
-        <Header />
-        <Content />
-        <Footer />
-      </Layout>
-    </Layout>
+    <PageLayout
+      sider={<Sidebar />}
+      header={<Header collapse={collapse} setCollapse={setCollapse} />}
+      footer={<Copyright />}
+      collapse={collapse}
+    >
+      <Content />
+    </PageLayout>
   );
 };
 
