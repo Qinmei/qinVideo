@@ -13,12 +13,13 @@ const languages = {
 export type LanguageKeys = CustomType.Paths<typeof zh_CN>;
 
 const intl = {
-  get: (key: LanguageKeys) => intlDefault.get(key),
+  get: (key: LanguageKeys, addon?: { [key: string]: string | number }) =>
+    intlDefault.get(key, addon),
   getHTML: (key: LanguageKeys, addon?: { [key: string]: string | number }) =>
     intlDefault.getHTML(key, addon),
 };
 
-const setLanguage = async (language: LanguageType = "zh_CN"): Promise<void> => {
+const initLanguage = async (language: LanguageType = "zh_CN"): Promise<void> => {
   const result = languages[language] || {};
   await intlDefault.init({
     currentLocale: language,
@@ -28,4 +29,11 @@ const setLanguage = async (language: LanguageType = "zh_CN"): Promise<void> => {
   });
 };
 
-export { intl, setLanguage };
+const setLanguage = (language: LanguageType): void => {
+  const languagePre: LanguageType = (localStorage.getItem("locale") as LanguageType) || "zh_CN";
+  if (languagePre === language) return;
+  localStorage.setItem("locale", language);
+  window.location.reload();
+};
+
+export { intl, initLanguage, setLanguage };

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AuthType } from "@/types";
 import { useHistory } from "react-router-dom";
+import JWTDecode from "jwt-decode";
 
 export const useUserToken = () => {
   const tokenInit = localStorage.getItem("token");
@@ -24,9 +25,12 @@ export const useUserToken = () => {
     history.push("/auth/login");
   };
 
+  const userInfo: AuthType.UserInfoData | null = token ? JWTDecode(token) : null;
+
   return {
     token,
     refreshToken,
+    userInfo,
     saveTokenCall,
     clearTokenCall,
   };

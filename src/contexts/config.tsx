@@ -2,7 +2,9 @@ import React, { FC, createContext, useReducer } from "react";
 
 interface PropsType {}
 
-interface DataType {}
+interface DataType {
+  theme: "light" | "dark";
+}
 
 interface MethodsType {}
 
@@ -23,11 +25,15 @@ const ConfigProvider: FC<PropsType> = props => {
     };
   };
 
-  const data: DataType = {};
+  const data: DataType = {
+    theme: "dark",
+  };
 
   const [state, dispatch] = useReducer(reducer, data);
 
-  const methods: MethodsType = {};
+  const methods: MethodsType = {
+    changeTheme: (value: "dark" | "light") => dispatch({ theme: value }),
+  };
 
   const contextValue: ContextProps = {
     state,

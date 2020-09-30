@@ -1,7 +1,8 @@
-import React, { ReactNode } from "react";
-import { Layout, Affix } from "antd";
+import React, { ReactNode, useContext } from "react";
+import { Layout } from "antd";
 import styles from "./index.less";
 import logo from "@/assets/logo.svg";
+import { ConfigContext } from "@/contexts";
 
 interface PropsType {
   sider: ReactNode;
@@ -13,7 +14,8 @@ interface PropsType {
 export const PageLayout: React.FC<PropsType> = props => {
   const { sider, header, footer, children, collapse = false } = props;
 
-  const theme: "light" | "dark" = "dark";
+  const { state } = useContext(ConfigContext);
+  const { theme } = state;
 
   return (
     <Layout className={styles.wrapper}>

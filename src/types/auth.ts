@@ -12,3 +12,14 @@ export type LoginResponse = {
   refreshToken: string;
   token: string;
 };
+
+export type UserInfoData = {
+  avatar: string;
+  background: string;
+  email: string;
+  id: string;
+  introduce: string;
+  level: number;
+  name: string;
+  score: number;
+};

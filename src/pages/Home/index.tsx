@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { PageLayout } from "@/layouts";
+import { Copyright } from "@/components";
+
 import Content from "./Content";
 import Header from "./Header";
 import Sidebar from "./SideBar";
-import { Copyright } from "@/components";
 
 interface PropsType {}
 

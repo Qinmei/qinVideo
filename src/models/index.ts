@@ -2,17 +2,19 @@ import { combineReducers } from "redux";
 import { Middleware } from "@/action";
 import { Loading } from "./loading";
 import { Auth } from "./auth";
+import { Global } from "./global";
 
 type ModulesAll = {
   loading: Loading;
   auth: Auth;
+  global: Global;
 };
 
 export type Modules = keyof ModulesAll;
 export type Actions = { [k in Modules]: ModulesAll[k]["methods"] };
 export type Reducers = { [k in Modules]: ModulesAll[k]["initialState"] };
 
-const models = [Loading, Auth];
+const models = [Loading, Auth, Global];
 
 const actions: any = {};
 const reducers: any = {};

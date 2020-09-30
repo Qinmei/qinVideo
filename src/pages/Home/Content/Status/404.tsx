@@ -18,7 +18,7 @@ const Result404: FC<propTypes> = props => {
       subTitle={intl.get("common.error.pageNoExist")}
       extra={
         <Button type="primary" onClick={goHome}>
-          {intl.get("common.goHome")}
+          {intl.get("common.base.goHome")}
         </Button>
       }
     />

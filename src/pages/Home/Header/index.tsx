@@ -1,5 +1,10 @@
 import React from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+
+import { Docs } from "./docs";
+import { Language } from "./language";
+import { UserInfo } from "./userInfo";
+import { Message } from "./message";
 import styles from "./index.less";
 
 interface PropsType {
@@ -13,6 +18,12 @@ const Header: React.FC<PropsType> = props => {
     <div className={styles.wrapper}>
       <div className={styles.list} onClick={() => setCollapse(!collapse)}>
         {collapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+      </div>
+      <div className={styles.right}>
+        <Docs></Docs>
+        <Message></Message>
+        <UserInfo></UserInfo>
+        <Language></Language>
       </div>
     </div>
   );
