@@ -6,10 +6,10 @@ export type Options = {
     [key: string]: boolean | string | number;
   };
   data?: {
-    [key: string]: any;
+    [key: string]: unknown;
   };
   formData?: FormData;
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 export type Response<T> = {

@@ -12,7 +12,7 @@ export const AuthLayout: React.FC<propTypes> = props => {
     <div className={styles.wrapper}>
       <div className={styles.form}>
         <h1>Qin Video</h1>
-        <p className={styles.title}>{intl.get("auth.title")}</p>
+        <p className={styles.title}>{intl.get("auth.layout.title")}</p>
         {children}
       </div>
       <Copyright></Copyright>

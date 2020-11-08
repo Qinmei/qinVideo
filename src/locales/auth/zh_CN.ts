@@ -1,6 +1,6 @@
 export default {
-  "auth.title": "qinVideo 后台管理面板",
-  "auth.footer": "Copyright ©2020 <a href={link} target='_blank'>QinVideo</a>提供技术支持",
+  "auth.layout.title": "qinVideo 后台管理面板",
+  "auth.layout.footer": "Copyright ©2020 <a href={link} target='_blank'>QinVideo</a>提供技术支持",
   "auth.login.title": "账户密码登录",
   "auth.login.submit": "登录",
   "auth.login.username.tips": "请输入用户名",

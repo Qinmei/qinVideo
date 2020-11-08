@@ -4,8 +4,8 @@ import { useHistory } from "react-router-dom";
 import JWTDecode from "jwt-decode";
 
 export const useUserToken = () => {
-  const tokenInit = localStorage.getItem("token");
-  const refreshTokenInit = localStorage.getItem("refreshToken");
+  const tokenInit = sessionStorage.getItem("token");
+  const refreshTokenInit = sessionStorage.getItem("refreshToken");
 
   const [token, setToken] = useState(tokenInit);
   const [refreshToken, setRefreshToken] = useState(refreshTokenInit);
@@ -13,15 +13,15 @@ export const useUserToken = () => {
   const history = useHistory();
 
   const saveTokenCall = (data: AuthType.LoginResponse) => {
-    localStorage.setItem("refreshToken", data.refreshToken);
-    localStorage.setItem("token", data.token);
+    sessionStorage.setItem("refreshToken", data.refreshToken);
+    sessionStorage.setItem("token", data.token);
     setToken(data.token);
     setRefreshToken(data.refreshToken);
   };
 
   const clearTokenCall = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("refreshToken");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("refreshToken");
     history.push("/auth/login");
   };
 

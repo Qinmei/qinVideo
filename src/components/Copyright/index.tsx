@@ -8,7 +8,7 @@ interface PropType {}
 export const Copyright: FC<PropType> = props => {
   return (
     <div className={styles.footer}>
-      {intl.getHTML("auth.footer", { link: Config.Base.copyright })}
+      {intl.getHTML("auth.layout.footer", { link: Config.Base.copyright })}
     </div>
   );
 };
