@@ -1,7 +1,7 @@
 import React from "react";
 import { Popover, Avatar } from "antd";
 import { UserOutlined, LogoutOutlined, SettingOutlined } from "@ant-design/icons";
-import { intl, setLanguage, LanguageType } from "@/locales";
+import { intl } from "@/locales";
 import { useUserToken } from "@/hooks";
 import { useHistory } from "react-router-dom";
 

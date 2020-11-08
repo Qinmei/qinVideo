@@ -1,16 +1,14 @@
 import intlDefault from "react-intl-universal";
 import { zh_CN, en_US } from "./lang";
-import { CustomType } from "@/types";
-import { Methods } from "@/utils";
 
 export type LanguageType = "zh_CN" | "en_US";
 
 const languages = {
-  zh_CN: Methods.languageFlat(zh_CN),
-  en_US: Methods.languageFlat(en_US),
+  zh_CN,
+  en_US,
 };
 
-export type LanguageKeys = CustomType.Paths<typeof zh_CN>;
+export type LanguageKeys = keyof typeof zh_CN;
 
 const intl = {
   get: (key: LanguageKeys, addon?: { [key: string]: string | number }) =>

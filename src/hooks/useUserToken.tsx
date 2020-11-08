@@ -25,7 +25,7 @@ export const useUserToken = () => {
     history.push("/auth/login");
   };
 
-  const userInfo: AuthType.UserInfoData | null = token ? JWTDecode(token) : null;
+  const userInfo = (token ? JWTDecode(token) : null) as AuthType.UserInfoData | null;
 
   return {
     token,

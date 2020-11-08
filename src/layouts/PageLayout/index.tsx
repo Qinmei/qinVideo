@@ -1,8 +1,10 @@
 import React, { ReactNode, useContext } from "react";
 import { Layout } from "antd";
+import { useHistory } from "react-router-dom";
+import { ConfigContext } from "@/contexts";
+import { useUserToken } from "@/hooks";
 import styles from "./index.less";
 import logo from "@/assets/logo.svg";
-import { ConfigContext } from "@/contexts";
 
 interface PropsType {
   sider: ReactNode;
@@ -14,8 +16,12 @@ interface PropsType {
 export const PageLayout: React.FC<PropsType> = props => {
   const { sider, header, footer, children, collapse = false } = props;
 
+  const { refreshToken } = useUserToken();
+  const history = useHistory();
   const { state } = useContext(ConfigContext);
   const { theme } = state;
+
+  if (!refreshToken) history.push("/auth/login");
 
   return (
     <Layout className={styles.wrapper}>
