@@ -33,7 +33,7 @@ class ConfigController extends Controller {
         const data = ctx.request.body;
 
         const info = await service.user.exist({});
-        if (info) return 22005;
+        if (info) ctx.helper.send(22005);
 
         data.status = 'publish';
         ctx.helper.validate('user', data, true);
