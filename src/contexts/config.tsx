@@ -1,10 +1,14 @@
 import React, { FC, createContext, useReducer } from "react";
 
+type ThemeType = "light" | "dark";
+
 interface DataType {
-  theme: "light" | "dark";
+  theme: ThemeType;
 }
 
-interface MethodsType {}
+interface MethodsType {
+  changeTheme: (value: ThemeType) => void;
+}
 
 interface ContextProps {
   state: DataType;
@@ -24,13 +28,13 @@ const ConfigProvider: FC = props => {
   };
 
   const data: DataType = {
-    theme: "dark",
+    theme: (localStorage.getItem("theme") as ThemeType) || "dark",
   };
 
   const [state, dispatch] = useReducer(reducer, data);
 
   const methods: MethodsType = {
-    changeTheme: (value: "dark" | "light") => dispatch({ theme: value }),
+    changeTheme: value => dispatch({ theme: value }),
   };
 
   const contextValue: ContextProps = {

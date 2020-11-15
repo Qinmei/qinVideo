@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { FC, useEffect, useCallback } from "react";
 import { Popover, Empty } from "antd";
 import { BellOutlined } from "@ant-design/icons";
 import moment from "moment";
@@ -8,7 +8,7 @@ import { intl } from "@/locales";
 
 import styles from "./index.less";
 
-export const Message: React.FC = props => {
+export const Message: FC = props => {
   const [actions, reducers] = useModel(["global"]);
 
   const { messageList } = reducers.global;

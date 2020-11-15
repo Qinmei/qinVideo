@@ -4,7 +4,8 @@ import { useHistory } from "react-router-dom";
 import { ConfigContext } from "@/contexts";
 import { useUserToken } from "@/hooks";
 import styles from "./index.less";
-import logo from "@/assets/logo.svg";
+import logoWhite from "@/assets/logoWhite.svg";
+import logoDark from "@/assets/logoDark.svg";
 
 interface PropsType {
   sider: ReactNode;
@@ -27,7 +28,7 @@ export const PageLayout: React.FC<PropsType> = props => {
     <Layout className={styles.wrapper}>
       <div className={styles.sideCon}>
         <div className={`${styles.logo} ${styles[theme]}`}>
-          <img src={logo} alt="" />
+          <img src={theme === "dark" ? logoWhite : logoDark} alt="" />
           {!collapse && <span>Qin Video</span>}
         </div>
         <Layout.Sider

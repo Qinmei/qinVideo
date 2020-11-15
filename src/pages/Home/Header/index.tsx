@@ -5,6 +5,7 @@ import { Docs } from "./docs";
 import { Language } from "./language";
 import { UserInfo } from "./userInfo";
 import { Message } from "./message";
+import { Theme } from "./theme";
 import styles from "./index.less";
 
 interface PropsType {
@@ -24,6 +25,7 @@ const Header: React.FC<PropsType> = props => {
         <Message></Message>
         <UserInfo></UserInfo>
         <Language></Language>
+        <Theme></Theme>
       </div>
     </div>
   );

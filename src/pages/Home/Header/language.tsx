@@ -1,6 +1,6 @@
 import React from "react";
 import { Popover } from "antd";
-import { GlobalOutlined, FontColorsOutlined } from "@ant-design/icons";
+import { GlobalOutlined, FontColorsOutlined, UnderlineOutlined } from "@ant-design/icons";
 import { intl } from "@/locales";
 import { setLanguage, LanguageType } from "@/locales";
 
@@ -14,7 +14,7 @@ const LanguageData = [
     value: "zh_CN",
   },
   {
-    icon: <FontColorsOutlined />,
+    icon: <UnderlineOutlined />,
     label: intl.get("common.header.lang.en_US"),
     value: "en_US",
   },
@@ -27,7 +27,7 @@ export const Language: React.FC = props => {
 
   return (
     <Popover
-      placement="bottomRight"
+      placement="bottom"
       content={<PopContent source={LanguageData} onChange={changeLanguage} />}
       trigger="hover"
     >
