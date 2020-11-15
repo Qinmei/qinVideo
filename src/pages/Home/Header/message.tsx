@@ -8,9 +8,7 @@ import { intl } from "@/locales";
 
 import styles from "./index.less";
 
-interface PropsType {}
-
-export const Message: React.FC<PropsType> = props => {
+export const Message: React.FC = props => {
   const [actions, reducers] = useModel(["global"]);
 
   const { messageList } = reducers.global;

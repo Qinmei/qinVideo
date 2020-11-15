@@ -1,38 +1,60 @@
 import React, { FC } from "react";
 import { Menu } from "antd";
-import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
-  TeamOutlined,
-  UserOutlined,
-  UploadOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
+import { ShopOutlined, UserOutlined } from "@ant-design/icons";
 import { intl } from "@/locales";
-import { useLocation, useRouteMatch } from "react-router-dom";
+import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
 
-interface PropsType {}
+import { MenuProps } from "antd/es/menu";
 
-const SideBar: FC<PropsType> = props => {
-  const pathname = useLocation();
-  const path = useRouteMatch();
+const SideBar: FC = props => {
+  const { pathname } = useLocation();
+  const { path } = useRouteMatch();
+  const history = useHistory();
 
-  console.log(pathname, path);
+  const menuSelect: MenuProps["onSelect"] = ({ key }) => {
+    history.push(`${path}${key as string}`);
+  };
+
+  const selectKey = () => {
+    const reg = new RegExp(path);
+    const result = pathname.replace(reg, "");
+    return result;
+  };
+
+  const openKeys = () => {
+    const pathArr = pathname.split("/");
+    return `/${pathArr[2]}`;
+  };
+
+  console.log(openKeys());
+
   return (
     <>
       <div className="logo" />
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
-        <Menu.SubMenu icon={<UserOutlined />} title={intl.get("common.menu.dashboard")}>
+      <Menu
+        theme="dark"
+        mode="inline"
+        selectedKeys={[selectKey()]}
+        defaultOpenKeys={[openKeys()]}
+        onSelect={menuSelect}
+      >
+        <Menu.SubMenu
+          key="/dashboard"
+          icon={<UserOutlined />}
+          title={intl.get("common.menu.dashboard")}
+        >
           <Menu.Item key="/dashboard/analysis">
             {intl.get("common.menu.dashboard.analysis")}
           </Menu.Item>
-          <Menu.Item key="/dashboard/workpplace">
+          <Menu.Item key="/dashboard/workplace">
             {intl.get("common.menu.dashboard.workplace")}
           </Menu.Item>
         </Menu.SubMenu>
-        <Menu.SubMenu icon={<UserOutlined />} title={intl.get("common.menu.animate")}>
+        <Menu.SubMenu
+          key="/animate"
+          icon={<UserOutlined />}
+          title={intl.get("common.menu.animate")}
+        >
           <Menu.Item key="/animate/list">{intl.get("common.menu.animate.list")}</Menu.Item>
           <Menu.Item key="/animate/create">{intl.get("common.menu.animate.create")}</Menu.Item>
           <Menu.Item key="/animate/category">{intl.get("common.menu.animate.category")}</Menu.Item>

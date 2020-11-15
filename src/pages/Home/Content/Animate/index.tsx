@@ -1,15 +1,15 @@
 import React, { FC } from "react";
 import { Route, Switch, Redirect, useRouteMatch } from "react-router-dom";
 
-const Result404 = React.lazy(() => import("./404"));
+const List = React.lazy(() => import("./List"));
 
-const Dashboard: FC = props => {
+const Dashboard: FC = () => {
   const { path } = useRouteMatch();
 
   return (
     <Switch>
-      <Route exact path={`${path}/404`} component={Result404} />
-      <Redirect to={`${path}/404`} />
+      <Route exact path={`${path}/list`} component={List} />
+      <Redirect to={`${path}/list`} />
     </Switch>
   );
 };

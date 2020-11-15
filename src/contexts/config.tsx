@@ -1,7 +1,5 @@
 import React, { FC, createContext, useReducer } from "react";
 
-interface PropsType {}
-
 interface DataType {
   theme: "light" | "dark";
 }
@@ -15,7 +13,7 @@ interface ContextProps {
 
 const ConfigContext = createContext({} as ContextProps);
 
-const ConfigProvider: FC<PropsType> = props => {
+const ConfigProvider: FC = props => {
   const { children } = props;
 
   const reducer = (state: DataType, action: Partial<DataType>) => {

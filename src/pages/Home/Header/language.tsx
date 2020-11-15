@@ -7,8 +7,6 @@ import { setLanguage, LanguageType } from "@/locales";
 import { PopContent } from "./popContent";
 import styles from "./index.less";
 
-interface PropsType {}
-
 const LanguageData = [
   {
     icon: <FontColorsOutlined />,
@@ -22,7 +20,7 @@ const LanguageData = [
   },
 ];
 
-export const Language: React.FC<PropsType> = props => {
+export const Language: React.FC = props => {
   const changeLanguage = (value: string) => {
     setLanguage(value as LanguageType);
   };

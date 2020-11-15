@@ -14,7 +14,7 @@ export class Request {
   ): Promise<RequestType.Response<T>> {
     const { params, query, data, formData, ...props } = options;
 
-    let defaultHeader: any = {
+    let defaultHeader: { [key: string]: string } = {
       Accept: "application/json",
       "Content-Type": "application/json; charset=utf-8",
     };
@@ -60,7 +60,11 @@ export class Request {
       });
     } else {
       notification.error({
-        message: intl.get("common.error.unknown"),
+        message: intl.get("common.error.api"),
+        description: res.url,
+        style: {
+          wordBreak: "break-all",
+        },
       });
     }
   }

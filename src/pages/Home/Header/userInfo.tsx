@@ -8,8 +8,6 @@ import { useHistory } from "react-router-dom";
 import { PopContent } from "./popContent";
 import styles from "./index.less";
 
-interface PropsType {}
-
 const UserData = [
   {
     icon: <SettingOutlined />,
@@ -23,7 +21,7 @@ const UserData = [
   },
 ];
 
-export const UserInfo: React.FC<PropsType> = props => {
+export const UserInfo: React.FC = props => {
   const { userInfo, clearTokenCall } = useUserToken();
   const history = useHistory();
 

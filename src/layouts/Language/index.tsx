@@ -9,9 +9,7 @@ const languages = {
   en_US: en_US,
 };
 
-interface PropsType {}
-
-export const Language: FC<PropsType> = props => {
+export const Language: FC = props => {
   const { children } = props;
 
   const language: LanguageType = (localStorage.getItem("locale") as LanguageType) || "zh_CN";

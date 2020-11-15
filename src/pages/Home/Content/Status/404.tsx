@@ -9,8 +9,9 @@ const Result404: FC<propTypes> = props => {
   const history = useHistory();
 
   const goHome = () => {
-    history.push("/home/dashboard/overview");
+    history.push("/home/dashboard/analysis");
   };
+
   return (
     <Result
       status="404"

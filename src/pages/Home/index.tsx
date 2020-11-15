@@ -6,9 +6,7 @@ import Content from "./Content";
 import Header from "./Header";
 import Sidebar from "./SideBar";
 
-interface PropsType {}
-
-const Home: React.FC<PropsType> = props => {
+const Home: React.FC = props => {
   const [collapse, setCollapse] = useState(false);
   return (
     <PageLayout

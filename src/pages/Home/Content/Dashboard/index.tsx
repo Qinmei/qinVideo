@@ -1,16 +1,17 @@
 import React, { FC } from "react";
 import { Route, Switch, Redirect, useRouteMatch } from "react-router-dom";
 
-const Overview = React.lazy(() => import("./Overview"));
+const Analysis = React.lazy(() => import("./Analysis"));
+const Workplace = React.lazy(() => import("./Workplace"));
 
-interface PropsType {}
-const Dashboard: FC<PropsType> = props => {
+const Dashboard: FC = props => {
   const { path } = useRouteMatch();
 
   return (
     <Switch>
-      <Route path={`${path}/overview`} component={Overview} />
-      <Redirect to={`${path}/overview`} />
+      <Route exact path={`${path}/analysis`} component={Analysis} />
+      <Route exact path={`${path}/workplace`} component={Workplace} />
+      <Redirect to={`${path}/analysis`} />
     </Switch>
   );
 };

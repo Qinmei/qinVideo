@@ -7,9 +7,7 @@ import { Pages } from "@/pages";
 import { Language } from "@/layouts";
 import { store } from "@/action";
 
-interface PropsType {}
-
-export const App: FC<PropsType> = props => {
+export const App: FC = () => {
   return (
     <ConfigProvider>
       <Language>

@@ -5,9 +5,7 @@ import "@/themes/global.less";
 const Auth = React.lazy(() => import("@/pages/Auth"));
 const Home = React.lazy(() => import("@/pages/Home"));
 
-interface PropsType {}
-
-export const Pages: FC<PropsType> = props => {
+export const Pages: FC = props => {
   return (
     <Switch>
       <Route path="/auth" component={Auth} />
