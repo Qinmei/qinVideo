@@ -1,4 +1,4 @@
-export const hexToRgb = (hex, opacity) => {
+export const hexToRgb = (hex = "#697689", opacity) => {
   const rgb = [];
 
   hex = hex.substr(1);
