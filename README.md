@@ -2,9 +2,9 @@
 
 基于 nodejs 的视频播放系统
 
-[演示地址](https://qinmei.video): https://qinmei.video
+演示地址: https://qinmei.video
 
-[使用文档](https://qinvideo.org): https://qinvideo.org
+使用文档: https://qinvideo.org
 
 视频安装教程:https://qinvideo.org/video/#%E5%AE%89%E8%A3%85
 
