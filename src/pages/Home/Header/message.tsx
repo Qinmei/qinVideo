@@ -60,7 +60,7 @@ const MessageContent: React.FC<ContentPropsType> = props => {
           ))}
         </>
       ) : (
-        <div className="empty">
+        <div className={styles.empty}>
           <Empty />
         </div>
       )}
