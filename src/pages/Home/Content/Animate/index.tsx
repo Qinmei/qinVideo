@@ -6,6 +6,8 @@ const List = React.lazy(() => import("./List"));
 const Dashboard: FC = () => {
   const { path } = useRouteMatch();
 
+  const config = {};
+
   return (
     <Switch>
       <Route exact path={`${path}/list`} component={List} />
