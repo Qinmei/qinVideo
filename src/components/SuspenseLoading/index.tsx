@@ -1,9 +1,7 @@
 import React, { FC } from "react";
 import { Spin } from "antd";
 
-interface PropType {}
-
-export const SuspenseLoading: FC<PropType> = props => {
+export const SuspenseLoading: FC = props => {
   return (
     <div
       style={{

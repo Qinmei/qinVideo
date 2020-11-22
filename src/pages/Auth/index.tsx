@@ -6,9 +6,7 @@ import { Login } from "./Login";
 import { Init } from "./Init";
 import { useAdminInit } from "@/hooks";
 
-interface propTypes {}
-
-const Auth: React.FC<propTypes> = props => {
+const Auth: React.FC = props => {
   const [init] = useAdminInit();
 
   return (

@@ -7,7 +7,7 @@ class Middleware {
     this.chain.push(...func);
   }
 
-  static compose(args: any) {
+  static compose(args: Record<string, unknown>) {
     return this.chain.reduceRight((args, fn) => fn(args), args);
   }
 
@@ -27,7 +27,7 @@ class Middleware {
     });
   }
 
-  static loading = (next: Function) => async (data: any, key: string) => {
+  static loading = (next: Function) => async (data: Record<string, unknown>, key: string) => {
     Middleware.sendRequestKeys(key);
 
     const result = await next(data);

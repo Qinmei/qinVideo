@@ -8,9 +8,7 @@ import { useAction, useLoading } from "@/action";
 import { AuthType } from "@/types";
 import { useUserToken } from "@/hooks";
 
-interface propTypes {}
-
-export const Login: FC<propTypes> = props => {
+export const Login: FC = props => {
   const [form] = Form.useForm();
   const history = useHistory();
   const { saveTokenCall } = useUserToken();

@@ -29,7 +29,8 @@
 		"build": "craco build",
 		"test": "craco test",
 		"eject": "react-scripts eject",
-		"eslint": "eslint --ext .tsx,.ts --fix ./src"
+		"eslint": "eslint --ext .tsx,.ts --fix ./src",
+		"prettier": "prettier --write  ./src"
 	},
 	"browserslist": {
 		"production": [
@@ -61,7 +62,7 @@
 	},
 	"lint-staged": {
 		"*.{js,jsx,ts,tsx}": [
-			"eslint --fix",
+			"yarn eslint",
 			"git add"
 		]
 	},

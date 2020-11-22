@@ -3,9 +3,7 @@ import { intl } from "@/locales";
 import { Copyright } from "@/components";
 import styles from "./index.less";
 
-interface propTypes {}
-
-export const AuthLayout: React.FC<propTypes> = props => {
+export const AuthLayout: React.FC = props => {
   const { children } = props;
 
   return (

@@ -5,9 +5,7 @@ import { Config } from "@/constants";
 import styles from "./index.less";
 import { intl } from "@/locales";
 
-interface DocsPropsType {}
-
-export const Docs: React.FC<DocsPropsType> = props => {
+export const Docs: React.FC = props => {
   const goToDocs = () => {
     window.open(Config.Base.docs);
   };

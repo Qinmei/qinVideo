@@ -1,8 +1,6 @@
 import React, { FC } from "react";
 
-interface propTypes {}
-
-const Analysis: FC<propTypes> = props => {
+const Analysis: FC = props => {
   return <div>Analysis</div>;
 };
 

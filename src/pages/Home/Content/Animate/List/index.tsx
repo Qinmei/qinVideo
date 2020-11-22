@@ -1,8 +1,6 @@
 import React, { FC } from "react";
 
-interface propTypes {}
-
-const List: FC<propTypes> = props => {
+const List: FC = props => {
   return <div>animate</div>;
 };
 

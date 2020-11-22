@@ -3,9 +3,7 @@ import { Result, Button } from "antd";
 import { intl } from "@/locales";
 import { useHistory } from "react-router-dom";
 
-interface propTypes {}
-
-const Result404: FC<propTypes> = props => {
+const Result404: FC = props => {
   const history = useHistory();
 
   const goHome = () => {

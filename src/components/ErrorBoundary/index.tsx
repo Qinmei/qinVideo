@@ -5,9 +5,7 @@ interface StateType {
   hasError: boolean;
 }
 
-interface PropsType {}
-
-export class ErrorBoundary extends Component<PropsType, StateType> {
+export class ErrorBoundary extends Component<unknown, StateType> {
   state = { hasError: false };
 
   static getDerivedStateFromError(error: React.ErrorInfo) {

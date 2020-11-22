@@ -1,8 +1,6 @@
 import React, { FC } from "react";
 
-interface propTypes {}
-
-const Workplace: FC<propTypes> = props => {
+const Workplace: FC = props => {
   return <div>Workplace</div>;
 };
 

@@ -6,9 +6,7 @@ import { intl } from "@/locales";
 import { useAction, useLoading } from "@/action";
 import { AuthType } from "@/types";
 
-interface propTypes {}
-
-export const Init: FC<propTypes> = props => {
+export const Init: FC = () => {
   const [form] = Form.useForm();
 
   const actions = useAction("auth");
