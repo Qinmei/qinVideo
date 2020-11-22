@@ -14,7 +14,7 @@ export const App: FC = () => {
         <ReduxProvider store={store}>
           <BrowserRouter>
             <ErrorLayout>
-              <Pages></Pages>
+              <Pages />
             </ErrorLayout>
           </BrowserRouter>
         </ReduxProvider>

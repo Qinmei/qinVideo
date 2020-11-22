@@ -6,14 +6,15 @@ module.exports = {
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended",
   ],
-  plugins: ["prettier"],
+  plugins: ["react", "prettier"],
   rules: {
     "prettier/prettier": "warn",
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-var-requires": "warn",
     "@typescript-eslint/class-name-casing": "off",
-    "react-hooks/rules-of-hooks": "warn",
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
+    "react/self-closing-comp": 'warn',
+    "react-hooks/rules-of-hooks": "warn",
   },
 };

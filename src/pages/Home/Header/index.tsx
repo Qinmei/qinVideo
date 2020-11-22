@@ -21,11 +21,11 @@ const Header: React.FC<PropsType> = props => {
         {collapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </div>
       <div className={styles.right}>
-        <Docs></Docs>
-        <Message></Message>
-        <UserInfo></UserInfo>
-        <Language></Language>
-        <Theme></Theme>
+        <Docs />
+        <Message />
+        <UserInfo />
+        <Language />
+        <Theme />
       </div>
     </div>
   );

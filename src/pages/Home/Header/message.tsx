@@ -16,7 +16,7 @@ export const Message: FC = props => {
 
   useEffect(() => {
     initData();
-  }, []);
+  }, [initData]);
 
   return (
     <Popover
@@ -37,12 +37,13 @@ interface ContentPropsType {
 }
 
 const MessageContent: React.FC<ContentPropsType> = props => {
-  const { list = [] } = props;
+  const { list } = props;
 
   const goToLink = (value: string | undefined) => {
     if (!value) return;
     window.open(value, "newwindow");
   };
+
   return (
     <div className={styles.message}>
       {list.length ? (
@@ -59,7 +60,9 @@ const MessageContent: React.FC<ContentPropsType> = props => {
           ))}
         </>
       ) : (
-        <Empty />
+        <div className="empty">
+          <Empty />
+        </div>
       )}
     </div>
   );

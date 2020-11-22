@@ -15,11 +15,11 @@ const Auth: React.FC<propTypes> = props => {
     <AuthLayout>
       <Tabs defaultActiveKey="login" centered>
         <Tabs.TabPane tab={intl.get("auth.login.title")} key="login">
-          <Login></Login>
+          <Login />
         </Tabs.TabPane>
         {init && (
           <Tabs.TabPane tab={intl.get("auth.init.title")} key="init">
-            <Init></Init>
+            <Init />
           </Tabs.TabPane>
         )}
       </Tabs>

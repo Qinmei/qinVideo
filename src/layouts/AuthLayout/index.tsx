@@ -15,7 +15,7 @@ export const AuthLayout: React.FC<propTypes> = props => {
         <p className={styles.title}>{intl.get("auth.layout.title")}</p>
         {children}
       </div>
-      <Copyright></Copyright>
+      <Copyright />
     </div>
   );
 };
