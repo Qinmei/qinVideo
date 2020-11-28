@@ -6,7 +6,7 @@
 
 使用文档: https://qinvideo.org
 
-视频安装教程:https://qinvideo.org/video/#%E5%AE%89%E8%A3%85
+视频安装教程:https://qinvideo.org/course/videos/install
 
 ## 交流
 
@@ -46,9 +46,3 @@
 -   2020.02.02: v2.0.2, 关于我们, 播放等 BUG 修复;
 -   2020.01.29: v2.0.1, 新增前端用户评分的功能;
 -   2020.01.01: v2.0.0, 基本功能 OK;
-
-## 赞赏
-
-<div align=center>
-<img src="https://qinvideo.org/assets/img/pay.jpeg" width="450" alt="weixin"/>
-</div>
