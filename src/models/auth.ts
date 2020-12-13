@@ -10,11 +10,11 @@ export class Auth extends Model<InitialState> {
   }
 
   methods = {
-    login: (data: AuthType.LoginRequest) =>
-      super.init<AuthType.LoginResponse>(Service.Methods.POST, Service.Urls.queryAuthLogin, data),
+    login: (data: AuthType.LoginReq) =>
+      super.init<AuthType.LoginRes>(Service.Methods.POST, Service.Urls.queryAuthLogin, data),
     exist: (data: Record<string, unknown>) =>
       super.init<"already" | "init">(Service.Methods.GET, Service.Urls.queryBaseInit, data),
-    init: (data: AuthType.LoginRequest) =>
+    init: (data: AuthType.LoginReq) =>
       super.init<null>(Service.Methods.POST, Service.Urls.queryBaseInit, data),
   };
 }

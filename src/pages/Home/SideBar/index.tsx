@@ -13,7 +13,7 @@ import {
   CloudServerOutlined,
 } from "@ant-design/icons";
 import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
-import { intl } from "@/locales";
+import { getLang } from "@/locales";
 import { ConfigContext } from "@/contexts";
 import { MenuProps } from "antd/es/menu";
 
@@ -51,74 +51,72 @@ const SideBar: FC = props => {
       <Menu.SubMenu
         key="/dashboard"
         icon={<DashboardOutlined />}
-        title={intl.get("common.menu.dashboard")}
+        title={getLang("common.menu.dashboard")}
       >
-        <Menu.Item key="/dashboard/analysis">
-          {intl.get("common.menu.dashboard.analysis")}
-        </Menu.Item>
+        <Menu.Item key="/dashboard/analysis">{getLang("common.menu.dashboard.analysis")}</Menu.Item>
         <Menu.Item key="/dashboard/workplace">
-          {intl.get("common.menu.dashboard.workplace")}
+          {getLang("common.menu.dashboard.workplace")}
         </Menu.Item>
       </Menu.SubMenu>
       <Menu.SubMenu
         key="/animate"
         icon={<VideoCameraOutlined />}
-        title={intl.get("common.menu.animate")}
+        title={getLang("common.menu.animate")}
       >
-        <Menu.Item key="/animate/list">{intl.get("common.menu.animate.list")}</Menu.Item>
-        <Menu.Item key="/animate/category">{intl.get("common.menu.animate.category")}</Menu.Item>
-        <Menu.Item key="/animate/season">{intl.get("common.menu.animate.season")}</Menu.Item>
+        <Menu.Item key="/animate/list">{getLang("common.menu.animate.list")}</Menu.Item>
+        <Menu.Item key="/animate/category">{getLang("common.menu.animate.category")}</Menu.Item>
+        <Menu.Item key="/animate/season">{getLang("common.menu.animate.season")}</Menu.Item>
       </Menu.SubMenu>
-      <Menu.SubMenu key="/comic" icon={<BookOutlined />} title={intl.get("common.menu.comic")}>
-        <Menu.Item key="/comic/list">{intl.get("common.menu.comic.list")}</Menu.Item>
-        <Menu.Item key="/comic/category">{intl.get("common.menu.comic.category")}</Menu.Item>
-        <Menu.Item key="/comic/season">{intl.get("common.menu.comic.season")}</Menu.Item>
+      <Menu.SubMenu key="/comic" icon={<BookOutlined />} title={getLang("common.menu.comic")}>
+        <Menu.Item key="/comic/list">{getLang("common.menu.comic.list")}</Menu.Item>
+        <Menu.Item key="/comic/category">{getLang("common.menu.comic.category")}</Menu.Item>
+        <Menu.Item key="/comic/season">{getLang("common.menu.comic.season")}</Menu.Item>
       </Menu.SubMenu>
-      <Menu.SubMenu key="/post" icon={<ReadOutlined />} title={intl.get("common.menu.post")}>
-        <Menu.Item key="/post/list">{intl.get("common.menu.post.list")}</Menu.Item>
-        <Menu.Item key="/post/category">{intl.get("common.menu.post.category")}</Menu.Item>
-        <Menu.Item key="/post/season">{intl.get("common.menu.post.season")}</Menu.Item>
+      <Menu.SubMenu key="/post" icon={<ReadOutlined />} title={getLang("common.menu.post")}>
+        <Menu.Item key="/post/list">{getLang("common.menu.post.list")}</Menu.Item>
+        <Menu.Item key="/post/category">{getLang("common.menu.post.category")}</Menu.Item>
+        <Menu.Item key="/post/season">{getLang("common.menu.post.season")}</Menu.Item>
       </Menu.SubMenu>
-      <Menu.SubMenu key="/blog" icon={<WeiboOutlined />} title={intl.get("common.menu.blog")}>
-        <Menu.Item key="/blog/list">{intl.get("common.menu.blog.list")}</Menu.Item>
-        <Menu.Item key="/blog/category">{intl.get("common.menu.blog.category")}</Menu.Item>
+      <Menu.SubMenu key="/blog" icon={<WeiboOutlined />} title={getLang("common.menu.blog")}>
+        <Menu.Item key="/blog/list">{getLang("common.menu.blog.list")}</Menu.Item>
+        <Menu.Item key="/blog/category">{getLang("common.menu.blog.category")}</Menu.Item>
       </Menu.SubMenu>
       <Menu.SubMenu
         key="/feedback"
         icon={<CommentOutlined />}
-        title={intl.get("common.menu.feedback")}
+        title={getLang("common.menu.feedback")}
       >
-        <Menu.Item key="/feedback/comment">{intl.get("common.menu.feedback.comment")}</Menu.Item>
-        <Menu.Item key="/feedback/rate">{intl.get("common.menu.feedback.rate")}</Menu.Item>
-        <Menu.Item key="/feedback/danmu">{intl.get("common.menu.feedback.danmu")}</Menu.Item>
-        <Menu.Item key="/feedback/report">{intl.get("common.menu.feedback.report")}</Menu.Item>
+        <Menu.Item key="/feedback/comment">{getLang("common.menu.feedback.comment")}</Menu.Item>
+        <Menu.Item key="/feedback/rate">{getLang("common.menu.feedback.rate")}</Menu.Item>
+        <Menu.Item key="/feedback/danmu">{getLang("common.menu.feedback.danmu")}</Menu.Item>
+        <Menu.Item key="/feedback/report">{getLang("common.menu.feedback.report")}</Menu.Item>
       </Menu.SubMenu>
-      <Menu.SubMenu key="/user" icon={<UserOutlined />} title={intl.get("common.menu.user")}>
-        <Menu.Item key="/user/list">{intl.get("common.menu.user.list")}</Menu.Item>
+      <Menu.SubMenu key="/user" icon={<UserOutlined />} title={getLang("common.menu.user")}>
+        <Menu.Item key="/user/list">{getLang("common.menu.user.list")}</Menu.Item>
       </Menu.SubMenu>
-      <Menu.SubMenu key="/store" icon={<ShopOutlined />} title={intl.get("common.menu.store")}>
-        <Menu.Item key="/store/shop">{intl.get("common.menu.store.shop")}</Menu.Item>
-        <Menu.Item key="/store/order">{intl.get("common.menu.store.order")}</Menu.Item>
-        <Menu.Item key="/store/key">{intl.get("common.menu.store.key")}</Menu.Item>
+      <Menu.SubMenu key="/store" icon={<ShopOutlined />} title={getLang("common.menu.store")}>
+        <Menu.Item key="/store/shop">{getLang("common.menu.store.shop")}</Menu.Item>
+        <Menu.Item key="/store/order">{getLang("common.menu.store.order")}</Menu.Item>
+        <Menu.Item key="/store/key">{getLang("common.menu.store.key")}</Menu.Item>
       </Menu.SubMenu>
       <Menu.SubMenu
         key="/cloud"
         icon={<CloudServerOutlined />}
-        title={intl.get("common.menu.cloud")}
+        title={getLang("common.menu.cloud")}
       >
-        <Menu.Item key="/cloud/list">{intl.get("common.menu.cloud.list")}</Menu.Item>
-        <Menu.Item key="/cloud/source">{intl.get("common.menu.cloud.source")}</Menu.Item>
-        <Menu.Item key="/cloud/record">{intl.get("common.menu.cloud.record")}</Menu.Item>
+        <Menu.Item key="/cloud/list">{getLang("common.menu.cloud.list")}</Menu.Item>
+        <Menu.Item key="/cloud/source">{getLang("common.menu.cloud.source")}</Menu.Item>
+        <Menu.Item key="/cloud/record">{getLang("common.menu.cloud.record")}</Menu.Item>
       </Menu.SubMenu>
 
       <Menu.SubMenu
         key="/manaager"
         icon={<SettingOutlined />}
-        title={intl.get("common.menu.manager")}
+        title={getLang("common.menu.manager")}
       >
-        <Menu.Item key="/manager/image">{intl.get("common.menu.manager.image")}</Menu.Item>
-        <Menu.Item key="/manager/config">{intl.get("common.menu.manager.config")}</Menu.Item>
-        <Menu.Item key="/manager/tool">{intl.get("common.menu.manager.tool")}</Menu.Item>
+        <Menu.Item key="/manager/image">{getLang("common.menu.manager.image")}</Menu.Item>
+        <Menu.Item key="/manager/config">{getLang("common.menu.manager.config")}</Menu.Item>
+        <Menu.Item key="/manager/tool">{getLang("common.menu.manager.tool")}</Menu.Item>
       </Menu.SubMenu>
     </Menu>
   );

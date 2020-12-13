@@ -1,14 +1,14 @@
-export type LoginRequestData = {
+export type LoginReqData = {
   name: string;
   email?: string;
   password: string;
 };
 
-export type LoginRequest = {
-  data: LoginRequestData;
+export type LoginReq = {
+  data: LoginReqData;
 };
 
-export type LoginResponse = {
+export type LoginRes = {
   refreshToken: string;
   token: string;
 };

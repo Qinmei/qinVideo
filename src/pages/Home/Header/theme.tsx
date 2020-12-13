@@ -2,20 +2,19 @@ import React, { useContext } from "react";
 import { Popover } from "antd";
 import { BgColorsOutlined, LayoutOutlined, LayoutFilled } from "@ant-design/icons";
 import { ConfigContext } from "@/contexts";
-import { intl } from "@/locales";
-
+import { getLang } from "@/locales";
 import { PopContent } from "./popContent";
 import styles from "./index.less";
 
 const LanguageData = [
   {
     icon: <LayoutOutlined />,
-    label: intl.get("common.header.theme.light"),
+    label: getLang("common.header.theme.light"),
     value: "light",
   },
   {
     icon: <LayoutFilled />,
-    label: intl.get("common.header.theme.dark"),
+    label: getLang("common.header.theme.dark"),
     value: "dark",
   },
 ];

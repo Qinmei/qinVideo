@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs } from "antd";
 import { AuthLayout } from "@/layouts";
-import { intl } from "@/locales";
+import { getLang } from "@/locales";
 import { Login } from "./Login";
 import { Init } from "./Init";
 import { useAdminInit } from "@/hooks";
@@ -12,11 +12,11 @@ const Auth: React.FC = props => {
   return (
     <AuthLayout>
       <Tabs defaultActiveKey="login" centered>
-        <Tabs.TabPane tab={intl.get("auth.login.title")} key="login">
+        <Tabs.TabPane tab={getLang("auth.login.title")} key="login">
           <Login />
         </Tabs.TabPane>
         {init && (
-          <Tabs.TabPane tab={intl.get("auth.init.title")} key="init">
+          <Tabs.TabPane tab={getLang("auth.init.title")} key="init">
             <Init />
           </Tabs.TabPane>
         )}

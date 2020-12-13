@@ -1,7 +1,7 @@
 import React from "react";
 import { Popover } from "antd";
 import { GlobalOutlined, FontColorsOutlined, UnderlineOutlined } from "@ant-design/icons";
-import { intl } from "@/locales";
+import { getLang } from "@/locales";
 import { setLanguage, LanguageType } from "@/locales";
 
 import { PopContent } from "./popContent";
@@ -10,12 +10,12 @@ import styles from "./index.less";
 const LanguageData = [
   {
     icon: <FontColorsOutlined />,
-    label: intl.get("common.header.lang.zh_CN"),
+    label: getLang("common.header.lang.zh_CN"),
     value: "zh_CN",
   },
   {
     icon: <UnderlineOutlined />,
-    label: intl.get("common.header.lang.en_US"),
+    label: getLang("common.header.lang.en_US"),
     value: "en_US",
   },
 ];

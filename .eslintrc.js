@@ -15,6 +15,7 @@ module.exports = {
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/ban-ts-ignore": "warn",
     "react/self-closing-comp": 'warn',
     "react-hooks/rules-of-hooks": "warn",
   }

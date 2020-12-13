@@ -1,43 +1,41 @@
 import { message } from "antd";
-import { Dispatch } from "redux";
 import { store } from "@/action";
 import { Request } from "@/utils";
 import { Service } from "@/constants";
-import { RequestType } from "@/types";
-import { Modules } from "@/models";
+import { RequestType, ModelType } from "@/types";
 
 export class Model<T> {
-  constructor(public namespace: Modules, public initialState: T) {}
+  constructor(public namespace: ModelType.Modules, public initialState: T) {}
 
-  success<T>(res: RequestType.Response<T>, dispatch: Dispatch): [boolean, T] {
+  success<ResType>(res: RequestType.Response<ResType>): [boolean, ResType] {
     return [true, res?.data];
   }
 
-  error<T>(res: RequestType.Response<T>): [boolean, T] {
+  error<ResType>(res: RequestType.Response<ResType>): [boolean, ResType] {
     return [false, res?.data];
+  }
+
+  dispatch(payload: Partial<T>) {
+    store.dispatch<{ type: string; payload: Partial<T> }>({
+      type: this.namespace,
+      payload,
+    });
   }
 
   async init<T>(
     method: Service.Methods,
     url: Service.Urls,
     data: RequestType.Options,
-    success = this.success,
-    err = this.error
+    dispatch?: ModelType.DispathCustom<T>
   ): Promise<[boolean, T]> {
     return Request.init<T>(method, url, data).then(async res => {
       if (res && res.code === 10000) {
-        return await success<T>(res, store.dispatch);
+        dispatch && dispatch(res);
+        return await this.success<T>(res);
       } else {
         res?.msg && message.error(res.msg || "unknown error");
-        return await err<T>(res);
+        return await this.error<T>(res);
       }
-    });
-  }
-
-  dispatch(payload: Partial<T>): void {
-    store.dispatch<{ type: string; payload: Partial<T> }>({
-      type: this.namespace,
-      payload,
     });
   }
 

@@ -12,7 +12,7 @@ module.exports = {
             javascriptEnabled: true,
           },
         },
-        modifyLessRule(lessRule, context) {
+        modifyLessRule(lessRule) {
           lessRule.test = /global\.less$/;
           return lessRule;
         },
@@ -37,7 +37,7 @@ module.exports = {
   devServer: {
     proxy: {
       "/api": {
-        target: "https://demo.qinvideo.org",
+        target: "http://code.qinmei.org:7001",
         secure: false,
         changeOrigin: true,
       },

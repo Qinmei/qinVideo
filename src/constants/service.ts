@@ -19,7 +19,7 @@ export enum Urls {
   // 配置
   queryBaseConfig = "/api/v1/config",
   queryBaseInit = "/api/v1/init",
-  queryMessage = "api/v1/message",
+  queryMessage = "/api/v2/messages",
 
   // 视频
   queryAnimate = "/api/v1/animates",

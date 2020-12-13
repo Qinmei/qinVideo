@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { intl } from "@/locales";
+import { getLang } from "@/locales";
+import styles from "./index.less";
+
+import { Spin } from "antd";
 
 interface StateType {
   hasError: boolean;
 }
-
 export class ErrorBoundary extends Component<unknown, StateType> {
   state = { hasError: false };
 
@@ -17,11 +19,17 @@ export class ErrorBoundary extends Component<unknown, StateType> {
     const { children } = this.props;
 
     return hasError ? (
-      <div style={{ textAlign: "center", marginTop: "200px", fontSize: "20px" }}>
-        {intl.get("common.error.errorboundry")}
-      </div>
+      <div className={styles.errorBoundary}>{getLang("common.error.errorboundry")}</div>
     ) : (
       children
     );
   }
 }
+
+export const SuspenseLoading: React.FC = () => {
+  return (
+    <div className={styles.suspenseLoading}>
+      <Spin size="large" />
+    </div>
+  );
+};

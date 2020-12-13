@@ -1,5 +1,5 @@
 import React from "react";
-import { intl } from "@/locales";
+import { getLang } from "@/locales";
 import { Copyright } from "@/components";
 import styles from "./index.less";
 
@@ -10,7 +10,7 @@ export const AuthLayout: React.FC = props => {
     <div className={styles.wrapper}>
       <div className={styles.form}>
         <h1>Qin Video</h1>
-        <p className={styles.title}>{intl.get("auth.layout.title")}</p>
+        <p className={styles.title}>{getLang("auth.layout.title")}</p>
         {children}
       </div>
       <Copyright />

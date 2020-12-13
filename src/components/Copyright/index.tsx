@@ -1,12 +1,12 @@
 import React, { FC } from "react";
-import styles from "./index.less";
-import { intl } from "@/locales";
+import { getHTML } from "@/locales";
 import { Config } from "@/constants";
+import styles from "./index.less";
 
-export const Copyright: FC = props => {
+export const Copyright: FC = () => {
   return (
     <div className={styles.footer}>
-      {intl.getHTML("auth.layout.footer", { link: Config.Base.copyright })}
+      {getHTML("auth.layout.footer", { link: Config.Base.copyright })}
     </div>
   );
 };

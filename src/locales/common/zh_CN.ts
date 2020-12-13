@@ -54,4 +54,11 @@ export default {
   "common.menu.manager.image": "图片列表",
   "common.menu.manager.config": "系统设置",
   "common.menu.manager.tool": "工具列表",
+  "common.options.add": "新增",
+  "common.options.edit": "编辑",
+  "common.options.edit.many": "批量编辑",
+  "common.options.edit.all": "全部编辑",
+  "common.options.delete": "删除",
+  "common.options.delete.many": "批量删除",
+  "common.options.delete.all": "全部删除",
 };

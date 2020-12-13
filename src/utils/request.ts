@@ -2,8 +2,7 @@ import { notification } from "antd";
 import { stringify } from "qs";
 import { RequestType } from "@/types";
 import { Service } from "@/constants";
-import { intl } from "@/locales";
-
+import { getLang } from "@/locales";
 export class Request {
   static readonly apiPrefix: string = "";
 
@@ -56,11 +55,11 @@ export class Request {
     if (res.status === 401) {
       localStorage.clear();
       notification.error({
-        message: intl.get("common.error.needAuth"),
+        message: getLang("common.error.needAuth"),
       });
     } else {
       notification.error({
-        message: intl.get("common.error.api"),
+        message: getLang("common.error.api"),
         description: res.url,
         style: {
           wordBreak: "break-all",

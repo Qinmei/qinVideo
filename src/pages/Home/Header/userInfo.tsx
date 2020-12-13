@@ -1,7 +1,7 @@
 import React from "react";
 import { Popover, Avatar } from "antd";
 import { UserOutlined, LogoutOutlined, SettingOutlined } from "@ant-design/icons";
-import { intl } from "@/locales";
+import { getLang } from "@/locales";
 import { useUserToken } from "@/hooks";
 import { useHistory } from "react-router-dom";
 
@@ -11,12 +11,12 @@ import styles from "./index.less";
 const UserData = [
   {
     icon: <SettingOutlined />,
-    label: intl.get("common.header.user.setting"),
+    label: getLang("common.header.user.setting"),
     value: "setting",
   },
   {
     icon: <LogoutOutlined />,
-    label: intl.get("common.header.user.logout"),
+    label: getLang("common.header.user.logout"),
     value: "logout",
   },
 ];

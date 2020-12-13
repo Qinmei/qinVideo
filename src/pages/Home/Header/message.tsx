@@ -4,8 +4,7 @@ import { BellOutlined } from "@ant-design/icons";
 import moment from "moment";
 import { useModel } from "@/action";
 import { GlobalType } from "@/types";
-import { intl } from "@/locales";
-
+import { getLang } from "@/locales";
 import styles from "./index.less";
 
 export const Message: FC = props => {
@@ -21,7 +20,7 @@ export const Message: FC = props => {
   return (
     <Popover
       placement="bottom"
-      title={intl.get("common.header.message.title")}
+      title={getLang("common.header.message.title")}
       content={<MessageContent list={messageList} />}
       trigger="hover"
     >

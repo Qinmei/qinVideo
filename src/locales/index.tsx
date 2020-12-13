@@ -10,12 +10,11 @@ const languages = {
 
 export type LanguageKeys = keyof typeof zh_CN;
 
-const intl = {
-  get: (key: LanguageKeys, addon?: { [key: string]: string | number }) =>
-    intlDefault.get(key, addon),
-  getHTML: (key: LanguageKeys, addon?: { [key: string]: string | number }) =>
-    intlDefault.getHTML(key, addon),
-};
+const getLang = (key: LanguageKeys, addon?: { [key: string]: string | number }) =>
+  intlDefault.get(key, addon);
+
+const getHTML = (key: LanguageKeys, addon?: { [key: string]: string | number }) =>
+  intlDefault.getHTML(key, addon);
 
 const initLanguage = async (language: LanguageType = "zh_CN"): Promise<void> => {
   const result = languages[language] || {};
@@ -34,4 +33,4 @@ const setLanguage = (language: LanguageType): void => {
   window.location.reload();
 };
 
-export { intl, initLanguage, setLanguage };
+export { initLanguage, setLanguage, getLang, getHTML };

@@ -1,20 +1,16 @@
-import { useState } from "react";
-import { AuthType } from "@/types";
 import { useHistory } from "react-router-dom";
 import JWTDecode from "jwt-decode";
+import { useSessionStorage } from "react-use";
+
+import { AuthType } from "@/types";
 
 export const useUserToken = () => {
-  const tokenInit = sessionStorage.getItem("token");
-  const refreshTokenInit = sessionStorage.getItem("refreshToken");
-
-  const [token, setToken] = useState(tokenInit);
-  const [refreshToken, setRefreshToken] = useState(refreshTokenInit);
+  const [token, setToken] = useSessionStorage<string>("token");
+  const [refreshToken, setRefreshToken] = useSessionStorage<string>("refreshToken");
 
   const history = useHistory();
 
-  const saveTokenCall = (data: AuthType.LoginResponse) => {
-    sessionStorage.setItem("refreshToken", data.refreshToken);
-    sessionStorage.setItem("token", data.token);
+  const saveTokenCall = (data: AuthType.LoginRes) => {
     setToken(data.token);
     setRefreshToken(data.refreshToken);
   };

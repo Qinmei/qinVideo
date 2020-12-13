@@ -1,38 +1,28 @@
-import { combineReducers } from "redux";
-import { Middleware } from "@/action";
-import { Loading } from "./loading";
 import { Auth } from "./auth";
 import { Global } from "./global";
 
-type ModulesAll = {
-  loading: Loading;
+type Models = {
   auth: Auth;
   global: Global;
 };
+export type Modules = keyof Models;
+export type Reducers = { [k in Modules]: Models[k]["handler"] };
+export type Actions = { [k in Modules]: Models[k]["methods"] };
+export type States = { [k in Modules]: Models[k]["initialState"] };
 
-export type Modules = keyof ModulesAll;
-export type Actions = { [k in Modules]: ModulesAll[k]["methods"] };
-export type Reducers = { [k in Modules]: ModulesAll[k]["initialState"] };
+const models = [Auth, Global];
 
-const models = [Loading, Auth, Global];
-
-const actions: any = {};
-const reducers: any = {};
+const actions = {} as Actions;
+const reducers = {} as Reducers;
 
 models.forEach(Model => {
   const model = new Model();
   const name: Modules = model.namespace;
 
+  // @ts-ignore
   reducers[name] = model.handler;
-  actions[name] = {};
-
-  for (const key in model.methods) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
-    actions[name][key] = (data: any) => Middleware.compose(model.methods[key])(data, key);
-  }
+  // @ts-ignore
+  actions[name] = model.methods;
 });
 
-const rootReducer = combineReducers(reducers);
-
-export { rootReducer, actions };
+export { actions, reducers };
