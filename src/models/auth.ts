@@ -1,8 +1,6 @@
 import { Service } from "@/constants";
 import { Model } from "@/action/model";
-import { AuthType } from "@/types";
-
-type InitialState = {};
+import { InitialState, LoginReq, LoginRes } from "@/types/auth";
 
 export class Auth extends Model<InitialState> {
   constructor() {
@@ -10,11 +8,11 @@ export class Auth extends Model<InitialState> {
   }
 
   methods = {
-    login: (data: AuthType.LoginReq) =>
-      super.init<AuthType.LoginRes>(Service.Methods.POST, Service.Urls.queryAuthLogin, data),
+    login: (data: LoginReq) =>
+      super.init<LoginRes>(Service.Methods.POST, Service.Urls.queryAuthLogin, data),
     exist: (data: Record<string, unknown>) =>
       super.init<"already" | "init">(Service.Methods.GET, Service.Urls.queryBaseInit, data),
-    init: (data: AuthType.LoginReq) =>
+    init: (data: LoginReq) =>
       super.init<null>(Service.Methods.POST, Service.Urls.queryBaseInit, data),
   };
 }

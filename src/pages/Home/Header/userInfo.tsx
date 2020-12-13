@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Popover, Avatar } from "antd";
 import { UserOutlined, LogoutOutlined, SettingOutlined } from "@ant-design/icons";
 import { getLang } from "@/locales";
@@ -21,7 +21,7 @@ const UserData = [
   },
 ];
 
-export const UserInfo: React.FC = props => {
+export const UserInfo: FC = props => {
   const { userInfo, clearTokenCall } = useUserToken();
   const history = useHistory();
 

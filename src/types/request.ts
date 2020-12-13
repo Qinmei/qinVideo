@@ -12,8 +12,9 @@ export type Options = {
   [key: string]: unknown;
 };
 
-export type Response<T> = {
+export type RequestRes<T> = {
   code: number;
   msg: string | null;
   data: T;
+  response: Response;
 };

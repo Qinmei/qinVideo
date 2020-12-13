@@ -3,6 +3,8 @@ import { stringify } from "qs";
 import { RequestType } from "@/types";
 import { Service } from "@/constants";
 import { getLang } from "@/locales";
+import { HttpError } from "./error";
+
 export class Request {
   static readonly apiPrefix: string = "";
 
@@ -10,7 +12,7 @@ export class Request {
     methods: Service.Methods,
     url: Service.Urls,
     options: RequestType.Options
-  ): Promise<RequestType.Response<T>> {
+  ): Promise<RequestType.RequestRes<T>> {
     const { params, query, data, formData, ...props } = options;
 
     let defaultHeader: { [key: string]: string } = {
@@ -45,22 +47,35 @@ export class Request {
       ...props,
     })
       .then(this.statusCheck)
-      .then(res => res && res.json());
+      .then(this.resFormat)
+      .catch(this.errorHandler);
   }
 
-  static statusCheck(res: Response): Response | void {
-    if (res.status === 200 || res.status === 201) {
-      return res;
+  static resFormat(res: Response) {
+    const newRes = res.json();
+    return {
+      ...newRes,
+      response: res,
+    };
+  }
+
+  static statusCheck(res: Response): Response {
+    if (![200, 201, 306].includes(res.status)) {
+      throw new HttpError(res);
     }
-    if (res.status === 401) {
-      localStorage.clear();
+    return res;
+  }
+
+  static errorHandler(error: HttpError) {
+    if (error.status === 401) {
+      sessionStorage.clear();
       notification.error({
         message: getLang("common.error.needAuth"),
       });
     } else {
       notification.error({
         message: getLang("common.error.api"),
-        description: res.url,
+        description: error.url,
         style: {
           wordBreak: "break-all",
         },

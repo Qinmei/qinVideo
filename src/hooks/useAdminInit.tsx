@@ -1,19 +1,15 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
+import { useAsync } from "react-use";
 import { useAction } from "@/action";
 
 export const useAdminInit = () => {
   const [init, setInit] = useState(false);
   const actions = useAction("auth");
 
-  const initData = useCallback(async () => {
-    const [status, res] = await actions.exist({});
-    if (!status) return;
+  useAsync(async () => {
+    const res = await actions.exist({});
     setInit(res === "init");
   }, [actions]);
-
-  useEffect(() => {
-    initData();
-  }, [initData]);
 
   return [init];
 };

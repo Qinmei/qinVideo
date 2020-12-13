@@ -2,11 +2,7 @@ import { Service } from "@/constants";
 import { Model } from "@/action/model";
 import { GlobalType, RequestType } from "@/types";
 
-type InitialState = {
-  messageList: GlobalType.MessageData[];
-};
-
-export class Global extends Model<InitialState> {
+export class Global extends Model<GlobalType.InitialState> {
   constructor() {
     super("global", {
       messageList: [],
@@ -14,7 +10,7 @@ export class Global extends Model<InitialState> {
   }
 
   initDispatch = {
-    message: (res: RequestType.Response<GlobalType.MessageData[]>) =>
+    message: (res: RequestType.RequestRes<GlobalType.MessageData[]>) =>
       super.dispatch({
         messageList: res.data,
       }),

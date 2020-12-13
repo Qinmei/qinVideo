@@ -12,14 +12,13 @@ export const Init: FC = () => {
   const actions = useAction("auth");
 
   const [state, onFinish] = useAsyncFn(async (values: AuthType.LoginReqData) => {
-    const [status] = await actions.init({
+    await actions.init({
       data: {
         name: values.name,
         email: values.email,
         password: md5(values.password),
       },
     });
-    if (!status) return;
     message.success(getLang("auth.init.success"));
   });
   return (

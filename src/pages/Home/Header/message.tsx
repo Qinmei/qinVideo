@@ -35,7 +35,7 @@ interface ContentPropsType {
   list: GlobalType.MessageData[];
 }
 
-const MessageContent: React.FC<ContentPropsType> = props => {
+const MessageContent: FC<ContentPropsType> = props => {
   const { list } = props;
 
   const goToLink = (value: string | undefined) => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { PageLayout } from "@/layouts";
 import { Copyright } from "@/components";
 
@@ -6,7 +6,7 @@ import Content from "./Content";
 import Header from "./Header";
 import Sidebar from "./SideBar";
 
-const Home: React.FC = () => {
+const Home: FC = () => {
   const [collapse, setCollapse] = useState(false);
   return (
     <PageLayout

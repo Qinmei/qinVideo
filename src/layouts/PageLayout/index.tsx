@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext } from "react";
+import React, { FC, ReactNode, useContext } from "react";
 import { Layout } from "antd";
 import { useHistory } from "react-router-dom";
 import { ConfigContext } from "@/contexts";
@@ -14,7 +14,7 @@ interface PropsType {
   collapse?: boolean;
 }
 
-export const PageLayout: React.FC<PropsType> = props => {
+export const PageLayout: FC<PropsType> = props => {
   const { sider, header, footer, children, collapse = false } = props;
 
   const { refreshToken } = useUserToken();

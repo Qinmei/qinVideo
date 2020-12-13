@@ -1,10 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 import { Tooltip } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { Config } from "@/constants";
 import styles from "./index.less";
 import { getLang } from "@/locales";
-export const Docs: React.FC = props => {
+
+export const Docs: FC = () => {
   const goToDocs = () => {
     window.open(Config.Base.docs);
   };

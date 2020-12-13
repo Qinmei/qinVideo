@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { FC, ReactElement } from "react";
 import styles from "./index.less";
 
 type List = {
@@ -12,7 +12,7 @@ interface PropsType {
   onChange: (value: string) => void;
 }
 
-export const PopContent: React.FC<PropsType> = props => {
+export const PopContent: FC<PropsType> = props => {
   const { source, onChange } = props;
   return (
     <div className={styles.popCon}>

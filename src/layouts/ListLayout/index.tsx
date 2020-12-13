@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { FC, ReactNode } from "react";
 import styles from "./index.less";
 
 interface PropsType {
@@ -7,7 +7,7 @@ interface PropsType {
   setting: ReactNode;
 }
 
-export const ListLayout: React.FC<PropsType> = props => {
+export const ListLayout: FC<PropsType> = props => {
   const { options, search, setting, children } = props;
 
   return (

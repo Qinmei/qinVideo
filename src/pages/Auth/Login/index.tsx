@@ -9,7 +9,7 @@ import { useAction } from "@/action";
 import { AuthType } from "@/types";
 import { useUserToken } from "@/hooks";
 
-export const Login: FC = props => {
+export const Login: FC = () => {
   const [form] = Form.useForm();
   const history = useHistory();
   const { saveTokenCall } = useUserToken();
@@ -17,13 +17,12 @@ export const Login: FC = props => {
   const actions = useAction("auth");
 
   const [state, onFinish] = useAsyncFn(async (values: AuthType.LoginReqData) => {
-    const [status, res] = await actions.login({
+    const res = await actions.login({
       data: {
         name: values.name,
         password: md5(values.password),
       },
     });
-    if (!status) return;
     saveTokenCall(res);
     history.push("/home/dashboard/analysis");
   });

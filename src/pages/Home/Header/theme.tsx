@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { FC, useContext } from "react";
 import { Popover } from "antd";
 import { BgColorsOutlined, LayoutOutlined, LayoutFilled } from "@ant-design/icons";
 import { ConfigContext } from "@/contexts";
@@ -19,7 +19,7 @@ const LanguageData = [
   },
 ];
 
-export const Theme: React.FC = props => {
+export const Theme: FC = () => {
   const { state, methods } = useContext(ConfigContext);
 
   const { changeTheme } = methods;

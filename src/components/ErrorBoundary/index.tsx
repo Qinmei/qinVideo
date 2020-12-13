@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { FC, Component } from "react";
 import { getLang } from "@/locales";
 import styles from "./index.less";
 
@@ -26,7 +26,7 @@ export class ErrorBoundary extends Component<unknown, StateType> {
   }
 }
 
-export const SuspenseLoading: React.FC = () => {
+export const SuspenseLoading: FC = () => {
   return (
     <div className={styles.suspenseLoading}>
       <Spin size="large" />

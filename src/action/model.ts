@@ -3,16 +3,13 @@ import { store } from "@/action";
 import { Request } from "@/utils";
 import { Service } from "@/constants";
 import { RequestType, ModelType } from "@/types";
+import { ServiceError } from "@/utils";
 
 export class Model<T> {
   constructor(public namespace: ModelType.Modules, public initialState: T) {}
 
-  success<ResType>(res: RequestType.Response<ResType>): [boolean, ResType] {
-    return [true, res?.data];
-  }
-
-  error<ResType>(res: RequestType.Response<ResType>): [boolean, ResType] {
-    return [false, res?.data];
+  success<ResType>(res: RequestType.RequestRes<ResType>): ResType {
+    return res.data;
   }
 
   dispatch(payload: Partial<T>) {
@@ -27,14 +24,14 @@ export class Model<T> {
     url: Service.Urls,
     data: RequestType.Options,
     dispatch?: ModelType.DispathCustom<T>
-  ): Promise<[boolean, T]> {
+  ): Promise<T> {
     return Request.init<T>(method, url, data).then(async res => {
-      if (res && res.code === 10000) {
+      if (res && res.code === 20000) {
         dispatch && dispatch(res);
         return await this.success<T>(res);
       } else {
         res?.msg && message.error(res.msg || "unknown error");
-        return await this.error<T>(res);
+        throw new ServiceError(res.response);
       }
     });
   }

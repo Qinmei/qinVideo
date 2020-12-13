@@ -4,3 +4,7 @@ export type MessageData = {
   link?: string;
   time: number;
 };
+
+export type InitialState = {
+  messageList: MessageData[];
+};

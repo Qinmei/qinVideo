@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import { getLang } from "@/locales";
 import { Copyright } from "@/components";
 import styles from "./index.less";
 
-export const AuthLayout: React.FC = props => {
+export const AuthLayout: FC = props => {
   const { children } = props;
 
   return (

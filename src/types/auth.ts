@@ -1,3 +1,5 @@
+export type InitialState = Record<string, unknown>;
+
 export type LoginReqData = {
   name: string;
   email?: string;

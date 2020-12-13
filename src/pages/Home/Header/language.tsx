@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Popover } from "antd";
 import { GlobalOutlined, FontColorsOutlined, UnderlineOutlined } from "@ant-design/icons";
 import { getLang } from "@/locales";
@@ -20,7 +20,7 @@ const LanguageData = [
   },
 ];
 
-export const Language: React.FC = props => {
+export const Language: FC = props => {
   const changeLanguage = (value: string) => {
     setLanguage(value as LanguageType);
   };

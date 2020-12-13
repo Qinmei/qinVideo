@@ -1,4 +1,4 @@
-export default {
+const common = {
   "common.base.goHome": "返回首页",
   "common.error.needAuth": "没有权限需要重新登录",
   "common.error.unknown": "未知错误",
@@ -62,3 +62,5 @@ export default {
   "common.options.delete.many": "批量删除",
   "common.options.delete.all": "全部删除",
 };
+
+export default common;

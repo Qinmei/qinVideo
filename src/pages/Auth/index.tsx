@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Tabs } from "antd";
 import { AuthLayout } from "@/layouts";
 import { getLang } from "@/locales";
@@ -6,7 +6,7 @@ import { Login } from "./Login";
 import { Init } from "./Init";
 import { useAdminInit } from "@/hooks";
 
-const Auth: React.FC = props => {
+const Auth: FC = () => {
   const [init] = useAdminInit();
 
   return (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 
 import { Docs } from "./docs";
@@ -13,7 +13,7 @@ interface PropsType {
   collapse: boolean;
 }
 
-const Header: React.FC<PropsType> = props => {
+const Header: FC<PropsType> = props => {
   const { collapse, setCollapse } = props;
   return (
     <div className={styles.wrapper}>

@@ -1,4 +1,4 @@
-export default {
+const auth = {
   "auth.layout.title": "qinVideo 后台管理面板",
   "auth.layout.footer": "Copyright ©2020 <a href={link} target='_blank'>QinVideo</a>提供技术支持",
   "auth.login.title": "账户密码登录",
@@ -10,3 +10,4 @@ export default {
   "auth.init.submit": "初始化",
   "auth.init.success": "初始化用户成功，请登录",
 };
+export default auth;
