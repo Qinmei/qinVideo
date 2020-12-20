@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { getHTML } from "@/locales";
 import { Config } from "@/constants";
 import styles from "./index.less";

@@ -15,7 +15,7 @@ import {
 import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
 import { getLang } from "@/locales";
 import { ConfigContext } from "@/contexts";
-import { MenuProps } from "antd/es/menu";
+import { AntdType } from "@/types";
 
 const SideBar: FC = props => {
   const { pathname } = useLocation();
@@ -25,7 +25,7 @@ const SideBar: FC = props => {
   const { state } = useContext(ConfigContext);
   const { theme } = state;
 
-  const menuSelect: MenuProps["onSelect"] = ({ key }) => {
+  const menuSelect: AntdType.MenuProps["onSelect"] = ({ key }) => {
     history.push(`${path}${key as string}`);
   };
 

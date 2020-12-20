@@ -1,10 +1,12 @@
 const common = {
   "common.base.goHome": "返回首页",
+
   "common.error.needAuth": "没有权限需要重新登录",
   "common.error.unknown": "未知错误",
   "common.error.api": "请求接口错误",
   "common.error.pageNoExist": "该页面不存在，请重新确认链接的有效性",
   "common.error.errorboundry": "页面加载错误，请重新刷新网页",
+
   "common.header.docs": "查看文档",
   "common.header.theme.dark": "暗黑风格",
   "common.header.theme.light": "亮色风格",
@@ -13,6 +15,7 @@ const common = {
   "common.header.user.setting": "系统设置",
   "common.header.user.logout": "退出登录",
   "common.header.message.title": "公告通知",
+
   "common.menu.dashboard": "概览",
   "common.menu.dashboard.analysis": "数据分析",
   "common.menu.dashboard.workplace": "工作区域",
@@ -54,6 +57,8 @@ const common = {
   "common.menu.manager.image": "图片列表",
   "common.menu.manager.config": "系统设置",
   "common.menu.manager.tool": "工具列表",
+
+  "common.options": "操作",
   "common.options.add": "新增",
   "common.options.edit": "编辑",
   "common.options.edit.many": "批量编辑",
@@ -61,6 +66,11 @@ const common = {
   "common.options.delete": "删除",
   "common.options.delete.many": "批量删除",
   "common.options.delete.all": "全部删除",
+  "common.options.more": "更多操作",
+  "common.options.delete.many.title": "删除选中的数据",
+  "common.options.delete.all.title": "删除所有的数据",
+  "common.options.delete.many.tips": "确认是否要删除选中的数据?",
+  "common.options.delete.all.tips": "确认是否要删除所有的数据?数据一旦删除则无法恢复",
 };
 
 export default common;

@@ -1,8 +1,10 @@
 import { Auth } from "./auth";
 import { Global } from "./global";
+import { Animate } from "./animate";
 
 type Models = {
   auth: Auth;
+  animate: Animate;
   global: Global;
 };
 export type Modules = keyof Models;
@@ -10,7 +12,7 @@ export type Reducers = { [k in Modules]: Models[k]["handler"] };
 export type Actions = { [k in Modules]: Models[k]["methods"] };
 export type States = { [k in Modules]: Models[k]["initialState"] };
 
-const models = [Auth, Global];
+const models = [Auth, Global, Animate];
 
 const actions = {} as Actions;
 const reducers = {} as Reducers;

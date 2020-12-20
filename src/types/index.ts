@@ -4,3 +4,5 @@ export * as CustomType from "./custom";
 export * as GlobalType from "./global";
 export * as ModelType from "./model";
 export * as AntdType from "./antd";
+export * as HooksType from "./hooks";
+export * as AnimateType from "./animate";

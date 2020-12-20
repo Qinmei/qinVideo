@@ -2,16 +2,17 @@ import React, { FC, useEffect, useCallback } from "react";
 import { Popover, Empty } from "antd";
 import { BellOutlined } from "@ant-design/icons";
 import moment from "moment";
-import { useModel } from "@/action";
-import { GlobalType } from "@/types";
+import { useModel, useAction } from "@/action";
 import { getLang } from "@/locales";
 import styles from "./index.less";
 
-export const Message: FC = props => {
-  const [actions, reducers] = useModel(["global"]);
+import { GlobalType } from "@/types";
 
-  const { messageList } = reducers.global;
-  const initData = useCallback(() => actions.global.getMessage({}), [actions.global]);
+export const Message: FC = () => {
+  const actions = useAction("global");
+  const { messageList } = useModel("global");
+
+  const initData = useCallback(() => actions.getMessage(), [actions]);
 
   useEffect(() => {
     initData();

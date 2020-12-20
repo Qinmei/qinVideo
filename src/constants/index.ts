@@ -1,4 +1,3 @@
-import * as Service from "./service";
-import * as Config from "./config";
-
-export { Service, Config };
+export * as Service from "./service";
+export * as Config from "./config";
+export * as Page from "./page";

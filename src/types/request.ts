@@ -3,7 +3,7 @@ export type Options = {
     [key: string]: string | number;
   };
   query?: {
-    [key: string]: boolean | string | number;
+    [key: string]: unknown;
   };
   data?: {
     [key: string]: unknown;
@@ -17,4 +17,9 @@ export type RequestRes<T> = {
   msg: string | null;
   data: T;
   response: Response;
+};
+
+export type ListContent<T> = {
+  list: T[];
+  total: number;
 };

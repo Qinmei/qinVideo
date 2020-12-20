@@ -1,4 +1,4 @@
-import React, { FC, Component } from "react";
+import { FC, Component, ErrorInfo } from "react";
 import { getLang } from "@/locales";
 import styles from "./index.less";
 
@@ -10,7 +10,7 @@ interface StateType {
 export class ErrorBoundary extends Component<unknown, StateType> {
   state = { hasError: false };
 
-  static getDerivedStateFromError(error: React.ErrorInfo) {
+  static getDerivedStateFromError(error: ErrorInfo) {
     return { hasError: true };
   }
 

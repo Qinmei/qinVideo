@@ -1,10 +1,6 @@
 class BaseError extends Error {
-  public type: string;
-  public name: string;
-  constructor(message: string, type: string, name = "") {
+  constructor(message: string, public type: string, public name: string = "") {
     super(message);
-    this.type = type;
-    this.name = name;
   }
 }
 
@@ -27,19 +23,13 @@ const codeMessage: Record<number, string> = {
 };
 
 export class HttpError extends BaseError {
-  public status: number;
-  public url: string;
-  constructor(response: Response) {
-    super(codeMessage[response.status], "http");
-    this.status = response.status;
-    this.url = response.url;
+  constructor(public status: number, public url: string) {
+    super(codeMessage[status], "http");
   }
 }
 
 export class ServiceError extends BaseError {
-  public response: Response;
-  constructor(response: Response) {
+  constructor(public readonly response: Response) {
     super("request service error", "service");
-    this.response = response;
   }
 }

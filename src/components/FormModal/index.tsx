@@ -1,15 +1,16 @@
 import React, { useRef } from "react";
 import { Modal } from "antd";
 import { useModalState } from "@/hooks";
-import { AntdType } from "@/types";
+import { AntdType, HooksType } from "@/types";
 
 interface PropsType<T> {
   submit: (values: T) => Promise<boolean> | boolean;
-  content: React.ReactElement;
+  content: (methods: HooksType.ModalStateMethods) => React.ReactNode;
   children: React.ReactElement;
+  title: string;
 }
 export const FormModal = <T,>(props: PropsType<T>) => {
-  const { submit, content, children } = props;
+  const { submit, content, title, children } = props;
 
   const formRef = useRef<AntdType.FormInstance<T>>(null);
   const [state, methods] = useModalState();
@@ -27,13 +28,19 @@ export const FormModal = <T,>(props: PropsType<T>) => {
   };
 
   const formNode = React.cloneElement(children, { ref: formRef, onFinish });
-  const contentNode = React.cloneElement(content, { onClick: methods.show });
 
   const { visible, loading } = state;
   return (
     <>
-      {contentNode}
-      <Modal visible={visible} confirmLoading={loading} onCancel={methods.cancel} onOk={confirm}>
+      {content(methods)}
+      <Modal
+        title={title}
+        visible={visible}
+        confirmLoading={loading}
+        onCancel={methods.cancel}
+        onOk={confirm}
+        destroyOnClose
+      >
         {formNode}
       </Modal>
     </>

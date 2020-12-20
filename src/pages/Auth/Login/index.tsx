@@ -14,14 +14,12 @@ export const Login: FC = () => {
   const history = useHistory();
   const { saveTokenCall } = useUserToken();
 
-  const actions = useAction("auth");
+  const action = useAction("auth");
 
-  const [state, onFinish] = useAsyncFn(async (values: AuthType.LoginReqData) => {
-    const res = await actions.login({
-      data: {
-        name: values.name,
-        password: md5(values.password),
-      },
+  const [state, onFinish] = useAsyncFn(async (values: AuthType.LoginReq) => {
+    const res = await action.login({
+      name: values.name,
+      password: md5(values.password),
     });
     saveTokenCall(res);
     history.push("/home/dashboard/analysis");

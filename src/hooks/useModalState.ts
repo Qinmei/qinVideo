@@ -1,18 +1,12 @@
 import { useSetState } from "react-use";
+import { HooksType } from "@/types";
 
 type State = {
   visible: boolean;
   loading: boolean;
 };
 
-type Methods = {
-  show: () => void;
-  hide: () => void;
-  load: () => void;
-  fail: () => void;
-  cancel: () => void;
-};
-export const useModalState = (): [State, Methods] => {
+export const useModalState = (): [State, HooksType.ModalStateMethods] => {
   const [state, setState] = useSetState({ visible: false, loading: false });
 
   const methods = {

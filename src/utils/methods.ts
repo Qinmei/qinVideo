@@ -13,4 +13,12 @@ export class Methods {
     });
     return newData;
   };
+
+  static addLanguagePrefix = (
+    langModule: Record<string, string>,
+    module: string
+  ): Record<string, string> => {
+    const res = Object.entries(langModule).map(item => [`${module}.${item[0]}`, item[1]]);
+    return Object.fromEntries(res);
+  };
 }

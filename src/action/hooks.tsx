@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { actions as modelActions } from "@/models";
 import { Modules, Actions, States } from "@/types/model";
 
-export const useModel = <T extends Modules>(arr: T[]): [Pick<Actions, T>, Pick<States, T>] => {
+export const useModules = <T extends Modules>(arr: T[]): [Pick<Actions, T>, Pick<States, T>] => {
   const actions = {} as Pick<Actions, T>;
   const reducers = {} as Pick<States, T>;
 
@@ -16,5 +16,5 @@ export const useModel = <T extends Modules>(arr: T[]): [Pick<Actions, T>, Pick<S
 
 export const useAction = <T extends Modules>(module: T): Actions[T] => modelActions[module];
 
-export const useRedux = <T extends Modules>(module: T): States[T] =>
+export const useModel = <T extends Modules>(module: T): States[T] =>
   useSelector((state: States) => state[module]);

@@ -5,6 +5,7 @@ interface PropsType {
   options: ReactNode;
   search: ReactNode;
   setting: ReactNode;
+  children: ReactNode;
 }
 
 export const ListLayout: FC<PropsType> = props => {
@@ -16,7 +17,7 @@ export const ListLayout: FC<PropsType> = props => {
         <div className={styles.options}>{options}</div>
         <div className={styles.search}>
           {search}
-          {setting}
+          <span className={styles.setting}>{setting}</span>
         </div>
       </div>
       <div className={styles.table}>{children}</div>

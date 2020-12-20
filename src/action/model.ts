@@ -26,7 +26,7 @@ export class Model<T> {
     dispatch?: ModelType.DispathCustom<T>
   ): Promise<T> {
     return Request.init<T>(method, url, data).then(async res => {
-      if (res && res.code === 20000) {
+      if (res && res.code === 10000) {
         dispatch && dispatch(res);
         return await this.success<T>(res);
       } else {

@@ -4,10 +4,10 @@ import { AuthLayout } from "@/layouts";
 import { getLang } from "@/locales";
 import { Login } from "./Login";
 import { Init } from "./Init";
-import { useAdminInit } from "@/hooks";
+import { useAuthInit } from "@/hooks";
 
 const Auth: FC = () => {
-  const [init] = useAdminInit();
+  const [init] = useAuthInit();
 
   return (
     <AuthLayout>

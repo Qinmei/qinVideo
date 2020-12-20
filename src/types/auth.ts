@@ -1,15 +1,12 @@
 export type InitialState = Record<string, unknown>;
 
-export type LoginReqData = {
+export type InitReq = {
   name: string;
-  email?: string;
+  email: string;
   password: string;
 };
 
-export type LoginReq = {
-  data: LoginReqData;
-};
-
+export type LoginReq = Omit<InitReq, "email">;
 export type LoginRes = {
   refreshToken: string;
   token: string;

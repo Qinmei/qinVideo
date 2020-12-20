@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useAsync } from "react-use";
 import { useAction } from "@/action";
 
-export const useAdminInit = () => {
+export const useAuthInit = () => {
   const [init, setInit] = useState(false);
-  const actions = useAction("auth");
+  const action = useAction("auth");
 
   useAsync(async () => {
-    const res = await actions.exist({});
+    const res = await action.exist();
     setInit(res === "init");
-  }, [actions]);
+  }, [action]);
 
   return [init];
 };

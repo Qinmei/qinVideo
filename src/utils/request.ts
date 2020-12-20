@@ -41,7 +41,7 @@ export class Request {
       body: formData ? formData : data ? JSON.stringify(data) : null,
       headers: {
         ...defaultHeader,
-        Authorization: localStorage.getItem("token") || "",
+        Authorization: sessionStorage.getItem("token") || "",
       },
       method: methods,
       ...props,
@@ -51,8 +51,8 @@ export class Request {
       .catch(this.errorHandler);
   }
 
-  static resFormat(res: Response) {
-    const newRes = res.json();
+  static async resFormat(res: Response) {
+    const newRes = await res.json();
     return {
       ...newRes,
       response: res,
@@ -61,7 +61,7 @@ export class Request {
 
   static statusCheck(res: Response): Response {
     if (![200, 201, 306].includes(res.status)) {
-      throw new HttpError(res);
+      throw new HttpError(res.status, res.url);
     }
     return res;
   }
@@ -81,5 +81,6 @@ export class Request {
         },
       });
     }
+    throw new HttpError(error.status, error.url);
   }
 }
