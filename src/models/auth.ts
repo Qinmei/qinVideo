@@ -1,4 +1,4 @@
-import { Service } from "@/constants";
+import { Urls, Methods } from "@/constants";
 import { Model } from "@/action/model";
 import { InitialState, LoginReq, LoginRes, InitReq } from "@/types/auth";
 
@@ -8,11 +8,8 @@ export class Auth extends Model<InitialState> {
   }
 
   methods = {
-    login: (data: LoginReq) =>
-      super.init<LoginRes>(Service.Methods.POST, Service.Urls.queryAuthLogin, { data }),
-    exist: () =>
-      super.init<"already" | "init">(Service.Methods.GET, Service.Urls.queryBaseInit, {}),
-    init: (data: InitReq) =>
-      super.init<null>(Service.Methods.POST, Service.Urls.queryBaseInit, { data }),
+    login: (data: LoginReq) => super.init<LoginRes>(Methods.POST, Urls.queryAuthLogin, { data }),
+    exist: () => super.init<"already" | "init">(Methods.GET, Urls.queryBaseInit, {}),
+    init: (data: InitReq) => super.init<null>(Methods.POST, Urls.queryBaseInit, { data }),
   };
 }

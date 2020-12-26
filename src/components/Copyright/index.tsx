@@ -5,8 +5,6 @@ import styles from "./index.less";
 
 export const Copyright: FC = () => {
   return (
-    <div className={styles.footer}>
-      {getHTML("auth.layout.footer", { link: Config.Base.copyright })}
-    </div>
+    <div className={styles.footer}>{getHTML("auth.layout.footer", { link: Config.copyright })}</div>
   );
 };

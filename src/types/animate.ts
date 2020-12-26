@@ -23,7 +23,7 @@ export type EposideItem = {
   sort: number;
 };
 
-export interface Base {
+export interface Base extends Record<string, unknown> {
   title: string;
   slug: string;
   author: string;

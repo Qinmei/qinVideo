@@ -1,4 +1,4 @@
-import { Service } from "@/constants";
+import { Methods, Urls } from "@/constants";
 import { Model } from "@/action/model";
 import { InitialState, MessageData } from "@/types/global";
 import { RequestRes } from "@/types/request";
@@ -19,11 +19,6 @@ export class Global extends Model<InitialState> {
 
   methods = {
     getMessage: () =>
-      super.init<MessageData[]>(
-        Service.Methods.GET,
-        Service.Urls.queryMessage,
-        {},
-        this.initDispatch.message
-      ),
+      super.init<MessageData[]>(Methods.GET, Urls.queryMessage, {}, this.initDispatch.message),
   };
 }

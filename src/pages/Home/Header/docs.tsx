@@ -7,7 +7,7 @@ import { getLang } from "@/locales";
 
 export const Docs: FC = () => {
   const goToDocs = () => {
-    window.open(Config.Base.docs);
+    window.open(Config.docs);
   };
   return (
     <Tooltip placement="bottom" title={getLang("common.header.docs")}>

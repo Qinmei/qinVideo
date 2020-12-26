@@ -1,7 +1,7 @@
 import { message } from "antd";
 import { store } from "@/action";
 import { Request } from "@/utils";
-import { Service } from "@/constants";
+import { Urls, Methods } from "@/constants";
 import { RequestType, ModelType } from "@/types";
 import { ServiceError } from "@/utils";
 
@@ -20,8 +20,8 @@ export class Model<T> {
   }
 
   async init<T>(
-    method: Service.Methods,
-    url: Service.Urls,
+    method: Methods,
+    url: Urls,
     data: RequestType.Options,
     dispatch?: ModelType.DispathCustom<T>
   ): Promise<T> {

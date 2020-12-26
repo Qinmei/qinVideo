@@ -1,7 +1,7 @@
 import { notification } from "antd";
 import { stringify } from "qs";
 import { RequestType } from "@/types";
-import { Service } from "@/constants";
+import { Methods, Urls } from "@/constants";
 import { getLang } from "@/locales";
 import { HttpError } from "./error";
 
@@ -9,8 +9,8 @@ export class Request {
   static readonly apiPrefix: string = "";
 
   static async init<T>(
-    methods: Service.Methods,
-    url: Service.Urls,
+    methods: Methods,
+    url: Urls,
     options: RequestType.Options
   ): Promise<RequestType.RequestRes<T>> {
     const { params, query, data, formData, ...props } = options;
