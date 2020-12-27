@@ -71,6 +71,12 @@ const common = {
   "common.options.delete.all.title": "删除所有的数据",
   "common.options.delete.many.tips": "确认是否要删除选中的数据?",
   "common.options.delete.all.tips": "确认是否要删除所有的数据?数据一旦删除则无法恢复",
+
+  "common.select.draft": "审核中",
+  "common.select.publish": "审核通过",
+  "common.select.reject": "审核驳回",
+  "common.select.updating": "连载中",
+  "common.select.updated": "已完结",
 };
 
 export default common;

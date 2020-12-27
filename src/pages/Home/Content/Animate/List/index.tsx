@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { Button, Form, Table } from "antd";
 import { useAsyncFn } from "react-use";
 import { useAction, useModel } from "@/action";
@@ -8,37 +8,36 @@ import { ListOptions, ListTable } from "@/components";
 import { getLang } from "@/locales";
 import { useColumns } from "./useColumns";
 
-import { GlobalType, AnimateType } from "@/types";
+import { AnimateType } from "@/types";
 
 const initState = {
   page: 1,
   size: 10,
+  query: "",
 };
 
 const List: FC = () => {
+  const [select, setSelect] = useState<string[]>([]);
   const [state, setState] = useSavedState(initState);
-  const { page, size } = state;
+  const { page, size, query } = state;
 
   const actions = useAction("animate");
   const { list, total } = useModel("animate");
   const { columns } = useColumns();
 
-  const [{ loading }, initData] = useAsyncFn(
-    async (data: GlobalType.ListQuery) => {
-      await actions.getAnimateList(data);
-    },
-    [actions]
-  );
+  const [{ loading }, initData] = useAsyncFn(async () => {
+    await actions.getAnimateList(state);
+  }, [actions, state]);
 
   useEffect(() => {
-    initData(state);
-  }, [initData, state]);
+    initData();
+  }, [initData]);
 
   return (
     <ListLayout
       options={
         <ListOptions
-          selected={[]}
+          selected={select}
           submit={() => true}
           newPath="/home/animate/add"
           remove={async () => console.log("sdsd")}
@@ -46,7 +45,9 @@ const List: FC = () => {
           <></>
         </ListOptions>
       }
-      search={<></>}
+      placeholder={getLang("animate.title.search")}
+      value={query}
+      onChange={query => setState({ query })}
       setting={<></>}
     >
       <ListTable<AnimateType.List>
@@ -56,7 +57,9 @@ const List: FC = () => {
         size={size}
         total={total}
         list={list}
-        pageSizeChange={setState}
+        select={select}
+        onSelectChange={setSelect}
+        onChange={setState}
       />
     </ListLayout>
   );

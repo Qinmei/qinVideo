@@ -71,6 +71,7 @@ const animate = {
   "animate.eposide.danmu": "弹幕",
   "animate.eposide": "集数",
   "animate.source": "来源",
+  "animate.title.search": "搜索视频标题",
 };
 
 export default animate;

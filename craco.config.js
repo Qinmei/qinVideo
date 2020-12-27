@@ -37,7 +37,7 @@ module.exports = {
   devServer: {
     proxy: {
       "/api": {
-        target: "http://code.qinmei.org:7001",
+        target: "http://code.qinmei.org:7003",
         secure: false,
         changeOrigin: true,
       },

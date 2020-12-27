@@ -6,3 +6,4 @@ export * as ModelType from "./model";
 export * as AntdType from "./antd";
 export * as HooksType from "./hooks";
 export * as AnimateType from "./animate";
+export * as ComponentsType from "./components";

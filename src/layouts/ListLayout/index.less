@@ -1,20 +1,19 @@
 @import "../../themes/common.less";
 
-.wrapper {
-  .header {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  .search {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    margin-bottom: 16px;
+    width: 360px;
 
-    .search {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-
-      .setting {
-        margin-left: 16px;
-      }
+    .setting {
+      margin-left: 16px;
     }
   }
 }

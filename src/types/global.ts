@@ -19,7 +19,8 @@ export type ListQuery = {
   page?: number;
   size?: number;
   sortBy?: string;
-  sortOrder?: number;
+  sortOrder?: number | string | null;
+  isUpdate?: string;
   title?: string;
   email?: string;
   type?: string;
@@ -43,4 +44,12 @@ export type OptionReturn = {
   ok: number;
   deletedCount?: number;
   nModified?: number;
+};
+
+export type SelectType<T> = {
+  [key: string]: {
+    text: string;
+    value: T;
+    badge?: "processing" | "success" | "error" | "default" | "warning";
+  };
 };

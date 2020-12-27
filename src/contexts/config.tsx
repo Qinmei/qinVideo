@@ -1,4 +1,5 @@
 import React, { FC, createContext, useReducer } from "react";
+import { useLocalStorage } from "react-use";
 
 type ThemeType = "light" | "dark";
 
@@ -19,6 +20,7 @@ const ConfigContext = createContext({} as ContextProps);
 
 const ConfigProvider: FC = props => {
   const { children } = props;
+  const [themeDefault] = useLocalStorage<ThemeType>("theme", "light", { raw: true });
 
   const reducer = (state: DataType, action: Partial<DataType>) => {
     return {
@@ -28,7 +30,7 @@ const ConfigProvider: FC = props => {
   };
 
   const data: DataType = {
-    theme: (localStorage.getItem("theme") as ThemeType) || "dark",
+    theme: themeDefault as ThemeType,
   };
 
   const [state, dispatch] = useReducer(reducer, data);

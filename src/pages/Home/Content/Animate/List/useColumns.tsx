@@ -1,12 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Badge } from "antd";
 import moment from "moment";
 import { getLang } from "@/locales";
-import { timeFormatAll } from "@/constants";
+import { timeFormatAll, statusSource, updateSource } from "@/constants";
 
 import { AntdType, AnimateType } from "@/types";
 
 export const useColumns = () => {
+  console.log(statusSource, updateSource);
   const columns: AntdType.ColumnsType<AnimateType.List> = [
     {
       title: getLang("animate.title"),
@@ -31,9 +33,9 @@ export const useColumns = () => {
       title: getLang("animate.update"),
       dataIndex: "isUpdate",
       align: "center",
-      // filters: Object.values(tableUpdate),
-      // filterMultiple: false,
-      // render: val =>getLang(val ? "common.update.in" : "common.update.out")
+      filters: updateSource,
+      filterMultiple: false,
+      render: val => getLang(val ? "common.select.updating" : "common.select.updated"),
     },
     {
       title: getLang("animate.eposide"),
@@ -112,16 +114,16 @@ export const useColumns = () => {
     //   // width: 120,
     //   // render: val => val.map(item => item.name).join(","),
     // },
-    // {
-    //   title: getLang("animate.status"),
-    //   dataIndex: "status",
-    //   filters: Object.values(tableStatus), // eslint-disable-line
-    //   filterMultiple: false,
-    //   render(val) {
-    //     return <Badge status={tableStatus[val].badge} text={tableStatus[val].text} />;
-    //   },
-    //   align: "center",
-    // },
+    {
+      title: getLang("animate.status"),
+      dataIndex: "status",
+      filters: Object.values(statusSource),
+      filterMultiple: false,
+      render: (val: string) => (
+        <Badge status={statusSource[val].badge} text={statusSource[val].text} />
+      ),
+      align: "center",
+    },
     {
       title: getLang("animate.updatedTime"),
       dataIndex: "updatedAt",

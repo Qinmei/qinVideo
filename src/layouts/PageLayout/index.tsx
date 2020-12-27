@@ -40,11 +40,11 @@ export const PageLayout: FC<PropsType> = props => {
           {sider}
         </Layout.Sider>
       </div>
-      <Layout className={styles.main}>
+      <div className={styles.main}>
         <div className={styles.header}>{header}</div>
         <div className={styles.content}>{children}</div>
         <div className={styles.footer}>{footer}</div>
-      </Layout>
+      </div>
     </Layout>
   );
 };

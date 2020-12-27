@@ -17,7 +17,7 @@ import { getLang } from "@/locales";
 import { ConfigContext } from "@/contexts";
 import { AntdType } from "@/types";
 
-const SideBar: FC = props => {
+const SideBar: FC = () => {
   const { pathname } = useLocation();
   const { path } = useRouteMatch();
   const history = useHistory();
