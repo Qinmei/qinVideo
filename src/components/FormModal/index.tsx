@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, forwardRef, useImperativeHandle } from "react";
 import { Modal } from "antd";
 import { useModalState } from "@/hooks";
 import { AntdType, HooksType } from "@/types";
@@ -9,23 +9,26 @@ interface PropsType<T> {
   children: React.ReactElement;
   title: string;
 }
-export const FormModal = <T,>(props: PropsType<T>) => {
+
+export const FormModal = forwardRef<AntdType.FormInstance<unknown>, PropsType<unknown>>((props,ref) => {
   const { submit, content, title, children } = props;
 
-  const formRef = useRef<AntdType.FormInstance<T>>(null);
+  const formRef = useRef<AntdType.FormInstance<unknown>>(null);
   const [state, methods] = useModalState();
 
   const confirm = () => {
     formRef.current?.submit();
   };
 
-  const onFinish = async (values: T) => {
+  const onFinish = async (values: unknown) => {
     methods.load();
     const res = await submit(values);
     methods.fail();
     if (!res) return;
     methods.cancel();
   };
+
+  useImperativeHandle(ref,()=>formRef.current as AntdType.FormInstance<unknown>)
 
   const formNode = React.cloneElement(children, { ref: formRef, onFinish });
 
@@ -45,4 +48,6 @@ export const FormModal = <T,>(props: PropsType<T>) => {
       </Modal>
     </>
   );
-};
+}) as <Values = any>(
+  props: React.PropsWithChildren<PropsType<Values>> & { ref?: React.Ref<AntdType.FormInstance<Values>> },
+) => React.ReactElement;

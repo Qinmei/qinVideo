@@ -3,7 +3,7 @@ import { Route, Switch, Redirect, useRouteMatch } from "react-router-dom";
 
 const List = React.lazy(() => import("./List"));
 
-const Dashboard: FC = () => {
+const Animate: FC = () => {
   const { path } = useRouteMatch();
 
   return (
@@ -14,4 +14,4 @@ const Dashboard: FC = () => {
   );
 };
 
-export default Dashboard;
+export default Animate;
