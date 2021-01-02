@@ -16,17 +16,18 @@ export enum Status {
 }
 
 export type ListQuery = {
-  page?: number;
-  size?: number;
+  page: number;
+  size: number;
+  title?: string;
   sortBy?: string;
   sortOrder?: number | string | null;
   isUpdate?: string;
-  title?: string;
   email?: string;
   type?: string;
   target?: string;
   status?: string;
   update?: string;
+  updateDay?: string;
   kind?: string;
   area?: string;
   year?: string;
@@ -52,4 +53,10 @@ export type SelectType<T> = {
     value: T;
     badge?: "processing" | "success" | "error" | "default" | "warning";
   };
+};
+
+export type ListMethods<T> = {
+  init: () => void;
+  delete: (id: string) => void;
+  update: (values: T) => Promise<unknown>;
 };

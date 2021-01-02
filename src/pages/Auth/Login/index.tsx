@@ -14,10 +14,10 @@ export const Login: FC = () => {
   const history = useHistory();
   const { saveTokenCall } = useUserToken();
 
-  const action = useAction("auth");
+  const actions = useAction("auth");
 
   const [state, onFinish] = useAsyncFn(async (values: AuthType.LoginReq) => {
-    const res = await action.login({
+    const res = await actions.login({
       name: values.name,
       password: md5(values.password),
     });

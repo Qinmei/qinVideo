@@ -1,6 +1,8 @@
-import React, { useRef, forwardRef, useImperativeHandle } from "react";
+import React, { useRef, forwardRef, useImperativeHandle, useCallback } from "react";
 import { Modal } from "antd";
 import { useModalState } from "@/hooks";
+import { modalFormLayout } from "@/constants";
+
 import { AntdType, HooksType } from "@/types";
 
 interface PropsType<T> {
@@ -10,7 +12,11 @@ interface PropsType<T> {
   title: string;
 }
 
-export const FormModal = forwardRef<AntdType.FormInstance<unknown>, PropsType<unknown>>((props,ref) => {
+export interface FormModalMethods extends HooksType.ModalStateMethods {
+  confirm: () => void;
+}
+
+export const FormModal = forwardRef<FormModalMethods, PropsType<unknown>>((props, ref) => {
   const { submit, content, title, children } = props;
 
   const formRef = useRef<AntdType.FormInstance<unknown>>(null);
@@ -20,17 +26,25 @@ export const FormModal = forwardRef<AntdType.FormInstance<unknown>, PropsType<un
     formRef.current?.submit();
   };
 
-  const onFinish = async (values: unknown) => {
-    methods.load();
-    const res = await submit(values);
-    methods.fail();
-    if (!res) return;
-    methods.cancel();
+  const methodsExpose = {
+    confirm,
+    ...methods,
   };
 
-  useImperativeHandle(ref,()=>formRef.current as AntdType.FormInstance<unknown>)
+  const onFinish = useCallback(
+    async (values: unknown) => {
+      methods.load();
+      const res = await submit(values);
+      methods.fail();
+      if (!res) return;
+      methods.cancel();
+    },
+    [methods, submit]
+  );
 
-  const formNode = React.cloneElement(children, { ref: formRef, onFinish });
+  useImperativeHandle(ref, () => methodsExpose);
+
+  const formNode = React.cloneElement(children, { ref: formRef, onFinish, ...modalFormLayout });
 
   const { visible, loading } = state;
   return (
@@ -48,6 +62,8 @@ export const FormModal = forwardRef<AntdType.FormInstance<unknown>, PropsType<un
       </Modal>
     </>
   );
-}) as <Values = any>(
-  props: React.PropsWithChildren<PropsType<Values>> & { ref?: React.Ref<AntdType.FormInstance<Values>> },
+}) as <Values = unknown>(
+  props: React.PropsWithChildren<PropsType<Values>> & {
+    ref?: React.Ref<FormModalMethods>;
+  }
 ) => React.ReactElement;

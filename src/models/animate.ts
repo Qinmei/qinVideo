@@ -1,6 +1,13 @@
 import { Urls, Methods } from "@/constants";
 import { Model } from "@/action/model";
-import { InitialState, ListRes, ItemRes } from "@/types/animate";
+import {
+  InitialState,
+  ListRes,
+  ItemRes,
+  DeleteReq,
+  UpdateListReq,
+  UpdateItemReq,
+} from "@/types/animate";
 import { ListQuery, IdQuery, OptionReturn } from "@/types/global";
 import { RequestRes } from "@/types/request";
 
@@ -25,14 +32,14 @@ export class Animate extends Model<InitialState> {
       super.init<ListRes>(Methods.GET, Urls.queryAnimate, { query }, this.initDispatch.animate),
     createAnimateList: (data: ListQuery) =>
       super.init<ItemRes>(Methods.POST, Urls.queryAnimate, { data }),
-    updateAnimateList: (data: ListQuery) =>
-      super.init<OptionReturn>(Methods.POST, Urls.queryAnimate, { data }),
-    deleteAnimateList: (query: ListQuery) =>
-      super.init<OptionReturn>(Methods.DELETE, Urls.queryAnimate, { query }),
+    updateAnimateList: (data: UpdateListReq) =>
+      super.init<OptionReturn>(Methods.PUT, Urls.queryAnimate, { data }),
+    deleteAnimateList: (data: DeleteReq) =>
+      super.init<OptionReturn>(Methods.DELETE, Urls.queryAnimate, { data }),
     getAnimateItem: (params: IdQuery) =>
       super.init<ItemRes>(Methods.GET, Urls.singleAnimate, { params }),
-    updateAnimateItem: (params: IdQuery) =>
-      super.init<OptionReturn>(Methods.PUT, Urls.singleAnimate, { params }),
+    updateAnimateItem: ({ id, ...data }: UpdateItemReq) =>
+      super.init<OptionReturn>(Methods.PUT, Urls.singleAnimate, { params: { id }, data }),
     deleteAnimateItem: (params: IdQuery) =>
       super.init<OptionReturn>(Methods.DELETE, Urls.singleAnimate, { params }),
   };

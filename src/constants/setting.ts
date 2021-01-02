@@ -4,3 +4,12 @@ export const pageQuery = {
 };
 
 export const timeFormatAll = "YYYY-MM-DD HH:mm:ss";
+
+export const modalFormLayout = {
+  labelCol: {
+    span: 4,
+  },
+  wrapperCol: {
+    span: 18,
+  },
+};

@@ -23,11 +23,11 @@ export enum Urls {
 
   // 视频
   queryAnimate = "/api/v1/animates",
-  singleAnimate = "/api/v1/animates/:slug",
+  singleAnimate = "/api/v1/animates/:id",
 
   // 漫画
   queryComic = "/api/v1/comics",
-  singleComic = "/api/v1/comics/:slug",
+  singleComic = "/api/v1/comics/:id",
 
   // 季数
   querySeason = "/api/v1/seasons",
@@ -39,7 +39,7 @@ export enum Urls {
 
   // 文章
   queryPost = "/api/v1/posts",
-  singlePost = "/api/v1/posts/:slug",
+  singlePost = "/api/v1/posts/:id",
 
   // 轻博客
   queryBlog = "/api/v1/blogs",
@@ -68,6 +68,7 @@ export enum Urls {
   // 分类
   queryCategory = "/api/v1/category",
   singleCategory = "/api/v1/category/:id",
+  queryCategoryType = "/api/v1/category/query/:type",
 
   // 商品
   queryShop = "/api/v1/shop",

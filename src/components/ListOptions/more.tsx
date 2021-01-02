@@ -15,7 +15,7 @@ export const MoreOptions = (props: PropsType) => {
         <Menu.Item key="delete">{getLang("common.options.delete.all")}</Menu.Item>
       </Menu>
     ),
-    []
+    [onChange]
   );
 
   return (

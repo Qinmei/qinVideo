@@ -11,12 +11,12 @@ interface PropsType<T> {
   page: number;
   size: number;
   columns: AntdType.ColumnsType<T>;
-  onChange: (values: GlobalType.ListQuery) => void;
+  onChange: (values: Partial<GlobalType.ListQuery>) => void;
   select: string[];
   onSelectChange: (select: string[]) => void;
   rowKey?: string;
 }
-export const ListTable = <T extends Record<string, unknown>>(props: PropsType<T>) => {
+export const ListTable = <T,>(props: PropsType<T>) => {
   const {
     loading,
     total,
@@ -30,37 +30,38 @@ export const ListTable = <T extends Record<string, unknown>>(props: PropsType<T>
     onChange,
   } = props;
 
-  const onFilterChange = (
+  const onTableChange = (
     pagination: AntdType.TablePaginationConfig,
-    filters: Record<string, React.ReactText[] | null>,
+    filters: Record<string, (string | number | boolean)[] | null>,
     sorter: AntdType.SorterResult<T> | AntdType.SorterResult<T>[]
   ) => {
     const { current, pageSize } = pagination;
-    const { area, kind, year, tag, isUpdate } = filters;
-    const { field, order } = sorter as AntdType.SorterResult<T>;
+    const { area, kind, year, tag, isUpdate, status, updateDay } = filters;
+    const { columnKey, order } = sorter as AntdType.SorterResult<T>;
 
     onChange({
       page: current as number,
       size: pageSize as number,
-      sortBy: order ? (field as string) : undefined,
+      sortBy: order ? (columnKey as string) : undefined,
       sortOrder: order === "ascend" ? 1 : order === "descend" ? -1 : undefined,
       area: area ? (area[0] as string) : undefined,
       kind: kind ? (kind[0] as string) : undefined,
       year: year ? (year[0] as string) : undefined,
       tag: tag ? (tag[0] as string) : undefined,
       isUpdate: isUpdate ? (isUpdate[0] as string) : undefined,
+      updateDay: updateDay ? (updateDay[0] as string) : undefined,
+      status: status ? (status[0] as string) : undefined,
     });
-
-    console.log(pagination, filters, sorter);
   };
 
   return (
-    <Table<T>
+    <Table<any>
       sticky
+      scroll={{ scrollToFirstRowOnChange: true, x: "max-content" }}
       loading={loading}
       rowKey={rowKey}
       columns={columns}
-      onChange={onFilterChange}
+      onChange={onTableChange}
       dataSource={list}
       showSorterTooltip={false}
       rowSelection={{

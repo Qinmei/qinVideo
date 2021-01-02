@@ -1,9 +1,9 @@
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import { Button, Space, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 import { getLang, LanguageKeys } from "@/locales";
-import { FormModal } from "@/components";
+import { FormModal, FormModalMethods } from "@/components";
 import { MoreOptions } from "./more";
 
 import { HooksType } from "@/types";
@@ -11,12 +11,14 @@ import { HooksType } from "@/types";
 interface PropsType<T> {
   children: React.ReactElement;
   submit: (values: T) => Promise<boolean> | boolean;
-  remove: (type: "all" | "many") => Promise<void>;
+  remove: (type: "all" | "many") => Promise<unknown>;
   newPath: string;
   selected: string[];
 }
 export const ListOptions = <T,>(props: PropsType<T>) => {
   const { children, submit, remove, selected, newPath } = props;
+
+  const ref = useRef<FormModalMethods>(null);
 
   const history = useHistory();
 
@@ -73,6 +75,7 @@ export const ListOptions = <T,>(props: PropsType<T>) => {
           <MoreOptions onChange={value => moreCall(value, methods)} />
         </Space>
       )}
+      ref={ref}
     >
       {children}
     </FormModal>

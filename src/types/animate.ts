@@ -23,7 +23,7 @@ export type EposideItem = {
   sort: number;
 };
 
-export interface Base extends Record<string, unknown> {
+export interface Base {
   title: string;
   slug: string;
   author: string;
@@ -83,4 +83,23 @@ export interface ItemRes extends Omit<Base, "author"> {
   kind: CategoryItem[];
   tag: CategoryItem[];
   year: CategoryItem[];
+}
+
+export interface UpdateListReq {
+  ids: string[];
+  area?: string[];
+  kind?: string[];
+  year?: string[];
+  tag?: string[];
+  status?: Status;
+  isUpdate?: boolean;
+  updateDay?: number;
+}
+
+export interface DeleteReq {
+  ids: string[];
+}
+
+export interface UpdateItemReq extends ListCreateReq {
+  id: string;
 }

@@ -1,5 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
-import { Button, Form, Table } from "antd";
+import React, { FC, useState, useEffect, useCallback, useMemo } from "react";
 import { useAsyncFn } from "react-use";
 import { useAction, useModel } from "@/action";
 import { useSavedState } from "@/hooks";
@@ -7,27 +6,84 @@ import { ListLayout } from "@/layouts";
 import { ListOptions, ListTable } from "@/components";
 import { getLang } from "@/locales";
 import { useColumns } from "./useColumns";
+import { EditForm } from "./form";
 
-import { AnimateType } from "@/types";
+import { AnimateType, GlobalType } from "@/types";
 
-const initState = {
+const initState: GlobalType.ListQuery = {
   page: 1,
   size: 10,
-  query: "",
+  title: undefined,
+  sortBy: undefined,
+  sortOrder: undefined,
+  area: undefined,
+  kind: undefined,
+  year: undefined,
+  tag: undefined,
+  isUpdate: undefined,
+  updateDay: undefined,
+  status: undefined,
 };
 
 const List: FC = () => {
   const [select, setSelect] = useState<string[]>([]);
   const [state, setState] = useSavedState(initState);
-  const { page, size, query } = state;
+  const { page, size, title } = state;
 
   const actions = useAction("animate");
   const { list, total } = useModel("animate");
-  const { columns } = useColumns();
 
   const [{ loading }, initData] = useAsyncFn(async () => {
     await actions.getAnimateList(state);
-  }, [actions, state]);
+    setSelect([]);
+  }, [actions, state, setSelect]);
+
+  const queryCompare = useCallback(
+    (value: Partial<GlobalType.ListQuery>) => {
+      const init = Object.entries(value).some(
+        item => state[item[0] as keyof GlobalType.ListQuery] !== item[1]
+      );
+      init && setState(value);
+    },
+    [setState, state]
+  );
+
+  const resetState = useCallback(() => queryCompare(initState), [queryCompare]);
+
+  const remove = useCallback(async (id: string) => await actions.deleteAnimateItem({ id }), [
+    actions,
+  ]);
+
+  const removeMany = useCallback(
+    async (type: "many" | "all") => {
+      const res = await actions.deleteAnimateList({ ids: type === "all" ? [] : select });
+      res && initData();
+    },
+    [actions, select, initData]
+  );
+
+  const update = useCallback(
+    async (values: AnimateType.UpdateItemReq) => await actions.updateAnimateItem({ ...values }),
+    [actions]
+  );
+
+  const updateMany = useCallback(
+    async (values: Omit<AnimateType.UpdateListReq, "ids">) => {
+      const res = await actions.updateAnimateList({ ids: select, ...values });
+      res && initData();
+      return !!res;
+    },
+    [actions, select, initData]
+  );
+
+  const methods = useMemo(() => ({ init: initData, delete: remove, reset: resetState, update }), [
+    initData,
+    remove,
+    resetState,
+    update,
+  ]);
+
+  const { columns, SettingBtn } = useColumns(state, methods);
 
   useEffect(() => {
     initData();
@@ -36,19 +92,20 @@ const List: FC = () => {
   return (
     <ListLayout
       options={
-        <ListOptions
+        <ListOptions<Omit<AnimateType.UpdateListReq, "ids">>
           selected={select}
-          submit={() => true}
+          submit={updateMany}
           newPath="/home/animate/add"
-          remove={async () => console.log("sdsd")}
+          remove={removeMany}
         >
-          <></>
+          <EditForm />
         </ListOptions>
       }
       placeholder={getLang("animate.title.search")}
-      value={query}
-      onChange={query => setState({ query })}
-      setting={<></>}
+      value={title}
+      onChange={title => setState({ title })}
+      setting={SettingBtn}
+      reset={methods.reset}
     >
       <ListTable<AnimateType.List>
         loading={loading}
@@ -59,7 +116,7 @@ const List: FC = () => {
         list={list}
         select={select}
         onSelectChange={setSelect}
-        onChange={setState}
+        onChange={queryCompare}
       />
     </ListLayout>
   );

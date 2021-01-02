@@ -67,6 +67,8 @@ const common = {
   "common.options.delete.many": "批量删除",
   "common.options.delete.all": "全部删除",
   "common.options.more": "更多操作",
+  "common.options.reset": "重置",
+  "common.options.ok": "确定",
   "common.options.delete.many.title": "删除选中的数据",
   "common.options.delete.all.title": "删除所有的数据",
   "common.options.delete.many.tips": "确认是否要删除选中的数据?",
@@ -77,6 +79,14 @@ const common = {
   "common.select.reject": "审核驳回",
   "common.select.updating": "连载中",
   "common.select.updated": "已完结",
+
+  "common.day.sun": "周日",
+  "common.day.mon": "周一",
+  "common.day.tue": "周二",
+  "common.day.wed": "周三",
+  "common.day.thur": "周四",
+  "common.day.fri": "周五",
+  "common.day.sat": "周六",
 };
 
 export default common;

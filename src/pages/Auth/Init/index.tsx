@@ -9,10 +9,10 @@ import { AuthType } from "@/types";
 
 export const Init: FC = () => {
   const [form] = Form.useForm();
-  const action = useAction("auth");
+  const actions = useAction("auth");
 
   const [state, onFinish] = useAsyncFn(async (values: AuthType.InitReq) => {
-    await action.init({
+    await actions.init({
       name: values.name,
       email: values.email,
       password: md5(values.password),

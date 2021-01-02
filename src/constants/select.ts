@@ -19,13 +19,46 @@ export const statusSource: GlobalType.SelectType<string> = {
   },
 };
 
-export const updateSource = [
-  {
+export const updateSource: GlobalType.SelectType<string> = {
+  true: {
     text: getLang("common.select.updating"),
-    value: true,
+    badge: "processing",
+    value: "true",
   },
-  {
+  false: {
     text: getLang("common.select.updated"),
-    value: false,
+    badge: "default",
+    value: "false",
   },
-];
+};
+
+export const updateDaySource: GlobalType.SelectType<string> = {
+  0: {
+    text: getLang("common.day.sun"),
+    value: "0",
+  },
+  1: {
+    text: getLang("common.day.mon"),
+    value: "1",
+  },
+  2: {
+    text: getLang("common.day.tue"),
+    value: "2",
+  },
+  3: {
+    text: getLang("common.day.wed"),
+    value: "3",
+  },
+  4: {
+    text: getLang("common.day.thur"),
+    value: "4",
+  },
+  5: {
+    text: getLang("common.day.fri"),
+    value: "5",
+  },
+  6: {
+    text: getLang("common.day.sat"),
+    value: "6",
+  },
+};

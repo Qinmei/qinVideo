@@ -19,7 +19,7 @@ export const useSavedState = <T extends GlobalType.ListQuery>(
     });
   }, [history, pathname, state]);
 
-  useEffect(replace, [state]);
+  useEffect(replace, [replace]);
 
   return [state, setState];
 };

@@ -5,9 +5,7 @@ export type Options = {
   query?: {
     [key: string]: unknown;
   };
-  data?: {
-    [key: string]: unknown;
-  };
+  data?: unknown;
   formData?: FormData;
   [key: string]: unknown;
 };

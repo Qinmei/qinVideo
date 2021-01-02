@@ -3,3 +3,8 @@ export * from "./Copyright";
 export * from "./FormModal";
 export * from "./ListOptions";
 export * from "./ListTable";
+export * from "./ColumnsSetting";
+export * from "./DeleteBtn";
+export * from "./ListFilters";
+export * from "./CategorySelect";
+export * from "./QuickEdit";

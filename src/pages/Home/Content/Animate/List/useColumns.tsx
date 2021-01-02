@@ -1,143 +1,142 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Badge } from "antd";
+import { Space } from "antd";
 import moment from "moment";
 import { getLang } from "@/locales";
-import { timeFormatAll, statusSource, updateSource } from "@/constants";
+import { useColumnsSetting } from "@/hooks";
+import {
+  DeleteBtn,
+  columnsSorter,
+  columnsFilter,
+  columnsFilterRequest,
+  QuickEdit,
+} from "@/components";
+import { timeFormatAll } from "@/constants";
+import { statusSource, updateSource, updateDaySource } from "@/constants/select";
+import { EditForm } from "./form";
 
-import { AntdType, AnimateType } from "@/types";
+import { AnimateType, GlobalType, ComponentsType } from "@/types";
 
-export const useColumns = () => {
-  console.log(statusSource, updateSource);
-  const columns: AntdType.ColumnsType<AnimateType.List> = [
-    {
-      title: getLang("animate.title"),
-      dataIndex: "title",
-      key: "title",
-      sorter: true,
-      render: (text, record) => <Link to={`/home/animate/slug/${record.id}`}>{text}</Link>,
-    },
-    {
-      title: getLang("animate.slug"),
-      dataIndex: "slug",
-      sorter: true,
-      align: "center",
-    },
-    {
-      title: getLang("animate.author"),
-      dataIndex: "author.name",
-      sorter: true,
-      align: "center",
-    },
-    {
-      title: getLang("animate.update"),
-      dataIndex: "isUpdate",
-      align: "center",
-      filters: updateSource,
-      filterMultiple: false,
-      render: val => getLang(val ? "common.select.updating" : "common.select.updated"),
-    },
-    {
-      title: getLang("animate.eposide"),
-      dataIndex: "countEposide",
-      sorter: true,
-      align: "center",
-    },
-    {
-      title: getLang("animate.comment"),
-      dataIndex: "countComment",
-      sorter: true,
-      align: "center",
-    },
-    {
-      title: getLang("animate.danmu"),
-      dataIndex: "countDanmu",
-      sorter: true,
-      align: "center",
-    },
-    {
-      title: getLang("animate.play"),
-      dataIndex: "countPlay",
-      sorter: true,
-      align: "center",
-    },
-    {
-      title: getLang("rate.rateStar"),
-      dataIndex: "countStar",
-      sorter: true,
-      align: "center",
-    },
-    {
-      title: getLang("rate.rateCount"),
-      dataIndex: "countRate",
-      sorter: true,
-      align: "center",
-    },
-    {
-      title: getLang("animate.like"),
-      dataIndex: "countLike",
-      sorter: true,
-      align: "center",
-    },
-    {
-      title: getLang("animate.level"),
-      dataIndex: "level",
-      sorter: true,
-      align: "center",
-    },
-    // {
-    //   title: getLang("animate.category.area"),
-    //   dataIndex: "area",
-    //   // filters: table.area,
-    //   // filterMultiple: false,
-    //   // render: val => val.map(item => item.name).join(","),
-    // },
-    // {
-    //   title: getLang("animate.category.year"),
-    //   dataIndex: "year",
-    //   // filters: table.year,
-    //   // filterMultiple: false,
-    //   // render: val => val.map(item => item.name).join(","),
-    // },
-    // {
-    //   title: getLang("animate.category.kind"),
-    //   dataIndex: "kind",
-    //   // filterMultiple: false,
-    //   // filters: table.kind,
-    //   // render: val => val.map(item => item.name).join(","),
-    // },
-    // {
-    //   title: getLang("animate.category.tag"),
-    //   dataIndex: "tag",
-    //   // filterMultiple: false,
-    //   // filters: table.tag,
-    //   // width: 120,
-    //   // render: val => val.map(item => item.name).join(","),
-    // },
-    {
-      title: getLang("animate.status"),
-      dataIndex: "status",
-      filters: Object.values(statusSource),
-      filterMultiple: false,
-      render: (val: string) => (
-        <Badge status={statusSource[val].badge} text={statusSource[val].text} />
-      ),
-      align: "center",
-    },
-    {
-      title: getLang("animate.updatedTime"),
-      dataIndex: "updatedAt",
-      sorter: true,
-      width: 120,
-      align: "center",
-      render: val => moment(val).format(timeFormatAll),
-    },
-    {
-      title: getLang("animate.option"),
-      key: "action",
-      dataIndex: "id",
-      align: "center",
-    },
-  ];
-  return { columns };
+export const useColumns = (
+  state: GlobalType.ListQuery,
+  methods: GlobalType.ListMethods<AnimateType.UpdateItemReq>
+) => {
+  const columnsOrigin: ComponentsType.ColumnsType<AnimateType.List> = useMemo(
+    () => [
+      {
+        title: getLang("animate.title"),
+        ...columnsSorter(state, "title", true),
+        width: 300,
+        align: "left",
+        render: (text, record) => <Link to={`/home/animate/slug/${record.id}`}>{text}</Link>,
+      },
+      {
+        title: getLang("animate.slug"),
+        ...columnsSorter(state, "slug", true),
+        width: 140,
+      },
+      {
+        title: getLang("animate.author"),
+        ...columnsSorter(state, "author", true),
+        dataIndex: ["author", "name"],
+      },
+      {
+        title: getLang("animate.update"),
+        ...columnsFilter(state, updateSource, "isUpdate", true),
+      },
+      {
+        title: getLang("animate.updateDay"),
+        ...columnsFilter(state, updateDaySource, "updateDay", true),
+      },
+      {
+        title: getLang("animate.eposide"),
+        ...columnsSorter(state, "countEposide", true),
+      },
+      {
+        title: getLang("animate.comment"),
+        ...columnsSorter(state, "countComment", true),
+      },
+      {
+        title: getLang("animate.danmu"),
+        ...columnsSorter(state, "countDanmu"),
+      },
+      {
+        title: getLang("animate.play"),
+        ...columnsSorter(state, "countPlay"),
+      },
+      {
+        title: getLang("rate.rateStar"),
+        ...columnsSorter(state, "countStar"),
+      },
+      {
+        title: getLang("rate.rateCount"),
+        ...columnsSorter(state, "countRate"),
+      },
+      {
+        title: getLang("animate.like"),
+        ...columnsSorter(state, "countLike"),
+      },
+      {
+        title: getLang("animate.level"),
+        ...columnsSorter(state, "level"),
+      },
+      {
+        title: getLang("animate.category.area"),
+        ...columnsFilterRequest(state, "area", false, "aarea"),
+      },
+      {
+        title: getLang("animate.category.year"),
+        ...columnsFilterRequest(state, "year", false, "ayear"),
+      },
+      {
+        title: getLang("animate.category.kind"),
+        ...columnsFilterRequest(state, "kind", false, "akind"),
+      },
+      {
+        title: getLang("animate.category.tag"),
+        ...columnsFilterRequest(state, "tag", false, "atag"),
+      },
+      {
+        title: getLang("animate.status"),
+        ...columnsFilter(state, statusSource, "status", true),
+      },
+      {
+        title: getLang("animate.updatedTime"),
+        ...columnsSorter(state, "updatedAt", true),
+        render: val => moment(val).format(timeFormatAll),
+      },
+      {
+        title: getLang("animate.option"),
+        key: "option",
+        preset: true,
+        dataIndex: "id",
+        align: "center",
+        fixed: "right",
+        width: 160,
+        render: (text, record) => (
+          <Space>
+            <QuickEdit<AnimateType.List, AnimateType.UpdateItemReq>
+              data={record}
+              submit={methods.update}
+              init={methods.init}
+            >
+              <EditForm />
+            </QuickEdit>
+            <DeleteBtn
+              title={record.title}
+              initCall={methods.init}
+              deleteCall={() => methods.delete(text)}
+            />
+          </Space>
+        ),
+      },
+    ],
+    [state, methods]
+  );
+
+  const { columns, SettingBtn } = useColumnsSetting<AnimateType.List>(
+    columnsOrigin,
+    "animateColumns"
+  );
+  return { columns, SettingBtn };
 };

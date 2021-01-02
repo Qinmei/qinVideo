@@ -4,12 +4,12 @@ import { useAction } from "@/action";
 
 export const useAuthInit = () => {
   const [init, setInit] = useState(false);
-  const action = useAction("auth");
+  const actions = useAction("auth");
 
   useAsync(async () => {
-    const res = await action.exist();
+    const res = await actions.exist();
     setInit(res === "init");
-  }, [action]);
+  }, [actions]);
 
   return [init];
 };
