@@ -1,11 +1,12 @@
+import { Button, Empty, Input, Radio } from "antd";
 import React, { useCallback, useMemo, useState } from "react";
-import { Radio, Input, Button, Empty } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+
 import { useCategoryType } from "@/hooks";
 import { getLang } from "@/locales";
-import styles from "./index.less";
+import { AntdType, CategoryType } from "@/types";
+import { LoadingOutlined } from "@ant-design/icons";
 
-import { CategoryType, AntdType } from "@/types";
+import styles from "./index.less";
 
 interface PropsType {
   type: CategoryType.CateType;
@@ -19,7 +20,7 @@ export const ListFilters: React.FC<PropsType> = props => {
 
   const [query, setQuery] = useState<string>("");
   const [value, setValue] = useState<React.ReactText>(selectedKeys[0]);
-  const { loading, source } = useCategoryType(type);
+  const [source, loading] = useCategoryType(type);
 
   const onChangeCall = useCallback((e: AntdType.RadioChangeEvent) => setValue(e.target.value), [
     setValue,

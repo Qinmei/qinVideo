@@ -1,14 +1,7 @@
 import { Urls, Methods } from "@/constants";
 import { Model } from "@/action/model";
-import {
-  InitialState,
-  ListRes,
-  ItemRes,
-  DeleteReq,
-  UpdateListReq,
-  UpdateItemReq,
-} from "@/types/animate";
-import { ListQuery, IdQuery, OptionReturn } from "@/types/global";
+import { InitialState, ListRes, ItemRes, UpdateListReq, UpdateItemReq } from "@/types/animate";
+import { ListQuery, IdQuery, IdsQuery, OptionReturn } from "@/types/global";
 import { RequestRes } from "@/types/request";
 
 export class Animate extends Model<InitialState> {
@@ -34,7 +27,7 @@ export class Animate extends Model<InitialState> {
       super.init<ItemRes>(Methods.POST, Urls.queryAnimate, { data }),
     updateAnimateList: (data: UpdateListReq) =>
       super.init<OptionReturn>(Methods.PUT, Urls.queryAnimate, { data }),
-    deleteAnimateList: (data: DeleteReq) =>
+    deleteAnimateList: (data: IdsQuery) =>
       super.init<OptionReturn>(Methods.DELETE, Urls.queryAnimate, { data }),
     getAnimateItem: (params: IdQuery) =>
       super.init<ItemRes>(Methods.GET, Urls.singleAnimate, { params }),

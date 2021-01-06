@@ -40,6 +40,10 @@ export type IdQuery = {
   id: string;
 };
 
+export type IdsQuery = {
+  ids: string[];
+};
+
 export type OptionReturn = {
   n: number;
   ok: number;
@@ -57,6 +61,10 @@ export type SelectType<T> = {
 
 export type ListMethods<T> = {
   init: () => void;
-  delete: (id: string) => void;
+  set: (values: Partial<ListQuery>) => void;
   update: (values: T) => Promise<unknown>;
+  updateMany: (values: T) => Promise<unknown>;
+  remove: (id: string) => Promise<unknown>;
+  removeMany: (ids: string[]) => Promise<unknown>;
+  reset: () => void;
 };

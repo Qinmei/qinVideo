@@ -1,5 +1,5 @@
-import localforage from 'localforage';
-import { useState, useCallback, Dispatch, SetStateAction, useEffect } from 'react';
+import localforage from "localforage";
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
 
 export const useIndexedDB = <T,>(
   key: string,
@@ -10,7 +10,7 @@ export const useIndexedDB = <T,>(
   const [state, setState] = useState<T | undefined>(initialValue);
 
   const set: Dispatch<SetStateAction<T | undefined>> = useCallback(
-    async (value) => {
+    async value => {
       await localforage.setItem(key, value);
       setState(value);
     },
@@ -23,7 +23,7 @@ export const useIndexedDB = <T,>(
     if ((value && needInit) || !value) value = await initData();
     setState(value);
     set(value);
-  }, [key, setState, initData]);
+  }, [key, initJudge, initData, set]);
 
   const remove = useCallback(async () => {
     await localforage.removeItem(key);

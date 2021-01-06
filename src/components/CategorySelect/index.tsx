@@ -13,7 +13,7 @@ interface PropsType {
 export const CategorySelect: React.FC<PropsType> = props => {
   const { type, value, onChange, placeholder } = props;
 
-  const { loading, source } = useCategoryType(type);
+  const [source, loading] = useCategoryType(type);
 
   return (
     <TreeSelect

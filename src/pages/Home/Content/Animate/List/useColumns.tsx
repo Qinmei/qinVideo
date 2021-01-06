@@ -125,7 +125,7 @@ export const useColumns = (
             <DeleteBtn
               title={record.title}
               initCall={methods.init}
-              deleteCall={() => methods.delete(text)}
+              deleteCall={() => methods.remove(text)}
             />
           </Space>
         ),

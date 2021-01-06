@@ -5,3 +5,8 @@ export type ModalStateMethods = {
   fail: () => void;
   cancel: () => void;
 };
+
+export type SessionCacheType<T> = {
+  data: T;
+  expired: number;
+};
