@@ -13,3 +13,12 @@ export const modalFormLayout = {
     span: 18,
   },
 };
+
+export const pageFormLayout = {
+  labelCol: {
+    span: 4,
+  },
+  wrapperCol: {
+    span: 18,
+  },
+};

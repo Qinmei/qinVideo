@@ -22,5 +22,9 @@ export const useCategoryType = (type: CategoryType.CateType) => {
     data,
   ]);
 
-  return [source, loading] as [{ label: string; value: string }[], boolean];
+  return [source, loading, init] as [
+    { label: string; value: string }[],
+    boolean,
+    (value: boolean) => void
+  ];
 };

@@ -54,6 +54,7 @@ export type OptionReturn = {
 export type SelectType<T> = {
   [key: string]: {
     text: string;
+    label?: string;
     value: T;
     badge?: "processing" | "success" | "error" | "default" | "warning";
   };

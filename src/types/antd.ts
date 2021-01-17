@@ -5,6 +5,8 @@ import { TableProps } from "antd/lib/table";
 import { TablePaginationConfig } from "antd/lib/table";
 import { SorterResult } from "antd/lib/table/interface";
 import { RadioChangeEvent } from "antd/lib/radio";
+import { CheckboxOptionType } from "antd/lib/checkbox";
+import { DatePickerProps } from "antd/lib/date-picker";
 
 export type {
   FormInstance,
@@ -16,4 +18,6 @@ export type {
   TablePaginationConfig,
   SorterResult,
   RadioChangeEvent,
+  CheckboxOptionType,
+  DatePickerProps,
 };

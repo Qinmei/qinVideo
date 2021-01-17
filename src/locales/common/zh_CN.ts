@@ -69,6 +69,7 @@ const common = {
   "common.options.more": "更多操作",
   "common.options.reset": "重置",
   "common.options.ok": "确定",
+  "common.options.submit": "提交",
   "common.options.delete.many.title": "删除选中的数据",
   "common.options.delete.all.title": "删除所有的数据",
   "common.options.delete.many.tips": "确认是否要删除选中的数据?",
@@ -87,6 +88,8 @@ const common = {
   "common.day.thur": "周四",
   "common.day.fri": "周五",
   "common.day.sat": "周六",
+
+  "common.add.baseinfo": "基本信息",
 };
 
 export default common;
