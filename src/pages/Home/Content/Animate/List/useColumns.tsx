@@ -15,11 +15,11 @@ import { timeFormatAll } from "@/constants";
 import { statusSource, updateSource, updateDaySource } from "@/constants/select";
 import { EditForm } from "./form";
 
-import { AnimateType, GlobalType, ComponentsType } from "@/types";
+import { AnimateType, CommonType, ComponentsType } from "@/types";
 
 export const useColumns = (
-  state: GlobalType.ListQuery,
-  methods: GlobalType.ListMethods<AnimateType.UpdateItemReq>
+  state: CommonType.ListQuery,
+  methods: CommonType.ListMethods<AnimateType.UpdateItemReq>
 ) => {
   const columnsOrigin: ComponentsType.ColumnsType<AnimateType.List> = useMemo(
     () => [

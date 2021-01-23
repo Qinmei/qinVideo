@@ -68,8 +68,7 @@ export type InitialState = {
 
 export type ListRes = ListContent<List>;
 
-export interface ListCreateReq extends Base {
-  eposide?: string[];
+export interface CreateItemReq extends Base {
   area?: string[];
   kind?: string[];
   year?: string[];
@@ -100,6 +99,6 @@ export interface DeleteReq {
   ids: string[];
 }
 
-export interface UpdateItemReq extends ListCreateReq {
+export interface UpdateItemReq extends CreateItemReq {
   id: string;
 }

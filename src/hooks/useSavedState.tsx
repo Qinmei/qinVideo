@@ -2,9 +2,9 @@ import { useCallback, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useSetState } from "react-use";
 
-import { GlobalType } from "@/types";
+import { CommonType } from "@/types";
 
-export const useSavedState = <T extends GlobalType.ListQuery>(
+export const useSavedState = <T extends CommonType.ListQuery>(
   initialState: T
 ): [T, (patch: Partial<T> | ((prevState: T) => Partial<T>)) => void] => {
   const history = useHistory();

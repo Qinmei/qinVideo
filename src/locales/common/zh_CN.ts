@@ -74,6 +74,8 @@ const common = {
   "common.options.delete.all.title": "删除所有的数据",
   "common.options.delete.many.tips": "确认是否要删除选中的数据?",
   "common.options.delete.all.tips": "确认是否要删除所有的数据?数据一旦删除则无法恢复",
+  "common.options.upload": "上传",
+  "common.options.confirm": "确认",
 
   "common.select.draft": "审核中",
   "common.select.publish": "审核通过",
@@ -90,6 +92,8 @@ const common = {
   "common.day.sat": "周六",
 
   "common.add.baseinfo": "基本信息",
+
+  "common.upload.file.size": "上传文件或图片需要小于{size}M",
 };
 
 export default common;

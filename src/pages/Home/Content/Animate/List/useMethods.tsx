@@ -2,9 +2,9 @@ import { useCallback, useMemo } from "react";
 import { useAction } from "@/action";
 import { useSavedState } from "@/hooks";
 
-import { AnimateType, GlobalType } from "@/types";
+import { AnimateType, CommonType } from "@/types";
 
-const initState: GlobalType.ListQuery = {
+const initState: CommonType.ListQuery = {
   page: 1,
   size: 10,
   title: undefined,
@@ -25,9 +25,9 @@ export const useMethods = (select: string[], setSelect: (values: string[]) => vo
   const actions = useAction("animate");
 
   const queryCompare = useCallback(
-    (value: Partial<GlobalType.ListQuery>) => {
+    (value: Partial<CommonType.ListQuery>) => {
       const init = Object.entries(value).some(
-        item => state[item[0] as keyof GlobalType.ListQuery] !== item[1]
+        item => state[item[0] as keyof CommonType.ListQuery] !== item[1]
       );
       init && setState(value);
     },
@@ -69,5 +69,5 @@ export const useMethods = (select: string[], setSelect: (values: string[]) => vo
     [init, queryCompare, update, updateMany, remove, removeMany, reset]
   );
 
-  return [state, methods] as [GlobalType.ListQuery, typeof methods];
+  return [state, methods] as [CommonType.ListQuery, typeof methods];
 };

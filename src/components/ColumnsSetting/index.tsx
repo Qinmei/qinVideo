@@ -5,7 +5,7 @@ import { SettingOutlined } from "@ant-design/icons";
 import { getLang } from "@/locales";
 import styles from "./index.less";
 
-import { ComponentsType, GlobalType, CategoryType } from "@/types";
+import { ComponentsType, CommonType, CategoryType } from "@/types";
 
 interface PropsType {
   source: { key: string; title: string }[];
@@ -75,7 +75,7 @@ const Content = (props: ContentProps) => {
 };
 
 export const columnsSorter = (
-  state: GlobalType.ListQuery,
+  state: CommonType.ListQuery,
   key: string,
   preset = false
 ): Pick<
@@ -101,8 +101,8 @@ export const columnsSorter = (
 };
 
 export const columnsFilter = (
-  state: GlobalType.ListQuery,
-  source: GlobalType.SelectType<string>,
+  state: CommonType.ListQuery,
+  source: CommonType.SelectType<string>,
   key: string,
   preset = false
 ): Pick<
@@ -118,7 +118,7 @@ export const columnsFilter = (
   | "filterMultiple"
   | "render"
 > => {
-  const stateFilterValue = state[key as keyof GlobalType.ListQuery];
+  const stateFilterValue = state[key as keyof CommonType.ListQuery];
   return {
     dataIndex: key,
     key,
@@ -139,7 +139,7 @@ export const columnsFilter = (
 };
 
 export const columnsFilterRequest = (
-  state: GlobalType.ListQuery,
+  state: CommonType.ListQuery,
   key: string,
   preset = false,
   type: CategoryType.CateType
@@ -157,7 +157,7 @@ export const columnsFilterRequest = (
   | "filterDropdown"
   | "render"
 > => {
-  const stateFilterValue = state[key as keyof GlobalType.ListQuery];
+  const stateFilterValue = state[key as keyof CommonType.ListQuery];
   return {
     dataIndex: key,
     key,

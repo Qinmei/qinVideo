@@ -1,12 +1,18 @@
-import { FormInstance } from "antd/lib/form";
 import { MenuProps } from "antd/es/menu";
-import { ColumnsType, ColumnType, ColumnGroupType } from "antd/lib/table";
-import { TableProps } from "antd/lib/table";
-import { TablePaginationConfig } from "antd/lib/table";
-import { SorterResult } from "antd/lib/table/interface";
-import { RadioChangeEvent } from "antd/lib/radio";
 import { CheckboxOptionType } from "antd/lib/checkbox";
 import { DatePickerProps } from "antd/lib/date-picker";
+import { FormInstance } from "antd/lib/form";
+import { RadioChangeEvent } from "antd/lib/radio";
+import {
+  ColumnGroupType,
+  ColumnsType,
+  ColumnType,
+  TablePaginationConfig,
+  TableProps,
+} from "antd/lib/table";
+import { SorterResult } from "antd/lib/table/interface";
+import { RcFile } from "antd/lib/upload";
+import { RcCustomRequestOptions } from "antd/lib/upload/interface";
 
 export type {
   FormInstance,
@@ -20,4 +26,6 @@ export type {
   RadioChangeEvent,
   CheckboxOptionType,
   DatePickerProps,
+  RcCustomRequestOptions,
+  RcFile,
 };

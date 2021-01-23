@@ -1,19 +1,26 @@
-import { getLang } from "@/locales";
-import { Col, Form, Input, Radio, Row, Switch, InputNumber, Select, Button } from "antd";
+import { Button, Col, Form, Input, InputNumber, Radio, Row, Select, Switch } from "antd";
 import React from "react";
-import { pageFormLayout } from "@/constants";
+
+import { CategorySelect, UploadImg, WrapDatePicker } from "@/components";
+import { pageFormLayout, pageTailLayout } from "@/constants";
 import { playTypeSource, statusSource, updateDaySource } from "@/constants/select";
-import { AntdType, AnimateType } from "@/types";
-import { WrapDatePicker } from "@/components/WrappAntd";
-import { CategorySelect } from "@/components";
+import { getLang } from "@/locales";
+import { AnimateType, AntdType } from "@/types";
+import { useAsyncFn } from "react-use";
 
 interface PropsType {
   data?: AnimateType.List;
+  submit: (data: AnimateType.CreateItemReq) => void;
 }
 export const BaseInfo: React.FC<PropsType> = props => {
-  const { data } = props;
+  const { data, submit } = props;
+
+  const [{ loading }, onFinish] = useAsyncFn(async (value: AnimateType.CreateItemReq) => {
+    await submit(value);
+  });
+
   return (
-    <Form {...pageFormLayout}>
+    <Form {...pageFormLayout} onFinish={onFinish}>
       <Row>
         <Col xs={24} sm={24} md={24} lg={24} xl={12}>
           <Form.Item
@@ -190,10 +197,50 @@ export const BaseInfo: React.FC<PropsType> = props => {
           >
             <Input placeholder={getLang("animate.season.name.tips")} />
           </Form.Item>
+
+          <Form.Item
+            label={getLang("animate.cover.horizontal")}
+            name="coverHorizontal"
+            initialValue={data?.coverHorizontal}
+          >
+            <Input.Search
+              enterButton={getLang("common.options.confirm")}
+              placeholder={getLang("components.upload.input.tips")}
+            />
+          </Form.Item>
+
+          <Form.Item
+            name="coverHorizontal"
+            initialValue={data?.coverHorizontal}
+            {...pageTailLayout}
+          >
+            <UploadImg type="animate" width={400} height={160} />
+          </Form.Item>
+
+          <Form.Item
+            label={getLang("animate.cover.vertical")}
+            name="coverVertical"
+            initialValue={data?.coverVertical}
+          >
+            <Input.Search
+              enterButton={getLang("common.options.confirm")}
+              placeholder={getLang("components.upload.input.tips")}
+            />
+          </Form.Item>
+
+          <Form.Item name="coverVertical" initialValue={data?.coverVertical} {...pageTailLayout}>
+            <UploadImg type="animate" width={200} height={280} />
+          </Form.Item>
         </Col>
       </Row>
       <Row justify="center" style={{ marginTop: "60px" }}>
-        <Button type="primary" size="large" style={{ minWidth: "160px" }} htmlType="submit">
+        <Button
+          type="primary"
+          size="large"
+          style={{ minWidth: "160px" }}
+          htmlType="submit"
+          loading={loading}
+        >
           {getLang("common.options.submit")}
         </Button>
       </Row>

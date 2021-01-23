@@ -2,7 +2,7 @@ import React from "react";
 import { Table } from "antd";
 import { getLang } from "@/locales";
 
-import { AntdType, GlobalType } from "@/types";
+import { AntdType, CommonType } from "@/types";
 
 interface PropsType<T> {
   loading: boolean;
@@ -11,7 +11,7 @@ interface PropsType<T> {
   page: number;
   size: number;
   columns: AntdType.ColumnsType<T>;
-  onChange: (values: Partial<GlobalType.ListQuery>) => void;
+  onChange: (values: Partial<CommonType.ListQuery>) => void;
   select: string[];
   onSelectChange: (select: string[]) => void;
   rowKey?: string;

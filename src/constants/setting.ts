@@ -22,3 +22,7 @@ export const pageFormLayout = {
     span: 18,
   },
 };
+
+export const pageTailLayout = {
+  wrapperCol: { offset: 4, span: 18 },
+};

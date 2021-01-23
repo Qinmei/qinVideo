@@ -5,6 +5,7 @@ const components = {
   "components.table.setting.reset": "重置",
   "components.table.reset.tips": "清空所有的筛选排序等条件",
   "components.table.filter.search": "请输入进行筛选",
+  "components.upload.input.tips": "请输入图片的链接url",
 };
 
 export default components;

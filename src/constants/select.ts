@@ -1,7 +1,7 @@
 import { getLang } from "@/locales";
-import { GlobalType } from "@/types";
+import { CommonType } from "@/types";
 
-export const statusSource: GlobalType.SelectType<string> = {
+export const statusSource: CommonType.SelectType<string> = {
   draft: {
     text: getLang("common.select.draft"),
     label: getLang("common.select.draft"),
@@ -22,7 +22,7 @@ export const statusSource: GlobalType.SelectType<string> = {
   },
 };
 
-export const updateSource: GlobalType.SelectType<string> = {
+export const updateSource: CommonType.SelectType<string> = {
   true: {
     text: getLang("common.select.updating"),
     badge: "processing",
@@ -35,7 +35,7 @@ export const updateSource: GlobalType.SelectType<string> = {
   },
 };
 
-export const updateDaySource: GlobalType.SelectType<string> = {
+export const updateDaySource: CommonType.SelectType<string> = {
   0: {
     text: getLang("common.day.sun"),
     label: getLang("common.day.sun"),
@@ -73,7 +73,7 @@ export const updateDaySource: GlobalType.SelectType<string> = {
   },
 };
 
-export const playTypeSource: GlobalType.SelectType<string> = {
+export const playTypeSource: CommonType.SelectType<string> = {
   mp4: {
     text: getLang("animate.play.kind.mp4"),
     label: getLang("animate.play.kind.mp4"),
