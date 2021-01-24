@@ -7,6 +7,8 @@ const common = {
   "common.error.pageNoExist": "该页面不存在，请重新确认链接的有效性",
   "common.error.errorboundry": "页面加载错误，请重新刷新网页",
 
+  "common.tips.nodata": "暂无",
+
   "common.header.docs": "查看文档",
   "common.header.theme.dark": "暗黑风格",
   "common.header.theme.light": "亮色风格",
@@ -24,6 +26,8 @@ const common = {
   "common.menu.animate.list": "动画列表",
   "common.menu.animate.category": "动画分类",
   "common.menu.animate.season": "动画专题",
+  "common.menu.eposide": "剧集",
+  "common.menu.eposide.list": "剧集列表",
   "common.menu.comic": "漫画",
   "common.menu.comic.create": "新建漫画",
   "common.menu.comic.list": "漫画列表",
@@ -61,6 +65,7 @@ const common = {
   "common.options": "操作",
   "common.options.add": "新增",
   "common.options.edit": "编辑",
+  "common.options.quickedit": "快速编辑",
   "common.options.edit.many": "批量编辑",
   "common.options.edit.all": "全部编辑",
   "common.options.delete": "删除",
@@ -91,7 +96,8 @@ const common = {
   "common.day.fri": "周五",
   "common.day.sat": "周六",
 
-  "common.add.baseinfo": "基本信息",
+  "common.tabs.baseinfo": "基本信息",
+  "common.tabs.eposide": "剧集信息",
 
   "common.upload.file.size": "上传文件或图片需要小于{size}M",
 };

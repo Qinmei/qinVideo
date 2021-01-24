@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Space } from "antd";
+import { Space, Tag, Tooltip } from "antd";
 import moment from "moment";
 import { getLang } from "@/locales";
 import { useColumnsSetting } from "@/hooks";
@@ -15,13 +15,30 @@ import { timeFormatAll } from "@/constants";
 import { statusSource, updateSource, updateDaySource } from "@/constants/select";
 import { EditForm } from "./form";
 
-import { AnimateType, CommonType, ComponentsType } from "@/types";
+import { EposideType, CommonType, ComponentsType } from "@/types";
+
+const TagShow = (props: { data: EposideType.ArrValueType[] }) => {
+  const { data } = props;
+  return (
+    <>
+      {data.length
+        ? data.map(item => (
+            <div style={{ lineHeight: "30px" }}>
+              <Tooltip placement="top" title={item.value}>
+                <Tag color="#108ee9">{item.name}</Tag>
+              </Tooltip>
+            </div>
+          ))
+        : getLang("common.tips.nodata")}
+    </>
+  );
+};
 
 export const useColumns = (
   state: CommonType.ListQuery,
-  methods: CommonType.ListMethods<AnimateType.UpdateItemReq>
+  methods: CommonType.ListMethods<EposideType.UpdateItemReq>
 ) => {
-  const columnsOrigin: ComponentsType.ColumnsType<AnimateType.List> = useMemo(
+  const columnsOrigin: ComponentsType.ColumnsType<EposideType.EposideItem> = useMemo(
     () => [
       {
         title: getLang("animate.title"),
@@ -115,7 +132,7 @@ export const useColumns = (
         width: 160,
         render: (text, record) => (
           <Space>
-            <QuickEdit<AnimateType.List, AnimateType.UpdateItemReq>
+            <QuickEdit<EposideType.EposideItem, EposideType.UpdateItemReq>
               data={record}
               submit={methods.update}
               init={methods.init}
@@ -134,7 +151,7 @@ export const useColumns = (
     [state, methods]
   );
 
-  const { columns, SettingBtn } = useColumnsSetting<AnimateType.List>(
+  const { columns, SettingBtn } = useColumnsSetting<EposideType.EposideItem>(
     columnsOrigin,
     "animateColumns"
   );

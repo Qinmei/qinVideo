@@ -80,3 +80,5 @@ export type FileListType = {
   path: string;
   transferEncoding: string;
 };
+
+export type CreateGlobalStateType<T> = () => [T, (state: T) => void];

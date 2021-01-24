@@ -75,6 +75,8 @@ const animate = {
   "animate.title.search": "搜索视频标题",
   "animate.season.name": "专题名",
   "animate.season.name.tips": "请输入专题名",
+  "animate.create.success": "视频创建成功",
+  "animate.edit.success": "视频修改成功",
 };
 
 export default animate;

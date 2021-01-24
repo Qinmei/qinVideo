@@ -9,3 +9,4 @@ export * as AnimateType from "./animate";
 export * as ComponentsType from "./components";
 export * as CategoryType from "./category";
 export * as CommonType from "./common";
+export * as EposideType from "./eposide";

@@ -1,4 +1,5 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useState, useEffect } from "react";
+import { useAsyncFn } from "react-use";
 import { useModel } from "@/action";
 import { ListLayout } from "@/layouts";
 import { ListOptions, ListTable } from "@/components";
@@ -7,44 +8,34 @@ import { useColumns } from "./useColumns";
 import { EditForm } from "./form";
 import { useMethods } from "./useMethods";
 
-import { AnimateType, CommonType } from "@/types";
+import { EposideType } from "@/types";
 
-import { useListLoading, useSelect } from "../Common/GlobalState";
-
-const initialState: CommonType.ListQuery = {
-  page: 1,
-  size: 10,
-  title: undefined,
-  sortBy: undefined,
-  sortOrder: undefined,
-  area: undefined,
-  kind: undefined,
-  year: undefined,
-  tag: undefined,
-  isUpdate: undefined,
-  updateDay: undefined,
-  status: undefined,
-};
-
-const List: FC = () => {
-  const [state, methods] = useMethods(initialState);
+interface PropsType {
+  target: string;
+  onModel: "Animate" | "Comic";
+}
+export const List: FC<PropsType> = props => {
+  const { target, onModel } = props;
+  const [select, setSelect] = useState<string[]>([]);
+  const [state, methods] = useMethods(select, setSelect);
   const { page, size, title } = state;
-  const { init } = methods;
 
-  const [loading] = useListLoading();
-  const [select, setSelect] = useSelect();
+  const { list, total } = useModel("eposide");
 
-  const { list, total } = useModel("animate");
+  const [{ loading }, initData] = useAsyncFn(async () => {
+    await methods.init();
+  }, [methods.init]);
+
   const { columns, SettingBtn } = useColumns(state, methods);
 
   useEffect(() => {
-    init();
-  }, [init]);
+    initData();
+  }, [initData]);
 
   return (
     <ListLayout
       options={
-        <ListOptions<Omit<AnimateType.UpdateListReq, "ids">>
+        <ListOptions<Omit<EposideType.UpdateListReq, "ids">>
           selected={select}
           submit={methods.updateMany}
           newPath="/home/animate/add"
@@ -59,7 +50,7 @@ const List: FC = () => {
       setting={SettingBtn}
       reset={methods.reset}
     >
-      <ListTable<AnimateType.List>
+      <ListTable<EposideType.EposideItem>
         loading={loading}
         columns={columns}
         page={page}

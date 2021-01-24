@@ -2,7 +2,7 @@ import { Urls, Methods } from "@/constants";
 import { Model } from "@/action/model";
 
 import { InitialState, ListRes, List, CategoryTypeQuery } from "@/types/category";
-import { ListQuery } from "@/types/global";
+import { ListQuery } from "@/types/common";
 import { RequestRes } from "@/types/request";
 
 export class Category extends Model<InitialState> {

@@ -4,23 +4,13 @@ import { useSavedState } from "@/hooks";
 
 import { AnimateType, CommonType } from "@/types";
 
-const initState: CommonType.ListQuery = {
-  page: 1,
-  size: 10,
-  title: undefined,
-  sortBy: undefined,
-  sortOrder: undefined,
-  area: undefined,
-  kind: undefined,
-  year: undefined,
-  tag: undefined,
-  isUpdate: undefined,
-  updateDay: undefined,
-  status: undefined,
-};
+import { useListLoading, useSelect } from "../Common/GlobalState";
 
-export const useMethods = (select: string[], setSelect: (values: string[]) => void) => {
-  const [state, setState] = useSavedState(initState);
+export const useMethods = (initialState: CommonType.ListQuery) => {
+  const [state, setState] = useSavedState(initialState);
+
+  const [, setLoading] = useListLoading();
+  const [select, setSelect] = useSelect();
 
   const actions = useAction("animate");
 
@@ -35,11 +25,13 @@ export const useMethods = (select: string[], setSelect: (values: string[]) => vo
   );
 
   const init = useCallback(async () => {
+    setLoading(true);
     const res = await actions.getAnimateList(state);
+    setLoading(false);
     res && setSelect([]);
-  }, [actions, state, setSelect]);
+  }, [actions, state, setSelect, setLoading]);
 
-  const reset = useCallback(() => queryCompare(initState), [queryCompare]);
+  const reset = useCallback(() => queryCompare(initialState), [queryCompare, initialState]);
 
   const remove = useCallback(async (id: string) => await actions.deleteAnimateItem({ id }), [
     actions,

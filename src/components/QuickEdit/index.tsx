@@ -22,7 +22,7 @@ export const QuickEdit = <T extends { id: string }, K>(props: PropsType<T, K>) =
   return (
     <>
       <FormModal
-        title={getLang("common.options.edit")}
+        title={getLang("common.options.quickedit")}
         content={methods => (
           <Button type="link" onClick={methods.show}>
             {getLang("common.options.edit")}

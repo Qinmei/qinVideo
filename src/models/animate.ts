@@ -8,7 +8,7 @@ import {
   UpdateItemReq,
   CreateItemReq,
 } from "@/types/animate";
-import { ListQuery, IdQuery, IdsQuery, OptionReturn } from "@/types/global";
+import { ListQuery, IdQuery, IdsQuery, OptionReturn } from "@/types/common";
 import { RequestRes } from "@/types/request";
 
 export class Animate extends Model<InitialState> {

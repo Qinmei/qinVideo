@@ -1,4 +1,4 @@
-import { Status } from "./global";
+import { Status } from "./common";
 import { ListContent } from "./request";
 
 export type CategoryItem = {

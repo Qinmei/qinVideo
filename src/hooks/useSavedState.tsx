@@ -4,13 +4,17 @@ import { useSetState } from "react-use";
 
 import { CommonType } from "@/types";
 
-export const useSavedState = <T extends CommonType.ListQuery>(
-  initialState: T
+export const useSavedState = <T extends CommonType.ListQuery, K extends string>(
+  initialState: T,
+  namespace?: K
 ): [T, (patch: Partial<T> | ((prevState: T) => Partial<T>)) => void] => {
   const history = useHistory();
-  const { state: historyState = {} as T, pathname } = useLocation<T>();
+  const { state: historyState = {} as K extends string ? Record<K, T> : T, pathname } = useLocation<
+    K extends string ? Record<K, T> : T
+  >();
 
-  const [state, setState] = useSetState<T>({ ...initialState, ...historyState });
+  const urlState = namespace ? historyState[namespace] : historyState;
+  const [state, setState] = useSetState<T>({ ...initialState, ...urlState });
 
   const replace = useCallback(() => {
     history.replace({

@@ -19,7 +19,7 @@ const Add = () => {
 
   return (
     <Tabs>
-      <Tabs.TabPane tab={getLang("common.add.baseinfo")}>
+      <Tabs.TabPane tab={getLang("common.tabs.baseinfo")}>
         <BaseInfo submit={submit} />
       </Tabs.TabPane>
     </Tabs>

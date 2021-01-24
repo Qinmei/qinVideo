@@ -9,7 +9,7 @@ import { AnimateType, AntdType } from "@/types";
 import { useAsyncFn } from "react-use";
 
 interface PropsType {
-  data?: AnimateType.List;
+  data?: AnimateType.ItemRes;
   submit: (data: AnimateType.CreateItemReq) => void;
 }
 export const BaseInfo: React.FC<PropsType> = props => {
@@ -64,6 +64,7 @@ export const BaseInfo: React.FC<PropsType> = props => {
             label={getLang("animate.isUpdate")}
             name="isUpdate"
             initialValue={data?.isUpdate ?? false}
+            valuePropName="checked"
           >
             <Switch />
           </Form.Item>
@@ -150,6 +151,7 @@ export const BaseInfo: React.FC<PropsType> = props => {
             label={getLang("animate.noPrefix")}
             name="noPrefix"
             initialValue={data?.noPrefix ?? false}
+            valuePropName="checked"
           >
             <Switch />
           </Form.Item>
@@ -198,11 +200,7 @@ export const BaseInfo: React.FC<PropsType> = props => {
             <Input placeholder={getLang("animate.season.name.tips")} />
           </Form.Item>
 
-          <Form.Item
-            label={getLang("animate.cover.horizontal")}
-            name="coverHorizontal"
-            initialValue={data?.coverHorizontal}
-          >
+          <Form.Item label={getLang("animate.cover.horizontal")} name="coverHorizontal">
             <Input.Search
               enterButton={getLang("common.options.confirm")}
               placeholder={getLang("components.upload.input.tips")}
@@ -217,11 +215,7 @@ export const BaseInfo: React.FC<PropsType> = props => {
             <UploadImg type="animate" width={400} height={160} />
           </Form.Item>
 
-          <Form.Item
-            label={getLang("animate.cover.vertical")}
-            name="coverVertical"
-            initialValue={data?.coverVertical}
-          >
+          <Form.Item label={getLang("animate.cover.vertical")} name="coverVertical">
             <Input.Search
               enterButton={getLang("common.options.confirm")}
               placeholder={getLang("components.upload.input.tips")}
