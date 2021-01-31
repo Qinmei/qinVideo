@@ -7,7 +7,7 @@ import { AnimateType, CommonType } from "@/types";
 import { useListLoading, useSelect } from "../Common/GlobalState";
 
 export const useMethods = (initialState: CommonType.ListQuery) => {
-  const [state, setState] = useSavedState(initialState);
+  const [state, setState] = useSavedState(initialState, "animate");
 
   const [, setLoading] = useListLoading();
   const [select, setSelect] = useSelect();
@@ -19,6 +19,7 @@ export const useMethods = (initialState: CommonType.ListQuery) => {
       const init = Object.entries(value).some(
         item => state[item[0] as keyof CommonType.ListQuery] !== item[1]
       );
+      console.log("setState", value);
       init && setState(value);
     },
     [setState, state]
@@ -30,17 +31,6 @@ export const useMethods = (initialState: CommonType.ListQuery) => {
     setLoading(false);
     res && setSelect([]);
   }, [actions, state, setSelect, setLoading]);
-
-  const reset = useCallback(() => queryCompare(initialState), [queryCompare, initialState]);
-
-  const remove = useCallback(async (id: string) => await actions.deleteAnimateItem({ id }), [
-    actions,
-  ]);
-
-  const removeMany = useCallback(async () => {
-    const res = await actions.deleteAnimateList({ ids: select });
-    res && init();
-  }, [actions, select, init]);
 
   const update = useCallback(
     async (values: AnimateType.UpdateItemReq) => await actions.updateAnimateItem({ ...values }),
@@ -55,6 +45,17 @@ export const useMethods = (initialState: CommonType.ListQuery) => {
     },
     [actions, select, init]
   );
+
+  const remove = useCallback(async (id: string) => await actions.deleteAnimateItem({ id }), [
+    actions,
+  ]);
+
+  const removeMany = useCallback(async () => {
+    const res = await actions.deleteAnimateList({ ids: select });
+    res && init();
+  }, [actions, select, init]);
+
+  const reset = useCallback(() => queryCompare(initialState), [queryCompare, initialState]);
 
   const methods = useMemo(
     () => ({ init, set: queryCompare, update, updateMany, remove, removeMany, reset }),

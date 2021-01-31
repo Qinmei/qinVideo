@@ -6,13 +6,23 @@ import { useUpload } from "@/hooks";
 import { getLang } from "@/locales";
 import { AntdType } from "@/types";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import { ImageViewer } from "@/components";
+import { UploadImageViewer } from "@/components";
 
 import styles from "./index.less";
 
 interface ImgPropsType {
   accept?: string;
-  type?: "animate" | "comic" | "post" | "blog" | "avatar" | "background" | "config" | "others";
+  type?:
+    | "animate"
+    | "comic"
+    | "post"
+    | "eposide"
+    | "blog"
+    | "comment"
+    | "avatar"
+    | "background"
+    | "config"
+    | "others";
   value?: string;
   onChange?: (value: string) => void;
   width?: number;
@@ -61,7 +71,7 @@ export const UploadImg: React.FC<ImgPropsType> = props => {
           style={{ width, height }}
           onClick={e => e.stopPropagation()}
         >
-          <ImageViewer source={value} remove={() => submit("")} />
+          <UploadImageViewer source={value} remove={() => submit("")} />
         </div>
       )}
 

@@ -12,3 +12,4 @@ export * from "./Upload";
 export * from "./WrappAntd";
 export * from "./Upload";
 export * from "./ImageViewer";
+export * from "./FormList";

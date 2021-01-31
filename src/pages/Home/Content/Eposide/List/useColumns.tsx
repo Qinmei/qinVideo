@@ -1,21 +1,15 @@
+import { Space, Switch, Tag, Tooltip } from "antd";
+import moment from "moment";
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Space, Tag, Tooltip } from "antd";
-import moment from "moment";
-import { getLang } from "@/locales";
-import { useColumnsSetting } from "@/hooks";
-import {
-  DeleteBtn,
-  columnsSorter,
-  columnsFilter,
-  columnsFilterRequest,
-  QuickEdit,
-} from "@/components";
-import { timeFormatAll } from "@/constants";
-import { statusSource, updateSource, updateDaySource } from "@/constants/select";
-import { EditForm } from "./form";
 
-import { EposideType, CommonType, ComponentsType } from "@/types";
+import { columnsSorter, DeleteBtn, QuickEdit, ListImageViewer } from "@/components";
+import { timeFormatAll } from "@/constants";
+import { useColumnsSetting } from "@/hooks";
+import { getLang } from "@/locales";
+import { CommonType, ComponentsType, EposideType } from "@/types";
+
+import { EditForm } from "../Common/QuickEditForm";
 
 const TagShow = (props: { data: EposideType.ArrValueType[] }) => {
   const { data } = props;
@@ -23,9 +17,9 @@ const TagShow = (props: { data: EposideType.ArrValueType[] }) => {
     <>
       {data.length
         ? data.map(item => (
-            <div style={{ lineHeight: "30px" }}>
+            <div style={{ lineHeight: "30px" }} key={item._id}>
               <Tooltip placement="top" title={item.value}>
-                <Tag color="#108ee9">{item.name}</Tag>
+                <Tag>{item.name}</Tag>
               </Tooltip>
             </div>
           ))
@@ -41,81 +35,62 @@ export const useColumns = (
   const columnsOrigin: ComponentsType.ColumnsType<EposideType.EposideItem> = useMemo(
     () => [
       {
-        title: getLang("animate.title"),
+        title: getLang("eposide.title"),
         ...columnsSorter(state, "title", true),
-        width: 300,
         align: "left",
-        render: (text, record) => <Link to={`/home/animate/edit/${record.id}`}>{text}</Link>,
+        width: 250,
       },
       {
-        title: getLang("animate.slug"),
-        ...columnsSorter(state, "slug", true),
-        width: 140,
+        title: getLang("eposide.target"),
+        dataIndex: "target",
+        key: "target",
+        preset: true,
+        width: 200,
+        render: val => <Link to={`/home/animate/edit/${val.id}`}>{val.title}</Link>,
       },
       {
-        title: getLang("animate.author"),
-        ...columnsSorter(state, "author", true),
-        dataIndex: ["author", "name"],
+        title: getLang("eposide.sort"),
+        ...columnsSorter(state, "sort", true),
       },
       {
-        title: getLang("animate.update"),
-        ...columnsFilter(state, updateSource, "isUpdate", true),
+        title: getLang("eposide.cover"),
+        dataIndex: "cover",
+        key: "cover",
+        preset: true,
+        align: "center",
+        render: val => (val ? <ListImageViewer source={val} /> : getLang("common.tips.nodata")),
       },
       {
-        title: getLang("animate.updateDay"),
-        ...columnsFilter(state, updateDaySource, "updateDay", true),
+        title: getLang("eposide.link"),
+        dataIndex: "link",
+        key: "link",
+        preset: true,
+        align: "center",
+        render: val => <TagShow data={val} />,
       },
       {
-        title: getLang("animate.eposide"),
-        ...columnsSorter(state, "countEposide", true),
+        title: getLang("eposide.subtitle"),
+        dataIndex: "subtitle",
+        key: "subtitle",
+        preset: true,
+        align: "center",
+        render: val => <TagShow data={val} />,
       },
       {
-        title: getLang("animate.comment"),
-        ...columnsSorter(state, "countComment", true),
+        title: getLang("eposide.bilibili"),
+        dataIndex: "bilibili",
+        key: "bilibili",
+        preset: true,
+        align: "center",
+        render: val => val || getLang("common.tips.nodata"),
       },
       {
-        title: getLang("animate.danmu"),
-        ...columnsSorter(state, "countDanmu"),
-      },
-      {
-        title: getLang("animate.play"),
-        ...columnsSorter(state, "countPlay"),
-      },
-      {
-        title: getLang("rate.rateStar"),
-        ...columnsSorter(state, "countStar"),
-      },
-      {
-        title: getLang("rate.rateCount"),
-        ...columnsSorter(state, "countRate"),
-      },
-      {
-        title: getLang("animate.like"),
-        ...columnsSorter(state, "countLike"),
-      },
-      {
-        title: getLang("animate.level"),
-        ...columnsSorter(state, "level"),
-      },
-      {
-        title: getLang("animate.category.area"),
-        ...columnsFilterRequest(state, "area", false, "aarea"),
-      },
-      {
-        title: getLang("animate.category.year"),
-        ...columnsFilterRequest(state, "year", false, "ayear"),
-      },
-      {
-        title: getLang("animate.category.kind"),
-        ...columnsFilterRequest(state, "kind", false, "akind"),
-      },
-      {
-        title: getLang("animate.category.tag"),
-        ...columnsFilterRequest(state, "tag", false, "atag"),
-      },
-      {
-        title: getLang("animate.status"),
-        ...columnsFilter(state, statusSource, "status", true),
+        title: getLang("eposide.noSetPrefix"),
+        dataIndex: "noSetPrefix",
+        key: "noSetPrefix",
+        preset: true,
+        align: "center",
+        render: val => <Switch disabled={true} checked={val} />,
       },
       {
         title: getLang("animate.updatedTime"),
@@ -153,7 +128,7 @@ export const useColumns = (
 
   const { columns, SettingBtn } = useColumnsSetting<EposideType.EposideItem>(
     columnsOrigin,
-    "animateColumns"
+    "eposideColumns"
   );
   return { columns, SettingBtn };
 };

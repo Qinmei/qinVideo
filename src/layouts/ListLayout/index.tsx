@@ -27,7 +27,7 @@ export const ListLayout: FC<PropsType> = props => {
               allowClear
               enterButton
               placeholder={placeholder}
-              value={value}
+              defaultValue={value}
               onSearch={onChange}
               className={styles.search}
             />

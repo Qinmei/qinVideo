@@ -29,12 +29,7 @@ export class Eposide extends Model<InitialState> {
 
   methods = {
     getEposideList: (query: ListQuery) =>
-      super.init<ListRes>(
-        Methods.GET,
-        Urls.queryEposide,
-        { query },
-        !query.target ? this.initDispatch.eposide : undefined
-      ),
+      super.init<ListRes>(Methods.GET, Urls.queryEposide, { query }, this.initDispatch.eposide),
     updateEposideList: (data: UpdateListReq) =>
       super.init<OptionReturn>(Methods.PUT, Urls.queryEposide, { data }),
     deleteEposideList: (data: IdsQuery) =>

@@ -4,7 +4,7 @@ import { ListLayout } from "@/layouts";
 import { ListOptions, ListTable } from "@/components";
 import { getLang } from "@/locales";
 import { useColumns } from "./useColumns";
-import { EditForm } from "./form";
+import { QuickEditForm } from "../Common/QuickEditForm";
 import { useMethods } from "./useMethods";
 
 import { AnimateType, CommonType } from "@/types";
@@ -40,17 +40,18 @@ const List: FC = () => {
   useEffect(() => {
     init();
   }, [init]);
+  console.log(window.history);
 
   return (
     <ListLayout
       options={
         <ListOptions<Omit<AnimateType.UpdateListReq, "ids">>
           selected={select}
-          submit={methods.updateMany}
+          onSubmit={methods.updateMany}
           newPath="/home/animate/add"
-          remove={methods.removeMany}
+          onRemove={methods.removeMany}
         >
-          <EditForm />
+          <QuickEditForm />
         </ListOptions>
       }
       placeholder={getLang("animate.title.search")}

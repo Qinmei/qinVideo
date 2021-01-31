@@ -2,6 +2,7 @@ import React, { useRef, forwardRef, useImperativeHandle, useCallback } from "rea
 import { Modal } from "antd";
 import { useModalState } from "@/hooks";
 import { modalFormLayout } from "@/constants";
+import styles from "./index.less";
 
 import { AntdType, HooksType } from "@/types";
 
@@ -57,8 +58,9 @@ export const FormModal = forwardRef<FormModalMethods, PropsType<unknown>>((props
         onCancel={methods.cancel}
         onOk={confirm}
         destroyOnClose
+        className={styles.modal}
       >
-        {formNode}
+        <div className={styles.main}>{formNode}</div>
       </Modal>
     </>
   );

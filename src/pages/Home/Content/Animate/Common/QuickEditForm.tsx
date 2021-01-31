@@ -1,14 +1,13 @@
 import React, { forwardRef } from "react";
 import { Form, Input, Select } from "antd";
 import { CategorySelect } from "@/components";
-import { AnimateType } from "@/types";
+import { AnimateType, AntdType } from "@/types";
 import { getLang } from "@/locales";
-import { FormInstance } from "antd/lib/form";
 
 interface PropsType {
   data?: AnimateType.List;
 }
-export const EditForm = forwardRef<FormInstance<unknown>, PropsType>((props, ref) => {
+export const QuickEditForm = forwardRef<AntdType.FormInstance<unknown>, PropsType>((props, ref) => {
   const { data, ...restProps } = props;
   return (
     <Form ref={ref} {...restProps}>

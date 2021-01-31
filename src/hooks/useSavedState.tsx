@@ -17,13 +17,17 @@ export const useSavedState = <T extends CommonType.ListQuery, K extends string>(
   const [state, setState] = useSetState<T>({ ...initialState, ...urlState });
 
   const replace = useCallback(() => {
+    const newState = namespace ? { [namespace]: state } : state;
+    console.log(state, newState, window.history);
     history.replace({
       pathname,
-      state,
+      state: newState,
     });
-  }, [history, pathname, state]);
+  }, [history, pathname, state, namespace]);
 
-  useEffect(replace, [replace]);
+  useEffect(() => {
+    replace();
+  }, [replace]);
 
   return [state, setState];
 };

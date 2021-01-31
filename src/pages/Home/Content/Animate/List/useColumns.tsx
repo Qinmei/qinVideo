@@ -13,7 +13,7 @@ import {
 } from "@/components";
 import { timeFormatAll } from "@/constants";
 import { statusSource, updateSource, updateDaySource } from "@/constants/select";
-import { EditForm } from "./form";
+import { QuickEditForm } from "../Common/QuickEditForm";
 
 import { AnimateType, CommonType, ComponentsType } from "@/types";
 
@@ -120,7 +120,7 @@ export const useColumns = (
               submit={methods.update}
               init={methods.init}
             >
-              <EditForm />
+              <QuickEditForm />
             </QuickEdit>
             <DeleteBtn
               title={record.title}

@@ -8,6 +8,8 @@ const common = {
   "common.error.errorboundry": "页面加载错误，请重新刷新网页",
 
   "common.tips.nodata": "暂无",
+  "common.tips.true": "是",
+  "common.tips.false": "否",
 
   "common.header.docs": "查看文档",
   "common.header.theme.dark": "暗黑风格",

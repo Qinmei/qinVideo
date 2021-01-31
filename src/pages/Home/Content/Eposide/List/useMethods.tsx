@@ -3,24 +3,16 @@ import { useAction } from "@/action";
 import { useSavedState } from "@/hooks";
 
 import { EposideType, CommonType } from "@/types";
+import { useSelect, useListLoading } from "../Common/GlobalState";
 
-const initState: CommonType.ListQuery = {
-  page: 1,
-  size: 10,
-  title: undefined,
-  sortBy: undefined,
-  sortOrder: undefined,
-  area: undefined,
-  kind: undefined,
-  year: undefined,
-  tag: undefined,
-  isUpdate: undefined,
-  updateDay: undefined,
-  status: undefined,
-};
-
-export const useMethods = (select: string[], setSelect: (values: string[]) => void) => {
-  const [state, setState] = useSavedState(initState);
+export const useMethods = (
+  initialState: CommonType.ListQuery,
+  target: string,
+  onModel: "Animate" | "Comic"
+) => {
+  const [state, setState] = useSavedState(initialState, "eposide");
+  const [select, setSelect] = useSelect();
+  const [, setLoading] = useListLoading();
 
   const actions = useAction("eposide");
 
@@ -29,26 +21,27 @@ export const useMethods = (select: string[], setSelect: (values: string[]) => vo
       const init = Object.entries(value).some(
         item => state[item[0] as keyof CommonType.ListQuery] !== item[1]
       );
+      console.log("setState", value);
       init && setState(value);
     },
     [setState, state]
   );
 
   const init = useCallback(async () => {
-    const res = await actions.getEposideList(state);
+    setLoading(true);
+    const res = await actions.getEposideList({ ...state, target });
+    setLoading(false);
     res && setSelect([]);
-  }, [actions, state, setSelect]);
+  }, [actions, state, setSelect, target, setLoading]);
 
-  const reset = useCallback(() => queryCompare(initState), [queryCompare]);
-
-  const remove = useCallback(async (id: string) => await actions.deleteEposideItem({ id }), [
-    actions,
-  ]);
-
-  const removeMany = useCallback(async () => {
-    const res = await actions.deleteEposideList({ ids: select });
-    res && init();
-  }, [actions, select, init]);
+  const create = useCallback(
+    async (values: Omit<EposideType.EposideItem, "id">) => {
+      const res = await actions.createEposideItem({ ...values, target, onModel });
+      res && init();
+      return !!res;
+    },
+    [actions, init, target, onModel]
+  );
 
   const update = useCallback(
     async (values: EposideType.UpdateItemReq) => await actions.updateEposideItem({ ...values }),
@@ -64,9 +57,20 @@ export const useMethods = (select: string[], setSelect: (values: string[]) => vo
     [actions, select, init]
   );
 
+  const remove = useCallback(async (id: string) => await actions.deleteEposideItem({ id }), [
+    actions,
+  ]);
+
+  const removeMany = useCallback(async () => {
+    const res = await actions.deleteEposideList({ ids: select });
+    res && init();
+  }, [actions, select, init]);
+
+  const reset = useCallback(() => queryCompare(initialState), [queryCompare, initialState]);
+
   const methods = useMemo(
-    () => ({ init, set: queryCompare, update, updateMany, remove, removeMany, reset }),
-    [init, queryCompare, update, updateMany, remove, removeMany, reset]
+    () => ({ init, set: queryCompare, create, update, updateMany, remove, removeMany, reset }),
+    [init, queryCompare, create, update, updateMany, remove, removeMany, reset]
   );
 
   return [state, methods] as [CommonType.ListQuery, typeof methods];

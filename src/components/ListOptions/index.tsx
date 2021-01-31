@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Button, Space, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
@@ -10,13 +10,15 @@ import { HooksType } from "@/types";
 
 interface PropsType<T> {
   children: React.ReactElement;
-  submit: (values: T) => Promise<boolean> | boolean;
-  remove: (type: "all" | "many") => Promise<unknown>;
-  newPath: string;
+  onSubmit: (values: T) => Promise<boolean> | boolean;
+  onAdd?: (values: T) => Promise<boolean>;
+  onRemove: (type: "all" | "many") => Promise<unknown>;
+  newPath?: string;
   selected: string[];
 }
 export const ListOptions = <T,>(props: PropsType<T>) => {
-  const { children, submit, remove, selected, newPath } = props;
+  const { children, onSubmit, onRemove, onAdd, selected, newPath } = props;
+  const [title, setTitle] = useState<"add" | "many" | "all">("many");
 
   const ref = useRef<FormModalMethods>(null);
 
@@ -27,10 +29,22 @@ export const ListOptions = <T,>(props: PropsType<T>) => {
       if (newPath) {
         history.push(newPath);
       } else {
+        setTitle("add");
         methods.show();
       }
     },
     [newPath, history]
+  );
+
+  const submitCall = useCallback(
+    (values: T) => {
+      if (title === "add") {
+        return (onAdd && onAdd(values)) as Promise<boolean>;
+      } else {
+        return onSubmit(values);
+      }
+    },
+    [onSubmit, title, onAdd]
   );
 
   const removeCall = useCallback(
@@ -38,17 +52,23 @@ export const ListOptions = <T,>(props: PropsType<T>) => {
       Modal.confirm({
         title: getLang(`common.options.delete.${type}.title` as LanguageKeys),
         content: getLang(`common.options.delete.${type}.tips` as LanguageKeys),
-        onOk: () => remove(type),
+        onOk: () => onRemove(type),
       });
     },
-    [remove]
+    [onRemove]
   );
+
+  const editCall = useCallback((methods: HooksType.ModalStateMethods) => {
+    setTitle("many");
+    methods.show();
+  }, []);
 
   const moreCall = useCallback(
     (type: string, methods: HooksType.ModalStateMethods) => {
       if (type === "delete") {
         removeCall("all");
       } else {
+        setTitle("all");
         methods.show();
       }
     },
@@ -57,8 +77,10 @@ export const ListOptions = <T,>(props: PropsType<T>) => {
 
   return (
     <FormModal<T>
-      submit={submit}
-      title={getLang("common.options")}
+      submit={submitCall}
+      title={getLang(
+        title === "add" ? "common.options.add" : (`common.options.edit.${title}` as LanguageKeys)
+      )}
       content={methods => (
         <Space size="middle">
           <Button type="primary" icon={<PlusOutlined />} onClick={() => goToNew(methods)}>
@@ -66,7 +88,9 @@ export const ListOptions = <T,>(props: PropsType<T>) => {
           </Button>
           {!!selected.length && (
             <>
-              <Button onClick={methods.show}>{getLang("common.options.edit.many")}</Button>
+              <Button onClick={() => editCall(methods)}>
+                {getLang("common.options.edit.many")}
+              </Button>
               <Button danger onClick={() => removeCall("many")}>
                 {getLang("common.options.delete.many")}
               </Button>

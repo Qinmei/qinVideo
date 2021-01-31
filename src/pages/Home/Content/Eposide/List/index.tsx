@@ -1,50 +1,58 @@
-import React, { FC, useState, useEffect } from "react";
-import { useAsyncFn } from "react-use";
+import React, { FC, useEffect } from "react";
+
 import { useModel } from "@/action";
-import { ListLayout } from "@/layouts";
 import { ListOptions, ListTable } from "@/components";
+import { ListLayout } from "@/layouts";
 import { getLang } from "@/locales";
+import { CommonType, EposideType } from "@/types";
+
+import { useSelect, useListLoading } from "../Common/GlobalState";
+import { EditForm } from "../Common/QuickEditForm";
 import { useColumns } from "./useColumns";
-import { EditForm } from "./form";
 import { useMethods } from "./useMethods";
 
-import { EposideType } from "@/types";
+const initState: CommonType.ListQuery = {
+  page: 1,
+  size: 10,
+  title: undefined,
+  sortBy: undefined,
+  sortOrder: undefined,
+};
 
 interface PropsType {
   target: string;
   onModel: "Animate" | "Comic";
 }
 export const List: FC<PropsType> = props => {
-  const { target, onModel } = props;
-  const [select, setSelect] = useState<string[]>([]);
-  const [state, methods] = useMethods(select, setSelect);
+  const { target = "5e8162ba67e9bf6809814c66", onModel = "Animate" } = props;
+  const [state, methods] = useMethods(initState, target, onModel);
+  const [select, setSelect] = useSelect();
+  const [loading] = useListLoading();
+
   const { page, size, title } = state;
+  const { init } = methods;
 
   const { list, total } = useModel("eposide");
-
-  const [{ loading }, initData] = useAsyncFn(async () => {
-    await methods.init();
-  }, [methods.init]);
 
   const { columns, SettingBtn } = useColumns(state, methods);
 
   useEffect(() => {
-    initData();
-  }, [initData]);
+    init();
+  }, [init]);
 
   return (
     <ListLayout
       options={
-        <ListOptions<Omit<EposideType.UpdateListReq, "ids">>
+        <ListOptions<Omit<EposideType.EposideItem, "id">>
           selected={select}
-          submit={methods.updateMany}
-          newPath="/home/animate/add"
-          remove={methods.removeMany}
+          onSubmit={methods.updateMany}
+          onRemove={methods.removeMany}
+          onAdd={methods.create}
         >
           <EditForm />
         </ListOptions>
       }
-      placeholder={getLang("animate.title.search")}
+      placeholder={getLang("eposide.title.search")}
       value={title}
       onChange={title => methods.set({ title })}
       setting={SettingBtn}

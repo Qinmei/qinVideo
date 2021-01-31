@@ -22,9 +22,7 @@ export type InitialState = {
 
 export type ListRes = ListContent<EposideItem>;
 
-export interface CreateItemReq extends Partial<EposideItem> {
-  title: string;
-  sort: number;
+export interface CreateItemReq extends Omit<EposideItem, "id"> {
   target: string;
   onModel: "Animate" | "Comic";
 }
