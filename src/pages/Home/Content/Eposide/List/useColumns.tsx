@@ -114,11 +114,7 @@ export const useColumns = (
             >
               <EditForm />
             </QuickEdit>
-            <DeleteBtn
-              title={record.title}
-              initCall={methods.init}
-              deleteCall={() => methods.remove(text)}
-            />
+            <DeleteBtn title={record.title} onDelete={() => methods.remove(text)} />
           </Space>
         ),
       },

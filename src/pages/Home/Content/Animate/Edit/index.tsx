@@ -15,7 +15,7 @@ export const Edit = () => {
   const actions = useAction("animate");
   const { id } = useParams<{ id: string }>();
 
-  const [, submit] = useAsyncFn(async (values: AnimateType.CreateItemReq) => {
+  const [, submit] = useAsyncFn(async (values: AnimateType.FormValues) => {
     const res = await actions.updateAnimateItem({ id, ...values });
     message.success(getLang("animate.edit.success"));
     history.goBack();
@@ -30,7 +30,14 @@ export const Edit = () => {
   return (
     <Tabs>
       <Tabs.TabPane tab={getLang("common.tabs.baseinfo")} key="baseinfo">
-        {info?.value ? <BaseInfo submit={submit} data={info?.value} /> : <Skeleton active />}
+        {info?.value ? (
+          <BaseInfo
+            submit={submit}
+            initialValues={(info?.value as unknown) as AnimateType.FormValues}
+          />
+        ) : (
+          <Skeleton active />
+        )}
       </Tabs.TabPane>
 
       <Tabs.TabPane tab={getLang("common.tabs.eposide")} key="eposide">

@@ -1,10 +1,10 @@
 import { DatePicker } from "antd";
 import React from "react";
 
-import { DatePickerProps } from "@/types/antd";
+import { AntdType } from "@/types";
 import moment from "moment";
 
-interface PropsType extends Omit<DatePickerProps, "onChange"> {
+interface PropsType extends Omit<AntdType.DatePickerProps, "onChange"> {
   onChange?: (value: string) => void;
 }
 export const WrapDatePicker: React.FC<PropsType> = props => {

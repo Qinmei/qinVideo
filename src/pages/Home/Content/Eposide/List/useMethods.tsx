@@ -57,9 +57,13 @@ export const useMethods = (
     [actions, select, init]
   );
 
-  const remove = useCallback(async (id: string) => await actions.deleteEposideItem({ id }), [
-    actions,
-  ]);
+  const remove = useCallback(
+    async (id: string) => {
+      const res = await actions.deleteEposideItem({ id });
+      res && init();
+    },
+    [actions, init]
+  );
 
   const removeMany = useCallback(async () => {
     const res = await actions.deleteEposideList({ ids: select });

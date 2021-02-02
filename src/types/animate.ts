@@ -68,12 +68,14 @@ export type InitialState = {
 
 export type ListRes = ListContent<List>;
 
-export interface CreateItemReq extends Base {
+export interface FormValues extends Omit<Base, "author" | "eposideCount"> {
   area?: string[];
   kind?: string[];
   year?: string[];
   tag?: string[];
 }
+
+export type CreateItemReq = FormValues;
 
 export interface ItemRes extends Omit<Base, "author"> {
   author: AuthorItem;

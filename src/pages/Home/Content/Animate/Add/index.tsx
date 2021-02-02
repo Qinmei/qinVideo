@@ -6,6 +6,7 @@ import { AnimateType } from "@/types";
 import { useAsyncFn } from "react-use";
 import { useAction } from "@/action";
 import { useHistory } from "react-router-dom";
+import { animateOrigin } from "../Common/GlobalState";
 
 const Add = () => {
   const history = useHistory();
@@ -20,7 +21,7 @@ const Add = () => {
   return (
     <Tabs>
       <Tabs.TabPane tab={getLang("common.tabs.baseinfo")}>
-        <BaseInfo submit={submit} />
+        <BaseInfo submit={submit} initialValues={animateOrigin} />
       </Tabs.TabPane>
     </Tabs>
   );
