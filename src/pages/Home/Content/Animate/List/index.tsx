@@ -40,7 +40,6 @@ const List: FC = () => {
   useEffect(() => {
     init();
   }, [init]);
-  console.log(window.history);
 
   return (
     <ListLayout

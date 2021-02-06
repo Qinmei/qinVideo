@@ -1,21 +1,23 @@
-import React, { useMemo } from "react";
-import { Link } from "react-router-dom";
 import { Space } from "antd";
 import moment from "moment";
-import { getLang } from "@/locales";
-import { useColumnsSetting } from "@/hooks";
+import React, { useMemo } from "react";
+import { Link } from "react-router-dom";
+
 import {
-  DeleteBtn,
-  columnsSorter,
   columnsFilter,
   columnsFilterRequest,
+  columnsSorter,
+  DeleteBtn,
   QuickEdit,
 } from "@/components";
 import { timeFormatAll } from "@/constants";
-import { statusSource, updateSource, updateDaySource } from "@/constants/select";
-import { QuickEditForm } from "../Common/QuickEditForm";
-
+import { statusSource, updateDaySource, updateSource } from "@/constants/select";
+import { useColumnsSetting } from "@/hooks";
+import { getLang } from "@/locales";
+import { animateDetailToSubmit } from "@/ramda";
 import { AnimateType, CommonType, ComponentsType } from "@/types";
+
+import { QuickEditForm } from "../Common/QuickEditForm";
 
 export const useColumns = (
   state: CommonType.ListQuery,
@@ -115,12 +117,11 @@ export const useColumns = (
         width: 160,
         render: (text, record) => (
           <Space>
-            <QuickEdit<AnimateType.List, AnimateType.UpdateItemReq>
-              data={record}
-              submit={methods.update}
-              init={methods.init}
+            <QuickEdit<AnimateType.UpdateItemReq>
+              onSubmit={methods.update}
+              initialValues={animateDetailToSubmit(record)}
             >
-              <QuickEditForm />
+              <QuickEditForm full />
             </QuickEdit>
             <DeleteBtn title={record.title} onDelete={() => methods.remove(text)} />
           </Space>

@@ -48,6 +48,7 @@ export const List: FC<PropsType> = props => {
           onSubmit={methods.updateMany}
           onRemove={methods.removeMany}
           onAdd={methods.create}
+          noAllOption
         >
           <EditForm />
         </ListOptions>

@@ -1,37 +1,29 @@
 import { Button, Col, Form, Input, InputNumber, Radio, Row, Select, Switch } from "antd";
-import React, { useRef, forwardRef, useImperativeHandle } from "react";
+import React, { useRef } from "react";
+import { useAsyncFn, useDeepCompareEffect } from "react-use";
 
-import { CategorySelect, FormModalMethods, UploadImg, WrapDatePicker } from "@/components";
+import { CategorySelect, UploadImg, WrapDatePicker } from "@/components";
 import { pageFormLayout, pageTailLayout } from "@/constants";
 import { playTypeSource, statusSource, updateDaySource } from "@/constants/select";
 import { getLang } from "@/locales";
 import { AnimateType, AntdType } from "@/types";
-import { useAsyncFn } from "react-use";
-import { FormInstance } from "antd/lib/form";
 
 interface PropsType {
   initialValues?: AnimateType.FormValues;
   submit: (value: AnimateType.FormValues) => void;
 }
-export const BaseInfo = forwardRef<Pick<FormModalMethods, "confirm">, PropsType>((props, ref) => {
+export const BaseInfo: React.FC<PropsType> = props => {
   const { initialValues, submit } = props;
 
-  const formRef = useRef<FormInstance<AnimateType.FormValues>>(null);
-
-  const methodsExpose = {
-    confirm: () => {
-      formRef.current?.submit();
-    },
-    setFieldsValue: (value: AnimateType.FormValues) => {
-      formRef.current?.setFieldsValue(value);
-    },
-  };
-
-  useImperativeHandle(ref, () => methodsExpose);
+  const formRef = useRef<AntdType.FormInstance<AnimateType.FormValues>>(null);
 
   const [{ loading }, onFinish] = useAsyncFn(async (value: AnimateType.FormValues) => {
     await submit(value);
   });
+
+  useDeepCompareEffect(() => {
+    initialValues && formRef.current?.setFieldsValue(initialValues);
+  }, [initialValues]);
 
   return (
     <Form {...pageFormLayout} onFinish={onFinish} initialValues={initialValues} ref={formRef}>
@@ -169,4 +161,4 @@ export const BaseInfo = forwardRef<Pick<FormModalMethods, "confirm">, PropsType>
       </Row>
     </Form>
   );
-});
+};

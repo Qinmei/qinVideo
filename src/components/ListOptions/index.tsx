@@ -3,7 +3,7 @@ import { Button, Space, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 import { getLang, LanguageKeys } from "@/locales";
-import { FormModal, FormModalMethods } from "@/components";
+import { FormModal } from "@/components";
 import { MoreOptions } from "./more";
 
 import { HooksType } from "@/types";
@@ -15,12 +15,11 @@ interface PropsType<T> {
   onRemove: (type: "all" | "many") => Promise<unknown>;
   newPath?: string;
   selected: string[];
+  noAllOption?: boolean;
 }
 export const ListOptions = <T,>(props: PropsType<T>) => {
-  const { children, onSubmit, onRemove, onAdd, selected, newPath } = props;
+  const { children, onSubmit, onRemove, onAdd, selected, newPath, noAllOption } = props;
   const [title, setTitle] = useState<"add" | "many" | "all">("many");
-
-  const ref = useRef<FormModalMethods>(null);
 
   const history = useHistory();
 
@@ -41,7 +40,7 @@ export const ListOptions = <T,>(props: PropsType<T>) => {
       if (title === "add") {
         return (onAdd && onAdd(values)) as Promise<boolean>;
       } else {
-        return onSubmit(values);
+        return onSubmit(values) as Promise<boolean>;
       }
     },
     [onSubmit, title, onAdd]
@@ -77,7 +76,7 @@ export const ListOptions = <T,>(props: PropsType<T>) => {
 
   return (
     <FormModal<T>
-      submit={submitCall}
+      onSubmit={submitCall}
       title={getLang(
         title === "add" ? "common.options.add" : (`common.options.edit.${title}` as LanguageKeys)
       )}
@@ -96,10 +95,9 @@ export const ListOptions = <T,>(props: PropsType<T>) => {
               </Button>
             </>
           )}
-          <MoreOptions onChange={value => moreCall(value, methods)} />
+          {!noAllOption && <MoreOptions onChange={value => moreCall(value, methods)} />}
         </Space>
       )}
-      ref={ref}
     >
       {children}
     </FormModal>

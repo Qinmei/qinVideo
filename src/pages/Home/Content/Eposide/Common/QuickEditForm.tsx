@@ -1,18 +1,18 @@
 import { Form, Input, InputNumber, Switch } from "antd";
-import React, { forwardRef } from "react";
+import React from "react";
 
 import { FormEposideList, UploadImg } from "@/components";
 import { pageTailLayout } from "@/constants";
 import { getLang } from "@/locales";
-import { AntdType, EposideType } from "@/types";
+import { EposideType } from "@/types";
 
 interface PropsType {
   data?: EposideType.EposideItem;
 }
-export const EditForm = forwardRef<AntdType.FormInstance<unknown>, PropsType>((props, ref) => {
-  const { data, ...restProps } = props;
+export const EditForm: React.FC<PropsType> = props => {
+  const { data } = props;
   return (
-    <Form ref={ref} {...restProps} style={{ width: 900 }}>
+    <div style={{ width: 900 }}>
       <Form.Item
         label={getLang("eposide.title")}
         name="title"
@@ -62,6 +62,6 @@ export const EditForm = forwardRef<AntdType.FormInstance<unknown>, PropsType>((p
       <Form.Item name="subtitle" initialValue={data?.subtitle} label={getLang("eposide.subtitle")}>
         <FormEposideList />
       </Form.Item>
-    </Form>
+    </div>
   );
-});
+};

@@ -13,9 +13,8 @@ const Add = () => {
   const actions = useAction("animate");
 
   const [, submit] = useAsyncFn(async (values: AnimateType.CreateItemReq) => {
-    const res = await actions.createAnimateItem(values);
+    await actions.createAnimateItem(values);
     history.goBack();
-    return res;
   }, []);
 
   return (

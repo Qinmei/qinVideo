@@ -18,7 +18,6 @@ export const useSavedState = <T extends CommonType.ListQuery, K extends string>(
 
   const replace = useCallback(() => {
     const newState = namespace ? { [namespace]: state } : state;
-    console.log(state, newState, window.history);
     history.replace({
       pathname,
       state: newState,

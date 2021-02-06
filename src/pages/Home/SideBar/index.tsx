@@ -5,7 +5,6 @@ import {
   UserOutlined,
   SettingOutlined,
   VideoCameraOutlined,
-  YoutubeOutlined,
   ReadOutlined,
   WeiboOutlined,
   CommentOutlined,
@@ -67,13 +66,7 @@ const SideBar: FC = () => {
         <Menu.Item key="/animate/category">{getLang("common.menu.animate.category")}</Menu.Item>
         <Menu.Item key="/animate/season">{getLang("common.menu.animate.season")}</Menu.Item>
       </Menu.SubMenu>
-      <Menu.SubMenu
-        key="/eposide"
-        icon={<YoutubeOutlined />}
-        title={getLang("common.menu.eposide")}
-      >
-        <Menu.Item key="/eposide/list">{getLang("common.menu.eposide.list")}</Menu.Item>
-      </Menu.SubMenu>
+
       <Menu.SubMenu key="/post" icon={<ReadOutlined />} title={getLang("common.menu.post")}>
         <Menu.Item key="/post/list">{getLang("common.menu.post.list")}</Menu.Item>
         <Menu.Item key="/post/category">{getLang("common.menu.post.category")}</Menu.Item>

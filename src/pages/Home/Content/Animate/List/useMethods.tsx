@@ -19,7 +19,6 @@ export const useMethods = (initialState: CommonType.ListQuery) => {
       const init = Object.entries(value).some(
         item => state[item[0] as keyof CommonType.ListQuery] !== item[1]
       );
-      console.log("setState", value);
       init && setState(value);
     },
     [setState, state]

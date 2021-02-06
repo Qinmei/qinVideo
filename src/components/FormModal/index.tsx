@@ -1,71 +1,54 @@
-import React, { useRef, forwardRef, useImperativeHandle, useCallback } from "react";
-import { Modal } from "antd";
+import React, { useCallback } from "react";
+import { Modal, Form } from "antd";
 import { useModalState } from "@/hooks";
 import { modalFormLayout } from "@/constants";
 import styles from "./index.less";
 
-import { AntdType, HooksType } from "@/types";
+import { HooksType } from "@/types";
+import { useDeepCompareEffect } from "react-use";
 
 interface PropsType<T> {
-  submit: (values: T) => Promise<boolean> | boolean;
+  onSubmit: (values: T) => Promise<unknown>;
   content: (methods: HooksType.ModalStateMethods) => React.ReactNode;
-  children: React.ReactElement;
+  children: React.ReactNode;
   title: string;
+  initialValues?: T;
 }
 
-export interface FormModalMethods extends HooksType.ModalStateMethods {
-  confirm: () => void;
-}
+export const FormModal = <T,>(props: PropsType<T>) => {
+  const { onSubmit, content, title, initialValues, children } = props;
 
-export const FormModal = forwardRef<FormModalMethods, PropsType<unknown>>((props, ref) => {
-  const { submit, content, title, children } = props;
-
-  const formRef = useRef<AntdType.FormInstance<unknown>>(null);
+  const [form] = Form.useForm<T>();
   const [state, methods] = useModalState();
 
-  const confirm = () => {
-    formRef.current?.submit();
-  };
-
-  const methodsExpose = {
-    confirm,
-    ...methods,
-  };
-
   const onFinish = useCallback(
-    async (values: unknown) => {
+    async (values: T) => {
       methods.load();
-      const res = await submit(values);
-      methods.fail();
-      if (!res) return;
-      methods.cancel();
+      onSubmit(values).then(methods.cancel, methods.fail);
     },
-    [methods, submit]
+    [methods, onSubmit]
   );
 
-  useImperativeHandle(ref, () => methodsExpose);
+  useDeepCompareEffect(() => {
+    initialValues && form && form.setFieldsValue(initialValues as any);
+  }, [initialValues, form]);
 
-  const formNode = React.cloneElement(children, { ref: formRef, onFinish, ...modalFormLayout });
-
-  const { visible, loading } = state;
   return (
     <>
       {content(methods)}
       <Modal
         title={title}
-        visible={visible}
-        confirmLoading={loading}
+        visible={state.visible}
+        confirmLoading={state.loading}
         onCancel={methods.cancel}
-        onOk={confirm}
+        onOk={form.submit}
         destroyOnClose
         className={styles.modal}
       >
-        <div className={styles.main}>{formNode}</div>
+        <Form<T> form={form} onFinish={onFinish} {...modalFormLayout} className={styles.form}>
+          {children}
+        </Form>
       </Modal>
     </>
   );
-}) as <Values = unknown>(
-  props: React.PropsWithChildren<PropsType<Values>> & {
-    ref?: React.Ref<FormModalMethods>;
-  }
-) => React.ReactElement;
+};

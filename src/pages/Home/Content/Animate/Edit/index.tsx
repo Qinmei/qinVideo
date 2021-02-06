@@ -1,4 +1,4 @@
-import { message, Skeleton, Tabs } from "antd";
+import { message, Spin, Tabs } from "antd";
 import React from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useAsync, useAsyncFn } from "react-use";
@@ -6,6 +6,7 @@ import { useAsync, useAsyncFn } from "react-use";
 import { useAction } from "@/action";
 import { getLang } from "@/locales";
 import { AnimateType } from "@/types";
+import { animateDetailToSubmit } from "@/ramda";
 
 import { BaseInfo } from "../Common/BaseInfo";
 import { List as EposideList } from "@/pages/Home/Content/Eposide/List/index";
@@ -15,29 +16,31 @@ export const Edit = () => {
   const actions = useAction("animate");
   const { id } = useParams<{ id: string }>();
 
-  const [, submit] = useAsyncFn(async (values: AnimateType.FormValues) => {
-    const res = await actions.updateAnimateItem({ id, ...values });
-    message.success(getLang("animate.edit.success"));
-    history.goBack();
-    return res;
-  }, []);
+  const [, submit] = useAsyncFn(
+    async (values: AnimateType.FormValues) => {
+      console.log(values);
+      const res = await actions.updateAnimateItem({ id, ...values });
+      message.success(getLang("animate.edit.success"));
+      history.goBack();
+      return res;
+    },
+    [history, id]
+  );
 
   const info = useAsync(async () => {
     const res = await actions.getAnimateItem({ id });
-    return res;
+    return animateDetailToSubmit(res);
   }, [actions, id]);
 
   return (
     <Tabs>
       <Tabs.TabPane tab={getLang("common.tabs.baseinfo")} key="baseinfo">
-        {info?.value ? (
+        <Spin spinning={info.loading}>
           <BaseInfo
             submit={submit}
             initialValues={(info?.value as unknown) as AnimateType.FormValues}
           />
-        ) : (
-          <Skeleton active />
-        )}
+        </Spin>
       </Tabs.TabPane>
 
       <Tabs.TabPane tab={getLang("common.tabs.eposide")} key="eposide">

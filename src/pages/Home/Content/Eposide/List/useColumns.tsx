@@ -1,9 +1,8 @@
 import { Space, Switch, Tag, Tooltip } from "antd";
 import moment from "moment";
 import React, { useMemo } from "react";
-import { Link } from "react-router-dom";
 
-import { columnsSorter, DeleteBtn, QuickEdit, ListImageViewer } from "@/components";
+import { columnsSorter, DeleteBtn, ListImageViewer, QuickEdit } from "@/components";
 import { timeFormatAll } from "@/constants";
 import { useColumnsSetting } from "@/hooks";
 import { getLang } from "@/locales";
@@ -40,14 +39,14 @@ export const useColumns = (
         align: "left",
         width: 250,
       },
-      {
-        title: getLang("eposide.target"),
-        dataIndex: "target",
-        key: "target",
-        preset: true,
-        width: 200,
-        render: val => <Link to={`/home/animate/edit/${val.id}`}>{val.title}</Link>,
-      },
+      // {
+      //   title: getLang("eposide.target"),
+      //   dataIndex: "target",
+      //   key: "target",
+      //   preset: true,
+      //   width: 200,
+      //   render: val => <Link to={`/home/animate/edit/${val.id}`}>{val.title}</Link>,
+      // },
       {
         title: getLang("eposide.sort"),
         ...columnsSorter(state, "sort", true),
@@ -107,11 +106,7 @@ export const useColumns = (
         width: 160,
         render: (text, record) => (
           <Space>
-            <QuickEdit<EposideType.EposideItem, EposideType.UpdateItemReq>
-              data={record}
-              submit={methods.update}
-              init={methods.init}
-            >
+            <QuickEdit<EposideType.UpdateItemReq> onSubmit={methods.update} initialValues={record}>
               <EditForm />
             </QuickEdit>
             <DeleteBtn title={record.title} onDelete={() => methods.remove(text)} />
