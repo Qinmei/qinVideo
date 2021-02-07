@@ -107,7 +107,7 @@ export const useColumns = (
         render: (text, record) => (
           <Space>
             <QuickEdit<EposideType.UpdateItemReq> onSubmit={methods.update} initialValues={record}>
-              <EditForm />
+              <EditForm full />
             </QuickEdit>
             <DeleteBtn title={record.title} onDelete={() => methods.remove(text)} />
           </Space>

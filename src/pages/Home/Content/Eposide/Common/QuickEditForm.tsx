@@ -4,45 +4,35 @@ import React from "react";
 import { FormEposideList, UploadImg } from "@/components";
 import { pageTailLayout } from "@/constants";
 import { getLang } from "@/locales";
-import { EposideType } from "@/types";
 
 interface PropsType {
-  data?: EposideType.EposideItem;
+  full?: boolean;
 }
 export const EditForm: React.FC<PropsType> = props => {
-  const { data } = props;
+  const { full } = props;
   return (
     <div style={{ width: 900 }}>
-      <Form.Item
-        label={getLang("eposide.title")}
-        name="title"
-        initialValue={data?.title}
-        rules={[{ required: true }]}
-      >
-        <Input placeholder={getLang("eposide.title.tips")} />
-      </Form.Item>
+      {full && (
+        <Form.Item label={getLang("eposide.title")} name="title" rules={[{ required: true }]}>
+          <Input placeholder={getLang("eposide.title.tips")} />
+        </Form.Item>
+      )}
 
-      <Form.Item
-        label={getLang("eposide.sort")}
-        name="sort"
-        initialValue={data?.sort || 0}
-        rules={[{ required: true }]}
-      >
-        <InputNumber />
-      </Form.Item>
+      {full && (
+        <Form.Item label={getLang("eposide.sort")} name="sort" rules={[{ required: true }]}>
+          <InputNumber />
+        </Form.Item>
+      )}
 
-      <Form.Item
-        label={getLang("eposide.noSetPrefix")}
-        name="noSetPrefix"
-        initialValue={data?.noSetPrefix ?? false}
-        valuePropName="checked"
-      >
+      <Form.Item label={getLang("eposide.noSetPrefix")} name="noSetPrefix" valuePropName="checked">
         <Switch />
       </Form.Item>
 
-      <Form.Item label={getLang("eposide.bilibili")} name="bilibili" initialValue={data?.bilibili}>
-        <Input placeholder={getLang("eposide.bilibili.tips")} />
-      </Form.Item>
+      {full && (
+        <Form.Item label={getLang("eposide.bilibili")} name="bilibili">
+          <Input placeholder={getLang("eposide.bilibili.tips")} />
+        </Form.Item>
+      )}
 
       <Form.Item label={getLang("eposide.cover")} name="cover">
         <Input.Search
@@ -51,17 +41,21 @@ export const EditForm: React.FC<PropsType> = props => {
         />
       </Form.Item>
 
-      <Form.Item name="cover" initialValue={data?.cover} {...pageTailLayout}>
+      <Form.Item name="cover" {...pageTailLayout}>
         <UploadImg type="eposide" width={400} height={160} />
       </Form.Item>
 
-      <Form.Item name="link" initialValue={data?.link} label={getLang("eposide.link")}>
-        <FormEposideList />
-      </Form.Item>
+      {full && (
+        <Form.Item name="link" label={getLang("eposide.link")}>
+          <FormEposideList />
+        </Form.Item>
+      )}
 
-      <Form.Item name="subtitle" initialValue={data?.subtitle} label={getLang("eposide.subtitle")}>
-        <FormEposideList />
-      </Form.Item>
+      {full && (
+        <Form.Item name="subtitle" label={getLang("eposide.subtitle")}>
+          <FormEposideList />
+        </Form.Item>
+      )}
     </div>
   );
 };
