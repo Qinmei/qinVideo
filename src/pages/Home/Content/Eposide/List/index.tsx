@@ -1,16 +1,16 @@
 import React, { FC, useEffect } from "react";
 import { Space } from "antd";
 import { useModel } from "@/action";
-import { ListOptions, ListTable, QuickEdit } from "@/components";
+import { ListOptions, ListTable } from "@/components";
 import { ListLayout } from "@/layouts";
 import { getLang } from "@/locales";
 import { CommonType, EposideType } from "@/types";
 
 import { useSelect, useListLoading } from "../Common/GlobalState";
-import { EditForm } from "../Common/QuickEditForm";
+import { EditForm } from "../Common/EditForm";
 import { useColumns } from "./useColumns";
 import { useMethods } from "./useMethods";
-import { AddManyForm } from "../Common/AddMany";
+import { AddMany } from "../Common/AddMany";
 
 const initState: CommonType.ListQuery = {
   page: 1,
@@ -22,7 +22,7 @@ const initState: CommonType.ListQuery = {
 
 interface PropsType {
   target: string;
-  onModel: "Animate" | "Comic";
+  onModel: EposideType.OnModelType;
 }
 export const List: FC<PropsType> = props => {
   const { target = "5e8162ba67e9bf6809814c66", onModel = "Animate" } = props;
@@ -44,15 +44,18 @@ export const List: FC<PropsType> = props => {
   return (
     <ListLayout
       options={
-        <ListOptions<Omit<EposideType.EposideItem, "id">>
-          selected={select}
-          onSubmit={methods.updateMany}
-          onRemove={methods.removeMany}
-          onAdd={methods.create}
-          noAllOption
-        >
-          <EditForm />
-        </ListOptions>
+        <Space>
+          <ListOptions<Omit<EposideType.EposideItem, "id">>
+            selected={select}
+            onSubmit={methods.updateMany}
+            onRemove={methods.removeMany}
+            onAdd={methods.create}
+            noAllOption
+          >
+            <EditForm />
+          </ListOptions>
+          <AddMany target={target} onModel={onModel} onSubmit={methods.createMany} />
+        </Space>
       }
       placeholder={getLang("eposide.title.search")}
       value={title}

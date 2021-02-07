@@ -8,7 +8,7 @@ import { useColumnsSetting } from "@/hooks";
 import { getLang } from "@/locales";
 import { CommonType, ComponentsType, EposideType } from "@/types";
 
-import { EditForm } from "../Common/QuickEditForm";
+import { EditForm } from "../Common/EditForm";
 
 const TagShow = (props: { data: EposideType.ArrValueType[] }) => {
   const { data } = props;

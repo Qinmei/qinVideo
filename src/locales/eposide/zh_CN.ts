@@ -26,6 +26,7 @@ const eposide = {
   "episode.muli.text.tips": "$分割标题, 空格或换行为下一集, 参考苹果CMS",
   "episode.muli.mode.auto": "自动生成",
   "episode.muli.mode.handle": "手动生成",
+  "episode.option.add.many": "批量新增",
 };
 
 export default eposide;

@@ -8,7 +8,7 @@ import { useSelect, useListLoading } from "../Common/GlobalState";
 export const useMethods = (
   initialState: CommonType.ListQuery,
   target: string,
-  onModel: "Animate" | "Comic"
+  onModel: EposideType.OnModelType
 ) => {
   const [state, setState] = useSavedState(initialState, "eposide");
   const [select, setSelect] = useSelect();
@@ -42,8 +42,13 @@ export const useMethods = (
     [actions, init, target, onModel]
   );
 
+  const createMany = useCallback(
+    async (values: EposideType.CreateListReq) => await actions.createEposideList(values),
+    [actions]
+  );
+
   const update = useCallback(
-    async (values: EposideType.UpdateItemReq) => await actions.updateEposideItem({ ...values }),
+    async (values: EposideType.UpdateItemReq) => await actions.updateEposideItem(values),
     [actions]
   );
 
@@ -72,8 +77,18 @@ export const useMethods = (
   const reset = useCallback(() => queryCompare(initialState), [queryCompare, initialState]);
 
   const methods = useMemo(
-    () => ({ init, set: queryCompare, create, update, updateMany, remove, removeMany, reset }),
-    [init, queryCompare, create, update, updateMany, remove, removeMany, reset]
+    () => ({
+      init,
+      set: queryCompare,
+      create,
+      createMany,
+      update,
+      updateMany,
+      remove,
+      removeMany,
+      reset,
+    }),
+    [init, queryCompare, create, createMany, update, updateMany, remove, removeMany, reset]
   );
 
   return [state, methods] as [CommonType.ListQuery, typeof methods];

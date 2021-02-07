@@ -2,6 +2,8 @@ import { ListContent } from "./request";
 
 export type ArrValueType = { name: string; value: string; _id?: string };
 
+export type OnModelType = "Animate" | "Comic";
+
 export type EposideItem = {
   id: string;
   createdAt: string;
@@ -40,3 +42,13 @@ export interface UpdateListReq {
   cover?: string;
   noSetPrefix?: boolean;
 }
+
+export interface CreateListItem {
+  title: string | number;
+  sort: number;
+  target: string;
+  onModel: OnModelType;
+  link: ArrValueType[];
+}
+
+export type CreateListReq = CreateListItem[];

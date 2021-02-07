@@ -7,6 +7,7 @@ import {
   CreateItemReq,
   UpdateItemReq,
   UpdateListReq,
+  CreateListReq,
 } from "@/types/eposide";
 import { ListQuery, IdQuery, IdsQuery, OptionReturn } from "@/types/common";
 import { RequestRes } from "@/types/request";
@@ -34,6 +35,8 @@ export class Eposide extends Model<InitialState> {
       super.init<OptionReturn>(Methods.PUT, Urls.queryEposide, { data }),
     deleteEposideList: (data: IdsQuery) =>
       super.init<OptionReturn>(Methods.DELETE, Urls.queryEposide, { data }),
+    createEposideList: (data: CreateListReq) =>
+      super.init<OptionReturn>(Methods.POST, Urls.queryEposide, { data }),
     createEposideItem: (data: CreateItemReq) =>
       super.init<EposideItem>(Methods.POST, Urls.queryEposide, { data }),
     getEposideItem: (params: IdQuery) =>
