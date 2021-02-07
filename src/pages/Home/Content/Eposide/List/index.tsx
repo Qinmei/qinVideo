@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from "react";
-
+import { Space } from "antd";
 import { useModel } from "@/action";
-import { ListOptions, ListTable } from "@/components";
+import { ListOptions, ListTable, QuickEdit } from "@/components";
 import { ListLayout } from "@/layouts";
 import { getLang } from "@/locales";
 import { CommonType, EposideType } from "@/types";
@@ -10,6 +10,7 @@ import { useSelect, useListLoading } from "../Common/GlobalState";
 import { EditForm } from "../Common/QuickEditForm";
 import { useColumns } from "./useColumns";
 import { useMethods } from "./useMethods";
+import { AddManyForm } from "../Common/AddMany";
 
 const initState: CommonType.ListQuery = {
   page: 1,
