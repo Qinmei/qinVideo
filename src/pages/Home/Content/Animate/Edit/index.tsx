@@ -6,7 +6,7 @@ import { useAsync, useAsyncFn } from "react-use";
 import { useAction } from "@/action";
 import { getLang } from "@/locales";
 import { AnimateType } from "@/types";
-import { animateDetailToSubmit } from "@/ramda";
+import { animateDetailToSubmit } from "@/ramdas";
 
 import { BaseInfo } from "../Common/BaseInfo";
 import { List as EposideList } from "@/pages/Home/Content/Eposide/List/index";

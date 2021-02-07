@@ -3,7 +3,7 @@ import { store } from "@/action";
 import { Request } from "@/utils";
 import { Urls, Methods } from "@/constants";
 import { RequestType, ModelType } from "@/types";
-import { ServiceError } from "@/utils";
+import { ServiceException } from "@/exceptions";
 
 export class Model<T> {
   constructor(public namespace: ModelType.Modules, public initialState: T) {}
@@ -31,7 +31,7 @@ export class Model<T> {
         return await this.success<T>(res);
       } else {
         res?.msg && message.error(res.msg || "unknown error");
-        throw new ServiceError(res.response);
+        throw new ServiceException(res.response);
       }
     });
   }

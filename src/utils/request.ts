@@ -1,9 +1,10 @@
 import { notification } from "antd";
 import { stringify } from "qs";
-import { RequestType } from "@/types";
+
 import { Methods, Urls } from "@/constants";
+import { HttpException } from "@/exceptions";
 import { getLang } from "@/locales";
-import { HttpError } from "./error";
+import { RequestType } from "@/types";
 
 export class Request {
   static readonly apiPrefix: string = "";
@@ -61,12 +62,12 @@ export class Request {
 
   static statusCheck(res: Response): Response {
     if (![200, 201, 306].includes(res.status)) {
-      throw new HttpError(res.status, res.url);
+      throw new HttpException(res.status, res.url);
     }
     return res;
   }
 
-  static errorHandler(error: HttpError) {
+  static errorHandler(error: HttpException) {
     if (error.status === 401) {
       sessionStorage.clear();
       notification.error({
@@ -81,6 +82,6 @@ export class Request {
         },
       });
     }
-    throw new HttpError(error.status, error.url);
+    throw new HttpException(error.status, error.url);
   }
 }

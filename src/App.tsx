@@ -6,6 +6,7 @@ import { ConfigProvider } from "@/contexts";
 import { Pages } from "@/pages";
 import { Language } from "@/layouts";
 import { store } from "@/action";
+import "@/exceptions";
 
 export const App: FC = () => {
   return (
