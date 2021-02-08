@@ -26,35 +26,34 @@ export const useMethods = (initialState: CommonType.ListQuery) => {
 
   const init = useCallback(async () => {
     setLoading(true);
-    const res = await actions.getAnimateList(state);
-    setLoading(false);
-    res && setSelect([]);
+    await actions.getAnimateList(state).finally(()=>setLoading(false))
+    setSelect([]);
   }, [actions, state, setSelect, setLoading]);
 
   const update = useCallback(
     async (values: AnimateType.UpdateItemReq) => {
-      const res = await actions.updateAnimateItem({ ...values });
-      res && init();
+      await actions.updateAnimateItem({ ...values });
+      init();
     },
     [actions]
   );
 
   const updateMany = useCallback(
     async (values: Partial<AnimateType.UpdateItemReq>) => {
-      const res = await actions.updateAnimateList({ ids: select, ...values });
-      res && init();
+      await actions.updateAnimateList({ ids: select, ...values });
+      init();
     },
     [actions, select, init]
   );
 
   const remove = useCallback(async (id: string) => {
-    const res = await actions.deleteAnimateItem({ id })
-    res && init();
+    await actions.deleteAnimateItem({ id })
+    init();
   }, [actions]);
 
   const removeMany = useCallback(async () => {
-    const res = await actions.deleteAnimateList({ ids: select });
-    res && init();
+    await actions.deleteAnimateList({ ids: select });
+    init();
   }, [actions, select, init]);
 
   const reset = useCallback(() => queryCompare(initialState), [queryCompare, initialState]);

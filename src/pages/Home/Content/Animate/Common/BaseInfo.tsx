@@ -15,18 +15,18 @@ interface PropsType {
 export const BaseInfo: React.FC<PropsType> = props => {
   const { initialValues, submit } = props;
 
-  const formRef = useRef<AntdType.FormInstance<AnimateType.FormValues>>(null);
+  const [form] = Form.useForm()
 
   const [{ loading }, onFinish] = useAsyncFn(async (value: AnimateType.FormValues) => {
     await submit(value);
   });
 
   useDeepCompareEffect(() => {
-    initialValues && formRef.current?.setFieldsValue(initialValues);
-  }, [initialValues]);
+    initialValues && form.setFieldsValue(initialValues);
+  }, [initialValues,form]);
 
   return (
-    <Form {...pageFormLayout} onFinish={onFinish} initialValues={initialValues} ref={formRef}>
+    <Form onFinish={onFinish} initialValues={initialValues} form={form} {...pageFormLayout} >
       <Row>
         <Col xs={24} sm={24} md={24} lg={24} xl={12}>
           <Form.Item label={getLang("animate.title")} name="title" rules={[{ required: true }]}>

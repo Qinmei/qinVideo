@@ -28,54 +28,53 @@ export const useMethods = (
 
   const init = useCallback(async () => {
     setLoading(true);
-    const res = await actions.getEposideList({ ...state, target });
-    setLoading(false);
-    res && setSelect([]);
+    await actions.getEposideList({ ...state, target }).finally(()=>setLoading(false))
+    setSelect([]);
   }, [actions, state, setSelect, target, setLoading]);
 
   const create = useCallback(
     async (values: Omit<EposideType.EposideItem, "id">) => {
-      const res = await actions.createEposideItem({ ...values, target, onModel });
-      res && init();
+      await actions.createEposideItem({ ...values, target, onModel });
+      init();
     },
     [actions, init, target, onModel]
   );
 
   const createMany = useCallback(
     async (values: EposideType.CreateListReq) => {
-      const res = await actions.createEposideList(values)
-      res && init();
+      await actions.createEposideList(values)
+      init();
     },
     [actions]
   );
 
   const update = useCallback(
     async (values: EposideType.UpdateItemReq) => {
-      const res = await actions.updateEposideItem(values)
-      res && init();
+      await actions.updateEposideItem(values)
+      init();
     },
     [actions]
   );
 
   const updateMany = useCallback(
     async (values: Partial<EposideType.UpdateListReq>) => {
-      const res = await actions.updateEposideList({ ids: select, ...values });
-      res && init();
+      await actions.updateEposideList({ ids: select, ...values });
+      init();
     },
     [actions, select, init]
   );
 
   const remove = useCallback(
     async (id: string) => {
-      const res = await actions.deleteEposideItem({ id });
-      res && init();
+      await actions.deleteEposideItem({ id });
+      init();
     },
     [actions, init]
   );
 
   const removeMany = useCallback(async () => {
-    const res = await actions.deleteEposideList({ ids: select });
-    res && init();
+    await actions.deleteEposideList({ ids: select });
+    init();
   }, [actions, select, init]);
 
   const reset = useCallback(() => queryCompare(initialState), [queryCompare, initialState]);
