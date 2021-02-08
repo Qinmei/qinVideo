@@ -18,7 +18,6 @@ export const Edit = () => {
 
   const [, submit] = useAsyncFn(
     async (values: AnimateType.FormValues) => {
-      console.log(values);
       const res = await actions.updateAnimateItem({ id, ...values });
       message.success(getLang("animate.edit.success"));
       history.goBack();

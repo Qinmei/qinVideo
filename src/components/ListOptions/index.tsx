@@ -10,8 +10,8 @@ import { HooksType } from "@/types";
 
 interface PropsType<T> {
   children: React.ReactElement;
-  onSubmit: (values: T) => Promise<boolean> | boolean;
-  onAdd?: (values: T) => Promise<boolean>;
+  onSubmit: (values: T) => Promise<unknown>;
+  onAdd?: (values: T) => Promise<unknown>;
   onRemove: (type: "all" | "many") => Promise<unknown>;
   newPath?: string;
   selected: string[];

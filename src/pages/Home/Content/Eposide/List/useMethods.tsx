@@ -37,18 +37,23 @@ export const useMethods = (
     async (values: Omit<EposideType.EposideItem, "id">) => {
       const res = await actions.createEposideItem({ ...values, target, onModel });
       res && init();
-      return !!res;
     },
     [actions, init, target, onModel]
   );
 
   const createMany = useCallback(
-    async (values: EposideType.CreateListReq) => await actions.createEposideList(values),
+    async (values: EposideType.CreateListReq) => {
+      const res = await actions.createEposideList(values)
+      res && init();
+    },
     [actions]
   );
 
   const update = useCallback(
-    async (values: EposideType.UpdateItemReq) => await actions.updateEposideItem(values),
+    async (values: EposideType.UpdateItemReq) => {
+      const res = await actions.updateEposideItem(values)
+      res && init();
+    },
     [actions]
   );
 
@@ -56,7 +61,6 @@ export const useMethods = (
     async (values: Partial<EposideType.UpdateListReq>) => {
       const res = await actions.updateEposideList({ ids: select, ...values });
       res && init();
-      return !!res;
     },
     [actions, select, init]
   );

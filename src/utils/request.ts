@@ -75,7 +75,7 @@ export class Request {
       });
     } else {
       notification.error({
-        message: getLang("common.error.api"),
+        message: error.message,
         description: error.url,
         style: {
           wordBreak: "break-all",
