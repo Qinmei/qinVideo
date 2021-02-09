@@ -1,12 +1,13 @@
-import { Button, Col, Form, Input, InputNumber, Radio, Row, Select, Switch } from "antd";
+import { Button, Col, DatePicker, Form, Input, InputNumber, Radio, Row, Select, Switch } from "antd";
 import React, { useRef } from "react";
 import { useAsyncFn, useDeepCompareEffect } from "react-use";
 
-import { CategorySelect, UploadImg, WrapDatePicker } from "@/components";
+import { CategorySelect, UploadImg } from "@/components";
 import { pageFormLayout, pageTailLayout } from "@/constants";
 import { playTypeSource, statusSource, updateDaySource } from "@/constants/select";
 import { getLang } from "@/locales";
 import { AnimateType, AntdType } from "@/types";
+import moment from "moment";
 
 interface PropsType {
   initialValues?: AnimateType.FormValues;
@@ -67,8 +68,11 @@ export const BaseInfo: React.FC<PropsType> = props => {
             <Select options={Object.values(updateDaySource)} style={{ width: 200 }} />
           </Form.Item>
 
-          <Form.Item label={getLang("animate.firstPlay")} name="firstPlay">
-            <WrapDatePicker style={{ width: 200 }} allowClear format="YYYYMMDD" />
+          <Form.Item label={getLang("animate.firstPlay")} name="firstPlay" 
+            getValueProps={value=>({value:moment(value)})}
+            getValueFromEvent={(date,dateString)=>dateString}
+          >
+            <DatePicker style={{ width: 200 }} allowClear format="YYYYMMDD"  />
           </Form.Item>
 
           <Form.Item label={getLang("animate.category.area")} name="area">

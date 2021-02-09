@@ -26,7 +26,7 @@ export const useMethods = (initialState: CommonType.ListQuery) => {
 
   const init = useCallback(async () => {
     setLoading(true);
-    await actions.getAnimateList(state).finally(()=>setLoading(false))
+    await actions.getAnimateList(state).finally(() => setLoading(false));
     setSelect([]);
   }, [actions, state, setSelect, setLoading]);
 
@@ -35,7 +35,7 @@ export const useMethods = (initialState: CommonType.ListQuery) => {
       await actions.updateAnimateItem({ ...values });
       init();
     },
-    [actions]
+    [actions, init]
   );
 
   const updateMany = useCallback(
@@ -46,10 +46,13 @@ export const useMethods = (initialState: CommonType.ListQuery) => {
     [actions, select, init]
   );
 
-  const remove = useCallback(async (id: string) => {
-    await actions.deleteAnimateItem({ id })
-    init();
-  }, [actions]);
+  const remove = useCallback(
+    async (id: string) => {
+      await actions.deleteAnimateItem({ id });
+      init();
+    },
+    [actions, init]
+  );
 
   const removeMany = useCallback(async () => {
     await actions.deleteAnimateList({ ids: select });
