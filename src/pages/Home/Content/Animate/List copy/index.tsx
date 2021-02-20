@@ -1,15 +1,15 @@
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, useEffect } from "react";
 import { useModel } from "@/action";
 import { ListLayout } from "@/layouts";
 import { ListOptions, ListTable } from "@/components";
 import { getLang } from "@/locales";
 import { useColumns } from "./useColumns";
 import { QuickEditForm } from "../Common/QuickEditForm";
-import { AnimateController } from "@/controllers";
+import { useMethods } from "./useMethods";
+
 import { AnimateType, CommonType } from "@/types";
 
 import { useListLoading, useSelect } from "../Common/GlobalState";
-import { useSavedState } from "@/hooks";
 
 const initialState: CommonType.ListQuery = {
   page: 1,
@@ -27,54 +27,37 @@ const initialState: CommonType.ListQuery = {
 };
 
 const List: FC = () => {
-  const [query, setQuery] = useSavedState(initialState, "animate");
-  const [loading, setLoading] = useListLoading();
-  const [select, setSelect] = useSelect();
-  const { title, page, size } = query;
+  const [state, methods] = useMethods(initialState);
+  const { page, size, title } = state;
+  const { init } = methods;
 
-  const dispatch = (propKey: string, value: unknown) => {
-    switch (propKey) {
-      case "query":
-        setQuery(value as CommonType.ListQuery);
-        break;
-      case "select":
-        setSelect(value as string[]);
-        break;
-      case "loading":
-        setLoading(value as boolean);
-        break;
-      default:
-        break;
-    }
-  };
-  const { current: controller } = useRef(
-    new AnimateController({ query, loading, select }, dispatch)
-  );
+  const [loading] = useListLoading();
+  const [select, setSelect] = useSelect();
 
   const { list, total } = useModel("animate");
-  const { columns, SettingBtn } = useColumns(query, controller);
+  const { columns, SettingBtn } = useColumns(state, methods);
 
   useEffect(() => {
-    controller.init();
-  }, [controller, query]);
+    init();
+  }, [init]);
 
   return (
     <ListLayout
       options={
         <ListOptions<Omit<AnimateType.UpdateListReq, "ids">>
           selected={select}
-          onSubmit={controller.updateMany}
+          onSubmit={methods.updateMany}
           newPath="/home/animate/add"
-          onRemove={controller.removeMany}
+          onRemove={methods.removeMany}
         >
           <QuickEditForm />
         </ListOptions>
       }
       placeholder={getLang("animate.title.search")}
       value={title}
-      onChange={title => controller.setQuery({ title })}
+      onChange={title => methods.set({ title })}
       setting={SettingBtn}
-      reset={controller.reset}
+      reset={methods.reset}
     >
       <ListTable<AnimateType.List>
         loading={loading}
@@ -85,7 +68,7 @@ const List: FC = () => {
         list={list}
         select={select}
         onSelectChange={setSelect}
-        onChange={controller.setQuery}
+        onChange={methods.set}
       />
     </ListLayout>
   );

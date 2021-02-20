@@ -51,7 +51,7 @@ export type SelectType<T> = {
 
 export type ListMethods<T> = {
   init: () => void;
-  set: (values: Partial<ListQuery>) => void;
+  setQuery: (values: Partial<ListQuery>) => void;
   update: (values: T) => Promise<unknown>;
   updateMany: (values: T) => Promise<unknown>;
   remove: (id: string) => Promise<unknown>;
