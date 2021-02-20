@@ -10,7 +10,6 @@ export class BusinessException extends Exception {
   }
 }
 
-
 export class AnimateException extends BusinessException {
   constructor(
     public readonly name: string,

@@ -28,7 +28,7 @@ export const useMethods = (
 
   const init = useCallback(async () => {
     setLoading(true);
-    await actions.getEposideList({ ...state, target }).finally(()=>setLoading(false))
+    await actions.getEposideList({ ...state, target }).finally(() => setLoading(false));
     setSelect([]);
   }, [actions, state, setSelect, target, setLoading]);
 
@@ -42,7 +42,7 @@ export const useMethods = (
 
   const createMany = useCallback(
     async (values: EposideType.CreateListReq) => {
-      await actions.createEposideList(values)
+      await actions.createEposideList(values);
       init();
     },
     [actions]
@@ -50,7 +50,7 @@ export const useMethods = (
 
   const update = useCallback(
     async (values: EposideType.UpdateItemReq) => {
-      await actions.updateEposideItem(values)
+      await actions.updateEposideItem(values);
       init();
     },
     [actions]

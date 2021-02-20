@@ -1,4 +1,15 @@
-import { Button, Col, DatePicker, Form, Input, InputNumber, Radio, Row, Select, Switch } from "antd";
+import {
+  Button,
+  Col,
+  DatePicker,
+  Form,
+  Input,
+  InputNumber,
+  Radio,
+  Row,
+  Select,
+  Switch,
+} from "antd";
 import React, { useRef } from "react";
 import { useAsyncFn, useDeepCompareEffect } from "react-use";
 
@@ -16,7 +27,7 @@ interface PropsType {
 export const BaseInfo: React.FC<PropsType> = props => {
   const { initialValues, submit } = props;
 
-  const [form] = Form.useForm()
+  const [form] = Form.useForm();
 
   const [{ loading }, onFinish] = useAsyncFn(async (value: AnimateType.FormValues) => {
     await submit(value);
@@ -24,10 +35,10 @@ export const BaseInfo: React.FC<PropsType> = props => {
 
   useDeepCompareEffect(() => {
     initialValues && form.setFieldsValue(initialValues);
-  }, [initialValues,form]);
+  }, [initialValues, form]);
 
   return (
-    <Form onFinish={onFinish} initialValues={initialValues} form={form} {...pageFormLayout} >
+    <Form onFinish={onFinish} initialValues={initialValues} form={form} {...pageFormLayout}>
       <Row>
         <Col xs={24} sm={24} md={24} lg={24} xl={12}>
           <Form.Item label={getLang("animate.title")} name="title" rules={[{ required: true }]}>
@@ -68,11 +79,13 @@ export const BaseInfo: React.FC<PropsType> = props => {
             <Select options={Object.values(updateDaySource)} style={{ width: 200 }} />
           </Form.Item>
 
-          <Form.Item label={getLang("animate.firstPlay")} name="firstPlay" 
-            getValueProps={value=>({value:moment(value)})}
-            getValueFromEvent={(date,dateString)=>dateString}
+          <Form.Item
+            label={getLang("animate.firstPlay")}
+            name="firstPlay"
+            getValueProps={value => ({ value: moment(value) })}
+            getValueFromEvent={(date, dateString) => dateString}
           >
-            <DatePicker style={{ width: 200 }} allowClear format="YYYYMMDD"  />
+            <DatePicker style={{ width: 200 }} allowClear format="YYYYMMDD" />
           </Form.Item>
 
           <Form.Item label={getLang("animate.category.area")} name="area">
