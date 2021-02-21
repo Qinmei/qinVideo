@@ -33,6 +33,7 @@ const List: FC = () => {
   const { title, page, size } = query;
 
   const dispatch = (propKey: string, value: unknown) => {
+    console.log("dispatch", propKey, value);
     switch (propKey) {
       case "query":
         setQuery(value as CommonType.ListQuery);
@@ -72,7 +73,7 @@ const List: FC = () => {
       }
       placeholder={getLang("animate.title.search")}
       value={title}
-      onChange={title => controller.setQuery({ title })}
+      onChange={title => controller.set({ title })}
       setting={SettingBtn}
       reset={controller.reset}
     >
@@ -85,7 +86,7 @@ const List: FC = () => {
         list={list}
         select={select}
         onSelectChange={setSelect}
-        onChange={controller.setQuery}
+        onChange={controller.set}
       />
     </ListLayout>
   );

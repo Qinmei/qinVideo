@@ -10,7 +10,7 @@ interface StateType {
 }
 
 export class AnimateController extends Controller<StateType> {
-  setQuery = (value: Partial<CommonType.ListQuery>) => {
+  set = (value: Partial<CommonType.ListQuery>) => {
     const { state } = this;
 
     const difference = Object.entries(value).some(item =>
@@ -53,5 +53,5 @@ export class AnimateController extends Controller<StateType> {
     this.init();
   };
 
-  reset = () => this.setQuery(this.initialState.query);
+  reset = () => this.set(this.initialState.query);
 }

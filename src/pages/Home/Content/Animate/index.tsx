@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Route, Switch, Redirect, useRouteMatch } from "react-router-dom";
 
-const List = React.lazy(() => import("./List"));
+const List = React.lazy(() => import("./ListCopy"));
 const Add = React.lazy(() => import("./Add"));
 const Edit = React.lazy(() => import("./Edit"));
 
