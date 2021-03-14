@@ -4,12 +4,12 @@ import { useHistory, useParams } from "react-router-dom";
 import { useAsync, useAsyncFn } from "react-use";
 
 import { useAction } from "@/action";
+import { animateDetailToSubmit } from "@/lamdas";
 import { getLang } from "@/locales";
+import { List as EposideList } from "@/pages/Home/Content/Eposide/List/index";
 import { AnimateType } from "@/types";
-import { animateDetailToSubmit } from "@/ramdas";
 
 import { BaseInfo } from "../Common/BaseInfo";
-import { List as EposideList } from "@/pages/Home/Content/Eposide/List/index";
 
 export const Edit = () => {
   const history = useHistory();

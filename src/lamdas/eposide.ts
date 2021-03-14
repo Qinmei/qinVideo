@@ -37,6 +37,5 @@ export const eposideGenerateMany = (
       ],
     }));
   }
-  console.log(data);
   return data;
 };

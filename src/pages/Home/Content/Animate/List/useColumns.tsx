@@ -14,7 +14,7 @@ import { timeFormatAll } from "@/constants";
 import { statusSource, updateDaySource, updateSource } from "@/constants/select";
 import { useColumnsSetting } from "@/hooks";
 import { getLang } from "@/locales";
-import { animateDetailToSubmit } from "@/ramdas";
+import { animateDetailToSubmit } from "@/lamdas";
 import { AnimateType, CommonType, ComponentsType } from "@/types";
 
 import { QuickEditForm } from "../Common/QuickEditForm";

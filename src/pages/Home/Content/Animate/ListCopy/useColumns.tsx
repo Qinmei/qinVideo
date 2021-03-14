@@ -13,8 +13,8 @@ import {
 import { timeFormatAll } from "@/constants";
 import { statusSource, updateDaySource, updateSource } from "@/constants/select";
 import { useColumnsSetting } from "@/hooks";
+import { animateDetailToSubmit } from "@/lamdas";
 import { getLang } from "@/locales";
-import { animateDetailToSubmit } from "@/ramdas";
 import { AnimateType, CommonType, ComponentsType } from "@/types";
 
 import { QuickEditForm } from "../Common/QuickEditForm";
