@@ -4,7 +4,7 @@ import { useModel } from "@/action";
 import { ListOptions, ListTable } from "@/components";
 import { ListLayout } from "@/layouts";
 import { getLang } from "@/locales";
-import { CommonType, EposideType } from "@/types";
+import { CategoryType, CommonType, EposideType } from "@/types";
 
 import { useSelect, useListLoading } from "../Common/GlobalState";
 import { EditForm } from "../Common/EditForm";
@@ -21,12 +21,11 @@ const initState: CommonType.ListQuery = {
 };
 
 interface PropsType {
-  target: string;
-  onModel: EposideType.OnModelType;
+  type: CategoryType.CateType;
 }
 export const List: FC<PropsType> = props => {
-  const { target = "5e8162ba67e9bf6809814c66", onModel = "Animate" } = props;
-  const [state, methods] = useMethods(initState, target, onModel);
+  const { type } = props;
+  const [state, methods] = useMethods(initState);
   const [select, setSelect] = useSelect();
   const [loading] = useListLoading();
 
@@ -54,7 +53,6 @@ export const List: FC<PropsType> = props => {
           >
             <EditForm />
           </ListOptions>
-          <AddMany target={target} onModel={onModel} onSubmit={methods.createMany} />
         </Space>
       }
       placeholder={getLang("eposide.title.search")}

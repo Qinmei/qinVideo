@@ -25,7 +25,7 @@ interface PropsType {
   onModel: EposideType.OnModelType;
 }
 export const List: FC<PropsType> = props => {
-  const { target = "5e8162ba67e9bf6809814c66", onModel = "Animate" } = props;
+  const { target, onModel } = props;
   const [state, methods] = useMethods(initState, target, onModel);
   const [select, setSelect] = useSelect();
   const [loading] = useListLoading();
@@ -52,7 +52,7 @@ export const List: FC<PropsType> = props => {
             onAdd={methods.create}
             noAllOption
           >
-            <EditForm />
+            <EditForm full />
           </ListOptions>
           <AddMany target={target} onModel={onModel} onSubmit={methods.createMany} />
         </Space>

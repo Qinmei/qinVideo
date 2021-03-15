@@ -5,11 +5,7 @@ import { useSavedState } from "@/hooks";
 import { EposideType, CommonType } from "@/types";
 import { useSelect, useListLoading } from "../Common/GlobalState";
 
-export const useMethods = (
-  initialState: CommonType.ListQuery,
-  target: string,
-  onModel: EposideType.OnModelType
-) => {
+export const useMethods = (initialState: CommonType.ListQuery) => {
   const [state, setState] = useSavedState(initialState, "eposide");
   const [select, setSelect] = useSelect();
   const [, setLoading] = useListLoading();
@@ -28,16 +24,16 @@ export const useMethods = (
 
   const init = useCallback(async () => {
     setLoading(true);
-    await actions.getEposideList({ ...state, target }).finally(() => setLoading(false));
+    await actions.getEposideList({ ...state }).finally(() => setLoading(false));
     setSelect([]);
-  }, [actions, state, setSelect, target, setLoading]);
+  }, [actions, state, setSelect, setLoading]);
 
   const create = useCallback(
     async (values: Omit<EposideType.EposideItem, "id">) => {
-      await actions.createEposideItem({ ...values, target, onModel });
+      await actions.createEposideItem({ ...values });
       init();
     },
-    [actions, init, target, onModel]
+    [actions, init]
   );
 
   const createMany = useCallback(

@@ -14,7 +14,7 @@ export class Category extends Model<InitialState> {
   }
 
   initDispatch = {
-    animate: (res: RequestRes<ListRes>) =>
+    category: (res: RequestRes<ListRes>) =>
       super.dispatch({
         list: res.data.list,
         total: res.data.total,
@@ -23,7 +23,7 @@ export class Category extends Model<InitialState> {
 
   methods = {
     getCategoryList: (query: ListQuery) =>
-      super.init<ListRes>(Methods.GET, Urls.queryAnimate, { query }, this.initDispatch.animate),
+      super.init<ListRes>(Methods.GET, Urls.queryCategory, { query }, this.initDispatch.category),
     getCategoryType: (params: CategoryTypeQuery) =>
       super.init<List[]>(Methods.GET, Urls.queryCategoryType, { params }),
   };
