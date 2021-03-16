@@ -1,0 +1,12 @@
+export * as AuthType from "./auth";
+export * as RequestType from "./request";
+export * as CustomType from "./custom";
+export * as GlobalType from "./global";
+export * as ModelType from "./model";
+export * as AntdType from "./antd";
+export * as HooksType from "./hooks";
+export * as AnimateType from "./animate";
+export * as ComponentsType from "./components";
+export * as CategoryType from "./category";
+export * as CommonType from "./common";
+export * as EposideType from "./eposide";
