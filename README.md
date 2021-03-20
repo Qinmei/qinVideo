@@ -6,6 +6,7 @@
 - server: 后端
 - web: 前端页面
 - mobile: 移动端页面
+- docs: 文档相关
 
 ## 进度
 
