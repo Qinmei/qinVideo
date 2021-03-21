@@ -57,7 +57,6 @@ export default defineConfig({
     ],
   },
   hash: true,
-  ssr: {},
   exportStatic: {},
   styles: [`*{box-sizing: border-box;color:#2c3e50} strong{color:#4569d4} img{width:100%}`],
 });

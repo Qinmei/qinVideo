@@ -14,9 +14,9 @@ const ReactComponent = () => {
           <Link to="/docs" className={styles.action}>
             查看文档
           </Link>
-          <a href={config.demo} className={styles.link} target="_blank">
+          {/* <a href={config.demo} className={styles.link} target="_blank">
             演示网站
-          </a>
+          </a> */}
         </div>
       </div>
     </div>
