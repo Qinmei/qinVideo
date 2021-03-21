@@ -2,6 +2,7 @@ FROM node:lts-slim as builder
 MAINTAINER Qinmei
 
 WORKDIR /app
+RUN ls
 COPY . .
 RUN yarn && yarn build
 
