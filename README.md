@@ -2,8 +2,6 @@
 
 基于 nodejs 的视频播放系统
 
-演示地址: https://qinmei.video
-
 使用文档: https://qinvideo.org
 
 视频安装教程:https://qinvideo.org/course/videos/install
