@@ -1,27 +1,47 @@
 import {
   Injectable,
-  CanActivate,
   ExecutionContext,
   UnauthorizedException,
 } from '@nestjs/common';
+import { AuthGuard as PassportAuthGuard } from '@nestjs/passport';
 import { Reflector } from '@nestjs/core';
+import { BusinessException, ErrorCode } from 'src/exceptions';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
-  constructor(private readonly reflector: Reflector) {}
+export class AuthGuard extends PassportAuthGuard('jwt') {
+  constructor(private readonly reflector: Reflector) {
+    super();
+  }
 
-  canActivate(context: ExecutionContext): boolean {
-    const noAuth = this.reflector.get<string[]>('noAuth', context.getHandler());
+  canActivate(context: ExecutionContext) {
+    return super.canActivate(context);
+  }
 
-    if (noAuth) {
-      return true;
+  getReflectMetaData<T>(context: ExecutionContext, propKey: string): T {
+    const methodsValue = this.reflector.get<T>(propKey, context.getHandler());
+    const controllerValue = this.reflector.get<T>(propKey, context.getClass());
+    return methodsValue || controllerValue;
+  }
+
+  handleRequest(
+    error: Error | null,
+    data,
+    info: Error,
+    context: ExecutionContext,
+  ) {
+    const noAuth = this.getReflectMetaData<boolean>(context, 'noAuth');
+    const noToken = this.getReflectMetaData<boolean>(context, 'noToken');
+
+    if (noToken) return false;
+
+    if (info?.message === 'jwt expired') {
+      throw new BusinessException(ErrorCode.TokenExpired);
     }
-    const request = context.switchToHttp().getRequest();
-    const user = request.user;
 
-    if (!user) {
-      throw new UnauthorizedException('Auth Failed');
+    if (!noAuth && (error || !data || info)) {
+      throw new UnauthorizedException();
     }
-    return user;
+
+    return data;
   }
 }

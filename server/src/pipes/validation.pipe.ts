@@ -20,7 +20,7 @@ export class CustomValidationPipe extends ValidationPipe {
 
   private loopError(errors: ValidationError[]) {
     const showArr: string[] = [];
-    errors.map(item => {
+    errors.map((item) => {
       if (item.children && item.children.length > 0) {
         const childrenArr = this.loopError(item.children);
         showArr.push(...childrenArr);

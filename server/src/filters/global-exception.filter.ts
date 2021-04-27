@@ -21,8 +21,8 @@ export class GlobalExceptionsFilter implements ExceptionFilter {
       exception instanceof HttpException ? exception.message : 'Unknown Error';
 
     response.status(status).json({
-      errorCode: status,
-      message,
+      code: status,
+      msg: message,
       path: request.url,
     });
   }

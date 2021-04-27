@@ -95,8 +95,8 @@ export interface Item extends Omit<Base, "author"> {
 
 export type QueryListReq = ListQuery;
 export type QueryListRes = ListContent<List>;
-export interface CreateListReq {}
-export interface CreateListRes {}
+// export interface CreateListReq {}
+// export interface CreateListRes {}
 export type UpdateListReq = QuickEdit & IdsQuery;
 export type UpdateListRes = OptionReturn;
 export type DeleteListReq = IdsQuery;

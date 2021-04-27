@@ -1,5 +1,5 @@
 import { HttpStatus, HttpException } from '@nestjs/common';
-import { CodeMsg } from './errorCode';
+import { CodeMsg, ErrorCode } from './errorCode';
 
 export class BusinessException extends HttpException {
   information: CodeMsg;

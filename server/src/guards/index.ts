@@ -1,6 +1,6 @@
 import { APP_GUARD } from '@nestjs/core';
-import { AuthGuard } from './auth.guard';
 import { RolesGuard } from './roles.guard';
+import { AuthGuard } from './auth.guard';
 
 const AllGuards = [
   {

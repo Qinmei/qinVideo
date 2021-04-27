@@ -1,27 +1,8 @@
-import { SettingModule } from './setting/setting.module';
-import { DatabaseModule } from './basis/database.module';
-import { StaticModule } from './basis/static.module';
-import { TokenModule } from './basis/token.module';
-import { HistoryModule } from './history/history.module';
-import { FileModule } from './file/file.module';
-import { UploadModule } from './upload/upload.module';
+import { CommonModule } from './common/common.module';
+import { VideosModule } from './videos/videos.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
-const AllModules = [
-  StaticModule,
-  DatabaseModule,
-  HistoryModule,
-  SettingModule,
-  FileModule,
-  UploadModule,
-];
+const AllModules = [CommonModule, AuthModule, VideosModule, UsersModule];
 
-export {
-  DatabaseModule,
-  HistoryModule,
-  SettingModule,
-  TokenModule,
-  StaticModule,
-  FileModule,
-  UploadModule,
-  AllModules,
-};
+export { AllModules };
