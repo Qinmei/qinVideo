@@ -5179,10 +5179,10 @@ node-homedir@^1.1.1:
   resolved "https://registry.yarnpkg.com/node-homedir/-/node-homedir-1.1.1.tgz#736db0b60e3bba8aba68df9927de40a7aabe1075"
   integrity sha512-Xsmf94D/DdeDISAECUaxXVxhh+kHdbOQE4CnP4igo3HXL3BSmmUpD5M7orH434EZZwBTFF2xe5SgsQr/wOBuNw==
 
-nodemailer@^6.3.1:
-  version "6.4.6"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.4.6.tgz#d37f504f6560b36616f646a606894fe18819107f"
-  integrity sha512-/kJ+FYVEm2HuUlw87hjSqTss+GU35D4giOpdSfGp7DO+5h6RlJj7R94YaYHOkoxu1CSaM0d3WRBtCzwXrY6MKA==
+nodemailer@^6.4.16:
+  version "6.4.16"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.4.16.tgz#5cb6391b1d79ab7eff32d6f9f48366b5a7117293"
+  integrity sha512-68K0LgZ6hmZ7PVmwL78gzNdjpj5viqBdFqKrTtr9bZbJYj6BRj5W6WGkxXrEnUl3Co3CBXi3CZBUlpV/foGnOQ==
 
 normalize-package-data@^2.3.2:
   version "2.5.0"
