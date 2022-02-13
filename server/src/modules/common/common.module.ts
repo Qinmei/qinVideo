@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { CustomConfigModule } from './config/config.module';
-import { DatabaseModule } from './database/database.module';
+import { RolesModule } from './roles/roles.module';
+import { UsersModule } from './users/users.module';
+import { VideosModule } from './videos/videos.module';
 
 @Module({
-  imports: [CustomConfigModule, DatabaseModule],
+  imports: [UsersModule, RolesModule, VideosModule],
 })
 export class CommonModule {}

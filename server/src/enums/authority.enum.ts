@@ -1,4 +1,4 @@
-export enum AuthorityList {
+export enum Authority {
   CONFIG_QUERY = 'configQuery',
   CONFIG_UPDATE = 'configUpdate',
 

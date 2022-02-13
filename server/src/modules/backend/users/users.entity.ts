@@ -46,4 +46,10 @@ export class User {
 
   @Column()
   status: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+  
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

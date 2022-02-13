@@ -1,8 +1,7 @@
-import { CommonModule } from './common/common.module';
-import { VideosModule } from './videos/videos.module';
-import { UsersModule } from './users/users.module';
+import { BaseModule } from './base/base.module';
 import { AuthModule } from './auth/auth.module';
+import { CommonModule } from './common/common.module';
 
-const AllModules = [CommonModule, AuthModule, VideosModule, UsersModule];
+const AllModules = [BaseModule, AuthModule, CommonModule];
 
 export { AllModules };

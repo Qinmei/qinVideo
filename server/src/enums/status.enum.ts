@@ -1,11 +1,11 @@
 export enum UserStatus {
-  REGISTERED = 'registered',
-  AUTHED = 'authed',
-  GHOST = 'ghost',
+  Audit = 1,
+  Normal,
+  Forbidden,
 }
 
 export enum PostStatus {
-  DRAFT = 'draft',
-  PUBLISH = 'publish',
-  REJECT = 'reject',
+  Draft = 1,
+  Publish,
+  Reject,
 }

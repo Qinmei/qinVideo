@@ -6,6 +6,7 @@ export default () => ({
     tokenExpired: parseInt(process.env.BIZ_TOKEN_EXPIRED, 10) || 7200000,
     jwtSecret: process.env.BIZ_JWT_SECRET || 'qinvideo',
     jwtExpired: process.env.BIZ_JWT_EXPIRED || '7200s',
+    salt: process.env.CONFIG_SALT || '',
   },
   database: {
     host: process.env.DB_HOST,

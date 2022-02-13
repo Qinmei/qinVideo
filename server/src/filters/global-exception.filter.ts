@@ -20,6 +20,8 @@ export class GlobalExceptionsFilter implements ExceptionFilter {
     const message =
       exception instanceof HttpException ? exception.message : 'Unknown Error';
 
+    console.log(exception);
+
     response.status(status).json({
       code: status,
       msg: message,
