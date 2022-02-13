@@ -4,7 +4,7 @@ export enum UserStatus {
   Forbidden,
 }
 
-export enum PostStatus {
+export enum MediaStatus {
   Draft = 1,
   Publish,
   Reject,

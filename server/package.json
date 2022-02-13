@@ -34,7 +34,7 @@
     "compression": "^1.7.4",
     "express-rate-limit": "^5.2.6",
     "helmet": "^4.4.1",
-    "mysql2": "^2.2.5",
+    "mysql2": "^2.3.3",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",

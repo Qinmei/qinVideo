@@ -36,7 +36,7 @@ export class User {
   background: string;
 
   @Column('varchar', { nullable: true })
-  introduce: string;
+  description: string;
 
   @Column('int', { default: 0 })
   money: number;

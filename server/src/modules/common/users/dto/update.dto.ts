@@ -42,7 +42,7 @@ export class UpdateDto {
 
   @IsString()
   @IsOptional()
-  readonly introduce: string;
+  readonly description: string;
 
   @IsInt()
   @IsOptional()

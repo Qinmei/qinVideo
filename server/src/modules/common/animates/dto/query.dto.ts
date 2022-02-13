@@ -1,7 +1,10 @@
-import { IsNumber, IsIn, Max, Min } from 'class-validator';
+import { IsNumber, IsIn, Max, Min, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class QueryDto {
+  @IsString()
+  readonly query: string = '';
+
   @IsNumber()
   @Type(() => Number)
   @Min(1)

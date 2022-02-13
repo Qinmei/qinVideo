@@ -39,7 +39,7 @@ export class CreateDto {
 
   @IsString()
   @IsOptional()
-  readonly introduce: string;
+  readonly description: string;
 
   @IsInt()
   @IsOptional()
