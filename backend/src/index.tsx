@@ -1,5 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { App } from "./App";
+import ReactDOM from 'react-dom';
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import { createFactory } from '@yuanjs/core';
+import { renderConfig, renderLocale, renderModel, renderRouter } from '@yuanjs/plugins';
+
+import { AppModule } from './modules';
+
+const App = createFactory(AppModule, {
+  middleware: [renderConfig, renderLocale, renderModel, renderRouter],
+});
+
+ReactDOM.render(App, document.getElementById('root'));
