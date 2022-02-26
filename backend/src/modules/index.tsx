@@ -1,4 +1,5 @@
 import { Module } from '@yuanjs/core';
+import '@/themes/global.less';
 
 interface PropsType {
   modules?: Module[];
