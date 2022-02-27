@@ -1,0 +1,20 @@
+@import 'src/themes/style.less';
+
+.moduleLayout {
+  height: 100%;
+  display: flex;
+
+  .sidebar {
+    background-color: @custom-bg-color-2;
+    width: @sidebar-width;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .content {
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+    background-color: @custom-layout-bg-color;
+  }
+}

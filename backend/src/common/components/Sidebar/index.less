@@ -1,0 +1,49 @@
+@import 'src/themes/style.less';
+
+.menu {
+  width: 100%;
+  overflow: hidden;
+
+  .title {
+    height: 50px;
+    line-height: 50px;
+    color: white;
+    font-size: 16px;
+    padding-left: 20px;
+    font-weight: bold;
+  }
+
+  .list {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: @custom-color-text-grey;
+    font-size: 14px;
+    padding: 0 10px;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      background-color: @custom-bg-color-hover;
+    }
+
+    &.active {
+      color: white;
+      background-color: @primary-color;
+    }
+
+    .icon {
+      font-size: 16px;
+      margin: 0 10px;
+    }
+
+    .name {
+      width: 100%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+}

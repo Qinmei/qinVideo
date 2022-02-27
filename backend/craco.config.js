@@ -38,7 +38,11 @@ module.exports = {
     {
       plugin: CracoLessPlugin,
       options: {
-        lessLoaderOptions: {},
+        lessLoaderOptions: {
+          lessOptions: {
+            paths: [path.resolve(__dirname)],
+          },
+        },
         modifyLessRule(lessRule) {
           lessRule.exclude = /node_modules/;
           return lessRule;
