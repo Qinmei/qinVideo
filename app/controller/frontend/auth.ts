@@ -134,6 +134,11 @@ class AuthController extends Controller {
   async refreshtoken() {
     const { ctx, service } = this;
     const { refreshToken } = ctx.request.body;
+
+    if (typeof refreshToken !== "string") {
+      return ctx.helper.status(403);
+    }
+
     const userInfo = await service.user.exist({ refreshToken });
 
     if (userInfo) {
